@@ -1,0 +1,100 @@
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\База артикулов.exe.config
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\База артикулов.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\База артикулов.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\BaseWindow.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\CSV Reader.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.dll
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\EntityFramework.dll
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\Logger.dll
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\WebDAVClient.dll
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.dll.config
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\CSV Reader.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\CSV Reader.exe.config
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\BaseWindow.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\BaseWindow.exe.config
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.exe.config
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\EntityFramework.xml
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\bin\Debug\Logger.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.AssemblyReference.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.SuggestedBindingRedirects.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.ResolveComReference.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\FilesWindow.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\ImportWindow.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\ProductUnitsWindow.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\ProductWindow.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\ProductWindow_OLD.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\TablesWindow.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\TestWindow.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\App.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов_Content.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов_MarkupCompile.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов_MarkupCompile.lref
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\FilesWindow.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\ImportWindow.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\ProductUnitsWindow.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\ProductWindow.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\ProductWindow_OLD.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\TablesWindow.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\Формы\TestWindow.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов.g.resources
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База_артикулов.Properties.Resources.resources
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.GenerateResource.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.CoreCompileInputs.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.CopyComplete
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\База артикулов\obj\Debug\База артикулов.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.AssemblyReference.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.SuggestedBindingRedirects.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.ResolveComReference.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\TestWindow.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\App.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов_Content.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов_MarkupCompile.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов_MarkupCompile.lref
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\FilesWindow.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\ImportWindow.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\ProductUnitsWindow.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\ProductWindow.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\ProductWindow_OLD.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\TablesWindow.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\База артикулов.exe.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\База артикулов.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\База артикулов.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CSV Reader.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.dll
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.dll
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\WebDAVClient.dll
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.dll.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CSV Reader.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CSV Reader.exe.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.exe.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.xml
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow.exe.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\FilesWindow.baml
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\ImportWindow.baml
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\ProductUnitsWindow.baml
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\ProductWindow.baml
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\ProductWindow_OLD.baml
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\TablesWindow.baml
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\TestWindow.baml
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.g.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База_артикулов.Properties.Resources.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.GenerateResource.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.CoreCompileInputs.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.CopyComplete

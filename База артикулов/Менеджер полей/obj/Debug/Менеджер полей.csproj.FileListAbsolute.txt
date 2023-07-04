@@ -1,0 +1,27 @@
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\bin\Debug\Менеджер полей.exe.config
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\bin\Debug\Менеджер полей.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\bin\Debug\Менеджер полей.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\bin\Debug\BaseWindow.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\bin\Debug\Custom Controls WF.dll
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\bin\Debug\Custom Controls WF.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\bin\Debug\BaseWindow.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\bin\Debug\BaseWindow.exe.config
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.csproj.AssemblyReference.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.csproj.SuggestedBindingRedirects.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\obj\Debug\Менеджер_полей.MainWindow.resources
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\obj\Debug\Менеджер_полей.Properties.Resources.resources
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.csproj.GenerateResource.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.csproj.CoreCompileInputs.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.csproj.CopyComplete
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.csproj.AssemblyReference.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.csproj.SuggestedBindingRedirects.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Менеджер полей\obj\Debug\Менеджер_полей.MainWindow.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Менеджер полей\obj\Debug\Менеджер_полей.Properties.Resources.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.csproj.GenerateResource.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.csproj.CoreCompileInputs.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Менеджер полей\obj\Debug\Менеджер полей.pdb

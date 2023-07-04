@@ -1,0 +1,16 @@
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\bin\Debug\BaseWindow WPF.exe.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\bin\Debug\BaseWindow WPF.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\bin\Debug\BaseWindow WPF.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\BaseWindow WPF.csproj.AssemblyReference.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\BaseWindow WPF.csproj.SuggestedBindingRedirects.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\Main.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\App.g.cs
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\BaseWindow WPF_MarkupCompile.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\BaseWindow WPF_MarkupCompile.lref
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\Main.baml
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\BaseWindow WPF.g.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\BaseWindow_WPF.Properties.Resources.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\BaseWindow WPF.csproj.GenerateResource.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\BaseWindow WPF.csproj.CoreCompileInputs.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\BaseWindow WPF.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow WPF\obj\Debug\BaseWindow WPF.pdb

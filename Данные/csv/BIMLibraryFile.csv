@@ -1,0 +1,8 @@
+﻿id;BIMLibraryName;BIMLibraryDescription;BIMLibraryURL;BIMLibraryAvatarPictureURL
+;Название библиотеки BIM;Описание библиотеки BIM;Ссылка на файл для скачивания;Ссылка на картинку аватарку
+1;estakady_modulnye_BIM.zip;Библиотека BIM модульных эстакад;./webfiles/estakady_modulnye_BIM.zip;./webfiles/estakady_modulnye_BIM.png
+2;estakady_sharnirno_povorotnye_BIM.zip;Библиотека BIM шарнирно-поворотных эстакад;./webfiles/estakady_sharnirno_povorotnye_BIM.zip;./webfiles/estakady_sharnirno_povorotnye_BIM.png
+3;kabelnye_konstruktsii_BIM.zip;Библиотека BIM кабельных конструкций;./webfiles/kabelnye_konstruktsii_BIM.zip;./webfiles/kabelnye_konstruktsii_BIM.png
+4;falshpol_BIM.zip;Библиотека BIM фальшполов;./webfiles/falshpol_BIM.zip;./webfiles/falshpol_BIM.png
+5;protivopozharnye_materialy_BIM.zip;Библиотека BIM противопожарных решений;./webfiles/protivopozharnye_materialy_BIM.zip;./webfiles/protivopozharnye_materialy_BIM.png
+6;kabelnye_lotki_dlya_sudov_BIM.zip;Библиотека BIM по кораблестроению;./webfiles/kabelnye_lotki_dlya_sudov_BIM.zip;./webfiles/kabelnye_lotki_dlya_sudov_BIM.png

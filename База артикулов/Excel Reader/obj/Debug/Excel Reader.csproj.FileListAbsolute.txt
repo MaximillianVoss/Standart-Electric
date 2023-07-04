@@ -1,0 +1,30 @@
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\obj\Debug\Excel Reader.csproj.AssemblyReference.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\obj\Debug\Excel Reader.csproj.SuggestedBindingRedirects.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\obj\Debug\CSV_Reader.Properties.Resources.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\obj\Debug\Excel Reader.csproj.GenerateResource.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\obj\Debug\Excel Reader.csproj.CoreCompileInputs.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\obj\Debug\CSV Reader.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\obj\Debug\CSV Reader.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\bin\Debug\CSV Reader.exe.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\bin\Debug\CSV Reader.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\bin\Debug\CSV Reader.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\bin\Debug\CSV Reader.exe.config
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\bin\Debug\CSV Reader.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\bin\Debug\CSV Reader.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\obj\Debug\Excel Reader.csproj.AssemblyReference.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\obj\Debug\Excel Reader.csproj.SuggestedBindingRedirects.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\obj\Debug\CSV_Reader.Properties.Resources.resources
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\obj\Debug\Excel Reader.csproj.GenerateResource.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\obj\Debug\Excel Reader.csproj.CoreCompileInputs.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\obj\Debug\CSV Reader.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\obj\Debug\CSV Reader.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\obj\Debug\ExcelReader.Forms.OpenFileWindow.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\bin\Debug\BaseWindow.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\bin\Debug\BaseWindow.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\bin\Debug\BaseWindow.exe.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Excel Reader\obj\Debug\Excel Reader.csproj.CopyComplete
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\obj\Debug\ExcelReader.Forms.OpenFileWindow.resources
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\bin\Debug\BaseWindow.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\bin\Debug\BaseWindow.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\bin\Debug\BaseWindow.exe.config
+C:\Users\ivan.ivanov\source\repos\База артикулов\Excel Reader\obj\Debug\Excel Reader.csproj.CopyComplete

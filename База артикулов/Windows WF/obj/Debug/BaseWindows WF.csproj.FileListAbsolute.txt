@@ -1,0 +1,11 @@
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow\bin\Debug\BaseWindow.exe.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow\bin\Debug\BaseWindow.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow\bin\Debug\BaseWindow.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow\obj\Debug\BaseWindows WF.csproj.AssemblyReference.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow\obj\Debug\BaseWindows WF.csproj.SuggestedBindingRedirects.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow\obj\Debug\BaseWindow.LoginWindow.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow\obj\Debug\BaseWindow.Properties.Resources.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow\obj\Debug\BaseWindows WF.csproj.GenerateResource.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow\obj\Debug\BaseWindows WF.csproj.CoreCompileInputs.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow\obj\Debug\BaseWindow.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\BaseWindow\obj\Debug\BaseWindow.pdb

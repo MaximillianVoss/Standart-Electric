@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
+<!-- Active URL: https://sql.toad.cz/? -->
+<sql>
+      <datatypes db="mssql">
+            <group label="Integer" color="rgb(238,238,170)">
+                  <type label="TinyInt" length="0" sql="nVarchar" re="INT" quote="" bytes="1" note="Integer data: 0 to 255"/>
+                  <type label="SmallInt" length="0" sql="smallint" re="INT" quote="" bytes="2" note="Integer data: -32,768 to 32,767"/>
+                  <type label="Int" length="0" sql="int" re="INT" quote="" bytes="4" note="Integer data: -2,147,483,648 to 2,147,483,647"/>
+                  <type label="BigInt" length="0" sql="bigint" re="INT" quote="" bytes="8" note="Integer data: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807"/>
+            </group>
+            <group label="Monetary" color="rgb(238,238,170)">
+                  <type label="Money" length="0" sql="money" re="FLOAT" quote="" bytes="8" note="Integer data: -922,337,203,685,477.5808 to 922,337,203,685,477.5807"/>
+                  <type label="SmallMoney" length="0" sql="smallmoney" re="FLOAT" quote="" bytes="4" note="-214,748.3648 to 214,748.3647"/>
+            </group>
+            <group label="Numeric" color="rgb(238,238,170)">
+                  <type label="Real" length="0" sql="real" re="FLOAT" quote="" bytes="4" note="Floating precision number data: -3.402823E+38 to 3.402823E+38"/>
+                  <type label="Float" length="0" sql="float" re="FLOAT" quote="" bytes="8" note="Floating precision number data: -4.94E+324 to 4.94E+324"/>
+                  <type label="Decimal" length="1" sql="decimal" re="DEC" quote="" bytes="n*" note="Fixed precision and scale numeric data: -10^38 +1 to 10^38 -1 (decimal and numeric are synonyms)"/>
+                  <type label="Numeric" length="1" sql="numeric" re="DEC" quote="" bytes="n*" note="Fixed precision and scale numeric data: -10^38 +1 to 10^38 -1 (decimal and numeric are synonyms)"/>
+            </group>
+            <group label="Character" color="rgb(255,200,200)">
+                  <type label="Char" length="0" sql="char" quote="'" bytes="n" note="Fixed-length character data with a maximum length of 8,000 characters"/>
+                  <type label="Varchar" length="1" sql="varchar" quote="'" bytes="m &lt;= n" note="Variable-length data with a maximum of 8,000 characters"/>
+                  <type label="Text" length="1" sql="text" quote="'" bytes="&lt;= 2,147,483,647" note="Variable-length data with a maximum length of 2,147,483,647 characters"/>
+                  <type label="XML" length="0" sql="xml" quote="'" bytes="n" note="XML"/>
+            </group>
+            <group label="Unicode Character" color="rgb(255,200,200)">
+                  <type label="nChar" length="0" sql="nchar" quote="'" bytes="n" note="Fixed-length Unicode data with a maximum length of 4,000 characters"/>
+                  <type label="nVarchar" length="1" sql="nvarchar" quote="'" bytes="m &lt;= n" note="Variable-length Unicode data with a maximum length of 4,000 characters"/>
+                  <type label="nText" length="1" sql="ntext" quote="'" bytes="&lt;= 2,147,483,647" note="Variable-length Unicode data with a maximum length of 1,073,741,823 characters"/>
+            </group>
+            <group label="Date &amp; Time" color="rgb(200,255,200)">
+                  <type label="Datetime" length="0" sql="datetime" quote="" bytes="8" note="Jan 1, 1753 to Dec 31, 9999"/>
+                  <type label="SmallDateTime" length="0" sql="smalldatetime" quote="" bytes="4" note="Jan 1, 1900 to Dec 31, 2079"/>
+            </group>
+            <group label="Binary" color="rgb(200,200,255)">
+                  <type label="Binary" length="0" sql="binary" quote="'" bytes="n" note="Fixed-length binary data with a maximum length of 8,000 bytes"/>
+                  <type label="Varbinary" length="1" sql="varbinary" quote="'" bytes="m &lt;= n" note="Variable-length binary data with a maximum length of 8,000 bytes"/>
+            </group>
+            <group label="Miscellaneous" color="rgb(200,220,255)">
+                  <type label="Bit" length="0" sql="bit" quote="" bytes="1" note="Boolean: 1 or 0"/>
+                  <type label="Image" length="1" sql="image" re="BLOB" quote="" bytes="0 to 2,147,483,647" note="Variable-length binary data with a maximum length of 2,147,483,647 bytes"/>
+                  <type label="Timestamp" length="0" sql="timestamp" quote="" bytes="8" note="Locally unique binary number updated as a row gets updated"/>
+                  <type label="SQL Variant" length="1" sql="sql_variant" quote="" bytes="" note="Stores any datatype except text, ntext, image, timestamp"/>
+                  <type label="Uniqueidentifier" length="1" sql="uniqueidentifier" quote="" bytes="16" note="GUID"/>
+            </group>
+      </datatypes>
+      <table x="514" y="318" name="SubGroups">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>id дескриптора-описания</comment>
+            </row>
+            <row name="idGroup" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Groups" row="id" />
+                  <comment>id группы</comment>
+            </row>
+            <row name="idLoadDiagram" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="LoadDiagrams" row="id" />
+                  <comment>id схемы нагрузки</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="515" y="474" name="Groups">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>id дескриптора-описания</comment>
+            </row>
+            <row name="idClass" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Classes" row="id" />
+                  <comment>
+                  </comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="948" y="705" name="BuisnessUnits">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>id дескриптора-описания</comment>
+            </row>
+            <row name="idBimLibraryFile" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDrawBlocksFile" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idTypicalAlbum" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>
+                  </comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="854" y="601" name="Classes">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>id дескриптора-описания</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="751" y="702" name="Applications">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>id дескриптора-описания</comment>
+            </row>
+            <row name="idBuisnessUnit" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="BuisnessUnits" row="id" />
+                  <comment>id направления</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="63" y="558" name="Perforations">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>id дескриптора-описания</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="526" y="206" name="Norms">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>id дескриптора-описания</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="57" y="339" name="Materials">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+            </row>
+            <row name="idMaterialNorm" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Norms" row="id" />
+                  <comment>Ссылка на нормативный документ</comment>
+            </row>
+            <row name="idPrepackNorm" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Norms" row="id" />
+                  <comment>Ссылка на норматив </comment>
+            </row>
+            <row name="type" null="1" autoincrement="0">
+                  <datatype>nVarchar(255)</datatype>
+                  <default>NULL</default>
+                  <comment>Обозначение материала или марка стали</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="817" y="438" name="LoadDiagrams">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>id дескриптора-описания</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="504" y="595" name="GroupsApplications">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idApplication" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Applications" row="id" />
+                  <comment>id применения</comment>
+            </row>
+            <row name="idSubGroup" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="SubGroups" row="id" />
+                  <comment>id группы</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="60" y="157" name="Covers">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+            </row>
+            <row name="idNorm" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Norms" row="id" />
+                  <comment>id Стандарта</comment>
+            </row>
+            <row name="thickness" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>Толщина покрытия</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="301" y="151" name="Products">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>id дескриптора-описания</comment>
+            </row>
+            <row name="idNorm" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Norms" row="id" />
+                  <comment>id Стандарта</comment>
+            </row>
+            <row name="idSubGroup" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="SubGroups" row="id" />
+                  <comment>Название норматива</comment>
+            </row>
+            <row name="idCover" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Covers" row="id" />
+                  <comment>Покрытие</comment>
+            </row>
+            <row name="idMaterial" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Materials" row="id" />
+                  <comment>Ссылка на нормативный документ</comment>
+            </row>
+            <row name="idPerforation" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Perforations" row="id" />
+                  <comment>Номер типа перфорации</comment>
+            </row>
+            <row name="idPackage" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Packages" row="id" />
+                  <comment>id упаковки</comment>
+            </row>
+            <row name="isInStock" null="0" autoincrement="0">
+                  <datatype>bit</datatype>
+                  <default>0</default>
+                  <comment>Складская позиция 1 или заказная 0</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="1175" y="225" name="Units">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+            </row>
+            <row name="OKEI" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>Общероссийский классификатор единиц измерения</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+            <comment>Единицы измерения</comment>
+      </table>
+      <table x="483" y="28" name="ProductsVendorCodes">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idProduct" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Products" row="id" />
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idCode" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="VendorCodes" row="id" />
+                  <comment>
+                  </comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="922" y="57" name="VendorCodes">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idManufacturer" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Manufacturers" row="id" />
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+            </row>
+            <row name="isActual" null="0" autoincrement="0">
+                  <datatype>bit</datatype>
+                  <default>1</default>
+                  <comment>устаревший или актуальный</comment>
+            </row>
+            <row name="isSale" null="0" autoincrement="0">
+                  <datatype>bit</datatype>
+                  <default>1</default>
+                  <comment>внешний лии внутренний</comment>
+            </row>
+            <row name="isPublic" null="1" autoincrement="0">
+                  <datatype>bit</datatype>
+                  <default>NULL</default>
+                  <comment>Является ли артикул публичным (можно ли экспортировать)</comment>
+            </row>
+            <row name="codeAccountant" null="1" autoincrement="0">
+                  <datatype>nvarchar(255)</datatype>
+                  <default>NULL</default>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+            <comment>Артикулы</comment>
+      </table>
+      <table x="56" y="32" name="ProductsAnalogs">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <comment>
+                  </comment>
+            </row>
+            <row name="idOriginal" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Products" row="id" />
+                  <comment>id оригинала</comment>
+            </row>
+            <row name="idAnalog" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Products" row="id" />
+                  <comment>id аналога</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="1406" y="480" name="Descriptors">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="code" null="1" autoincrement="0">
+                  <datatype>nvarchar(255)</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="title" null="1" autoincrement="0">
+                  <datatype>nvarchar(255)</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="titleShort" null="1" autoincrement="0">
+                  <datatype>nvarchar(255)</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="titleDisplay" null="1" autoincrement="0">
+                  <datatype>varchar(255)</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="description" null="1" autoincrement="0">
+                  <datatype>nvarchar(2048)</datatype>
+                  <default>NULL</default>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+            <comment>Содержит описания различных объектов</comment>
+      </table>
+      <table x="745" y="198" name="UnitsProducts">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="idProduct" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Products" row="id" />
+            </row>
+            <row name="idUnit" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Units" row="id" />
+            </row>
+            <row name="idType" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="UnitsTypes" row="id" />
+            </row>
+            <row name="value" null="0" autoincrement="0">
+                  <datatype>float</datatype>
+                  <default>NULL</default>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+            <comment>Измерения для продуктов</comment>
+      </table>
+      <table x="1185" y="379" name="UnitsTypes">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="title" null="0" autoincrement="0">
+                  <datatype>nvarchar(255)</datatype>
+                  <default>'NULL'</default>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+            <comment>Типы измерений для продуктов</comment>
+      </table>
+      <table x="63" y="694" name="Packages">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+                  <comment>id дескриптора-описания</comment>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="292" y="577" name="UnitsPerforations">
+            <row name="id" null="0" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="idPerforation" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Perforations" row="id" />
+            </row>
+            <row name="idUnit" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Units" row="id" />
+            </row>
+            <row name="idType" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="UnitsTypes" row="id" />
+            </row>
+            <row name="Value" null="0" autoincrement="0">
+                  <datatype>float</datatype>
+                  <default>NULL</default>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="295" y="764" name="UnitsPakages">
+            <row name="id" null="0" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="idPackage" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Packages" row="id" />
+            </row>
+            <row name="idUnit" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Units" row="id" />
+            </row>
+            <row name="idType" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="UnitsTypes" row="id" />
+            </row>
+            <row name="Value" null="1" autoincrement="0">
+                  <datatype>float</datatype>
+                  <default>NULL</default>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="1155" y="28" name="Manufacturers">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+            </row>
+            <row name="TIN" null="1" autoincrement="0">
+                  <datatype>varchar(20)</datatype>
+                  <default>NULL</default>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+            <comment>Производители</comment>
+      </table>
+      <table x="952" y="1175" name="Tables">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="idDescriptor" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+            <comment>Список таблиц</comment>
+      </table>
+      <table x="1145" y="700" name="Fields">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="idDescriptor" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+            </row>
+            <row name="titleRus" null="1" autoincrement="0">
+                  <datatype>nvarchar(255)</datatype>
+                  <default>NULL</default>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="1608" y="487" name="DescriptorsResources">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+            </row>
+            <row name="idResource" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Resources" row="id" />
+            </row>
+            <row name="idResourceType" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="ResourceTypes" row="id" />
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="1865" y="442" name="Resources">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="URL" null="1" autoincrement="0">
+                  <datatype>nvarchar(2048)</datatype>
+                  <default>NULL</default>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="1862" y="592" name="ResourceTypes">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="title" null="0" autoincrement="0">
+                  <datatype>nvarchar(255)</datatype>
+                  <default>'NULL'</default>
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+            <comment>Тип ресурса</comment>
+      </table>
+      <table x="734" y="1086" name="ViewsTables">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="idTable" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Tables" row="id" />
+            </row>
+            <row name="idView" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Views" row="id" />
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+            <comment>Список представлений</comment>
+      </table>
+      <table x="308" y="942" name="ViewTypes">
+            <row name="id" null="0" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="idDescriptor" null="0" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+      </table>
+      <table x="523" y="1022.1571960449219" name="Views">
+            <row name="id" null="1" autoincrement="1">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+            </row>
+            <row name="idDescriptor" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="Descriptors" row="id" />
+            </row>
+            <row name="idType" null="1" autoincrement="0">
+                  <datatype>int</datatype>
+                  <default>NULL</default>
+                  <relation table="ViewTypes" row="id" />
+            </row>
+            <key type="PRIMARY" name="">
+                  <part>id</part>
+            </key>
+            <comment>Представления для таблиц</comment>
+      </table>
+</sql>

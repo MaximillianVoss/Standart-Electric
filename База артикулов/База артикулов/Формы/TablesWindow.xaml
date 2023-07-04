@@ -1,0 +1,23 @@
+﻿<local:CustomWindow
+    xmlns:local="clr-namespace:База_артикулов.Формы"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:CustomControlsWPF="clr-namespace:CustomControlsWPF;assembly=CustomControlsWPF" x:Class="База_артикулов.Формы.TablesWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="510" Width="800" Loaded="TableWindow_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dgTable" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,67,10,135" Background="Gray" CellEditEnding="dgTable_CellEditEnding" MouseDown="dgTable_MouseDown" AddingNewItem="dgTable_AddingNewItem" SelectedCellsChanged="dgTable_SelectedCellsChanged" Grid.Column="1"/>
+        <CustomControlsWPF:LabeledComboBox x:Name="cmbTables" Margin="10,10,10,0" VerticalAlignment="Top" Title="Таблицы" SelectionChanged="cmbTables_SelectionChanged" Grid.ColumnSpan="2" Height="75"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnImport" Margin="10,0,10,60" Height="30" VerticalAlignment="Bottom" Text="Импортировать данные" Click="btnImport_Click" Grid.ColumnSpan="2"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnEdit" Margin="10,0,10,100" Color="success" Text="Редактировать" Click="btnEdit_Click" Height="30" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+        <TreeView x:Name="tvGroups" Margin="10,67,10,135" Width="200" SelectedItemChanged="tvGroups_SelectedItemChanged"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnExport" Margin="10,0,10,20" Height="30" VerticalAlignment="Bottom" Text="Экспорт данных" Grid.ColumnSpan="2" Click="btnExport_Click" />
+
+    </Grid>
+</local:CustomWindow>

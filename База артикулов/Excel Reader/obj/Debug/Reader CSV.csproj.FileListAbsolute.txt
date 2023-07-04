@@ -1,0 +1,11 @@
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Reader CSV\bin\Debug\CSV Reader.exe.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Reader CSV\bin\Debug\CSV Reader.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Reader CSV\bin\Debug\CSV Reader.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Reader CSV\obj\Debug\Reader CSV.csproj.AssemblyReference.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Reader CSV\obj\Debug\Reader CSV.csproj.SuggestedBindingRedirects.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Reader CSV\obj\Debug\CSV_Reader.Properties.Resources.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Reader CSV\obj\Debug\Reader CSV.csproj.GenerateResource.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Reader CSV\obj\Debug\Reader CSV.csproj.CoreCompileInputs.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Reader CSV\obj\Debug\CSV Reader.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Reader CSV\obj\Debug\CSV Reader.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Reader CSV\obj\Debug\ExcelReader.MainForm.resources

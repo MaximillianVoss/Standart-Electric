@@ -1,0 +1,10 @@
+C:\Users\FossW\source\repos\Турагенство\BaseWindow\obj\Debug\BaseWindow.csproj.AssemblyReference.cache
+C:\Users\FossW\source\repos\Турагенство\BaseWindow\obj\Debug\BaseWindow.csproj.SuggestedBindingRedirects.cache
+C:\Users\FossW\source\repos\Турагенство\BaseWindow\obj\Debug\BaseWindow.Properties.Resources.resources
+C:\Users\FossW\source\repos\Турагенство\BaseWindow\obj\Debug\BaseWindow.csproj.GenerateResource.cache
+C:\Users\FossW\source\repos\Турагенство\BaseWindow\obj\Debug\BaseWindow.csproj.CoreCompileInputs.cache
+C:\Users\FossW\source\repos\Турагенство\BaseWindow\bin\Debug\BaseWindow.exe.config
+C:\Users\FossW\source\repos\Турагенство\BaseWindow\bin\Debug\BaseWindow.exe
+C:\Users\FossW\source\repos\Турагенство\BaseWindow\bin\Debug\BaseWindow.pdb
+C:\Users\FossW\source\repos\Турагенство\BaseWindow\obj\Debug\BaseWindow.exe
+C:\Users\FossW\source\repos\Турагенство\BaseWindow\obj\Debug\BaseWindow.pdb

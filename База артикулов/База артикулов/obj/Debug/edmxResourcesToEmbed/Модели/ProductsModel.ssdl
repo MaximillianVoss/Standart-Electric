@@ -1,0 +1,1695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище DBSEModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Applications">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="idBuisnessUnit" Type="int" />
+  </EntityType>
+  <EntityType Name="BuisnessUnits">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="idBimLibraryFile" Type="int" />
+    <Property Name="idDrawBlocksFile" Type="int" />
+    <Property Name="idTypicalAlbum" Type="int" />
+  </EntityType>
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Covers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="idNorm" Type="int" Nullable="false" />
+    <Property Name="thickness" Type="int" />
+  </EntityType>
+  <EntityType Name="Descriptors">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="255" />
+    <Property Name="title" Type="nvarchar" MaxLength="255" />
+    <Property Name="titleShort" Type="nvarchar" MaxLength="255" />
+    <Property Name="titleDisplay" Type="varchar" MaxLength="255" />
+    <Property Name="description" Type="nvarchar" MaxLength="2048" />
+  </EntityType>
+  <EntityType Name="DescriptorsResources">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="idResource" Type="int" Nullable="false" />
+    <Property Name="idResourceType" Type="int" />
+  </EntityType>
+  <EntityType Name="Fields">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" />
+    <Property Name="titleRus" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="idClass" Type="int" />
+  </EntityType>
+  <EntityType Name="GroupsApplications">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idApplication" Type="int" />
+    <Property Name="idSubGroup" Type="int" />
+  </EntityType>
+  <EntityType Name="LoadDiagrams">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" />
+  </EntityType>
+  <EntityType Name="Manufacturers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="TIN" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Materials">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="idMaterialNorm" Type="int" />
+    <Property Name="idPrepackNorm" Type="int" />
+    <Property Name="type" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Norms">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Packages">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Perforations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="idNorm" Type="int" />
+    <Property Name="idSubGroup" Type="int" />
+    <Property Name="idCover" Type="int" />
+    <Property Name="idMaterial" Type="int" />
+    <Property Name="idPerforation" Type="int" />
+    <Property Name="idPackage" Type="int" />
+    <Property Name="isInStock" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductsAnalogs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idOriginal" Type="int" />
+    <Property Name="idAnalog" Type="int" />
+  </EntityType>
+  <EntityType Name="ProductsVendorCodes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idProduct" Type="int" Nullable="false" />
+    <Property Name="idCode" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Resources">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="URL" Type="nvarchar" MaxLength="2048" />
+  </EntityType>
+  <EntityType Name="ResourceTypes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubGroups">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="idGroup" Type="int" />
+    <Property Name="idLoadDiagram" Type="int" />
+  </EntityType>
+  <EntityType Name="Tables">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" />
+  </EntityType>
+  <EntityType Name="Units">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="OKEI" Type="int" />
+  </EntityType>
+  <EntityType Name="UnitsPakages">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idPackage" Type="int" Nullable="false" />
+    <Property Name="idUnit" Type="int" />
+    <Property Name="idType" Type="int" />
+    <Property Name="Value" Type="float" />
+  </EntityType>
+  <EntityType Name="UnitsPerforations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idPerforation" Type="int" Nullable="false" />
+    <Property Name="idUnit" Type="int" Nullable="false" />
+    <Property Name="idType" Type="int" Nullable="false" />
+    <Property Name="Value" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UnitsProducts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idProduct" Type="int" Nullable="false" />
+    <Property Name="idUnit" Type="int" />
+    <Property Name="idType" Type="int" />
+    <Property Name="value" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UnitsTypes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VendorCodes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idManufacturer" Type="int" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="isActual" Type="bit" Nullable="false" />
+    <Property Name="isSale" Type="bit" Nullable="false" />
+    <Property Name="isPublic" Type="bit" />
+    <Property Name="codeAccountant" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Views">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" />
+    <Property Name="idType" Type="int" />
+  </EntityType>
+  <EntityType Name="ViewsTables">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idTable" Type="int" />
+    <Property Name="idView" Type="int" />
+  </EntityType>
+  <EntityType Name="ViewTypes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.AllProductsInfoView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="AllProductsInfoView">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="idDescriptor" />
+      <PropertyRef Name="isInStock" />
+      <PropertyRef Name="idDescriptorNorm" />
+      <PropertyRef Name="idDescriptorSubGroups" />
+      <PropertyRef Name="idNormCovers" />
+      <PropertyRef Name="idDescriptorPerforations" />
+      <PropertyRef Name="idDescriptorPackages" />
+      <PropertyRef Name="idDescriptorMaterials" />
+      <PropertyRef Name="idDescriptorCovers" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="idDescriptor" Type="int" Nullable="false" />
+    <Property Name="idNorm" Type="int" />
+    <Property Name="idSubGroup" Type="int" />
+    <Property Name="idCover" Type="int" />
+    <Property Name="idMaterial" Type="int" />
+    <Property Name="isInStock" Type="bit" Nullable="false" />
+    <Property Name="idPerforation" Type="int" />
+    <Property Name="idPackage" Type="int" />
+    <Property Name="code" Type="nvarchar" MaxLength="255" />
+    <Property Name="title" Type="nvarchar" MaxLength="255" />
+    <Property Name="titleShort" Type="nvarchar" MaxLength="255" />
+    <Property Name="description" Type="nvarchar" MaxLength="2048" />
+    <Property Name="idDescriptorNorm" Type="int" Nullable="false" />
+    <Property Name="idGroup" Type="int" />
+    <Property Name="idDescriptorSubGroups" Type="int" Nullable="false" />
+    <Property Name="idLoadDiagram" Type="int" />
+    <Property Name="thickness" Type="int" />
+    <Property Name="idNormCovers" Type="int" Nullable="false" />
+    <Property Name="typeMaterials" Type="nvarchar" MaxLength="255" />
+    <Property Name="idMaterialNorm" Type="int" />
+    <Property Name="idPrepackNorm" Type="int" />
+    <Property Name="idDescriptorPerforations" Type="int" Nullable="false" />
+    <Property Name="idDescriptorPackages" Type="int" Nullable="false" />
+    <Property Name="idDescriptorMaterials" Type="int" Nullable="false" />
+    <Property Name="idDescriptorCovers" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.AllProductUnitsInfoView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="AllProductUnitsInfoView">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="idProduct" />
+      <PropertyRef Name="value" />
+      <PropertyRef Name="titleUnitType" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="idProduct" Type="int" Nullable="false" />
+    <Property Name="idUnit" Type="int" />
+    <Property Name="idType" Type="int" />
+    <Property Name="value" Type="float" Nullable="false" />
+    <Property Name="titleUnitType" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="OKEI" Type="int" />
+    <Property Name="titleUnit" Type="nvarchar" MaxLength="255" />
+    <Property Name="descriptionUnit" Type="nvarchar" MaxLength="2048" />
+    <Property Name="titleShortUnit" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.ClassesView " не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="ClassesView ">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Сокращенное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.CoversView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="CoversView">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Полное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Сокращенное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Обозначение покрытия" Type="nvarchar" MaxLength="255" />
+    <Property Name="Толщина покрытия, мкм" Type="int" />
+    <Property Name="Наименование ГОСТ" Type="nvarchar" MaxLength="255" />
+    <Property Name="номер ГОСТ" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.DescriptorsViewDisplay" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="DescriptorsViewDisplay">
+    <Key>
+      <PropertyRef Name="ID дексриптора" />
+    </Key>
+    <Property Name="ID дексриптора" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Сокращенное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Код" Type="nvarchar" MaxLength="255" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.GroupsView " не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="GroupsView ">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Сокращенное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
+    <Property Name="ID класса" Type="int" />
+    <Property Name="Наименование класса" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.LoadDiagramsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="LoadDiagramsView">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Полное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Краткое обозначение" Type="nvarchar" MaxLength="255" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.ManufacturersView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="ManufacturersView">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Полное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Сокращенное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="ИНН" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.MaterialsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="MaterialsView">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Полное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Сокращенное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Обозначение материала" Type="nvarchar" MaxLength="255" />
+    <Property Name="Стандарт материала" Type="nvarchar" MaxLength="255" />
+    <Property Name="Стандарт сырья" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.NormsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="NormsView">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Номер документа" Type="nvarchar" MaxLength="255" />
+    <Property Name="Наименование документа" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.PackagesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="PackagesView">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Полное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Краткое обозначение" Type="nvarchar" MaxLength="255" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.PerforationsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="PerforationsView">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Полное обозначение" Type="nvarchar" MaxLength="255" />
+    <Property Name="Сокращенное обозначение" Type="nvarchar" MaxLength="255" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.ResourceTypesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="ResourceTypesView">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Полное наименование" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Полное наименование" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.SubGroupsView " не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="SubGroupsView ">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Сокращенное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
+    <Property Name="ID группы" Type="int" />
+    <Property Name="Наименование группы" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.TablesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="TablesView">
+    <Key>
+      <PropertyRef Name="TableId" />
+    </Key>
+    <Property Name="TableId" Type="int" Nullable="false" />
+    <Property Name="TableTitle" Type="nvarchar" MaxLength="255" />
+    <Property Name="TableTitleShort" Type="nvarchar" MaxLength="255" />
+    <Property Name="TableTitleDisplay" Type="varchar" MaxLength="255" />
+    <Property Name="TableDescription" Type="nvarchar" MaxLength="2048" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.TablesViewsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="TablesViewsView">
+    <Key>
+      <PropertyRef Name="ID таблицы" />
+      <PropertyRef Name="ID представления" />
+      <PropertyRef Name="ID типа представления" />
+      <PropertyRef Name="ID дескриптора типа представления" />
+    </Key>
+    <Property Name="ID таблицы" Type="int" Nullable="false" />
+    <Property Name="ID дескриптора таблицы" Type="int" />
+    <Property Name="ID представления" Type="int" Nullable="false" />
+    <Property Name="ID дескриптора представления" Type="int" />
+    <Property Name="ID типа представления" Type="int" Nullable="false" />
+    <Property Name="ID дескриптора типа представления" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.UnitsTypesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="UnitsTypesView">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Название измерения" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Название измерения" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.UnitsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="UnitsView">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Сокращенное наименование" Type="nvarchar" MaxLength="255" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
+    <Property Name="Код ОКЕИ" Type="int" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.ViewsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="ViewsView">
+    <Key>
+      <PropertyRef Name="ViewId" />
+    </Key>
+    <Property Name="ViewId" Type="int" Nullable="false" />
+    <Property Name="ViewIdType" Type="int" />
+    <Property Name="ViewTypeTitle" Type="nvarchar" MaxLength="255" />
+    <Property Name="ViewTypeTitleShort" Type="nvarchar" MaxLength="255" />
+    <Property Name="ViewTitle" Type="nvarchar" MaxLength="255" />
+    <Property Name="ViewTitleShort" Type="nvarchar" MaxLength="255" />
+    <Property Name="ViewTitleDisplay" Type="varchar" MaxLength="255" />
+    <Property Name="ViewDescription" Type="nvarchar" MaxLength="2048" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.ViewTypesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="ViewTypesView">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="DescriptorTitle" Type="nvarchar" MaxLength="255" />
+    <Property Name="DescriptorTitleShort" Type="nvarchar" MaxLength="255" />
+    <Property Name="DescriptorTitleDisplay" Type="varchar" MaxLength="255" />
+    <Property Name="DescriptorDescription" Type="nvarchar" MaxLength="2048" />
+  </EntityType>
+  <Association Name="FK__Applicati__idBui__57CBF5FE">
+    <End Role="BuisnessUnits" Type="Self.BuisnessUnits" Multiplicity="0..1" />
+    <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuisnessUnits">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Applications">
+        <PropertyRef Name="idBuisnessUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Applicati__idDes__56D7D1C5">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Applications">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BuisnessU__idBim__530740E1">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="0..1" />
+    <End Role="BuisnessUnits" Type="Self.BuisnessUnits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BuisnessUnits">
+        <PropertyRef Name="idBimLibraryFile" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BuisnessU__idDes__52131CA8">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="BuisnessUnits" Type="Self.BuisnessUnits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BuisnessUnits">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BuisnessU__idDra__53FB651A">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="0..1" />
+    <End Role="BuisnessUnits" Type="Self.BuisnessUnits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BuisnessUnits">
+        <PropertyRef Name="idDrawBlocksFile" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BuisnessU__idTyp__54EF8953">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="0..1" />
+    <End Role="BuisnessUnits" Type="Self.BuisnessUnits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BuisnessUnits">
+        <PropertyRef Name="idTypicalAlbum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Classes__idDescr__55E3AD8C">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="Classes" Type="Self.Classes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Classes">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Covers__idDescri__60613BFF">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="Covers" Type="Self.Covers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Covers">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Covers__idNorm__61556038">
+    <End Role="Norms" Type="Self.Norms" Multiplicity="1" />
+    <End Role="Covers" Type="Self.Covers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Norms">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Covers">
+        <PropertyRef Name="idNorm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Descripto__idDes__7C095674">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="DescriptorsResources" Type="Self.DescriptorsResources" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DescriptorsResources">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Descripto__idRes__7CFD7AAD">
+    <End Role="Resources" Type="Self.Resources" Multiplicity="1" />
+    <End Role="DescriptorsResources" Type="Self.DescriptorsResources" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resources">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DescriptorsResources">
+        <PropertyRef Name="idResource" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Descripto__idRes__7DF19EE6">
+    <End Role="ResourceTypes" Type="Self.ResourceTypes" Multiplicity="0..1" />
+    <End Role="DescriptorsResources" Type="Self.DescriptorsResources" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResourceTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DescriptorsResources">
+        <PropertyRef Name="idResourceType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Fields__idDescri__7B15323B">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="0..1" />
+    <End Role="Fields" Type="Self.Fields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Fields">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Groups__idClass__511EF86F">
+    <End Role="Classes" Type="Self.Classes" Multiplicity="0..1" />
+    <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="idClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Groups__idDescri__502AD436">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GroupsApp__idApp__5E78F38D">
+    <End Role="Applications" Type="Self.Applications" Multiplicity="0..1" />
+    <End Role="GroupsApplications" Type="Self.GroupsApplications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Applications">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="GroupsApplications">
+        <PropertyRef Name="idApplication" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GroupsApp__idSub__5F6D17C6">
+    <End Role="SubGroups" Type="Self.SubGroups" Multiplicity="0..1" />
+    <End Role="GroupsApplications" Type="Self.GroupsApplications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubGroups">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="GroupsApplications">
+        <PropertyRef Name="idSubGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LoadDiagr__idDes__5D84CF54">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="0..1" />
+    <End Role="LoadDiagrams" Type="Self.LoadDiagrams" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LoadDiagrams">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Manufactu__idDes__792CE9C9">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Manufacturers">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Materials__idDes__5AA862A9">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="Materials" Type="Self.Materials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Materials">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Materials__idMat__5B9C86E2">
+    <End Role="Norms" Type="Self.Norms" Multiplicity="0..1" />
+    <End Role="Materials" Type="Self.Materials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Norms">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Materials">
+        <PropertyRef Name="idMaterialNorm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Materials__idPre__5C90AB1B">
+    <End Role="Norms" Type="Self.Norms" Multiplicity="0..1" />
+    <End Role="Materials" Type="Self.Materials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Norms">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Materials">
+        <PropertyRef Name="idPrepackNorm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Norms__idDescrip__59B43E70">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="Norms" Type="Self.Norms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Norms">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Packages__idDesc__727FEC3A">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Packages">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Perforati__idDes__58C01A37">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="Perforations" Type="Self.Perforations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Perforations">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__idCove__6525F11C">
+    <End Role="Covers" Type="Self.Covers" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Covers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="idCover" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__idDesc__62498471">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__idMate__661A1555">
+    <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materials">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="idMaterial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__idNorm__633DA8AA">
+    <End Role="Norms" Type="Self.Norms" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Norms">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="idNorm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__idPack__68025DC7">
+    <End Role="Packages" Type="Self.Packages" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Packages">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="idPackage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__idPerf__670E398E">
+    <End Role="Perforations" Type="Self.Perforations" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Perforations">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="idPerforation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__idSubG__6431CCE3">
+    <End Role="SubGroups" Type="Self.SubGroups" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubGroups">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="idSubGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductsA__idAna__6EAF5B56">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="ProductsAnalogs" Type="Self.ProductsAnalogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ProductsAnalogs">
+        <PropertyRef Name="idAnalog" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductsA__idOri__6DBB371D">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="ProductsAnalogs" Type="Self.ProductsAnalogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ProductsAnalogs">
+        <PropertyRef Name="idOriginal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductsV__idCod__6ADECA72">
+    <End Role="VendorCodes" Type="Self.VendorCodes" Multiplicity="1" />
+    <End Role="ProductsVendorCodes" Type="Self.ProductsVendorCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VendorCodes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ProductsVendorCodes">
+        <PropertyRef Name="idCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductsV__idPro__69EAA639">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductsVendorCodes" Type="Self.ProductsVendorCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ProductsVendorCodes">
+        <PropertyRef Name="idProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubGroups__idDes__4D4E678B">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="SubGroups" Type="Self.SubGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SubGroups">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubGroups__idGro__4E428BC4">
+    <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+    <End Role="SubGroups" Type="Self.SubGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SubGroups">
+        <PropertyRef Name="idGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubGroups__idLoa__4F36AFFD">
+    <End Role="LoadDiagrams" Type="Self.LoadDiagrams" Multiplicity="0..1" />
+    <End Role="SubGroups" Type="Self.SubGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoadDiagrams">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SubGroups">
+        <PropertyRef Name="idLoadDiagram" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tables__idDescri__7A210E02">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="0..1" />
+    <End Role="Tables" Type="Self.Tables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Tables">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Units__idDescrip__68F68200">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="Units" Type="Self.Units" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Units">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UnitsPaka__idPac__76507D1E">
+    <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+    <End Role="UnitsPakages" Type="Self.UnitsPakages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Packages">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UnitsPakages">
+        <PropertyRef Name="idPackage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UnitsPaka__idTyp__7838C590">
+    <End Role="UnitsTypes" Type="Self.UnitsTypes" Multiplicity="0..1" />
+    <End Role="UnitsPakages" Type="Self.UnitsPakages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnitsTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UnitsPakages">
+        <PropertyRef Name="idType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UnitsPaka__idUni__7744A157">
+    <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+    <End Role="UnitsPakages" Type="Self.UnitsPakages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Units">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UnitsPakages">
+        <PropertyRef Name="idUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UnitsPerf__idPer__73741073">
+    <End Role="Perforations" Type="Self.Perforations" Multiplicity="1" />
+    <End Role="UnitsPerforations" Type="Self.UnitsPerforations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Perforations">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UnitsPerforations">
+        <PropertyRef Name="idPerforation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UnitsPerf__idTyp__755C58E5">
+    <End Role="UnitsTypes" Type="Self.UnitsTypes" Multiplicity="1" />
+    <End Role="UnitsPerforations" Type="Self.UnitsPerforations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnitsTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UnitsPerforations">
+        <PropertyRef Name="idType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UnitsPerf__idUni__746834AC">
+    <End Role="Units" Type="Self.Units" Multiplicity="1" />
+    <End Role="UnitsPerforations" Type="Self.UnitsPerforations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Units">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UnitsPerforations">
+        <PropertyRef Name="idUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UnitsProd__idPro__6FA37F8F">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="UnitsProducts" Type="Self.UnitsProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UnitsProducts">
+        <PropertyRef Name="idProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UnitsProd__idTyp__718BC801">
+    <End Role="UnitsTypes" Type="Self.UnitsTypes" Multiplicity="0..1" />
+    <End Role="UnitsProducts" Type="Self.UnitsProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnitsTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UnitsProducts">
+        <PropertyRef Name="idType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UnitsProd__idUni__7097A3C8">
+    <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+    <End Role="UnitsProducts" Type="Self.UnitsProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Units">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UnitsProducts">
+        <PropertyRef Name="idUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VendorCod__idDes__6CC712E4">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="VendorCodes" Type="Self.VendorCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VendorCodes">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VendorCod__idMan__6BD2EEAB">
+    <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+    <End Role="VendorCodes" Type="Self.VendorCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VendorCodes">
+        <PropertyRef Name="idManufacturer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Views__idDescrip__01C22FCA">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="0..1" />
+    <End Role="Views" Type="Self.Views" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Views">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Views__idType__02B65403">
+    <End Role="ViewTypes" Type="Self.ViewTypes" Multiplicity="0..1" />
+    <End Role="Views" Type="Self.Views" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ViewTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Views">
+        <PropertyRef Name="idType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ViewsTabl__idTab__7EE5C31F">
+    <End Role="Tables" Type="Self.Tables" Multiplicity="0..1" />
+    <End Role="ViewsTables" Type="Self.ViewsTables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tables">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ViewsTables">
+        <PropertyRef Name="idTable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ViewsTabl__idVie__7FD9E758">
+    <End Role="Views" Type="Self.Views" Multiplicity="0..1" />
+    <End Role="ViewsTables" Type="Self.ViewsTables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Views">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ViewsTables">
+        <PropertyRef Name="idView" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ViewTypes__idDes__00CE0B91">
+    <End Role="Descriptors" Type="Self.Descriptors" Multiplicity="1" />
+    <End Role="ViewTypes" Type="Self.ViewTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descriptors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ViewTypes">
+        <PropertyRef Name="idDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddProductImagePaths" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="AddSubGroupImagePaths" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Хранилище DBSEModelContainer">
+    <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BuisnessUnits" EntityType="Self.BuisnessUnits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Covers" EntityType="Self.Covers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Descriptors" EntityType="Self.Descriptors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DescriptorsResources" EntityType="Self.DescriptorsResources" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fields" EntityType="Self.Fields" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupsApplications" EntityType="Self.GroupsApplications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoadDiagrams" EntityType="Self.LoadDiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Norms" EntityType="Self.Norms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Packages" EntityType="Self.Packages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Perforations" EntityType="Self.Perforations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductsAnalogs" EntityType="Self.ProductsAnalogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductsVendorCodes" EntityType="Self.ProductsVendorCodes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resources" EntityType="Self.Resources" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResourceTypes" EntityType="Self.ResourceTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubGroups" EntityType="Self.SubGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tables" EntityType="Self.Tables" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UnitsPakages" EntityType="Self.UnitsPakages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UnitsPerforations" EntityType="Self.UnitsPerforations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UnitsProducts" EntityType="Self.UnitsProducts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UnitsTypes" EntityType="Self.UnitsTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VendorCodes" EntityType="Self.VendorCodes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Views" EntityType="Self.Views" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ViewsTables" EntityType="Self.ViewsTables" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ViewTypes" EntityType="Self.ViewTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AllProductsInfoView" EntityType="Self.AllProductsInfoView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AllProductsInfoView].[id] AS [id], 
+    [AllProductsInfoView].[idDescriptor] AS [idDescriptor], 
+    [AllProductsInfoView].[idNorm] AS [idNorm], 
+    [AllProductsInfoView].[idSubGroup] AS [idSubGroup], 
+    [AllProductsInfoView].[idCover] AS [idCover], 
+    [AllProductsInfoView].[idMaterial] AS [idMaterial], 
+    [AllProductsInfoView].[isInStock] AS [isInStock], 
+    [AllProductsInfoView].[idPerforation] AS [idPerforation], 
+    [AllProductsInfoView].[idPackage] AS [idPackage], 
+    [AllProductsInfoView].[code] AS [code], 
+    [AllProductsInfoView].[title] AS [title], 
+    [AllProductsInfoView].[titleShort] AS [titleShort], 
+    [AllProductsInfoView].[description] AS [description], 
+    [AllProductsInfoView].[idDescriptorNorm] AS [idDescriptorNorm], 
+    [AllProductsInfoView].[idGroup] AS [idGroup], 
+    [AllProductsInfoView].[idDescriptorSubGroups] AS [idDescriptorSubGroups], 
+    [AllProductsInfoView].[idLoadDiagram] AS [idLoadDiagram], 
+    [AllProductsInfoView].[thickness] AS [thickness], 
+    [AllProductsInfoView].[idNormCovers] AS [idNormCovers], 
+    [AllProductsInfoView].[typeMaterials] AS [typeMaterials], 
+    [AllProductsInfoView].[idMaterialNorm] AS [idMaterialNorm], 
+    [AllProductsInfoView].[idPrepackNorm] AS [idPrepackNorm], 
+    [AllProductsInfoView].[idDescriptorPerforations] AS [idDescriptorPerforations], 
+    [AllProductsInfoView].[idDescriptorPackages] AS [idDescriptorPackages], 
+    [AllProductsInfoView].[idDescriptorMaterials] AS [idDescriptorMaterials], 
+    [AllProductsInfoView].[idDescriptorCovers] AS [idDescriptorCovers]
+    FROM [dbo].[AllProductsInfoView] AS [AllProductsInfoView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="AllProductUnitsInfoView" EntityType="Self.AllProductUnitsInfoView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AllProductUnitsInfoView].[id] AS [id], 
+    [AllProductUnitsInfoView].[idProduct] AS [idProduct], 
+    [AllProductUnitsInfoView].[idUnit] AS [idUnit], 
+    [AllProductUnitsInfoView].[idType] AS [idType], 
+    [AllProductUnitsInfoView].[value] AS [value], 
+    [AllProductUnitsInfoView].[titleUnitType] AS [titleUnitType], 
+    [AllProductUnitsInfoView].[OKEI] AS [OKEI], 
+    [AllProductUnitsInfoView].[titleUnit] AS [titleUnit], 
+    [AllProductUnitsInfoView].[descriptionUnit] AS [descriptionUnit], 
+    [AllProductUnitsInfoView].[titleShortUnit] AS [titleShortUnit]
+    FROM [dbo].[AllProductUnitsInfoView] AS [AllProductUnitsInfoView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ClassesView " EntityType="Self.ClassesView " store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ClassesView ].[ID] AS [ID], 
+    [ClassesView ].[Наименование] AS [Наименование], 
+    [ClassesView ].[Сокращенное наименование] AS [Сокращенное наименование], 
+    [ClassesView ].[Описание] AS [Описание]
+    FROM [dbo].[ClassesView ] AS [ClassesView ]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CoversView" EntityType="Self.CoversView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CoversView].[ID] AS [ID], 
+    [CoversView].[Полное наименование] AS [Полное наименование], 
+    [CoversView].[Сокращенное наименование] AS [Сокращенное наименование], 
+    [CoversView].[Обозначение покрытия] AS [Обозначение покрытия], 
+    [CoversView].[Толщина покрытия, мкм] AS [Толщина покрытия, мкм], 
+    [CoversView].[Наименование ГОСТ] AS [Наименование ГОСТ], 
+    [CoversView].[номер ГОСТ] AS [номер ГОСТ]
+    FROM [dbo].[CoversView] AS [CoversView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DescriptorsViewDisplay" EntityType="Self.DescriptorsViewDisplay" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DescriptorsViewDisplay].[ID дексриптора] AS [ID дексриптора], 
+    [DescriptorsViewDisplay].[Наименование] AS [Наименование], 
+    [DescriptorsViewDisplay].[Сокращенное наименование] AS [Сокращенное наименование], 
+    [DescriptorsViewDisplay].[Код] AS [Код], 
+    [DescriptorsViewDisplay].[Описание] AS [Описание]
+    FROM [dbo].[DescriptorsViewDisplay] AS [DescriptorsViewDisplay]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GroupsView " EntityType="Self.GroupsView " store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GroupsView ].[ID] AS [ID], 
+    [GroupsView ].[Наименование] AS [Наименование], 
+    [GroupsView ].[Сокращенное наименование] AS [Сокращенное наименование], 
+    [GroupsView ].[Описание] AS [Описание], 
+    [GroupsView ].[ID класса] AS [ID класса], 
+    [GroupsView ].[Наименование класса] AS [Наименование класса]
+    FROM [dbo].[GroupsView ] AS [GroupsView ]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="LoadDiagramsView" EntityType="Self.LoadDiagramsView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [LoadDiagramsView].[ID] AS [ID], 
+    [LoadDiagramsView].[Полное наименование] AS [Полное наименование], 
+    [LoadDiagramsView].[Краткое обозначение] AS [Краткое обозначение], 
+    [LoadDiagramsView].[Описание] AS [Описание]
+    FROM [dbo].[LoadDiagramsView] AS [LoadDiagramsView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ManufacturersView" EntityType="Self.ManufacturersView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ManufacturersView].[ID] AS [ID], 
+    [ManufacturersView].[Полное наименование] AS [Полное наименование], 
+    [ManufacturersView].[Сокращенное наименование] AS [Сокращенное наименование], 
+    [ManufacturersView].[ИНН] AS [ИНН]
+    FROM [dbo].[ManufacturersView] AS [ManufacturersView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="MaterialsView" EntityType="Self.MaterialsView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [MaterialsView].[ID] AS [ID], 
+    [MaterialsView].[Полное наименование] AS [Полное наименование], 
+    [MaterialsView].[Сокращенное наименование] AS [Сокращенное наименование], 
+    [MaterialsView].[Обозначение материала] AS [Обозначение материала], 
+    [MaterialsView].[Стандарт материала] AS [Стандарт материала], 
+    [MaterialsView].[Стандарт сырья] AS [Стандарт сырья]
+    FROM [dbo].[MaterialsView] AS [MaterialsView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="NormsView" EntityType="Self.NormsView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [NormsView].[ID] AS [ID], 
+    [NormsView].[Номер документа] AS [Номер документа], 
+    [NormsView].[Наименование документа] AS [Наименование документа]
+    FROM [dbo].[NormsView] AS [NormsView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PackagesView" EntityType="Self.PackagesView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PackagesView].[ID] AS [ID], 
+    [PackagesView].[Полное наименование] AS [Полное наименование], 
+    [PackagesView].[Краткое обозначение] AS [Краткое обозначение], 
+    [PackagesView].[Описание] AS [Описание]
+    FROM [dbo].[PackagesView] AS [PackagesView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PerforationsView" EntityType="Self.PerforationsView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PerforationsView].[ID] AS [ID], 
+    [PerforationsView].[Полное обозначение] AS [Полное обозначение], 
+    [PerforationsView].[Сокращенное обозначение] AS [Сокращенное обозначение], 
+    [PerforationsView].[Описание] AS [Описание]
+    FROM [dbo].[PerforationsView] AS [PerforationsView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ResourceTypesView" EntityType="Self.ResourceTypesView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ResourceTypesView].[ID] AS [ID], 
+    [ResourceTypesView].[Полное наименование] AS [Полное наименование]
+    FROM [dbo].[ResourceTypesView] AS [ResourceTypesView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="SubGroupsView " EntityType="Self.SubGroupsView " store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SubGroupsView ].[ID] AS [ID], 
+    [SubGroupsView ].[Наименование] AS [Наименование], 
+    [SubGroupsView ].[Сокращенное наименование] AS [Сокращенное наименование], 
+    [SubGroupsView ].[Описание] AS [Описание], 
+    [SubGroupsView ].[ID группы] AS [ID группы], 
+    [SubGroupsView ].[Наименование группы] AS [Наименование группы]
+    FROM [dbo].[SubGroupsView ] AS [SubGroupsView ]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TablesView" EntityType="Self.TablesView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TablesView].[TableId] AS [TableId], 
+    [TablesView].[TableTitle] AS [TableTitle], 
+    [TablesView].[TableTitleShort] AS [TableTitleShort], 
+    [TablesView].[TableTitleDisplay] AS [TableTitleDisplay], 
+    [TablesView].[TableDescription] AS [TableDescription]
+    FROM [dbo].[TablesView] AS [TablesView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TablesViewsView" EntityType="Self.TablesViewsView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TablesViewsView].[ID таблицы] AS [ID таблицы], 
+    [TablesViewsView].[ID дескриптора таблицы] AS [ID дескриптора таблицы], 
+    [TablesViewsView].[ID представления] AS [ID представления], 
+    [TablesViewsView].[ID дескриптора представления] AS [ID дескриптора представления], 
+    [TablesViewsView].[ID типа представления] AS [ID типа представления], 
+    [TablesViewsView].[ID дескриптора типа представления] AS [ID дескриптора типа представления]
+    FROM [dbo].[TablesViewsView] AS [TablesViewsView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UnitsTypesView" EntityType="Self.UnitsTypesView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UnitsTypesView].[ID] AS [ID], 
+    [UnitsTypesView].[Название измерения] AS [Название измерения]
+    FROM [dbo].[UnitsTypesView] AS [UnitsTypesView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UnitsView" EntityType="Self.UnitsView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UnitsView].[ID] AS [ID], 
+    [UnitsView].[Наименование] AS [Наименование], 
+    [UnitsView].[Сокращенное наименование] AS [Сокращенное наименование], 
+    [UnitsView].[Описание] AS [Описание], 
+    [UnitsView].[Код ОКЕИ] AS [Код ОКЕИ]
+    FROM [dbo].[UnitsView] AS [UnitsView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewsView" EntityType="Self.ViewsView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewsView].[ViewId] AS [ViewId], 
+    [ViewsView].[ViewIdType] AS [ViewIdType], 
+    [ViewsView].[ViewTypeTitle] AS [ViewTypeTitle], 
+    [ViewsView].[ViewTypeTitleShort] AS [ViewTypeTitleShort], 
+    [ViewsView].[ViewTitle] AS [ViewTitle], 
+    [ViewsView].[ViewTitleShort] AS [ViewTitleShort], 
+    [ViewsView].[ViewTitleDisplay] AS [ViewTitleDisplay], 
+    [ViewsView].[ViewDescription] AS [ViewDescription]
+    FROM [dbo].[ViewsView] AS [ViewsView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ViewTypesView" EntityType="Self.ViewTypesView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ViewTypesView].[id] AS [id], 
+    [ViewTypesView].[DescriptorTitle] AS [DescriptorTitle], 
+    [ViewTypesView].[DescriptorTitleShort] AS [DescriptorTitleShort], 
+    [ViewTypesView].[DescriptorTitleDisplay] AS [DescriptorTitleDisplay], 
+    [ViewTypesView].[DescriptorDescription] AS [DescriptorDescription]
+    FROM [dbo].[ViewTypesView] AS [ViewTypesView]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Applicati__idBui__57CBF5FE" Association="Self.FK__Applicati__idBui__57CBF5FE">
+      <End Role="BuisnessUnits" EntitySet="BuisnessUnits" />
+      <End Role="Applications" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Applicati__idDes__56D7D1C5" Association="Self.FK__Applicati__idDes__56D7D1C5">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Applications" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BuisnessU__idBim__530740E1" Association="Self.FK__BuisnessU__idBim__530740E1">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="BuisnessUnits" EntitySet="BuisnessUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BuisnessU__idDes__52131CA8" Association="Self.FK__BuisnessU__idDes__52131CA8">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="BuisnessUnits" EntitySet="BuisnessUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BuisnessU__idDra__53FB651A" Association="Self.FK__BuisnessU__idDra__53FB651A">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="BuisnessUnits" EntitySet="BuisnessUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BuisnessU__idTyp__54EF8953" Association="Self.FK__BuisnessU__idTyp__54EF8953">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="BuisnessUnits" EntitySet="BuisnessUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Classes__idDescr__55E3AD8C" Association="Self.FK__Classes__idDescr__55E3AD8C">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Classes" EntitySet="Classes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Covers__idDescri__60613BFF" Association="Self.FK__Covers__idDescri__60613BFF">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Covers" EntitySet="Covers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Covers__idNorm__61556038" Association="Self.FK__Covers__idNorm__61556038">
+      <End Role="Norms" EntitySet="Norms" />
+      <End Role="Covers" EntitySet="Covers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Descripto__idDes__7C095674" Association="Self.FK__Descripto__idDes__7C095674">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="DescriptorsResources" EntitySet="DescriptorsResources" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Descripto__idRes__7CFD7AAD" Association="Self.FK__Descripto__idRes__7CFD7AAD">
+      <End Role="Resources" EntitySet="Resources" />
+      <End Role="DescriptorsResources" EntitySet="DescriptorsResources" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Descripto__idRes__7DF19EE6" Association="Self.FK__Descripto__idRes__7DF19EE6">
+      <End Role="ResourceTypes" EntitySet="ResourceTypes" />
+      <End Role="DescriptorsResources" EntitySet="DescriptorsResources" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Fields__idDescri__7B15323B" Association="Self.FK__Fields__idDescri__7B15323B">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Fields" EntitySet="Fields" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Groups__idClass__511EF86F" Association="Self.FK__Groups__idClass__511EF86F">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Groups__idDescri__502AD436" Association="Self.FK__Groups__idDescri__502AD436">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GroupsApp__idApp__5E78F38D" Association="Self.FK__GroupsApp__idApp__5E78F38D">
+      <End Role="Applications" EntitySet="Applications" />
+      <End Role="GroupsApplications" EntitySet="GroupsApplications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GroupsApp__idSub__5F6D17C6" Association="Self.FK__GroupsApp__idSub__5F6D17C6">
+      <End Role="SubGroups" EntitySet="SubGroups" />
+      <End Role="GroupsApplications" EntitySet="GroupsApplications" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LoadDiagr__idDes__5D84CF54" Association="Self.FK__LoadDiagr__idDes__5D84CF54">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="LoadDiagrams" EntitySet="LoadDiagrams" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Manufactu__idDes__792CE9C9" Association="Self.FK__Manufactu__idDes__792CE9C9">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Manufacturers" EntitySet="Manufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Materials__idDes__5AA862A9" Association="Self.FK__Materials__idDes__5AA862A9">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Materials" EntitySet="Materials" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Materials__idMat__5B9C86E2" Association="Self.FK__Materials__idMat__5B9C86E2">
+      <End Role="Norms" EntitySet="Norms" />
+      <End Role="Materials" EntitySet="Materials" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Materials__idPre__5C90AB1B" Association="Self.FK__Materials__idPre__5C90AB1B">
+      <End Role="Norms" EntitySet="Norms" />
+      <End Role="Materials" EntitySet="Materials" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Norms__idDescrip__59B43E70" Association="Self.FK__Norms__idDescrip__59B43E70">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Norms" EntitySet="Norms" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Packages__idDesc__727FEC3A" Association="Self.FK__Packages__idDesc__727FEC3A">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Packages" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Perforati__idDes__58C01A37" Association="Self.FK__Perforati__idDes__58C01A37">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Perforations" EntitySet="Perforations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__idCove__6525F11C" Association="Self.FK__Products__idCove__6525F11C">
+      <End Role="Covers" EntitySet="Covers" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__idDesc__62498471" Association="Self.FK__Products__idDesc__62498471">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__idMate__661A1555" Association="Self.FK__Products__idMate__661A1555">
+      <End Role="Materials" EntitySet="Materials" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__idNorm__633DA8AA" Association="Self.FK__Products__idNorm__633DA8AA">
+      <End Role="Norms" EntitySet="Norms" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__idPack__68025DC7" Association="Self.FK__Products__idPack__68025DC7">
+      <End Role="Packages" EntitySet="Packages" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__idPerf__670E398E" Association="Self.FK__Products__idPerf__670E398E">
+      <End Role="Perforations" EntitySet="Perforations" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__idSubG__6431CCE3" Association="Self.FK__Products__idSubG__6431CCE3">
+      <End Role="SubGroups" EntitySet="SubGroups" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductsA__idAna__6EAF5B56" Association="Self.FK__ProductsA__idAna__6EAF5B56">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductsAnalogs" EntitySet="ProductsAnalogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductsA__idOri__6DBB371D" Association="Self.FK__ProductsA__idOri__6DBB371D">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductsAnalogs" EntitySet="ProductsAnalogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductsV__idCod__6ADECA72" Association="Self.FK__ProductsV__idCod__6ADECA72">
+      <End Role="VendorCodes" EntitySet="VendorCodes" />
+      <End Role="ProductsVendorCodes" EntitySet="ProductsVendorCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductsV__idPro__69EAA639" Association="Self.FK__ProductsV__idPro__69EAA639">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductsVendorCodes" EntitySet="ProductsVendorCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubGroups__idDes__4D4E678B" Association="Self.FK__SubGroups__idDes__4D4E678B">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="SubGroups" EntitySet="SubGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubGroups__idGro__4E428BC4" Association="Self.FK__SubGroups__idGro__4E428BC4">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="SubGroups" EntitySet="SubGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubGroups__idLoa__4F36AFFD" Association="Self.FK__SubGroups__idLoa__4F36AFFD">
+      <End Role="LoadDiagrams" EntitySet="LoadDiagrams" />
+      <End Role="SubGroups" EntitySet="SubGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tables__idDescri__7A210E02" Association="Self.FK__Tables__idDescri__7A210E02">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Tables" EntitySet="Tables" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Units__idDescrip__68F68200" Association="Self.FK__Units__idDescrip__68F68200">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Units" EntitySet="Units" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UnitsPaka__idPac__76507D1E" Association="Self.FK__UnitsPaka__idPac__76507D1E">
+      <End Role="Packages" EntitySet="Packages" />
+      <End Role="UnitsPakages" EntitySet="UnitsPakages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UnitsPaka__idTyp__7838C590" Association="Self.FK__UnitsPaka__idTyp__7838C590">
+      <End Role="UnitsTypes" EntitySet="UnitsTypes" />
+      <End Role="UnitsPakages" EntitySet="UnitsPakages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UnitsPaka__idUni__7744A157" Association="Self.FK__UnitsPaka__idUni__7744A157">
+      <End Role="Units" EntitySet="Units" />
+      <End Role="UnitsPakages" EntitySet="UnitsPakages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UnitsPerf__idPer__73741073" Association="Self.FK__UnitsPerf__idPer__73741073">
+      <End Role="Perforations" EntitySet="Perforations" />
+      <End Role="UnitsPerforations" EntitySet="UnitsPerforations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UnitsPerf__idTyp__755C58E5" Association="Self.FK__UnitsPerf__idTyp__755C58E5">
+      <End Role="UnitsTypes" EntitySet="UnitsTypes" />
+      <End Role="UnitsPerforations" EntitySet="UnitsPerforations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UnitsPerf__idUni__746834AC" Association="Self.FK__UnitsPerf__idUni__746834AC">
+      <End Role="Units" EntitySet="Units" />
+      <End Role="UnitsPerforations" EntitySet="UnitsPerforations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UnitsProd__idPro__6FA37F8F" Association="Self.FK__UnitsProd__idPro__6FA37F8F">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="UnitsProducts" EntitySet="UnitsProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UnitsProd__idTyp__718BC801" Association="Self.FK__UnitsProd__idTyp__718BC801">
+      <End Role="UnitsTypes" EntitySet="UnitsTypes" />
+      <End Role="UnitsProducts" EntitySet="UnitsProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UnitsProd__idUni__7097A3C8" Association="Self.FK__UnitsProd__idUni__7097A3C8">
+      <End Role="Units" EntitySet="Units" />
+      <End Role="UnitsProducts" EntitySet="UnitsProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VendorCod__idDes__6CC712E4" Association="Self.FK__VendorCod__idDes__6CC712E4">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="VendorCodes" EntitySet="VendorCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VendorCod__idMan__6BD2EEAB" Association="Self.FK__VendorCod__idMan__6BD2EEAB">
+      <End Role="Manufacturers" EntitySet="Manufacturers" />
+      <End Role="VendorCodes" EntitySet="VendorCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Views__idDescrip__01C22FCA" Association="Self.FK__Views__idDescrip__01C22FCA">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="Views" EntitySet="Views" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Views__idType__02B65403" Association="Self.FK__Views__idType__02B65403">
+      <End Role="ViewTypes" EntitySet="ViewTypes" />
+      <End Role="Views" EntitySet="Views" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ViewsTabl__idTab__7EE5C31F" Association="Self.FK__ViewsTabl__idTab__7EE5C31F">
+      <End Role="Tables" EntitySet="Tables" />
+      <End Role="ViewsTables" EntitySet="ViewsTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ViewsTabl__idVie__7FD9E758" Association="Self.FK__ViewsTabl__idVie__7FD9E758">
+      <End Role="Views" EntitySet="Views" />
+      <End Role="ViewsTables" EntitySet="ViewsTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ViewTypes__idDes__00CE0B91" Association="Self.FK__ViewTypes__idDes__00CE0B91">
+      <End Role="Descriptors" EntitySet="Descriptors" />
+      <End Role="ViewTypes" EntitySet="ViewTypes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

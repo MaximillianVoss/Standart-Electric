@@ -1,0 +1,544 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище DBSEModelContainer" CdmEntityContainer="DBSEEntities">
+    <EntitySetMapping Name="Applications">
+      <EntityTypeMapping TypeName="DBSEModel.Applications">
+        <MappingFragment StoreEntitySet="Applications">
+          <ScalarProperty Name="idBuisnessUnit" ColumnName="idBuisnessUnit" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuisnessUnits">
+      <EntityTypeMapping TypeName="DBSEModel.BuisnessUnits">
+        <MappingFragment StoreEntitySet="BuisnessUnits">
+          <ScalarProperty Name="idTypicalAlbum" ColumnName="idTypicalAlbum" />
+          <ScalarProperty Name="idDrawBlocksFile" ColumnName="idDrawBlocksFile" />
+          <ScalarProperty Name="idBimLibraryFile" ColumnName="idBimLibraryFile" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Classes">
+      <EntityTypeMapping TypeName="DBSEModel.Classes">
+        <MappingFragment StoreEntitySet="Classes">
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Covers">
+      <EntityTypeMapping TypeName="DBSEModel.Covers">
+        <MappingFragment StoreEntitySet="Covers">
+          <ScalarProperty Name="thickness" ColumnName="thickness" />
+          <ScalarProperty Name="idNorm" ColumnName="idNorm" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Descriptors">
+      <EntityTypeMapping TypeName="DBSEModel.Descriptors">
+        <MappingFragment StoreEntitySet="Descriptors">
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="titleDisplay" ColumnName="titleDisplay" />
+          <ScalarProperty Name="titleShort" ColumnName="titleShort" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DescriptorsResources">
+      <EntityTypeMapping TypeName="DBSEModel.DescriptorsResources">
+        <MappingFragment StoreEntitySet="DescriptorsResources">
+          <ScalarProperty Name="idResourceType" ColumnName="idResourceType" />
+          <ScalarProperty Name="idResource" ColumnName="idResource" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fields">
+      <EntityTypeMapping TypeName="DBSEModel.Fields">
+        <MappingFragment StoreEntitySet="Fields">
+          <ScalarProperty Name="titleRus" ColumnName="titleRus" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="DBSEModel.Groups">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="idClass" ColumnName="idClass" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupsApplications">
+      <EntityTypeMapping TypeName="DBSEModel.GroupsApplications">
+        <MappingFragment StoreEntitySet="GroupsApplications">
+          <ScalarProperty Name="idSubGroup" ColumnName="idSubGroup" />
+          <ScalarProperty Name="idApplication" ColumnName="idApplication" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoadDiagrams">
+      <EntityTypeMapping TypeName="DBSEModel.LoadDiagrams">
+        <MappingFragment StoreEntitySet="LoadDiagrams">
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manufacturers">
+      <EntityTypeMapping TypeName="DBSEModel.Manufacturers">
+        <MappingFragment StoreEntitySet="Manufacturers">
+          <ScalarProperty Name="TIN" ColumnName="TIN" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Materials">
+      <EntityTypeMapping TypeName="DBSEModel.Materials">
+        <MappingFragment StoreEntitySet="Materials">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="idPrepackNorm" ColumnName="idPrepackNorm" />
+          <ScalarProperty Name="idMaterialNorm" ColumnName="idMaterialNorm" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Norms">
+      <EntityTypeMapping TypeName="DBSEModel.Norms">
+        <MappingFragment StoreEntitySet="Norms">
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packages">
+      <EntityTypeMapping TypeName="DBSEModel.Packages">
+        <MappingFragment StoreEntitySet="Packages">
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Perforations">
+      <EntityTypeMapping TypeName="DBSEModel.Perforations">
+        <MappingFragment StoreEntitySet="Perforations">
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="DBSEModel.Products">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="isInStock" ColumnName="isInStock" />
+          <ScalarProperty Name="idPackage" ColumnName="idPackage" />
+          <ScalarProperty Name="idPerforation" ColumnName="idPerforation" />
+          <ScalarProperty Name="idMaterial" ColumnName="idMaterial" />
+          <ScalarProperty Name="idCover" ColumnName="idCover" />
+          <ScalarProperty Name="idSubGroup" ColumnName="idSubGroup" />
+          <ScalarProperty Name="idNorm" ColumnName="idNorm" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductsAnalogs">
+      <EntityTypeMapping TypeName="DBSEModel.ProductsAnalogs">
+        <MappingFragment StoreEntitySet="ProductsAnalogs">
+          <ScalarProperty Name="idAnalog" ColumnName="idAnalog" />
+          <ScalarProperty Name="idOriginal" ColumnName="idOriginal" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductsVendorCodes">
+      <EntityTypeMapping TypeName="DBSEModel.ProductsVendorCodes">
+        <MappingFragment StoreEntitySet="ProductsVendorCodes">
+          <ScalarProperty Name="idCode" ColumnName="idCode" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resources">
+      <EntityTypeMapping TypeName="DBSEModel.Resources">
+        <MappingFragment StoreEntitySet="Resources">
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResourceTypes">
+      <EntityTypeMapping TypeName="DBSEModel.ResourceTypes">
+        <MappingFragment StoreEntitySet="ResourceTypes">
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubGroups">
+      <EntityTypeMapping TypeName="DBSEModel.SubGroups">
+        <MappingFragment StoreEntitySet="SubGroups">
+          <ScalarProperty Name="idLoadDiagram" ColumnName="idLoadDiagram" />
+          <ScalarProperty Name="idGroup" ColumnName="idGroup" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tables">
+      <EntityTypeMapping TypeName="DBSEModel.Tables">
+        <MappingFragment StoreEntitySet="Tables">
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Units">
+      <EntityTypeMapping TypeName="DBSEModel.Units">
+        <MappingFragment StoreEntitySet="Units">
+          <ScalarProperty Name="OKEI" ColumnName="OKEI" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitsPakages">
+      <EntityTypeMapping TypeName="DBSEModel.UnitsPakages">
+        <MappingFragment StoreEntitySet="UnitsPakages">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="idType" ColumnName="idType" />
+          <ScalarProperty Name="idUnit" ColumnName="idUnit" />
+          <ScalarProperty Name="idPackage" ColumnName="idPackage" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitsPerforations">
+      <EntityTypeMapping TypeName="DBSEModel.UnitsPerforations">
+        <MappingFragment StoreEntitySet="UnitsPerforations">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="idType" ColumnName="idType" />
+          <ScalarProperty Name="idUnit" ColumnName="idUnit" />
+          <ScalarProperty Name="idPerforation" ColumnName="idPerforation" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitsProducts">
+      <EntityTypeMapping TypeName="DBSEModel.UnitsProducts">
+        <MappingFragment StoreEntitySet="UnitsProducts">
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="idType" ColumnName="idType" />
+          <ScalarProperty Name="idUnit" ColumnName="idUnit" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitsTypes">
+      <EntityTypeMapping TypeName="DBSEModel.UnitsTypes">
+        <MappingFragment StoreEntitySet="UnitsTypes">
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorCodes">
+      <EntityTypeMapping TypeName="DBSEModel.VendorCodes">
+        <MappingFragment StoreEntitySet="VendorCodes">
+          <ScalarProperty Name="codeAccountant" ColumnName="codeAccountant" />
+          <ScalarProperty Name="isPublic" ColumnName="isPublic" />
+          <ScalarProperty Name="isSale" ColumnName="isSale" />
+          <ScalarProperty Name="isActual" ColumnName="isActual" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="idManufacturer" ColumnName="idManufacturer" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Views">
+      <EntityTypeMapping TypeName="DBSEModel.Views">
+        <MappingFragment StoreEntitySet="Views">
+          <ScalarProperty Name="idType" ColumnName="idType" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewsTables">
+      <EntityTypeMapping TypeName="DBSEModel.ViewsTables">
+        <MappingFragment StoreEntitySet="ViewsTables">
+          <ScalarProperty Name="idView" ColumnName="idView" />
+          <ScalarProperty Name="idTable" ColumnName="idTable" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewTypes">
+      <EntityTypeMapping TypeName="DBSEModel.ViewTypes">
+        <MappingFragment StoreEntitySet="ViewTypes">
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AllProductsInfoView">
+      <EntityTypeMapping TypeName="DBSEModel.AllProductsInfoView">
+        <MappingFragment StoreEntitySet="AllProductsInfoView">
+          <ScalarProperty Name="idDescriptorCovers" ColumnName="idDescriptorCovers" />
+          <ScalarProperty Name="idDescriptorMaterials" ColumnName="idDescriptorMaterials" />
+          <ScalarProperty Name="idDescriptorPackages" ColumnName="idDescriptorPackages" />
+          <ScalarProperty Name="idDescriptorPerforations" ColumnName="idDescriptorPerforations" />
+          <ScalarProperty Name="idPrepackNorm" ColumnName="idPrepackNorm" />
+          <ScalarProperty Name="idMaterialNorm" ColumnName="idMaterialNorm" />
+          <ScalarProperty Name="typeMaterials" ColumnName="typeMaterials" />
+          <ScalarProperty Name="idNormCovers" ColumnName="idNormCovers" />
+          <ScalarProperty Name="thickness" ColumnName="thickness" />
+          <ScalarProperty Name="idLoadDiagram" ColumnName="idLoadDiagram" />
+          <ScalarProperty Name="idDescriptorSubGroups" ColumnName="idDescriptorSubGroups" />
+          <ScalarProperty Name="idGroup" ColumnName="idGroup" />
+          <ScalarProperty Name="idDescriptorNorm" ColumnName="idDescriptorNorm" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="titleShort" ColumnName="titleShort" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="idPackage" ColumnName="idPackage" />
+          <ScalarProperty Name="idPerforation" ColumnName="idPerforation" />
+          <ScalarProperty Name="isInStock" ColumnName="isInStock" />
+          <ScalarProperty Name="idMaterial" ColumnName="idMaterial" />
+          <ScalarProperty Name="idCover" ColumnName="idCover" />
+          <ScalarProperty Name="idSubGroup" ColumnName="idSubGroup" />
+          <ScalarProperty Name="idNorm" ColumnName="idNorm" />
+          <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AllProductUnitsInfoView">
+      <EntityTypeMapping TypeName="DBSEModel.AllProductUnitsInfoView">
+        <MappingFragment StoreEntitySet="AllProductUnitsInfoView">
+          <ScalarProperty Name="titleShortUnit" ColumnName="titleShortUnit" />
+          <ScalarProperty Name="descriptionUnit" ColumnName="descriptionUnit" />
+          <ScalarProperty Name="titleUnit" ColumnName="titleUnit" />
+          <ScalarProperty Name="OKEI" ColumnName="OKEI" />
+          <ScalarProperty Name="titleUnitType" ColumnName="titleUnitType" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="idType" ColumnName="idType" />
+          <ScalarProperty Name="idUnit" ColumnName="idUnit" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassesView_">
+      <EntityTypeMapping TypeName="DBSEModel.ClassesView_">
+        <MappingFragment StoreEntitySet="ClassesView ">
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CoversView">
+      <EntityTypeMapping TypeName="DBSEModel.CoversView">
+        <MappingFragment StoreEntitySet="CoversView">
+          <ScalarProperty Name="номер_ГОСТ" ColumnName="номер ГОСТ" />
+          <ScalarProperty Name="Наименование_ГОСТ" ColumnName="Наименование ГОСТ" />
+          <ScalarProperty Name="Толщина_покрытия__мкм" ColumnName="Толщина покрытия, мкм" />
+          <ScalarProperty Name="Обозначение_покрытия" ColumnName="Обозначение покрытия" />
+          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
+          <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DescriptorsViewDisplay">
+      <EntityTypeMapping TypeName="DBSEModel.DescriptorsViewDisplay">
+        <MappingFragment StoreEntitySet="DescriptorsViewDisplay">
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+          <ScalarProperty Name="Код" ColumnName="Код" />
+          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="ID_дексриптора" ColumnName="ID дексриптора" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupsView_">
+      <EntityTypeMapping TypeName="DBSEModel.GroupsView_">
+        <MappingFragment StoreEntitySet="GroupsView ">
+          <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
+          <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoadDiagramsView">
+      <EntityTypeMapping TypeName="DBSEModel.LoadDiagramsView">
+        <MappingFragment StoreEntitySet="LoadDiagramsView">
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+          <ScalarProperty Name="Краткое_обозначение" ColumnName="Краткое обозначение" />
+          <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ManufacturersView">
+      <EntityTypeMapping TypeName="DBSEModel.ManufacturersView">
+        <MappingFragment StoreEntitySet="ManufacturersView">
+          <ScalarProperty Name="ИНН" ColumnName="ИНН" />
+          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
+          <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaterialsView">
+      <EntityTypeMapping TypeName="DBSEModel.MaterialsView">
+        <MappingFragment StoreEntitySet="MaterialsView">
+          <ScalarProperty Name="Стандарт_сырья" ColumnName="Стандарт сырья" />
+          <ScalarProperty Name="Стандарт_материала" ColumnName="Стандарт материала" />
+          <ScalarProperty Name="Обозначение_материала" ColumnName="Обозначение материала" />
+          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
+          <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NormsView">
+      <EntityTypeMapping TypeName="DBSEModel.NormsView">
+        <MappingFragment StoreEntitySet="NormsView">
+          <ScalarProperty Name="Наименование_документа" ColumnName="Наименование документа" />
+          <ScalarProperty Name="Номер_документа" ColumnName="Номер документа" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PackagesView">
+      <EntityTypeMapping TypeName="DBSEModel.PackagesView">
+        <MappingFragment StoreEntitySet="PackagesView">
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+          <ScalarProperty Name="Краткое_обозначение" ColumnName="Краткое обозначение" />
+          <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PerforationsView">
+      <EntityTypeMapping TypeName="DBSEModel.PerforationsView">
+        <MappingFragment StoreEntitySet="PerforationsView">
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+          <ScalarProperty Name="Сокращенное_обозначение" ColumnName="Сокращенное обозначение" />
+          <ScalarProperty Name="Полное_обозначение" ColumnName="Полное обозначение" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResourceTypesView">
+      <EntityTypeMapping TypeName="DBSEModel.ResourceTypesView">
+        <MappingFragment StoreEntitySet="ResourceTypesView">
+          <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubGroupsView_">
+      <EntityTypeMapping TypeName="DBSEModel.SubGroupsView_">
+        <MappingFragment StoreEntitySet="SubGroupsView ">
+          <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
+          <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TablesView">
+      <EntityTypeMapping TypeName="DBSEModel.TablesView">
+        <MappingFragment StoreEntitySet="TablesView">
+          <ScalarProperty Name="TableDescription" ColumnName="TableDescription" />
+          <ScalarProperty Name="TableTitleDisplay" ColumnName="TableTitleDisplay" />
+          <ScalarProperty Name="TableTitleShort" ColumnName="TableTitleShort" />
+          <ScalarProperty Name="TableTitle" ColumnName="TableTitle" />
+          <ScalarProperty Name="TableId" ColumnName="TableId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TablesViewsView">
+      <EntityTypeMapping TypeName="DBSEModel.TablesViewsView">
+        <MappingFragment StoreEntitySet="TablesViewsView">
+          <ScalarProperty Name="ID_дескриптора_типа_представления" ColumnName="ID дескриптора типа представления" />
+          <ScalarProperty Name="ID_типа_представления" ColumnName="ID типа представления" />
+          <ScalarProperty Name="ID_дескриптора_представления" ColumnName="ID дескриптора представления" />
+          <ScalarProperty Name="ID_представления" ColumnName="ID представления" />
+          <ScalarProperty Name="ID_дескриптора_таблицы" ColumnName="ID дескриптора таблицы" />
+          <ScalarProperty Name="ID_таблицы" ColumnName="ID таблицы" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitsTypesView">
+      <EntityTypeMapping TypeName="DBSEModel.UnitsTypesView">
+        <MappingFragment StoreEntitySet="UnitsTypesView">
+          <ScalarProperty Name="Название_измерения" ColumnName="Название измерения" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitsView">
+      <EntityTypeMapping TypeName="DBSEModel.UnitsView">
+        <MappingFragment StoreEntitySet="UnitsView">
+          <ScalarProperty Name="Код_ОКЕИ" ColumnName="Код ОКЕИ" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewsView">
+      <EntityTypeMapping TypeName="DBSEModel.ViewsView">
+        <MappingFragment StoreEntitySet="ViewsView">
+          <ScalarProperty Name="ViewDescription" ColumnName="ViewDescription" />
+          <ScalarProperty Name="ViewTitleDisplay" ColumnName="ViewTitleDisplay" />
+          <ScalarProperty Name="ViewTitleShort" ColumnName="ViewTitleShort" />
+          <ScalarProperty Name="ViewTitle" ColumnName="ViewTitle" />
+          <ScalarProperty Name="ViewTypeTitleShort" ColumnName="ViewTypeTitleShort" />
+          <ScalarProperty Name="ViewTypeTitle" ColumnName="ViewTypeTitle" />
+          <ScalarProperty Name="ViewIdType" ColumnName="ViewIdType" />
+          <ScalarProperty Name="ViewId" ColumnName="ViewId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewTypesView">
+      <EntityTypeMapping TypeName="DBSEModel.ViewTypesView">
+        <MappingFragment StoreEntitySet="ViewTypesView">
+          <ScalarProperty Name="DescriptorDescription" ColumnName="DescriptorDescription" />
+          <ScalarProperty Name="DescriptorTitleDisplay" ColumnName="DescriptorTitleDisplay" />
+          <ScalarProperty Name="DescriptorTitleShort" ColumnName="DescriptorTitleShort" />
+          <ScalarProperty Name="DescriptorTitle" ColumnName="DescriptorTitle" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddProductImagePaths" FunctionName="Хранилище DBSEModel.AddProductImagePaths" />
+    <FunctionImportMapping FunctionImportName="AddSubGroupImagePaths" FunctionName="Хранилище DBSEModel.AddSubGroupImagePaths" />
+  </EntityContainerMapping>
+</Mapping>

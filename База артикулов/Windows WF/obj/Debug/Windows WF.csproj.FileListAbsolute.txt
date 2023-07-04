@@ -1,0 +1,22 @@
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Windows WF\bin\Debug\BaseWindow.exe.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Windows WF\bin\Debug\BaseWindow.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Windows WF\bin\Debug\BaseWindow.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Windows WF\obj\Debug\Windows WF.csproj.AssemblyReference.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Windows WF\obj\Debug\Windows WF.csproj.SuggestedBindingRedirects.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Windows WF\obj\Debug\BaseWindow.LoginWindow.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Windows WF\obj\Debug\BaseWindow.Properties.Resources.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Windows WF\obj\Debug\Windows WF.csproj.GenerateResource.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Windows WF\obj\Debug\Windows WF.csproj.CoreCompileInputs.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Windows WF\obj\Debug\BaseWindow.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Windows WF\obj\Debug\BaseWindow.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\Windows WF\bin\Debug\BaseWindow.exe.config
+C:\Users\ivan.ivanov\source\repos\База артикулов\Windows WF\bin\Debug\BaseWindow.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\Windows WF\bin\Debug\BaseWindow.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\Windows WF\obj\Debug\Windows WF.csproj.AssemblyReference.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Windows WF\obj\Debug\Windows WF.csproj.SuggestedBindingRedirects.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Windows WF\obj\Debug\BaseWindow.LoginWindow.resources
+C:\Users\ivan.ivanov\source\repos\База артикулов\Windows WF\obj\Debug\BaseWindow.Properties.Resources.resources
+C:\Users\ivan.ivanov\source\repos\База артикулов\Windows WF\obj\Debug\Windows WF.csproj.GenerateResource.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Windows WF\obj\Debug\Windows WF.csproj.CoreCompileInputs.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\Windows WF\obj\Debug\BaseWindow.exe
+C:\Users\ivan.ivanov\source\repos\База артикулов\Windows WF\obj\Debug\BaseWindow.pdb

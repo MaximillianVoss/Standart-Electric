@@ -1,0 +1,73 @@
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\bin\Debug\CustomControlsWPF.dll
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\bin\Debug\CustomControlsWPF.pdb
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\CustomControlsWPF.csproj.AssemblyReference.cache
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\CustomControlsWPF_MarkupCompile.cache
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\CustomControlsWPF_MarkupCompile.lref
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\CustomControlsWPF.g.resources
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\CustomControlsWPF.Properties.Resources.resources
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\CustomControlsWPF.csproj.GenerateResource.cache
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\CustomControlsWPF.csproj.CoreCompileInputs.cache
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\CustomControlsWPF.dll
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\CustomControlsWPF.pdb
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\LabeledTextBox.g.cs
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\LabeledTextBox.baml
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\LabeledPasswordTextBox.g.cs
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\LabeledPasswordTextBox.baml
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\LabeledDateTimePicker.g.cs
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\LabeledDateTimePicker.baml
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\LabeledComboBox.g.cs
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\LabeledComboBox.baml
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\FlightListViewItem.g.cs
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\FlightListViewItem.baml
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\TicketListViewItem.g.cs
+C:\Users\FossW\source\repos\Авиабилеты\CustomControlsWPF\obj\Debug\TicketListViewItem.baml
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\bin\Debug\CustomControlsWPF.dll
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\bin\Debug\CustomControlsWPF.pdb
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\CustomControlsWPF.csproj.AssemblyReference.cache
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\ButtonPrimary.g.cs
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\TicketListViewItem.g.cs
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\FlightListViewItem.g.cs
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\LabeledComboBox.g.cs
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\LabeledDateTimePicker.g.cs
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\LabeledPasswordTextBox.g.cs
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\LabeledTextBox.g.cs
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\CustomControlsWPF_MarkupCompile.cache
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\CustomControlsWPF_MarkupCompile.lref
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\ButtonPrimary.baml
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\TicketListViewItem.baml
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\FlightListViewItem.baml
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\LabeledComboBox.baml
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\LabeledDateTimePicker.baml
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\LabeledPasswordTextBox.baml
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\LabeledTextBox.baml
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\CustomControlsWPF.g.resources
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\CustomControlsWPF.Properties.Resources.resources
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\CustomControlsWPF.csproj.GenerateResource.cache
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\CustomControlsWPF.csproj.CoreCompileInputs.cache
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\CustomControlsWPF.dll
+C:\Users\FossW\source\repos\Зоопарк\CustomControlsWPF\obj\Debug\CustomControlsWPF.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\bin\Debug\CustomControlsWPF.dll
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\bin\Debug\CustomControlsWPF.pdb
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\CustomControlsWPF.csproj.AssemblyReference.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\ButtonPrimary.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\TicketListViewItem.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\FlightListViewItem.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\LabeledComboBox.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\LabeledDateTimePicker.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\LabeledPasswordTextBox.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\LabeledTextBox.g.cs
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\CustomControlsWPF_MarkupCompile.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\CustomControlsWPF_MarkupCompile.lref
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\ButtonPrimary.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\TicketListViewItem.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\FlightListViewItem.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\LabeledComboBox.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\LabeledDateTimePicker.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\LabeledPasswordTextBox.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\LabeledTextBox.baml
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\CustomControlsWPF.g.resources
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\CustomControlsWPF.Properties.Resources.resources
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\CustomControlsWPF.csproj.GenerateResource.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\CustomControlsWPF.csproj.CoreCompileInputs.cache
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\CustomControlsWPF.dll
+C:\Users\ivan.ivanov\source\repos\База артикулов\CustomControlsWPF\obj\Debug\CustomControlsWPF.pdb

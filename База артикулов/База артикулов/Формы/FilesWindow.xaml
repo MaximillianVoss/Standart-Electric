@@ -1,0 +1,20 @@
+﻿<local:CustomWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:База_артикулов.Формы"
+        xmlns:CustomControlsWPF="clr-namespace:CustomControlsWPF;assembly=CustomControlsWPF" 
+    x:Class="База_артикулов.Формы.FilesWindow"
+        mc:Ignorable="d"
+        Title="FilesWindow" Height="390" Width="555" Loaded="CustomWindow_Loaded">
+    <Grid>
+        <TreeView x:Name="tvFiles" Margin="0,0,365,0"/>
+
+        <CustomControlsWPF:LabeledTextBox x:Name="txbFilePath" Margin="195,10,10,0" VerticalAlignment="Top" Text="" Title="Путь до файла в облаке"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnUpload" Margin="195,67,5,0" VerticalAlignment="Top" Text="Загрузить" Color="success" Height="25" Click="btnUpload_Click"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnDownload" Margin="195,97,5,0" VerticalAlignment="Top" Text="Скачать" Height="25" Click="btnDownload_Click"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnDelete" Margin="195,127,5,0" VerticalAlignment="Top" Color="danger" Text="Удалить" Height="25" Click="btnDelete_Click"/>
+
+    </Grid>
+</local:CustomWindow>
