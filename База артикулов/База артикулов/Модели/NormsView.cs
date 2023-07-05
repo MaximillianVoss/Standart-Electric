@@ -15,7 +15,6 @@ namespace База_артикулов.Модели
     public partial class NormsView
     {
         public int ID { get; set; }
-        public string Номер_документа { get; set; }
-        public string Наименование_документа { get; set; }
+        public string Дескриптор { get; set; }
     }
 }

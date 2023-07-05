@@ -15,6 +15,6 @@ namespace База_артикулов.Модели
     public partial class ResourceTypesView
     {
         public int ID { get; set; }
-        public string Полное_наименование { get; set; }
+        public string Наименование { get; set; }
     }
 }

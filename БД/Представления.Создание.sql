@@ -12,7 +12,8 @@ AS
     SELECT
         ID AS 'ID дескриптора',
         Title AS 'Наименование',
-        titleShort AS 'Сокращенное Наименование',
+        titleShort AS 'Сокращенное наименование',
+        titleDisplay AS 'Отображаемое название',
         Code AS 'Код',
         Description AS 'Описание'
     FROM
@@ -20,7 +21,6 @@ AS
 );
 --#endregion
 --#endregion
-
 
 --#region Представление LoadDiagramsView
 --#region Удаление
@@ -42,7 +42,6 @@ AS
 --#endregion
 --#endregion
 
-
 --#region Представление SubGroupsView
 --#region Удаление
 GO
@@ -55,7 +54,7 @@ AS
     (
     SELECT
         SG.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор',
+        DV.[Наименование] AS 'Наименование',
         SG.[idGroup] AS 'ID Группы',
         LD.[Наименование] AS 'Схема нагрузки'
     FROM
@@ -78,7 +77,7 @@ AS
     (
     SELECT
         G.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор',
+        DV.[Наименование] AS 'Наименование',
         G.[idClass] AS 'ID Класса'
     FROM
         Groups G
@@ -99,7 +98,7 @@ AS
     (
     SELECT
         BU.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор',
+        DV.[Наименование] AS 'Наименование',
         BU.[idBimLibraryFile] AS 'ID Файла BIM-библиотеки',
         BU.[idDrawBlocksFile] AS 'ID Файла блоков чертежей',
         BU.[idTypicalAlbum] AS 'ID Типового альбома'
@@ -122,7 +121,7 @@ AS
     (
     SELECT
         C.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор'
+        DV.[Наименование] AS 'Наименование'
     FROM
         Classes C
         JOIN DescriptorsView DV ON C.[idDescriptor] = DV.[ID дескриптора]
@@ -142,7 +141,7 @@ AS
     (
     SELECT
         A.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор',
+        DV.[Наименование] AS 'Наименование',
         A.[idBuisnessUnit] AS 'ID Направления'
     FROM
         Applications A
@@ -163,7 +162,7 @@ AS
     (
     SELECT
         PER.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор'
+        DV.[Наименование] AS 'Наименование'
     FROM
         Perforations PER
         JOIN DescriptorsView DV ON PER.[idDescriptor] = DV.[ID дескриптора]
@@ -183,7 +182,8 @@ AS
     (
     SELECT
         N.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор'
+        DV.[Код] AS 'Номер документа',
+        DV.[Наименование] AS 'Наименование документа'
     FROM
         Norms N
         JOIN DescriptorsView DV ON N.[idDescriptor] = DV.[ID дескриптора]
@@ -203,13 +203,21 @@ AS
     (
     SELECT
         M.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор',
-        M.[idMaterialNorm] AS 'ID Нормативного документа',
-        M.[idPrepackNorm] AS 'ID Норматива',
-        M.[type] AS 'Обозначение материала или марка стали'
+        -- M.[idMaterialNorm] AS 'ID Нормативного документа материалов',
+        -- M.[idPrepackNorm] AS 'ID Норматива документа сырья',
+        DV.[Наименование] AS 'Наименование',
+        DV.[Сокращенное наименование] AS 'Сокращенное наименование',
+        DV.[Код] AS 'Обозначение материала',
+        M.[type] AS 'Обозначение материала/марка стали',
+        NVM.[Наименование документа] AS 'Стандарт материала',
+        NVM.[Номер документа] AS 'Код стандарта материала',
+        NVP.[Наименование документа] AS 'Стандарт сырья',
+        NVP.[Номер документа] AS 'Код стандарта сырья'
     FROM
         Materials M
         JOIN DescriptorsView DV ON M.[idDescriptor] = DV.[ID дескриптора]
+        JOIN NormsView NVM ON M.idMaterialNorm = NVM.ID
+        JOIN NormsView NVP ON M.idPrepackNorm = NVP.ID
 );
 --#endregion
 --#endregion
@@ -248,7 +256,7 @@ AS
     (
     SELECT
         CV.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор',
+        DV.[Наименование] AS 'Наименование',
         CV.[thickness] AS 'Толщина покрытия'
     FROM
         Covers CV
@@ -269,7 +277,7 @@ AS
     (
     SELECT
         P.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор',
+        DV.[Наименование] AS 'Наименование',
         N.[Наименование] AS 'Стандарт',
         SG.[Наименование] AS 'Подгруппа',
         CV.[Наименование] AS 'Покрытие',
@@ -302,11 +310,32 @@ AS
     (
     SELECT
         U.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор',
+        DV.[Наименование] AS 'Наименование',
+        DV.[Сокращенное наименование] AS 'Сокращенное наименование',
+        DV.[Описание] AS 'Описание',
         U.[OKEI] AS 'Общероссийский классификатор единиц измерения'
     FROM
         Units U
         JOIN DescriptorsView DV ON U.[idDescriptor] = DV.[ID дескриптора]
+);
+--#endregion
+--#endregion
+
+--#region Представление UnitsTypesView
+--#region Удаление
+GO
+DROP VIEW IF EXISTS dbo.[UnitsTypesView]; 
+--#endregion
+--#region Создание
+GO
+CREATE VIEW dbo.[UnitsTypesView]
+AS
+    (
+    SELECT
+        UT.id AS 'ID',
+        UT.[title] AS 'Наименование измерения'
+    FROM
+        UnitsTypes UT
 );
 --#endregion
 --#endregion
@@ -346,7 +375,7 @@ AS
     SELECT
         VC.id AS 'ID',
         M.[Наименование] AS 'Производитель',
-        DV.[Наименование] AS 'Дескриптор',
+        DV.[Наименование] AS 'Наименование',
         VC.[isActual] AS 'Актуальность',
         VC.[isSale] AS 'Тип',
         VC.[isPublic] AS 'Публичность',
@@ -381,6 +410,25 @@ AS
 --#endregion
 --#endregion
 
+--#region Представление ResourcesView
+--#region Удаление
+GO
+DROP VIEW IF EXISTS dbo.[ResourcesView]; 
+--#endregion
+--#region Создание
+GO
+CREATE VIEW dbo.[ResourcesView]
+AS
+    (
+    SELECT
+        R.id AS 'ID',
+        R.[URL] AS 'URL ресурса'
+    FROM
+        Resources R
+);
+--#endregion
+--#endregion
+
 --#region Представление DescriptorsResourcesView
 --#region Удаление
 GO
@@ -393,7 +441,7 @@ AS
     (
     SELECT
         DR.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор',
+        DV.[Наименование] AS 'Наименование',
         R.[URL] AS 'URL ресурса',
         RT.[Наименование] AS 'Тип ресурса'
     FROM
@@ -405,25 +453,24 @@ AS
 --#endregion
 --#endregion
 
---#region Представление ViewsTablesView
+--#region Представление TablesView
 --#region Удаление
 GO
-DROP VIEW IF EXISTS dbo.[ViewsTablesView]; 
+DROP VIEW IF EXISTS dbo.[TablesView]; 
 --#endregion
 --#region Создание
 GO
-CREATE VIEW dbo.[ViewsTablesView]
+CREATE VIEW dbo.[TablesView]
 AS
     (
     SELECT
-        VT.id AS 'ID',
-        T.[Наименование] AS 'Таблица',
-        V.[Наименование] AS 'Представление'
+        [id] AS 'ID',
+        DV.*
     FROM
-        ViewsTables VT
-        JOIN TablesView T ON VT.[idTable] = T.[ID]
-        JOIN ViewsView V ON VT.[idView] = V.[ID]
-);
+        [Tables] AS T
+        JOIN DescriptorsView DV
+        ON T.[idDescriptor] = DV.[ID дескриптора]
+    );
 --#endregion
 --#endregion
 
@@ -439,7 +486,7 @@ AS
     (
     SELECT
         VT.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор'
+        DV.[Наименование]
     FROM
         ViewTypes VT
         JOIN DescriptorsView DV ON VT.[idDescriptor] = DV.[ID дескриптора]
@@ -459,12 +506,47 @@ AS
     (
     SELECT
         V.id AS 'ID',
-        DV.[Наименование] AS 'Дескриптор',
+        DV.[Наименование] AS 'Наименование представления',
+        DV.[Сокращенное наименование] AS 'Сокращенное наименование представления',
+        DV.[Отображаемое название] AS 'Отображаемое название представления',
+        DV.[ID дескриптора] AS 'ID дескриптора представления',
+        VT.[ID] AS 'ID Типа',
         VT.[Наименование] AS 'Тип'
     FROM
         Views V
         JOIN DescriptorsView DV ON V.[idDescriptor] = DV.[ID дескриптора]
         JOIN ViewTypesView VT ON V.[idType] = VT.[ID]
+);
+--#endregion
+--#endregion
+
+--#region Представление ViewsTablesView
+--#region Удаление
+GO
+DROP VIEW IF EXISTS dbo.[ViewsTablesView]; 
+--#endregion
+--#region Создание
+GO
+CREATE VIEW dbo.[ViewsTablesView]
+AS
+    (
+    SELECT
+        V.id AS 'ID',
+        DV.[ID дескриптора] AS 'ID дескриптора представления',
+        DV.[Наименование] AS 'Наименование представления',
+        DV.[Сокращенное наименование] AS 'Сокращенное наименование представления',
+        DV.[Отображаемое название] AS 'Отображаемое название представления',
+        VT.[Наименование] AS 'Тип',
+        TV.[ID дескриптора] AS 'ID дескриптора таблицы',
+        TV.[Наименование] AS 'Наименование таблицы',
+        TV.[Сокращенное наименование] AS 'Сокращенное наименование таблицы',
+        TV.[Отображаемое название] AS 'Отображаемое название таблицы'
+    FROM
+        Views V
+        JOIN DescriptorsView DV ON V.[idDescriptor] = DV.[ID дескриптора]
+        JOIN ViewTypesView VT ON V.[idType] = VT.[ID]
+        JOIN ViewsTables ON V.id = ViewsTables.idView
+        JOIN TablesView TV ON TV.[id] = ViewsTables.idTable  
 );
 --#endregion
 --#endregion

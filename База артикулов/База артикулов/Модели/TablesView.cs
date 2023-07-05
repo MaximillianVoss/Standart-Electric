@@ -14,10 +14,12 @@ namespace База_артикулов.Модели
     
     public partial class TablesView
     {
-        public int TableId { get; set; }
-        public string TableTitle { get; set; }
-        public string TableTitleShort { get; set; }
-        public string TableTitleDisplay { get; set; }
-        public string TableDescription { get; set; }
+        public int ID { get; set; }
+        public int ID_дескриптора { get; set; }
+        public string Наименование { get; set; }
+        public string Сокращенное_Наименование { get; set; }
+        public string Отображаемое_название { get; set; }
+        public string Код { get; set; }
+        public string Описание { get; set; }
     }
 }

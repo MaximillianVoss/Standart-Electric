@@ -1,0 +1,34 @@
+﻿<local:CustomWindow x:Class="База_артикулов.Формы.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:База_артикулов.Формы"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--<ContentControl x:Name="ccMain" Margin="5,5,5,5" Background="#FFA9A2A2"/>-->
+        <TabControl Grid.Row="1">
+            <TabItem x:Name="tiTables" Header="Просмотр таблиц">
+                <Grid Background="#FFE5E5E5">
+                    <Frame x:Name="fTables" Content="Frame" NavigationUIVisibility="Hidden"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tiImport" Header="Импорт данных">
+                <Grid Background="#FFE5E5E5">
+                    <Frame x:Name="fImport" Content="Frame" NavigationUIVisibility="Hidden"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tiSettings" Header="Настройки">
+                <Grid Background="#FFE5E5E5">
+                    <Frame x:Name="fSettings" Content="Frame" NavigationUIVisibility="Hidden"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</local:CustomWindow>

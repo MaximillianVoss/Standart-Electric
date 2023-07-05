@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -62,18 +61,18 @@ namespace База_артикулов.Формы
         /// <returns></returns>
         private Type GetTableItemsType(String tableName)
         {
-            var tableView = this.DB.ViewsView.FirstOrDefault(x => x.ViewTitleDisplay.StartsWith(tableName) && x.ViewTypeTitle == "Пользовательский");
-            if (tableView != null)
-            {
-                var tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(
-                p => p.PropertyType.Name.StartsWith("DbSet") &&
-                p.Name == tableView.ViewTitleDisplay);
-                if (tableProperty != null)
-                {
-                    var dbSet = tableProperty.GetValue(this.DB, null);
-                    return dbSet.GetType().GetGenericArguments().First();
-                }
-            }
+            //var tableView = this.DB.ViewsView.FirstOrDefault(x => x.Наименование_таблицы.StartsWith(tableName) && x.Тип == "Пользовательский");
+            //if (tableView != null)
+            //{
+            //    var tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(
+            //    p => p.PropertyType.Name.StartsWith("DbSet") &&
+            //    p.Name == tableView.ViewTitleDisplay);
+            //    if (tableProperty != null)
+            //    {
+            //        var dbSet = tableProperty.GetValue(this.DB, null);
+            //        return dbSet.GetType().GetGenericArguments().First();
+            //    }
+            //}
             return typeof(object);
         }
 
@@ -84,20 +83,20 @@ namespace База_артикулов.Формы
         /// <returns></returns>
         private IEnumerable GetTable(String tableName)
         {
-            var table = this.DB.TablesView.FirstOrDefault(x => x.TableTitleDisplay == tableName);
-            var tv = this.DB.ViewsTables.FirstOrDefault(x => x.idTable == table.TableId);
-            var view = this.DB.ViewsView.FirstOrDefault(x => x.ViewId == tv.idView);
-            var tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(
-                p => p.PropertyType.Name.StartsWith("DbSet") &&
-                p.Name == view.ViewTitle);
-            if (tableProperty != null)
-            {
-                var dbSet = tableProperty.GetValue(this.DB, null);
-                Type dbSetType = dbSet.GetType().GetGenericArguments().First();
-                var collectionWithType = typeof(ObservableCollection<>).MakeGenericType(dbSetType);
-                this.tableItems = Activator.CreateInstance(collectionWithType, dbSet);
-                return (IEnumerable)this.tableItems;
-            }
+            //var table = this.DB.TablesView.FirstOrDefault(x => x.TableTitleDisplay == tableName);
+            //var tv = this.DB.ViewsTables.FirstOrDefault(x => x.idTable == table.TableId);
+            //var view = this.DB.ViewsView.FirstOrDefault(x => x.ViewId == tv.idView);
+            //var tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(
+            //    p => p.PropertyType.Name.StartsWith("DbSet") &&
+            //    p.Name == view.ViewTitle);
+            //if (tableProperty != null)
+            //{
+            //    var dbSet = tableProperty.GetValue(this.DB, null);
+            //    Type dbSetType = dbSet.GetType().GetGenericArguments().First();
+            //    var collectionWithType = typeof(ObservableCollection<>).MakeGenericType(dbSetType);
+            //    this.tableItems = Activator.CreateInstance(collectionWithType, dbSet);
+            //    return (IEnumerable)this.tableItems;
+            //}
             return null;
         }
 
@@ -189,7 +188,7 @@ namespace База_артикулов.Формы
             var tables = this.DB.TablesView.ToList();
             foreach (var table in tables)
             {
-                this.cmbTables.Add(table.TableTitleDisplay);
+                //this.cmbTables.Add(table.TableTitleDisplay);
             }
             this.cmbTables.Select("Продукты");
             //foreach (var table in tables)
@@ -316,7 +315,6 @@ namespace База_артикулов.Формы
             this.InitializeComponent();
             this.UpdateTablesComboBox();
         }
-
 
         #endregion
 

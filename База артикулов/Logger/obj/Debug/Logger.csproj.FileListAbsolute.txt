@@ -1,0 +1,12 @@
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Logger\bin\Debug\Logger.dll
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Logger\bin\Debug\Logger.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Logger\obj\Debug\Logger.csproj.AssemblyReference.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Logger\obj\Debug\Logger.csproj.CoreCompileInputs.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Logger\obj\Debug\Logger.dll
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\C#\Base CSharp\Logger\obj\Debug\Logger.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Logger\bin\Debug\Logger.dll
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Logger\bin\Debug\Logger.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Logger\obj\Debug\Logger.csproj.AssemblyReference.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Logger\obj\Debug\Logger.csproj.CoreCompileInputs.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Logger\obj\Debug\Logger.dll
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Logger\obj\Debug\Logger.pdb

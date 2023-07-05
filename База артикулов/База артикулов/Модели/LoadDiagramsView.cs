@@ -15,8 +15,11 @@ namespace База_артикулов.Модели
     public partial class LoadDiagramsView
     {
         public int ID { get; set; }
-        public string Полное_наименование { get; set; }
-        public string Краткое_обозначение { get; set; }
+        public int ID_дескриптора { get; set; }
+        public string Наименование { get; set; }
+        public string Сокращенное_Наименование { get; set; }
+        public string Отображаемое_название { get; set; }
+        public string Код { get; set; }
         public string Описание { get; set; }
     }
 }

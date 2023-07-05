@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Хранилище DBSEModelContainer" CdmEntityContainer="DBSEEntities">
+    <FunctionImportMapping FunctionImportName="AddProductImagePaths" FunctionName="Хранилище DBSEModel.AddProductImagePaths" />
+    <FunctionImportMapping FunctionImportName="AddSubGroupImagePaths" FunctionName="Хранилище DBSEModel.AddSubGroupImagePaths" />
     <EntitySetMapping Name="Applications">
       <EntityTypeMapping TypeName="DBSEModel.Applications">
         <MappingFragment StoreEntitySet="Applications">
@@ -344,12 +346,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ClassesView_">
-      <EntityTypeMapping TypeName="DBSEModel.ClassesView_">
-        <MappingFragment StoreEntitySet="ClassesView ">
-          <ScalarProperty Name="Описание" ColumnName="Описание" />
-          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
-          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+    <EntitySetMapping Name="ApplicationsView">
+      <EntityTypeMapping TypeName="DBSEModel.ApplicationsView">
+        <MappingFragment StoreEntitySet="ApplicationsView">
+          <ScalarProperty Name="ID_Направления" ColumnName="ID Направления" />
+          <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuisnessUnitsView">
+      <EntityTypeMapping TypeName="DBSEModel.BuisnessUnitsView">
+        <MappingFragment StoreEntitySet="BuisnessUnitsView">
+          <ScalarProperty Name="ID_Типового_альбома" ColumnName="ID Типового альбома" />
+          <ScalarProperty Name="ID_Файла_блоков_чертежей" ColumnName="ID Файла блоков чертежей" />
+          <ScalarProperty Name="ID_Файла_BIM_библиотеки" ColumnName="ID Файла BIM-библиотеки" />
+          <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassesView">
+      <EntityTypeMapping TypeName="DBSEModel.ClassesView">
+        <MappingFragment StoreEntitySet="ClassesView">
+          <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -357,13 +377,21 @@
     <EntitySetMapping Name="CoversView">
       <EntityTypeMapping TypeName="DBSEModel.CoversView">
         <MappingFragment StoreEntitySet="CoversView">
-          <ScalarProperty Name="номер_ГОСТ" ColumnName="номер ГОСТ" />
-          <ScalarProperty Name="Наименование_ГОСТ" ColumnName="Наименование ГОСТ" />
-          <ScalarProperty Name="Толщина_покрытия__мкм" ColumnName="Толщина покрытия, мкм" />
-          <ScalarProperty Name="Обозначение_покрытия" ColumnName="Обозначение покрытия" />
-          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
-          <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
+          <ScalarProperty Name="Толщина_покрытия" ColumnName="Толщина покрытия" />
+          <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DescriptorsView">
+      <EntityTypeMapping TypeName="DBSEModel.DescriptorsView">
+        <MappingFragment StoreEntitySet="DescriptorsView">
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+          <ScalarProperty Name="Код" ColumnName="Код" />
+          <ScalarProperty Name="Отображаемое_название" ColumnName="Отображаемое название" />
+          <ScalarProperty Name="Сокращенное_Наименование" ColumnName="Сокращенное Наименование" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="ID_дескриптора" ColumnName="ID дескриптора" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -378,14 +406,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="GroupsView_">
-      <EntityTypeMapping TypeName="DBSEModel.GroupsView_">
-        <MappingFragment StoreEntitySet="GroupsView ">
-          <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
-          <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
-          <ScalarProperty Name="Описание" ColumnName="Описание" />
-          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
-          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+    <EntitySetMapping Name="GroupsView">
+      <EntityTypeMapping TypeName="DBSEModel.GroupsView">
+        <MappingFragment StoreEntitySet="GroupsView">
+          <ScalarProperty Name="ID_Класса" ColumnName="ID Класса" />
+          <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -394,8 +419,11 @@
       <EntityTypeMapping TypeName="DBSEModel.LoadDiagramsView">
         <MappingFragment StoreEntitySet="LoadDiagramsView">
           <ScalarProperty Name="Описание" ColumnName="Описание" />
-          <ScalarProperty Name="Краткое_обозначение" ColumnName="Краткое обозначение" />
-          <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
+          <ScalarProperty Name="Код" ColumnName="Код" />
+          <ScalarProperty Name="Отображаемое_название" ColumnName="Отображаемое название" />
+          <ScalarProperty Name="Сокращенное_Наименование" ColumnName="Сокращенное Наименование" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="ID_дескриптора" ColumnName="ID дескриптора" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -413,11 +441,10 @@
     <EntitySetMapping Name="MaterialsView">
       <EntityTypeMapping TypeName="DBSEModel.MaterialsView">
         <MappingFragment StoreEntitySet="MaterialsView">
-          <ScalarProperty Name="Стандарт_сырья" ColumnName="Стандарт сырья" />
-          <ScalarProperty Name="Стандарт_материала" ColumnName="Стандарт материала" />
-          <ScalarProperty Name="Обозначение_материала" ColumnName="Обозначение материала" />
-          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
-          <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
+          <ScalarProperty Name="Обозначение_материала_или_марка_стали" ColumnName="Обозначение материала или марка стали" />
+          <ScalarProperty Name="ID_Норматива" ColumnName="ID Норматива" />
+          <ScalarProperty Name="ID_Нормативного_документа" ColumnName="ID Нормативного документа" />
+          <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -425,8 +452,7 @@
     <EntitySetMapping Name="NormsView">
       <EntityTypeMapping TypeName="DBSEModel.NormsView">
         <MappingFragment StoreEntitySet="NormsView">
-          <ScalarProperty Name="Наименование_документа" ColumnName="Наименование документа" />
-          <ScalarProperty Name="Номер_документа" ColumnName="Номер документа" />
+          <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -444,9 +470,15 @@
     <EntitySetMapping Name="PerforationsView">
       <EntityTypeMapping TypeName="DBSEModel.PerforationsView">
         <MappingFragment StoreEntitySet="PerforationsView">
-          <ScalarProperty Name="Описание" ColumnName="Описание" />
-          <ScalarProperty Name="Сокращенное_обозначение" ColumnName="Сокращенное обозначение" />
-          <ScalarProperty Name="Полное_обозначение" ColumnName="Полное обозначение" />
+          <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResourcesView">
+      <EntityTypeMapping TypeName="DBSEModel.ResourcesView">
+        <MappingFragment StoreEntitySet="ResourcesView">
+          <ScalarProperty Name="URL_ресурса" ColumnName="URL ресурса" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -454,19 +486,17 @@
     <EntitySetMapping Name="ResourceTypesView">
       <EntityTypeMapping TypeName="DBSEModel.ResourceTypesView">
         <MappingFragment StoreEntitySet="ResourceTypesView">
-          <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SubGroupsView_">
-      <EntityTypeMapping TypeName="DBSEModel.SubGroupsView_">
-        <MappingFragment StoreEntitySet="SubGroupsView ">
-          <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
-          <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
-          <ScalarProperty Name="Описание" ColumnName="Описание" />
-          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
-          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+    <EntitySetMapping Name="SubGroupsView">
+      <EntityTypeMapping TypeName="DBSEModel.SubGroupsView">
+        <MappingFragment StoreEntitySet="SubGroupsView">
+          <ScalarProperty Name="Схема_нагрузки" ColumnName="Схема нагрузки" />
+          <ScalarProperty Name="ID_Группы" ColumnName="ID Группы" />
+          <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -474,11 +504,13 @@
     <EntitySetMapping Name="TablesView">
       <EntityTypeMapping TypeName="DBSEModel.TablesView">
         <MappingFragment StoreEntitySet="TablesView">
-          <ScalarProperty Name="TableDescription" ColumnName="TableDescription" />
-          <ScalarProperty Name="TableTitleDisplay" ColumnName="TableTitleDisplay" />
-          <ScalarProperty Name="TableTitleShort" ColumnName="TableTitleShort" />
-          <ScalarProperty Name="TableTitle" ColumnName="TableTitle" />
-          <ScalarProperty Name="TableId" ColumnName="TableId" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+          <ScalarProperty Name="Код" ColumnName="Код" />
+          <ScalarProperty Name="Отображаемое_название" ColumnName="Отображаемое название" />
+          <ScalarProperty Name="Сокращенное_Наименование" ColumnName="Сокращенное Наименование" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="ID_дескриптора" ColumnName="ID дескриптора" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -505,10 +537,24 @@
     <EntitySetMapping Name="UnitsView">
       <EntityTypeMapping TypeName="DBSEModel.UnitsView">
         <MappingFragment StoreEntitySet="UnitsView">
-          <ScalarProperty Name="Код_ОКЕИ" ColumnName="Код ОКЕИ" />
-          <ScalarProperty Name="Описание" ColumnName="Описание" />
-          <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
-          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Общероссийский_классификатор_единиц_измерения" ColumnName="Общероссийский классификатор единиц измерения" />
+          <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewsTablesView">
+      <EntityTypeMapping TypeName="DBSEModel.ViewsTablesView">
+        <MappingFragment StoreEntitySet="ViewsTablesView">
+          <ScalarProperty Name="Отображаемое_название_таблицы" ColumnName="Отображаемое название таблицы" />
+          <ScalarProperty Name="Сокращенное_наименование_таблицы" ColumnName="Сокращенное наименование таблицы" />
+          <ScalarProperty Name="Наименование_таблицы" ColumnName="Наименование таблицы" />
+          <ScalarProperty Name="ID_дескриптора_таблицы" ColumnName="ID дескриптора таблицы" />
+          <ScalarProperty Name="Тип" ColumnName="Тип" />
+          <ScalarProperty Name="Отображаемое_название_представления" ColumnName="Отображаемое название представления" />
+          <ScalarProperty Name="Сокращенное_Наименование_представления" ColumnName="Сокращенное Наименование представления" />
+          <ScalarProperty Name="Наименование_представления" ColumnName="Наименование представления" />
+          <ScalarProperty Name="ID_дескриптора_представления" ColumnName="ID дескриптора представления" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -516,29 +562,23 @@
     <EntitySetMapping Name="ViewsView">
       <EntityTypeMapping TypeName="DBSEModel.ViewsView">
         <MappingFragment StoreEntitySet="ViewsView">
-          <ScalarProperty Name="ViewDescription" ColumnName="ViewDescription" />
-          <ScalarProperty Name="ViewTitleDisplay" ColumnName="ViewTitleDisplay" />
-          <ScalarProperty Name="ViewTitleShort" ColumnName="ViewTitleShort" />
-          <ScalarProperty Name="ViewTitle" ColumnName="ViewTitle" />
-          <ScalarProperty Name="ViewTypeTitleShort" ColumnName="ViewTypeTitleShort" />
-          <ScalarProperty Name="ViewTypeTitle" ColumnName="ViewTypeTitle" />
-          <ScalarProperty Name="ViewIdType" ColumnName="ViewIdType" />
-          <ScalarProperty Name="ViewId" ColumnName="ViewId" />
+          <ScalarProperty Name="Тип" ColumnName="Тип" />
+          <ScalarProperty Name="ID_Типа" ColumnName="ID Типа" />
+          <ScalarProperty Name="ID_дескриптора_представления" ColumnName="ID дескриптора представления" />
+          <ScalarProperty Name="Отображаемое_название_представления" ColumnName="Отображаемое название представления" />
+          <ScalarProperty Name="Сокращенное_Наименование_представления" ColumnName="Сокращенное Наименование представления" />
+          <ScalarProperty Name="Наименование_представления" ColumnName="Наименование представления" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ViewTypesView">
       <EntityTypeMapping TypeName="DBSEModel.ViewTypesView">
         <MappingFragment StoreEntitySet="ViewTypesView">
-          <ScalarProperty Name="DescriptorDescription" ColumnName="DescriptorDescription" />
-          <ScalarProperty Name="DescriptorTitleDisplay" ColumnName="DescriptorTitleDisplay" />
-          <ScalarProperty Name="DescriptorTitleShort" ColumnName="DescriptorTitleShort" />
-          <ScalarProperty Name="DescriptorTitle" ColumnName="DescriptorTitle" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="AddProductImagePaths" FunctionName="Хранилище DBSEModel.AddProductImagePaths" />
-    <FunctionImportMapping FunctionImportName="AddSubGroupImagePaths" FunctionName="Хранилище DBSEModel.AddSubGroupImagePaths" />
   </EntityContainerMapping>
 </Mapping>

@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Custom Controls WPF", "..\B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel Reader", "..\Base CSharp\Excel Reader\Excel Reader.csproj", "{8BEEBFB5-53CA-488C-8F4E-223AE0F4EBC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows WF", "Windows WF\Windows WF.csproj", "{A532D3DB-6C91-47A1-868F-68040D76B6AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{B31EBF35-5627-4E1E-8424-128F41B6C574}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{8BEEBFB5-53CA-488C-8F4E-223AE0F4EBC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BEEBFB5-53CA-488C-8F4E-223AE0F4EBC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BEEBFB5-53CA-488C-8F4E-223AE0F4EBC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A532D3DB-6C91-47A1-868F-68040D76B6AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A532D3DB-6C91-47A1-868F-68040D76B6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A532D3DB-6C91-47A1-868F-68040D76B6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A532D3DB-6C91-47A1-868F-68040D76B6AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B31EBF35-5627-4E1E-8424-128F41B6C574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B31EBF35-5627-4E1E-8424-128F41B6C574}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B31EBF35-5627-4E1E-8424-128F41B6C574}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B31EBF35-5627-4E1E-8424-128F41B6C574}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,10 +15,9 @@ namespace База_артикулов.Модели
     public partial class MaterialsView
     {
         public int ID { get; set; }
-        public string Полное_наименование { get; set; }
-        public string Сокращенное_наименование { get; set; }
-        public string Обозначение_материала { get; set; }
-        public string Стандарт_материала { get; set; }
-        public string Стандарт_сырья { get; set; }
+        public string Дескриптор { get; set; }
+        public Nullable<int> ID_Нормативного_документа { get; set; }
+        public Nullable<int> ID_Норматива { get; set; }
+        public string Обозначение_материала_или_марка_стали { get; set; }
     }
 }

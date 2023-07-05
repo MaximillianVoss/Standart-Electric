@@ -15,9 +15,7 @@ namespace База_артикулов.Модели
     public partial class UnitsView
     {
         public int ID { get; set; }
-        public string Наименование { get; set; }
-        public string Сокращенное_наименование { get; set; }
-        public string Описание { get; set; }
-        public Nullable<int> Код_ОКЕИ { get; set; }
+        public string Дескриптор { get; set; }
+        public Nullable<int> Общероссийский_классификатор_единиц_измерения { get; set; }
     }
 }

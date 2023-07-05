@@ -101,3 +101,19 @@ SELECT
     *
 FROM
     ViewsView;
+
+-- Проверка остальных таблиц/предсталвений
+SELECT
+    *
+FROM
+    TablesView
+
+SELECT
+    *
+FROM
+    ViewsView
+
+SELECT
+    *
+FROM
+    ViewsTablesView

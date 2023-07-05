@@ -14,10 +14,7 @@ namespace База_артикулов.Модели
     
     public partial class ViewTypesView
     {
-        public int id { get; set; }
-        public string DescriptorTitle { get; set; }
-        public string DescriptorTitleShort { get; set; }
-        public string DescriptorTitleDisplay { get; set; }
-        public string DescriptorDescription { get; set; }
+        public int ID { get; set; }
+        public string Наименование { get; set; }
     }
 }

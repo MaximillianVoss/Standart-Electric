@@ -108,13 +108,19 @@
     <Compile Include="Модели\Applications.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Модели\ApplicationsView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Модели\BuisnessUnits.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Модели\BuisnessUnitsView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\Classes.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Модели\ClassesView_.cs">
+    <Compile Include="Модели\ClassesView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\Covers.cs">
@@ -129,6 +135,9 @@
     <Compile Include="Модели\DescriptorsResources.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Модели\DescriptorsView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Модели\DescriptorsViewDisplay.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
@@ -141,7 +150,7 @@
     <Compile Include="Модели\GroupsApplications.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Модели\GroupsView_.cs">
+    <Compile Include="Модели\GroupsView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\LoadDiagrams.cs">
@@ -201,13 +210,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductsModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Модели\ResourcesView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Модели\ResourceTypes.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\ResourceTypesView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Модели\SubGroupsView_.cs">
+    <Compile Include="Модели\SubGroupsView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\TablesView.cs">
@@ -228,6 +240,9 @@
     <Compile Include="Модели\ViewsTables.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Модели\ViewsTablesView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Модели\ViewsView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
@@ -237,17 +252,36 @@
     <Compile Include="Модели\ViewTypesView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Формы\CustomBase.cs" />
+    <Compile Include="Формы\CustomPage.cs" />
     <Compile Include="Формы\FilesWindow.xaml.cs">
       <DependentUpon>FilesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Формы\WindowMain.xaml.cs">
+      <DependentUpon>WindowMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Формы\Страницы\PageImport.xaml.cs">
+      <DependentUpon>PageImport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Формы\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Формы\Страницы\PageTables.xaml.cs">
+      <DependentUpon>PageTables.xaml</DependentUpon>
     </Compile>
     <Page Include="Формы\FilesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Формы\ImportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Формы\WindowMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Формы\Страницы\PageImport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -319,6 +353,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Формы\TestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Формы\Страницы\PageTables.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

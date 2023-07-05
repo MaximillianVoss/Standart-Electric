@@ -1,4 +1,5 @@
-﻿using CustomControlsWPF;
+﻿using BaseWindow_WPF;
+using CustomControlsWPF;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,70 +9,60 @@ using База_артикулов.Модели;
 
 namespace База_артикулов.Формы
 {
-    public class CustomWindow : BaseWindow_WPF.BaseWindow
+    public class CustomWindow : BaseWindow
     {
 
 
         #region Поля
-        /// <summary>
-        /// База данных
-        /// </summary>
-        private DBSEEntities db = new DBSEEntities();
-        /// <summary>
-        /// webDAV-клиент
-        /// </summary>
-        private WDClient wdClient = new WDClient(
-                "devstor",
-                "TE6db?lZE~8Ixc?KAtQW",
-                "https://rcloud.rsk-gr.ru",
-                "/remote.php/dav/files/devstor"
-                );
+        private CustomBase customBase = new CustomBase();
         #endregion
 
         #region Свойства
         /// <summary>
         /// webDAV-клиент
         /// </summary>
-        public WDClient WDClient { get => this.wdClient; set => this.wdClient = value; }
+        public WDClient WDClient
+        {
+            get => this.customBase.WDClient;
+            set => this.customBase.WDClient = value;
+        }
         /// <summary>
         /// База данных
         /// </summary>
-        public DBSEEntities DB { get => this.db; set => this.db = value; }
+        public DBSEEntities DB
+        {
+            get => this.customBase.DB;
+            set => this.customBase.DB = value;
+        }
         #endregion
 
         #region Методы
+
+        #region Работа с облачным WebDav-клиентом
         /// <summary>
         /// Инициализирует WebDAV-клиент
         /// </summary>
         public void InitClient()
         {
-            this.WDClient = new WDClient(
-                "devstor",
-                "TE6db?lZE~8Ixc?KAtQW",
-                "https://rcloud.rsk-gr.ru",
-                "/remote.php/dav/files/devstor"
-                );
+            this.customBase.InitClient();
         }
+        #endregion
+
+        #region Работа с объектами
+        /// <summary>
+        /// Получает указанное поле из объекта
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public object GetObjectFieldValue(object obj, string fieldName)
         {
-            //TODO: падает при выделении другой таблицы, проверить!
-            if (obj == null)
-            {
-                throw new Exception("Не передан объект для получения поля!");
-            }
-
-            if (String.IsNullOrEmpty(fieldName))
-            {
-                throw new Exception("Не передано имя поля!");
-            }
-
-            var field = obj.GetType().GetProperty(fieldName);
-            if (field == null)
-            {
-                throw new Exception(База_артикулов.Классы.Common.Strings.Errors.fieldIsNotFoundInObject);
-            }
-            return field.GetValue(obj, null);
+            return this.customBase.GetObjectFieldValue(obj, fieldName);
         }
+        #endregion
+
+        #region Обновление элементов управления
         /// <summary>
         /// Заполняет LabeledComboBox элементами из указанной коллекции
         /// </summary>
@@ -79,7 +70,7 @@ namespace База_артикулов.Формы
         /// <param name="items">коллекция объектов (поля:id,title)</param>
         public void UpdateComboBox(LabeledComboBox labeledComboBox, List<object> items)
         {
-            labeledComboBox.Items = items;
+            this.customBase.UpdateComboBox(labeledComboBox, items);
         }
         /// <summary>
         /// Заполняет LabeledTextBoxAndComboBox элементами из указанной коллекции
@@ -88,7 +79,7 @@ namespace База_артикулов.Формы
         /// <param name="items">коллекция объектов (поля:id,title)</param>
         public void UpdateComboBox(LabeledTextBoxAndComboBox labeledComboBox, List<object> items)
         {
-            labeledComboBox.Items = items;
+            this.customBase.UpdateComboBox(labeledComboBox, items);
         }
         /// <summary>
         /// Обновляет значение LabeledCheckBox указанными значениями
@@ -99,9 +90,7 @@ namespace База_артикулов.Формы
         /// <param name="isChecked">начальное значение LabeledCheckBox</param>
         public void UpdateCheckBox(LabeledCheckBox labeledCheckBox, string isCheckedStr, string isUncheckedStr, bool isChecked)
         {
-            labeledCheckBox.IsCheckedTrue = isCheckedStr;
-            labeledCheckBox.IsCheckedFalse = isUncheckedStr;
-            labeledCheckBox.IsChecked = isChecked;
+            this.customBase.UpdateCheckBox(labeledCheckBox, isCheckedStr, isUncheckedStr, isChecked);
         }
         /// <summary>
         /// Заполняет LabeledTextBox указанным значением
@@ -111,9 +100,11 @@ namespace База_артикулов.Формы
         /// <param name="defaultValue">значение по умолчанию(если основное знаение null)</param>
         public void UpdateTextBox(LabeledTextBox labeledTextBox, object value, string defaultValue)
         {
-            labeledTextBox.Text = value == null ? defaultValue : value.ToString();
+            this.customBase.UpdateTextBox(labeledTextBox, value, defaultValue);
         }
-        #region To List
+        #endregion
+
+        #region Преобразование в списки
         /// <summary>
         /// 
         /// </summary>
@@ -122,8 +113,7 @@ namespace База_артикулов.Формы
         /// <returns></returns>
         public object ToList(IEnumerable items, Type type)
         {
-            var collectionWithType = typeof(List<>).MakeGenericType(type);
-            return Activator.CreateInstance(collectionWithType, items);
+            return this.customBase.ToList(items, type);
         }
         /// <summary>
         /// Получает список объектов из указанного DbSet.
@@ -134,14 +124,7 @@ namespace База_артикулов.Формы
         /// <returns></returns>
         public List<object> ToList<T>(DbSet items)
         {
-            List<object> list = new List<object>();
-            foreach (var item in items)
-            {
-                var type = item.GetType();
-                var methodInfo = type.GetMethod("ToObject");
-                list.Add(methodInfo.Invoke(item, null));
-            }
-            return list;
+            return this.customBase.ToList<T>(items);
         }
         /// <summary>
         /// Получает список объектов из указанного List.
@@ -152,14 +135,7 @@ namespace База_артикулов.Формы
         /// <returns></returns>
         public List<object> ToList<T>(List<T> items)
         {
-            List<object> list = new List<object>();
-            foreach (T item in items)
-            {
-                var type = item.GetType();
-                var methodInfo = type.GetMethod("ToObject");
-                list.Add(methodInfo.Invoke(item, null));
-            }
-            return list;
+            return this.customBase.ToList<T>(items);
         }
         #endregion
 

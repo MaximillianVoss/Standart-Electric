@@ -14,13 +14,12 @@ namespace База_артикулов.Модели
     
     public partial class ViewsView
     {
-        public int ViewId { get; set; }
-        public Nullable<int> ViewIdType { get; set; }
-        public string ViewTypeTitle { get; set; }
-        public string ViewTypeTitleShort { get; set; }
-        public string ViewTitle { get; set; }
-        public string ViewTitleShort { get; set; }
-        public string ViewTitleDisplay { get; set; }
-        public string ViewDescription { get; set; }
+        public int ID { get; set; }
+        public string Наименование_представления { get; set; }
+        public string Сокращенное_Наименование_представления { get; set; }
+        public string Отображаемое_название_представления { get; set; }
+        public int ID_дескриптора_представления { get; set; }
+        public int ID_Типа { get; set; }
+        public string Тип { get; set; }
     }
 }

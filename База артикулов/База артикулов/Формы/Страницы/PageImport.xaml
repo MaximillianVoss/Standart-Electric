@@ -1,0 +1,52 @@
+﻿<local1:CustomPage 
+      xmlns:local1="clr-namespace:База_артикулов.Формы"
+      x:Class="База_артикулов.Формы.Страницы.PageImport"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:База_артикулов.Формы.Страницы"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageImport">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <GroupBox x:Name="gbProgress" Header="Прогресс обработки файлов" Margin="5,5,5,5" Grid.Row="3" Height="40">
+            <ProgressBar x:Name="pbProgress" Height="10" Margin="5,0,5,0" VerticalAlignment="Center" Foreground="#FF0D6EFD"/>
+        </GroupBox>
+        <GroupBox x:Name="gbSelectedItems" Header="Выбранные файлы" Margin="5,5,5,5" Grid.Row="2">
+            <ListView x:Name="lvSelectedItems" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="Auto"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+
+        <GroupBox x:Name="gbLog" Header="Вывод" Margin="5,5,5,5" Grid.Row="4">
+            <DataGrid x:Name="gvLog" ItemsSource="{Binding}"/>
+        </GroupBox>
+        <GroupBox Header="Заголовок" Margin="5,60,5,5" Grid.Row="1" Height="40">
+            <CheckBox x:Name="chbIsHasHeaders" Content="CheckBox" VerticalAlignment="Top" Margin="0,0,-2,0" Checked="chbIsHasHeaders_Checked" IsChecked="False" Click="chbIsHasHeaders_Click"/>
+        </GroupBox>
+        <GroupBox Header="Описание столбцов" Margin="5,5,5,0" Grid.Row="1" Height="40" VerticalAlignment="Top">
+            <CheckBox x:Name="chbIsHasDescriptions" Content="CheckBox" VerticalAlignment="Top" Margin="0,0,-2,0" Checked="chbIsHasDescriptions_Checked" Click="chbIsHasDescriptions_Click"/>
+        </GroupBox>
+        <Menu Margin="0,0,0,5">
+            <MenuItem Header="Файл">
+                <MenuItem x:Name="btnImportOne" Header="Иморт одной таблицы" Click="btnImportOne_Click" />
+                <MenuItem x:Name="btnImportAll" Header="Иморт всех таблиц из указанной папки" Click="btnImportAll_Click" />
+            </MenuItem>
+        </Menu>
+
+    </Grid>
+</local1:CustomPage>

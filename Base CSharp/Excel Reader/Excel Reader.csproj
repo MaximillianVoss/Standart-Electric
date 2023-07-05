@@ -38,6 +38,7 @@
       <HintPath>..\..\База артикулов\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -101,13 +102,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Logger\Logger.csproj">
+    <ProjectReference Include="..\..\База артикулов\Logger\Logger.csproj">
       <Project>{b31ebf35-5627-4e1e-8424-128f41b6c574}</Project>
       <Name>Logger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Windows WF\Windows WF.csproj">
+    <ProjectReference Include="..\..\База артикулов\Windows WF\Windows WF.csproj">
       <Project>{a532d3db-6c91-47a1-868f-68040d76b6ae}</Project>
       <Name>Windows WF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windows WPF\Windows WPF.csproj">
+      <Project>{318BA0C4-4D3C-45DC-B2BE-2EE68C8C9CEB}</Project>
+      <Name>Windows WPF</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

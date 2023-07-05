@@ -12,13 +12,13 @@ namespace База_артикулов.Модели
     using System;
     using System.Collections.Generic;
     
-    public partial class SubGroupsView_
+    public partial class DescriptorsView
     {
-        public int ID { get; set; }
+        public int ID_дескриптора { get; set; }
         public string Наименование { get; set; }
-        public string Сокращенное_наименование { get; set; }
+        public string Сокращенное_Наименование { get; set; }
+        public string Отображаемое_название { get; set; }
+        public string Код { get; set; }
         public string Описание { get; set; }
-        public Nullable<int> ID_группы { get; set; }
-        public string Наименование_группы { get; set; }
     }
 }

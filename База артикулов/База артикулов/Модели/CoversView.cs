@@ -15,11 +15,7 @@ namespace База_артикулов.Модели
     public partial class CoversView
     {
         public int ID { get; set; }
-        public string Полное_наименование { get; set; }
-        public string Сокращенное_наименование { get; set; }
-        public string Обозначение_покрытия { get; set; }
-        public Nullable<int> Толщина_покрытия__мкм { get; set; }
-        public string Наименование_ГОСТ { get; set; }
-        public string номер_ГОСТ { get; set; }
+        public string Дескриптор { get; set; }
+        public Nullable<int> Толщина_покрытия { get; set; }
     }
 }

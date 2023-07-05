@@ -12,11 +12,12 @@ namespace База_артикулов.Модели
     using System;
     using System.Collections.Generic;
     
-    public partial class ClassesView_
+    public partial class BuisnessUnitsView
     {
         public int ID { get; set; }
-        public string Наименование { get; set; }
-        public string Сокращенное_наименование { get; set; }
-        public string Описание { get; set; }
+        public string Дескриптор { get; set; }
+        public Nullable<int> ID_Файла_BIM_библиотеки { get; set; }
+        public Nullable<int> ID_Файла_блоков_чертежей { get; set; }
+        public Nullable<int> ID_Типового_альбома { get; set; }
     }
 }

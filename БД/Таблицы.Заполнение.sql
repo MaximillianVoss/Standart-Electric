@@ -454,7 +454,7 @@ SET idType = (
     id
 FROM
     ViewTypesView
-WHERE DescriptorTitle = 'Пользовательский'
+WHERE ['Наименование'] = 'Пользовательский'
 );
 
 
