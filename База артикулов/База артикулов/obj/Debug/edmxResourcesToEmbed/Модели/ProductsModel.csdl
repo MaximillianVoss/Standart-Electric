@@ -43,6 +43,7 @@
     <EntitySet Name="CoversView" EntityType="DBSEModel.CoversView" />
     <EntitySet Name="DescriptorsView" EntityType="DBSEModel.DescriptorsView" />
     <EntitySet Name="DescriptorsViewDisplay" EntityType="DBSEModel.DescriptorsViewDisplay" />
+    <EntitySet Name="GroupsApplicationsView" EntityType="DBSEModel.GroupsApplicationsView" />
     <EntitySet Name="GroupsView" EntityType="DBSEModel.GroupsView" />
     <EntitySet Name="LoadDiagramsView" EntityType="DBSEModel.LoadDiagramsView" />
     <EntitySet Name="ManufacturersView" EntityType="DBSEModel.ManufacturersView" />
@@ -50,6 +51,8 @@
     <EntitySet Name="NormsView" EntityType="DBSEModel.NormsView" />
     <EntitySet Name="PackagesView" EntityType="DBSEModel.PackagesView" />
     <EntitySet Name="PerforationsView" EntityType="DBSEModel.PerforationsView" />
+    <EntitySet Name="ProductsVendorCodesView" EntityType="DBSEModel.ProductsVendorCodesView" />
+    <EntitySet Name="ProductsView" EntityType="DBSEModel.ProductsView" />
     <EntitySet Name="ResourcesView" EntityType="DBSEModel.ResourcesView" />
     <EntitySet Name="ResourceTypesView" EntityType="DBSEModel.ResourceTypesView" />
     <EntitySet Name="SubGroupsView" EntityType="DBSEModel.SubGroupsView" />
@@ -57,6 +60,7 @@
     <EntitySet Name="TablesViewsView" EntityType="DBSEModel.TablesViewsView" />
     <EntitySet Name="UnitsTypesView" EntityType="DBSEModel.UnitsTypesView" />
     <EntitySet Name="UnitsView" EntityType="DBSEModel.UnitsView" />
+    <EntitySet Name="VendorCodesView" EntityType="DBSEModel.VendorCodesView" />
     <EntitySet Name="ViewsTablesView" EntityType="DBSEModel.ViewsTablesView" />
     <EntitySet Name="ViewsView" EntityType="DBSEModel.ViewsView" />
     <EntitySet Name="ViewTypesView" EntityType="DBSEModel.ViewTypesView" />
@@ -727,36 +731,47 @@
   </EntityType>
   <EntityType Name="ApplicationsView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_применения" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ID_Направления" Type="Int32" />
+    <Property Name="ID_применения" Type="Int32" Nullable="false" />
+    <Property Name="Наименование_применения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_направления" Type="Int32" />
+    <Property Name="Наименование_направления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_Файла_BIM_библиотеки" Type="Int32" />
+    <Property Name="ID_Файла_блоков_чертежей" Type="Int32" />
+    <Property Name="ID_Типового_альбома" Type="Int32" />
   </EntityType>
   <EntityType Name="BuisnessUnitsView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_направления" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_направления" Type="Int32" Nullable="false" />
+    <Property Name="Наименование_направления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ID_Файла_BIM_библиотеки" Type="Int32" />
     <Property Name="ID_Файла_блоков_чертежей" Type="Int32" />
     <Property Name="ID_Типового_альбома" Type="Int32" />
   </EntityType>
   <EntityType Name="ClassesView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_класса" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_класса" Type="Int32" Nullable="false" />
+    <Property Name="Наименование_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Код_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="URL_изображения_класса" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CoversView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_покрытия" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_покрытия" Type="Int32" Nullable="false" />
+    <Property Name="Наименование_покрытия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_покрытия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Обозначение_покрытия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Толщина_покрытия" Type="Int32" />
+    <Property Name="Название_стандарта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Номер_стандарта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="DescriptorsView">
     <Key>
@@ -764,7 +779,7 @@
     </Key>
     <Property Name="ID_дескриптора" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Сокращенное_Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Отображаемое_название" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
@@ -779,68 +794,149 @@
     <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="GroupsApplicationsView">
+    <Key>
+      <PropertyRef Name="ID_применения_подгруппы" />
+    </Key>
+    <Property Name="ID_применения_подгруппы" Type="Int32" Nullable="false" />
+    <Property Name="ID_применения" Type="Int32" />
+    <Property Name="Наименование_применения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_направления" Type="Int32" />
+    <Property Name="Наименование_направления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_Файла_BIM_библиотеки" Type="Int32" />
+    <Property Name="ID_Файла_блоков_чертежей" Type="Int32" />
+    <Property Name="ID_Типового_альбома" Type="Int32" />
+    <Property Name="ID_подгруппы" Type="Int32" />
+    <Property Name="Наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Код_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="URL_изображения_подгруппы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="ID_группы" Type="Int32" />
+    <Property Name="ID_схемы_нагрузок" Type="Int32" />
+    <Property Name="ID_дескриптора" Type="Int32" />
+    <Property Name="Наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Отображаемое_название_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Код_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Описание_схемы_нагрузок" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="GroupsView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_группы" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ID_Класса" Type="Int32" />
+    <Property Name="ID_группы" Type="Int32" Nullable="false" />
+    <Property Name="Наименование_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Код_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="URL_изображения_группы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="ID_класса" Type="Int32" />
   </EntityType>
   <EntityType Name="LoadDiagramsView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_схемы_нагрузок" />
       <PropertyRef Name="ID_дескриптора" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ID_схемы_нагрузок" Type="Int32" Nullable="false" />
     <Property Name="ID_дескриптора" Type="Int32" Nullable="false" />
-    <Property Name="Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Сокращенное_Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Отображаемое_название" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Отображаемое_название_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Код_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Описание_схемы_нагрузок" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ManufacturersView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_производителя" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Полное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Сокращенное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_производителя" Type="Int32" Nullable="false" />
+    <Property Name="Наименование_производителя" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_производителя" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ИНН" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="MaterialsView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_материала" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ID_Нормативного_документа" Type="Int32" />
-    <Property Name="ID_Норматива" Type="Int32" />
-    <Property Name="Обозначение_материала_или_марка_стали" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_материала" Type="Int32" Nullable="false" />
+    <Property Name="Наименование_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Обозначение_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Обозначение_материала_марка_стали" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Стандарт_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Код_стандарта_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Стандарт_сырья" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Код_стандарта_сырья" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="NormsView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_документа" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_документа" Type="Int32" Nullable="false" />
+    <Property Name="Номер_документа" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_документа" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PackagesView">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Полное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Краткое_обозначение" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_упаковки" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_упаковки" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Описание_упаковки" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="ID_единицы_измерения" Type="Int32" />
+    <Property Name="Наименование_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_типа_измерения" Type="Int32" />
+    <Property Name="Наименование_типа_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PerforationsView">
     <Key>
       <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_единицы_измерения" />
+      <PropertyRef Name="ID_типа_измерения" />
+      <PropertyRef Name="Наименование_типа_единицы_измерения" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_перфорации" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_перфорации" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Описание_перфорации" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="ID_единицы_измерения" Type="Int32" Nullable="false" />
+    <Property Name="Наименование_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_типа_измерения" Type="Int32" Nullable="false" />
+    <Property Name="Наименование_типа_единицы_измерения" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProductsVendorCodesView">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Продукт" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Артикул" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProductsView">
+    <Key>
+      <PropertyRef Name="ID_продукта" />
+    </Key>
+    <Property Name="ID_продукта" Type="Int32" Nullable="false" />
+    <Property Name="Артикул" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_продукта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_продукта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Описание_продукта" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Код_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="URL_изображения_подгруппы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Код_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="URL_изображения_группы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Код_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="URL_изображения_класса" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_покрытия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Название_стандарта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Обозначение_покрытия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Толщина_покрытия" Type="Int32" />
   </EntityType>
   <EntityType Name="ResourcesView">
     <Key>
@@ -859,12 +955,21 @@
   </EntityType>
   <EntityType Name="SubGroupsView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_подгруппы" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ID_Группы" Type="Int32" />
-    <Property Name="Схема_нагрузки" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_подгруппы" Type="Int32" Nullable="false" />
+    <Property Name="Наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Код_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="URL_изображения_подгруппы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="ID_группы" Type="Int32" />
+    <Property Name="ID_схемы_нагрузок" Type="Int32" />
+    <Property Name="ID_дескриптора" Type="Int32" />
+    <Property Name="Наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Отображаемое_название_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Код_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Описание_схемы_нагрузок" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="TablesView">
     <Key>
@@ -874,7 +979,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="ID_дескриптора" Type="Int32" Nullable="false" />
     <Property Name="Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Сокращенное_Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Отображаемое_название" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
@@ -896,18 +1001,35 @@
   <EntityType Name="UnitsTypesView">
     <Key>
       <PropertyRef Name="ID" />
-      <PropertyRef Name="Название_измерения" />
+      <PropertyRef Name="Наименование_типа_единицы_измерения" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Название_измерения" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_типа_единицы_измерения" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="UnitsView">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Описание_единицы_измерения" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
     <Property Name="Общероссийский_классификатор_единиц_измерения" Type="Int32" />
+  </EntityType>
+  <EntityType Name="VendorCodesView">
+    <Key>
+      <PropertyRef Name="ID_артикула" />
+      <PropertyRef Name="Актуальность" />
+      <PropertyRef Name="Тип" />
+    </Key>
+    <Property Name="ID_артикула" Type="Int32" Nullable="false" />
+    <Property Name="ID_продукта" Type="Int32" />
+    <Property Name="Артикул" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Актуальность" Type="Boolean" Nullable="false" />
+    <Property Name="Тип" Type="Boolean" Nullable="false" />
+    <Property Name="Публичность" Type="Boolean" />
+    <Property Name="Артикул_бухгалтерии" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Производитель" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ViewsTablesView">
     <Key>
@@ -918,7 +1040,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="ID_дескриптора_представления" Type="Int32" Nullable="false" />
     <Property Name="Наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Сокращенное_Наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Отображаемое_название_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Тип" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ID_дескриптора_таблицы" Type="Int32" Nullable="false" />
@@ -934,7 +1056,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Сокращенное_Наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Отображаемое_название_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="ID_дескриптора_представления" Type="Int32" Nullable="false" />
     <Property Name="ID_Типа" Type="Int32" Nullable="false" />

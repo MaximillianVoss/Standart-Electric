@@ -14,8 +14,8 @@ namespace База_артикулов.Модели
     
     public partial class BuisnessUnitsView
     {
-        public int ID { get; set; }
-        public string Дескриптор { get; set; }
+        public int ID_направления { get; set; }
+        public string Наименование_направления { get; set; }
         public Nullable<int> ID_Файла_BIM_библиотеки { get; set; }
         public Nullable<int> ID_Файла_блоков_чертежей { get; set; }
         public Nullable<int> ID_Типового_альбома { get; set; }

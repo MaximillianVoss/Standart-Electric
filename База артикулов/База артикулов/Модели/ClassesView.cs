@@ -14,7 +14,10 @@ namespace База_артикулов.Модели
     
     public partial class ClassesView
     {
-        public int ID { get; set; }
-        public string Дескриптор { get; set; }
+        public int ID_класса { get; set; }
+        public string Наименование_класса { get; set; }
+        public string Сокращенное_наименование_класса { get; set; }
+        public string Код_класса { get; set; }
+        public string URL_изображения_класса { get; set; }
     }
 }

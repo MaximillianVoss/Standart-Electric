@@ -15,6 +15,6 @@ namespace База_артикулов.Модели
     public partial class UnitsTypesView
     {
         public int ID { get; set; }
-        public string Название_измерения { get; set; }
+        public string Наименование_типа_единицы_измерения { get; set; }
     }
 }

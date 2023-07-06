@@ -12,14 +12,10 @@ namespace База_артикулов.Модели
     using System;
     using System.Collections.Generic;
     
-    public partial class ViewsView
+    public partial class ProductsVendorCodesView
     {
         public int ID { get; set; }
-        public string Наименование_представления { get; set; }
-        public string Сокращенное_наименование_представления { get; set; }
-        public string Отображаемое_название_представления { get; set; }
-        public int ID_дескриптора_представления { get; set; }
-        public int ID_Типа { get; set; }
-        public string Тип { get; set; }
+        public string Продукт { get; set; }
+        public string Артикул { get; set; }
     }
 }

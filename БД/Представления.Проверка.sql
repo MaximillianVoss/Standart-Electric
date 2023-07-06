@@ -1,119 +1,179 @@
 USE [DBSE]
 GO
--- Пример выборки для представления DescriptorsView
+
+--#region Пример выборки для представления DescriptorsView
 SELECT
     *
 FROM
     DescriptorsView;
+--#endregion
 
--- Пример выборки для представления ApplicationsView
-SELECT
-    *
-FROM
-    ApplicationsView;
-
--- Пример выборки для представления PerforationsView
-SELECT
-    *
-FROM
-    PerforationsView;
-
--- Пример выборки для представления NormsView
-SELECT
-    *
-FROM
-    NormsView;
-
--- Пример выборки для представления MaterialsView
-SELECT
-    *
-FROM
-    MaterialsView;
-
--- Пример выборки для представления LoadDiagramsView
-SELECT
-    *
-FROM
-    LoadDiagramsView;
-
--- Пример выборки для представления GroupsApplicationsView
-SELECT
-    *
-FROM
-    GroupsApplicationsView;
-
--- Пример выборки для представления CoversView
-SELECT
-    *
-FROM
-    CoversView;
-
--- Пример выборки для представления ProductsView
-SELECT
-    *
-FROM
-    ProductsView;
-
--- Пример выборки для представления UnitsView
-SELECT
-    *
-FROM
-    UnitsView;
-
--- Пример выборки для представления ProductsVendorCodesView
-SELECT
-    *
-FROM
-    ProductsVendorCodesView;
-
--- Пример выборки для представления VendorCodesView
-SELECT
-    *
-FROM
-    VendorCodesView;
-
--- Пример выборки для представления ProductsAnalogsView
-SELECT
-    *
-FROM
-    ProductsAnalogsView;
-
--- Пример выборки для представления DescriptorsResourcesView
+--#region Пример выборки для представления DescriptorsResourcesView
 SELECT
     *
 FROM
     DescriptorsResourcesView;
+--#endregion
 
--- Пример выборки для представления ViewsTablesView
+--#region Пример выборки для представления LoadDiagramsView
+SELECT
+    *
+FROM
+    LoadDiagramsView;
+--#endregion
+
+--#region Пример выборки для представления SubGroupsView
+SELECT
+    *
+FROM
+    SubGroupsView;
+--#endregion
+
+--#region Пример выборки для представления GroupsView
+SELECT
+    *
+FROM
+    GroupsView;
+--#endregion
+
+--#region Пример выборки для представления ClassesView
+SELECT
+    *
+FROM
+    ClassesView;
+--#endregion
+
+--#region Пример выборки для представления BuisnessUnitsView
+SELECT
+    *
+FROM
+    BuisnessUnitsView;
+--#endregion
+
+--#region Пример выборки для представления ApplicationsView
+SELECT
+    *
+FROM
+    ApplicationsView;
+--#endregion
+
+--#region Пример выборки для представления UnitsView
+SELECT
+    *
+FROM
+    UnitsView;
+--#endregion
+
+--#region Пример выборки для представления UnitsTypesView
+SELECT
+    *
+FROM
+    UnitsTypesView;
+--#endregion
+
+--#region Пример выборки для представления PerforationsView
+SELECT
+    *
+FROM
+    PerforationsView;
+--#endregion
+
+--#region Пример выборки для представления PackagesView
+SELECT
+    *
+FROM
+    PackagesView;
+--#endregion
+
+--#region Пример выборки для представления NormsView
+SELECT
+    *
+FROM
+    NormsView;
+--#endregion
+
+--#region Пример выборки для представления MaterialsView
+SELECT
+    *
+FROM
+    MaterialsView;
+--#endregion
+
+--#region Пример выборки для представления GroupsApplicationsView
+SELECT
+    *
+FROM
+    GroupsApplicationsView;
+--#endregion
+
+--#region Пример выборки для представления CoversView
+SELECT
+    *
+FROM
+    CoversView;
+--#endregion
+
+--#region Пример выборки для представления ManufacturersView
+SELECT
+    *
+FROM
+    ManufacturersView;
+--#endregion
+
+--#region Пример выборки для представления VendorCodesView
+SELECT
+    *
+FROM
+    VendorCodesView;
+--#endregion
+
+--#region Пример выборки для представления ProductsView
+SELECT
+    *
+FROM
+    ProductsView;
+--#endregion
+
+
+--#region Пример выборки для представления ViewsTablesView
 SELECT
     *
 FROM
     ViewsTablesView;
+--#endregion
 
--- Пример выборки для представления ViewTypesView
+--#region Пример выборки для представления ViewTypesView
 SELECT
     *
 FROM
     ViewTypesView;
+--#endregion
 
--- Пример выборки для представления ViewsView
+--#region Пример выборки для представления ViewsView
 SELECT
     *
 FROM
     ViewsView;
+--#endregion
 
--- Проверка остальных таблиц/предсталвений
+
+--#region Пример выборки для представления ProductsVendorCodesView
 SELECT
     *
 FROM
-    TablesView
+    ProductsVendorCodesView;
+--#endregion
 
+
+--#region Пример выборки для представления ProductsAnalogsView
 SELECT
     *
 FROM
-    ViewsView
+    ProductsAnalogsView;
+--#endregion
 
-SELECT
-    *
-FROM
-    ViewsTablesView
+
+
+--#region Проверка остальных таблиц/представлений
+
+--#endregion

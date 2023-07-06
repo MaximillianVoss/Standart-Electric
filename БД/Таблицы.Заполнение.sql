@@ -454,7 +454,7 @@ SET idType = (
     id
 FROM
     ViewTypesView
-WHERE ['Наименование'] = 'Пользовательский'
+WHERE [Наименование] = 'Пользовательский'
 );
 
 
@@ -466,228 +466,231 @@ FROM
 --#endregion
 
 --#region Заполнение ViewsTables 
-
+SELECT
+    *
+FROM
+    TablesView
 INSERT INTO ViewsTables
     (idTable, idView)
 VALUES
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Applications'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Applications'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'ApplicationsView')),
+        WHERE [Наименование представления] = 'ApplicationsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'BuisnessUnits'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'BuisnessUnits'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'BuisnessUnitsView')),
+        WHERE [Наименование представления] = 'BuisnessUnitsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Classes'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Classes'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'ClassesView')),
+        WHERE [Наименование представления] = 'ClassesView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Covers'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Covers'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'CoversView')),
+        WHERE [Наименование представления] = 'CoversView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Descriptors'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Descriptors'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'DescriptorsView')),
+        WHERE [Наименование представления] = 'DescriptorsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'DescriptorsImages'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'DescriptorsImages'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'DescriptorsImagesView')),
+        WHERE [Наименование представления] = 'DescriptorsImagesView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Groups'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Groups'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'GroupsView')),
+        WHERE [Наименование представления] = 'GroupsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'GroupsApplications'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'GroupsApplications'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'GroupsApplicationsView')),
+        WHERE [Наименование представления] = 'GroupsApplicationsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Images'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Images'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'ImagesView')),
+        WHERE [Наименование представления] = 'ImagesView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'LoadDiagrams'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'LoadDiagrams'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'LoadDiagramsView')),
+        WHERE [Наименование представления] = 'LoadDiagramsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Manufacturers'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Manufacturers'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'ManufacturersView')),
+        WHERE [Наименование представления] = 'ManufacturersView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Materials'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Materials'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'MaterialsView')),
+        WHERE [Наименование представления] = 'MaterialsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Norms'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Norms'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'NormsView')),
+        WHERE [Наименование представления] = 'NormsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Packages'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Packages'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'PackagesView')),
+        WHERE [Наименование представления] = 'PackagesView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Perforations'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Perforations'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'PerforationsView')),
+        WHERE [Наименование представления] = 'PerforationsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Products'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Products'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'ProductsView')),
+        WHERE [Наименование представления] = 'ProductsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'ProductsAnalogs'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'ProductsAnalogs'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'ProductsAnalogsView')),
+        WHERE [Наименование представления] = 'ProductsAnalogsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'ProductsVendorCodes'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'ProductsVendorCodes'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'ProductsVendorCodesView')),
+        WHERE [Наименование представления] = 'ProductsVendorCodesView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'SubGroups'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'SubGroups'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'SubGroupsView')),
+        WHERE [Наименование представления] = 'SubGroupsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'Units'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'Units'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'UnitsView')),
+        WHERE [Наименование представления] = 'UnitsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'UnitsPakages'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'UnitsPakages'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'UnitsPakagesView')),
+        WHERE [Наименование представления] = 'UnitsPakagesView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'UnitsPerforations'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'UnitsPerforations'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'UnitsPerforationsView')),
+        WHERE [Наименование представления] = 'UnitsPerforationsView')),
     ((SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'UnitsProducts'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'UnitsProducts'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'UnitsProductsView')),
+        WHERE [Наименование представления] = 'UnitsProductsView')),
     ((
 
 SELECT
-            TableId
+            ID
         FROM
             TablesView
-        WHERE TableTitle = 'UnitsTypes'), (SELECT
-            ViewId
+        WHERE [Наименование] = 'UnitsTypes'), (SELECT
+            ID
         FROM
             ViewsView
-        WHERE ViewTitle = 'UnitsTypesView'));
+        WHERE [Наименование представления] = 'UnitsTypesView'));
 
 
 SELECT

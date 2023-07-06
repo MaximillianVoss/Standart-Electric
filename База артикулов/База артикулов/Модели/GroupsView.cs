@@ -14,8 +14,11 @@ namespace База_артикулов.Модели
     
     public partial class GroupsView
     {
-        public int ID { get; set; }
-        public string Дескриптор { get; set; }
-        public Nullable<int> ID_Класса { get; set; }
+        public int ID_группы { get; set; }
+        public string Наименование_группы { get; set; }
+        public string Сокращенное_наименование_группы { get; set; }
+        public string Код_группы { get; set; }
+        public string URL_изображения_группы { get; set; }
+        public Nullable<int> ID_класса { get; set; }
     }
 }

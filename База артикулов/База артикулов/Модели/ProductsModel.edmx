@@ -335,20 +335,24 @@
 предупреждение 6002: В таблице или представлении "DBSE.dbo.ApplicationsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="ApplicationsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID применения" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Дескриптор" Type="nvarchar" MaxLength="255" />
-          <Property Name="ID Направления" Type="int" />
+          <Property Name="ID применения" Type="int" Nullable="false" />
+          <Property Name="Наименование применения" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID направления" Type="int" />
+          <Property Name="Наименование направления" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID Файла BIM-библиотеки" Type="int" />
+          <Property Name="ID Файла блоков чертежей" Type="int" />
+          <Property Name="ID Типового альбома" Type="int" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.BuisnessUnitsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="BuisnessUnitsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID направления" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Дескриптор" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID направления" Type="int" Nullable="false" />
+          <Property Name="Наименование направления" Type="nvarchar" MaxLength="255" />
           <Property Name="ID Файла BIM-библиотеки" Type="int" />
           <Property Name="ID Файла блоков чертежей" Type="int" />
           <Property Name="ID Типового альбома" Type="int" />
@@ -357,20 +361,27 @@
 предупреждение 6002: В таблице или представлении "DBSE.dbo.ClassesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="ClassesView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID класса" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Дескриптор" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID класса" Type="int" Nullable="false" />
+          <Property Name="Наименование класса" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование класса" Type="nvarchar" MaxLength="255" />
+          <Property Name="Код класса" Type="nvarchar" MaxLength="255" />
+          <Property Name="URL изображения класса" Type="nvarchar" MaxLength="2048" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.CoversView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="CoversView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID покрытия" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Дескриптор" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID покрытия" Type="int" Nullable="false" />
+          <Property Name="Наименование покрытия" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование покрытия" Type="nvarchar" MaxLength="255" />
+          <Property Name="Обозначение покрытия" Type="nvarchar" MaxLength="255" />
           <Property Name="Толщина покрытия" Type="int" />
+          <Property Name="Название стандарта" Type="nvarchar" MaxLength="255" />
+          <Property Name="Номер стандарта" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.DescriptorsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -380,7 +391,7 @@
           </Key>
           <Property Name="ID дескриптора" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Наименование" Type="nvarchar" MaxLength="255" />
-          <Property Name="Сокращенное Наименование" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование" Type="nvarchar" MaxLength="255" />
           <Property Name="Отображаемое название" Type="varchar" MaxLength="255" />
           <Property Name="Код" Type="nvarchar" MaxLength="255" />
           <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
@@ -398,61 +409,97 @@
           <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.GroupsApplicationsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="GroupsApplicationsView">
+          <Key>
+            <PropertyRef Name="ID применения подгруппы" />
+          </Key>
+          <Property Name="ID применения подгруппы" Type="int" Nullable="false" />
+          <Property Name="ID применения" Type="int" />
+          <Property Name="Наименование применения" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID направления" Type="int" />
+          <Property Name="Наименование направления" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID Файла BIM-библиотеки" Type="int" />
+          <Property Name="ID Файла блоков чертежей" Type="int" />
+          <Property Name="ID Типового альбома" Type="int" />
+          <Property Name="ID подгруппы" Type="int" />
+          <Property Name="Наименование подгруппы" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование подгруппы" Type="nvarchar" MaxLength="255" />
+          <Property Name="Код подгруппы" Type="nvarchar" MaxLength="255" />
+          <Property Name="URL изображения подгруппы" Type="nvarchar" MaxLength="2048" />
+          <Property Name="ID группы" Type="int" />
+          <Property Name="ID схемы нагрузок" Type="int" />
+          <Property Name="ID дескриптора" Type="int" />
+          <Property Name="Наименование схемы нагрузок" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование схемы нагрузок" Type="nvarchar" MaxLength="255" />
+          <Property Name="Отображаемое название схемы нагрузок" Type="varchar" MaxLength="255" />
+          <Property Name="Код схемы нагрузок" Type="nvarchar" MaxLength="255" />
+          <Property Name="Описание схемы нагрузок" Type="nvarchar" MaxLength="2048" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.GroupsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="GroupsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID группы" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Дескриптор" Type="nvarchar" MaxLength="255" />
-          <Property Name="ID Класса" Type="int" />
+          <Property Name="ID группы" Type="int" Nullable="false" />
+          <Property Name="Наименование группы" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование группы" Type="nvarchar" MaxLength="255" />
+          <Property Name="Код группы" Type="nvarchar" MaxLength="255" />
+          <Property Name="URL изображения группы" Type="nvarchar" MaxLength="2048" />
+          <Property Name="ID класса" Type="int" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.LoadDiagramsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="LoadDiagramsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID схемы нагрузок" />
             <PropertyRef Name="ID дескриптора" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID схемы нагрузок" Type="int" Nullable="false" />
           <Property Name="ID дескриптора" Type="int" Nullable="false" />
-          <Property Name="Наименование" Type="nvarchar" MaxLength="255" />
-          <Property Name="Сокращенное Наименование" Type="nvarchar" MaxLength="255" />
-          <Property Name="Отображаемое название" Type="varchar" MaxLength="255" />
-          <Property Name="Код" Type="nvarchar" MaxLength="255" />
-          <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Наименование схемы нагрузок" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование схемы нагрузок" Type="nvarchar" MaxLength="255" />
+          <Property Name="Отображаемое название схемы нагрузок" Type="varchar" MaxLength="255" />
+          <Property Name="Код схемы нагрузок" Type="nvarchar" MaxLength="255" />
+          <Property Name="Описание схемы нагрузок" Type="nvarchar" MaxLength="2048" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.ManufacturersView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="ManufacturersView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID производителя" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Полное наименование" Type="nvarchar" MaxLength="255" />
-          <Property Name="Сокращенное наименование" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID производителя" Type="int" Nullable="false" />
+          <Property Name="Наименование производителя" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование производителя" Type="nvarchar" MaxLength="255" />
           <Property Name="ИНН" Type="varchar" MaxLength="20" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.MaterialsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="MaterialsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID материала" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Дескриптор" Type="nvarchar" MaxLength="255" />
-          <Property Name="ID Нормативного документа" Type="int" />
-          <Property Name="ID Норматива" Type="int" />
-          <Property Name="Обозначение материала или марка стали" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID материала" Type="int" Nullable="false" />
+          <Property Name="Наименование материала" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование материала" Type="nvarchar" MaxLength="255" />
+          <Property Name="Обозначение материала" Type="nvarchar" MaxLength="255" />
+          <Property Name="Обозначение материала/марка стали" Type="nvarchar" MaxLength="255" />
+          <Property Name="Стандарт материала" Type="nvarchar" MaxLength="255" />
+          <Property Name="Код стандарта материала" Type="nvarchar" MaxLength="255" />
+          <Property Name="Стандарт сырья" Type="nvarchar" MaxLength="255" />
+          <Property Name="Код стандарта сырья" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.NormsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="NormsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID документа" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Дескриптор" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID документа" Type="int" Nullable="false" />
+          <Property Name="Номер документа" Type="nvarchar" MaxLength="255" />
+          <Property Name="Наименование документа" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.PackagesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -461,18 +508,69 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Полное наименование" Type="nvarchar" MaxLength="255" />
-          <Property Name="Краткое обозначение" Type="nvarchar" MaxLength="255" />
-          <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Наименование упаковки" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование упаковки" Type="nvarchar" MaxLength="255" />
+          <Property Name="Описание упаковки" Type="nvarchar" MaxLength="2048" />
+          <Property Name="ID единицы измерения" Type="int" />
+          <Property Name="Наименование единицы измерения" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID типа измерения" Type="int" />
+          <Property Name="Наименование типа единицы измерения" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.PerforationsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="PerforationsView">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="ID единицы измерения" />
+            <PropertyRef Name="ID типа измерения" />
+            <PropertyRef Name="Наименование типа единицы измерения" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Дескриптор" Type="nvarchar" MaxLength="255" />
+          <Property Name="Наименование перфорации" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование перфорации" Type="nvarchar" MaxLength="255" />
+          <Property Name="Описание перфорации" Type="nvarchar" MaxLength="2048" />
+          <Property Name="ID единицы измерения" Type="int" Nullable="false" />
+          <Property Name="Наименование единицы измерения" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID типа измерения" Type="int" Nullable="false" />
+          <Property Name="Наименование типа единицы измерения" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.ProductsVendorCodesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ProductsVendorCodesView">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Продукт" Type="nvarchar" MaxLength="255" />
+          <Property Name="Артикул" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.ProductsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ProductsView">
+          <Key>
+            <PropertyRef Name="ID продукта" />
+          </Key>
+          <Property Name="ID продукта" Type="int" Nullable="false" />
+          <Property Name="Артикул" Type="nvarchar" MaxLength="255" />
+          <Property Name="Наименование продукта" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование продукта" Type="nvarchar" MaxLength="255" />
+          <Property Name="Описание продукта" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Наименование подгруппы" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование подгруппы" Type="nvarchar" MaxLength="255" />
+          <Property Name="Код подгруппы" Type="nvarchar" MaxLength="255" />
+          <Property Name="URL изображения подгруппы" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Наименование группы" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование группы" Type="nvarchar" MaxLength="255" />
+          <Property Name="Код группы" Type="nvarchar" MaxLength="255" />
+          <Property Name="URL изображения группы" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Наименование класса" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование класса" Type="nvarchar" MaxLength="255" />
+          <Property Name="Код класса" Type="nvarchar" MaxLength="255" />
+          <Property Name="URL изображения класса" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Наименование покрытия" Type="nvarchar" MaxLength="255" />
+          <Property Name="Название стандарта" Type="nvarchar" MaxLength="255" />
+          <Property Name="Обозначение покрытия" Type="nvarchar" MaxLength="255" />
+          <Property Name="Толщина покрытия" Type="int" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.ResourcesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -497,12 +595,21 @@
 предупреждение 6002: В таблице или представлении "DBSE.dbo.SubGroupsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="SubGroupsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID подгруппы" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Дескриптор" Type="nvarchar" MaxLength="255" />
-          <Property Name="ID Группы" Type="int" />
-          <Property Name="Схема нагрузки" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID подгруппы" Type="int" Nullable="false" />
+          <Property Name="Наименование подгруппы" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование подгруппы" Type="nvarchar" MaxLength="255" />
+          <Property Name="Код подгруппы" Type="nvarchar" MaxLength="255" />
+          <Property Name="URL изображения подгруппы" Type="nvarchar" MaxLength="2048" />
+          <Property Name="ID группы" Type="int" />
+          <Property Name="ID схемы нагрузок" Type="int" />
+          <Property Name="ID дескриптора" Type="int" />
+          <Property Name="Наименование схемы нагрузок" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование схемы нагрузок" Type="nvarchar" MaxLength="255" />
+          <Property Name="Отображаемое название схемы нагрузок" Type="varchar" MaxLength="255" />
+          <Property Name="Код схемы нагрузок" Type="nvarchar" MaxLength="255" />
+          <Property Name="Описание схемы нагрузок" Type="nvarchar" MaxLength="2048" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.TablesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -514,7 +621,7 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="ID дескриптора" Type="int" Nullable="false" />
           <Property Name="Наименование" Type="nvarchar" MaxLength="255" />
-          <Property Name="Сокращенное Наименование" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование" Type="nvarchar" MaxLength="255" />
           <Property Name="Отображаемое название" Type="varchar" MaxLength="255" />
           <Property Name="Код" Type="nvarchar" MaxLength="255" />
           <Property Name="Описание" Type="nvarchar" MaxLength="2048" />
@@ -540,10 +647,10 @@
         <EntityType Name="UnitsTypesView">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="Название измерения" />
+            <PropertyRef Name="Наименование типа единицы измерения" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Название измерения" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Наименование типа единицы измерения" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.UnitsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -552,8 +659,27 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Дескриптор" Type="nvarchar" MaxLength="255" />
+          <Property Name="Наименование единицы измерения" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование единицы измерения" Type="nvarchar" MaxLength="255" />
+          <Property Name="Описание единицы измерения" Type="nvarchar" MaxLength="2048" />
           <Property Name="Общероссийский классификатор единиц измерения" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DBSE.dbo.VendorCodesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="VendorCodesView">
+          <Key>
+            <PropertyRef Name="ID артикула" />
+            <PropertyRef Name="Актуальность" />
+            <PropertyRef Name="Тип" />
+          </Key>
+          <Property Name="ID артикула" Type="int" Nullable="false" />
+          <Property Name="ID продукта" Type="int" />
+          <Property Name="Артикул" Type="nvarchar" MaxLength="255" />
+          <Property Name="Актуальность" Type="bit" Nullable="false" />
+          <Property Name="Тип" Type="bit" Nullable="false" />
+          <Property Name="Публичность" Type="bit" />
+          <Property Name="Артикул бухгалтерии" Type="nvarchar" MaxLength="255" />
+          <Property Name="Производитель" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "DBSE.dbo.ViewsTablesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -566,7 +692,7 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="ID дескриптора представления" Type="int" Nullable="false" />
           <Property Name="Наименование представления" Type="nvarchar" MaxLength="255" />
-          <Property Name="Сокращенное Наименование представления" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование представления" Type="nvarchar" MaxLength="255" />
           <Property Name="Отображаемое название представления" Type="varchar" MaxLength="255" />
           <Property Name="Тип" Type="nvarchar" MaxLength="255" />
           <Property Name="ID дескриптора таблицы" Type="int" Nullable="false" />
@@ -584,7 +710,7 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Наименование представления" Type="nvarchar" MaxLength="255" />
-          <Property Name="Сокращенное Наименование представления" Type="nvarchar" MaxLength="255" />
+          <Property Name="Сокращенное наименование представления" Type="nvarchar" MaxLength="255" />
           <Property Name="Отображаемое название представления" Type="varchar" MaxLength="255" />
           <Property Name="ID дескриптора представления" Type="int" Nullable="false" />
           <Property Name="ID Типа" Type="int" Nullable="false" />
@@ -1363,15 +1489,19 @@
           </EntitySet>
           <EntitySet Name="ApplicationsView" EntityType="Self.ApplicationsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [ApplicationsView].[ID] AS [ID], 
-    [ApplicationsView].[Дескриптор] AS [Дескриптор], 
-    [ApplicationsView].[ID Направления] AS [ID Направления]
+    [ApplicationsView].[ID применения] AS [ID применения], 
+    [ApplicationsView].[Наименование применения] AS [Наименование применения], 
+    [ApplicationsView].[ID направления] AS [ID направления], 
+    [ApplicationsView].[Наименование направления] AS [Наименование направления], 
+    [ApplicationsView].[ID Файла BIM-библиотеки] AS [ID Файла BIM-библиотеки], 
+    [ApplicationsView].[ID Файла блоков чертежей] AS [ID Файла блоков чертежей], 
+    [ApplicationsView].[ID Типового альбома] AS [ID Типового альбома]
     FROM [dbo].[ApplicationsView] AS [ApplicationsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="BuisnessUnitsView" EntityType="Self.BuisnessUnitsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [BuisnessUnitsView].[ID] AS [ID], 
-    [BuisnessUnitsView].[Дескриптор] AS [Дескриптор], 
+    [BuisnessUnitsView].[ID направления] AS [ID направления], 
+    [BuisnessUnitsView].[Наименование направления] AS [Наименование направления], 
     [BuisnessUnitsView].[ID Файла BIM-библиотеки] AS [ID Файла BIM-библиотеки], 
     [BuisnessUnitsView].[ID Файла блоков чертежей] AS [ID Файла блоков чертежей], 
     [BuisnessUnitsView].[ID Типового альбома] AS [ID Типового альбома]
@@ -1379,22 +1509,29 @@
           </EntitySet>
           <EntitySet Name="ClassesView" EntityType="Self.ClassesView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [ClassesView].[ID] AS [ID], 
-    [ClassesView].[Дескриптор] AS [Дескриптор]
+    [ClassesView].[ID класса] AS [ID класса], 
+    [ClassesView].[Наименование класса] AS [Наименование класса], 
+    [ClassesView].[Сокращенное наименование класса] AS [Сокращенное наименование класса], 
+    [ClassesView].[Код класса] AS [Код класса], 
+    [ClassesView].[URL изображения класса] AS [URL изображения класса]
     FROM [dbo].[ClassesView] AS [ClassesView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="CoversView" EntityType="Self.CoversView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [CoversView].[ID] AS [ID], 
-    [CoversView].[Дескриптор] AS [Дескриптор], 
-    [CoversView].[Толщина покрытия] AS [Толщина покрытия]
+    [CoversView].[ID покрытия] AS [ID покрытия], 
+    [CoversView].[Наименование покрытия] AS [Наименование покрытия], 
+    [CoversView].[Сокращенное наименование покрытия] AS [Сокращенное наименование покрытия], 
+    [CoversView].[Обозначение покрытия] AS [Обозначение покрытия], 
+    [CoversView].[Толщина покрытия] AS [Толщина покрытия], 
+    [CoversView].[Название стандарта] AS [Название стандарта], 
+    [CoversView].[Номер стандарта] AS [Номер стандарта]
     FROM [dbo].[CoversView] AS [CoversView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DescriptorsView" EntityType="Self.DescriptorsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DescriptorsView].[ID дескриптора] AS [ID дескриптора], 
     [DescriptorsView].[Наименование] AS [Наименование], 
-    [DescriptorsView].[Сокращенное Наименование] AS [Сокращенное Наименование], 
+    [DescriptorsView].[Сокращенное наименование] AS [Сокращенное наименование], 
     [DescriptorsView].[Отображаемое название] AS [Отображаемое название], 
     [DescriptorsView].[Код] AS [Код], 
     [DescriptorsView].[Описание] AS [Описание]
@@ -1409,60 +1546,135 @@
     [DescriptorsViewDisplay].[Описание] AS [Описание]
     FROM [dbo].[DescriptorsViewDisplay] AS [DescriptorsViewDisplay]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="GroupsApplicationsView" EntityType="Self.GroupsApplicationsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GroupsApplicationsView].[ID применения подгруппы] AS [ID применения подгруппы], 
+    [GroupsApplicationsView].[ID применения] AS [ID применения], 
+    [GroupsApplicationsView].[Наименование применения] AS [Наименование применения], 
+    [GroupsApplicationsView].[ID направления] AS [ID направления], 
+    [GroupsApplicationsView].[Наименование направления] AS [Наименование направления], 
+    [GroupsApplicationsView].[ID Файла BIM-библиотеки] AS [ID Файла BIM-библиотеки], 
+    [GroupsApplicationsView].[ID Файла блоков чертежей] AS [ID Файла блоков чертежей], 
+    [GroupsApplicationsView].[ID Типового альбома] AS [ID Типового альбома], 
+    [GroupsApplicationsView].[ID подгруппы] AS [ID подгруппы], 
+    [GroupsApplicationsView].[Наименование подгруппы] AS [Наименование подгруппы], 
+    [GroupsApplicationsView].[Сокращенное наименование подгруппы] AS [Сокращенное наименование подгруппы], 
+    [GroupsApplicationsView].[Код подгруппы] AS [Код подгруппы], 
+    [GroupsApplicationsView].[URL изображения подгруппы] AS [URL изображения подгруппы], 
+    [GroupsApplicationsView].[ID группы] AS [ID группы], 
+    [GroupsApplicationsView].[ID схемы нагрузок] AS [ID схемы нагрузок], 
+    [GroupsApplicationsView].[ID дескриптора] AS [ID дескриптора], 
+    [GroupsApplicationsView].[Наименование схемы нагрузок] AS [Наименование схемы нагрузок], 
+    [GroupsApplicationsView].[Сокращенное наименование схемы нагрузок] AS [Сокращенное наименование схемы нагрузок], 
+    [GroupsApplicationsView].[Отображаемое название схемы нагрузок] AS [Отображаемое название схемы нагрузок], 
+    [GroupsApplicationsView].[Код схемы нагрузок] AS [Код схемы нагрузок], 
+    [GroupsApplicationsView].[Описание схемы нагрузок] AS [Описание схемы нагрузок]
+    FROM [dbo].[GroupsApplicationsView] AS [GroupsApplicationsView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="GroupsView" EntityType="Self.GroupsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [GroupsView].[ID] AS [ID], 
-    [GroupsView].[Дескриптор] AS [Дескриптор], 
-    [GroupsView].[ID Класса] AS [ID Класса]
+    [GroupsView].[ID группы] AS [ID группы], 
+    [GroupsView].[Наименование группы] AS [Наименование группы], 
+    [GroupsView].[Сокращенное наименование группы] AS [Сокращенное наименование группы], 
+    [GroupsView].[Код группы] AS [Код группы], 
+    [GroupsView].[URL изображения группы] AS [URL изображения группы], 
+    [GroupsView].[ID класса] AS [ID класса]
     FROM [dbo].[GroupsView] AS [GroupsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="LoadDiagramsView" EntityType="Self.LoadDiagramsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [LoadDiagramsView].[ID] AS [ID], 
+    [LoadDiagramsView].[ID схемы нагрузок] AS [ID схемы нагрузок], 
     [LoadDiagramsView].[ID дескриптора] AS [ID дескриптора], 
-    [LoadDiagramsView].[Наименование] AS [Наименование], 
-    [LoadDiagramsView].[Сокращенное Наименование] AS [Сокращенное Наименование], 
-    [LoadDiagramsView].[Отображаемое название] AS [Отображаемое название], 
-    [LoadDiagramsView].[Код] AS [Код], 
-    [LoadDiagramsView].[Описание] AS [Описание]
+    [LoadDiagramsView].[Наименование схемы нагрузок] AS [Наименование схемы нагрузок], 
+    [LoadDiagramsView].[Сокращенное наименование схемы нагрузок] AS [Сокращенное наименование схемы нагрузок], 
+    [LoadDiagramsView].[Отображаемое название схемы нагрузок] AS [Отображаемое название схемы нагрузок], 
+    [LoadDiagramsView].[Код схемы нагрузок] AS [Код схемы нагрузок], 
+    [LoadDiagramsView].[Описание схемы нагрузок] AS [Описание схемы нагрузок]
     FROM [dbo].[LoadDiagramsView] AS [LoadDiagramsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ManufacturersView" EntityType="Self.ManufacturersView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [ManufacturersView].[ID] AS [ID], 
-    [ManufacturersView].[Полное наименование] AS [Полное наименование], 
-    [ManufacturersView].[Сокращенное наименование] AS [Сокращенное наименование], 
+    [ManufacturersView].[ID производителя] AS [ID производителя], 
+    [ManufacturersView].[Наименование производителя] AS [Наименование производителя], 
+    [ManufacturersView].[Сокращенное наименование производителя] AS [Сокращенное наименование производителя], 
     [ManufacturersView].[ИНН] AS [ИНН]
     FROM [dbo].[ManufacturersView] AS [ManufacturersView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="MaterialsView" EntityType="Self.MaterialsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [MaterialsView].[ID] AS [ID], 
-    [MaterialsView].[Дескриптор] AS [Дескриптор], 
-    [MaterialsView].[ID Нормативного документа] AS [ID Нормативного документа], 
-    [MaterialsView].[ID Норматива] AS [ID Норматива], 
-    [MaterialsView].[Обозначение материала или марка стали] AS [Обозначение материала или марка стали]
+    [MaterialsView].[ID материала] AS [ID материала], 
+    [MaterialsView].[Наименование материала] AS [Наименование материала], 
+    [MaterialsView].[Сокращенное наименование материала] AS [Сокращенное наименование материала], 
+    [MaterialsView].[Обозначение материала] AS [Обозначение материала], 
+    [MaterialsView].[Обозначение материала/марка стали] AS [Обозначение материала/марка стали], 
+    [MaterialsView].[Стандарт материала] AS [Стандарт материала], 
+    [MaterialsView].[Код стандарта материала] AS [Код стандарта материала], 
+    [MaterialsView].[Стандарт сырья] AS [Стандарт сырья], 
+    [MaterialsView].[Код стандарта сырья] AS [Код стандарта сырья]
     FROM [dbo].[MaterialsView] AS [MaterialsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="NormsView" EntityType="Self.NormsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [NormsView].[ID] AS [ID], 
-    [NormsView].[Дескриптор] AS [Дескриптор]
+    [NormsView].[ID документа] AS [ID документа], 
+    [NormsView].[Номер документа] AS [Номер документа], 
+    [NormsView].[Наименование документа] AS [Наименование документа]
     FROM [dbo].[NormsView] AS [NormsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PackagesView" EntityType="Self.PackagesView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PackagesView].[ID] AS [ID], 
-    [PackagesView].[Полное наименование] AS [Полное наименование], 
-    [PackagesView].[Краткое обозначение] AS [Краткое обозначение], 
-    [PackagesView].[Описание] AS [Описание]
+    [PackagesView].[Наименование упаковки] AS [Наименование упаковки], 
+    [PackagesView].[Сокращенное наименование упаковки] AS [Сокращенное наименование упаковки], 
+    [PackagesView].[Описание упаковки] AS [Описание упаковки], 
+    [PackagesView].[ID единицы измерения] AS [ID единицы измерения], 
+    [PackagesView].[Наименование единицы измерения] AS [Наименование единицы измерения], 
+    [PackagesView].[ID типа измерения] AS [ID типа измерения], 
+    [PackagesView].[Наименование типа единицы измерения] AS [Наименование типа единицы измерения]
     FROM [dbo].[PackagesView] AS [PackagesView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PerforationsView" EntityType="Self.PerforationsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PerforationsView].[ID] AS [ID], 
-    [PerforationsView].[Дескриптор] AS [Дескриптор]
+    [PerforationsView].[Наименование перфорации] AS [Наименование перфорации], 
+    [PerforationsView].[Сокращенное наименование перфорации] AS [Сокращенное наименование перфорации], 
+    [PerforationsView].[Описание перфорации] AS [Описание перфорации], 
+    [PerforationsView].[ID единицы измерения] AS [ID единицы измерения], 
+    [PerforationsView].[Наименование единицы измерения] AS [Наименование единицы измерения], 
+    [PerforationsView].[ID типа измерения] AS [ID типа измерения], 
+    [PerforationsView].[Наименование типа единицы измерения] AS [Наименование типа единицы измерения]
     FROM [dbo].[PerforationsView] AS [PerforationsView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProductsVendorCodesView" EntityType="Self.ProductsVendorCodesView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProductsVendorCodesView].[ID] AS [ID], 
+    [ProductsVendorCodesView].[Продукт] AS [Продукт], 
+    [ProductsVendorCodesView].[Артикул] AS [Артикул]
+    FROM [dbo].[ProductsVendorCodesView] AS [ProductsVendorCodesView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProductsView" EntityType="Self.ProductsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProductsView].[ID продукта] AS [ID продукта], 
+    [ProductsView].[Артикул] AS [Артикул], 
+    [ProductsView].[Наименование продукта] AS [Наименование продукта], 
+    [ProductsView].[Сокращенное наименование продукта] AS [Сокращенное наименование продукта], 
+    [ProductsView].[Описание продукта] AS [Описание продукта], 
+    [ProductsView].[Наименование подгруппы] AS [Наименование подгруппы], 
+    [ProductsView].[Сокращенное наименование подгруппы] AS [Сокращенное наименование подгруппы], 
+    [ProductsView].[Код подгруппы] AS [Код подгруппы], 
+    [ProductsView].[URL изображения подгруппы] AS [URL изображения подгруппы], 
+    [ProductsView].[Наименование группы] AS [Наименование группы], 
+    [ProductsView].[Сокращенное наименование группы] AS [Сокращенное наименование группы], 
+    [ProductsView].[Код группы] AS [Код группы], 
+    [ProductsView].[URL изображения группы] AS [URL изображения группы], 
+    [ProductsView].[Наименование класса] AS [Наименование класса], 
+    [ProductsView].[Сокращенное наименование класса] AS [Сокращенное наименование класса], 
+    [ProductsView].[Код класса] AS [Код класса], 
+    [ProductsView].[URL изображения класса] AS [URL изображения класса], 
+    [ProductsView].[Наименование покрытия] AS [Наименование покрытия], 
+    [ProductsView].[Название стандарта] AS [Название стандарта], 
+    [ProductsView].[Обозначение покрытия] AS [Обозначение покрытия], 
+    [ProductsView].[Толщина покрытия] AS [Толщина покрытия]
+    FROM [dbo].[ProductsView] AS [ProductsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ResourcesView" EntityType="Self.ResourcesView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1478,10 +1690,19 @@
           </EntitySet>
           <EntitySet Name="SubGroupsView" EntityType="Self.SubGroupsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [SubGroupsView].[ID] AS [ID], 
-    [SubGroupsView].[Дескриптор] AS [Дескриптор], 
-    [SubGroupsView].[ID Группы] AS [ID Группы], 
-    [SubGroupsView].[Схема нагрузки] AS [Схема нагрузки]
+    [SubGroupsView].[ID подгруппы] AS [ID подгруппы], 
+    [SubGroupsView].[Наименование подгруппы] AS [Наименование подгруппы], 
+    [SubGroupsView].[Сокращенное наименование подгруппы] AS [Сокращенное наименование подгруппы], 
+    [SubGroupsView].[Код подгруппы] AS [Код подгруппы], 
+    [SubGroupsView].[URL изображения подгруппы] AS [URL изображения подгруппы], 
+    [SubGroupsView].[ID группы] AS [ID группы], 
+    [SubGroupsView].[ID схемы нагрузок] AS [ID схемы нагрузок], 
+    [SubGroupsView].[ID дескриптора] AS [ID дескриптора], 
+    [SubGroupsView].[Наименование схемы нагрузок] AS [Наименование схемы нагрузок], 
+    [SubGroupsView].[Сокращенное наименование схемы нагрузок] AS [Сокращенное наименование схемы нагрузок], 
+    [SubGroupsView].[Отображаемое название схемы нагрузок] AS [Отображаемое название схемы нагрузок], 
+    [SubGroupsView].[Код схемы нагрузок] AS [Код схемы нагрузок], 
+    [SubGroupsView].[Описание схемы нагрузок] AS [Описание схемы нагрузок]
     FROM [dbo].[SubGroupsView] AS [SubGroupsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TablesView" EntityType="Self.TablesView" store:Type="Views" store:Schema="dbo">
@@ -1489,7 +1710,7 @@
     [TablesView].[ID] AS [ID], 
     [TablesView].[ID дескриптора] AS [ID дескриптора], 
     [TablesView].[Наименование] AS [Наименование], 
-    [TablesView].[Сокращенное Наименование] AS [Сокращенное Наименование], 
+    [TablesView].[Сокращенное наименование] AS [Сокращенное наименование], 
     [TablesView].[Отображаемое название] AS [Отображаемое название], 
     [TablesView].[Код] AS [Код], 
     [TablesView].[Описание] AS [Описание]
@@ -1508,22 +1729,36 @@
           <EntitySet Name="UnitsTypesView" EntityType="Self.UnitsTypesView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [UnitsTypesView].[ID] AS [ID], 
-    [UnitsTypesView].[Название измерения] AS [Название измерения]
+    [UnitsTypesView].[Наименование типа единицы измерения] AS [Наименование типа единицы измерения]
     FROM [dbo].[UnitsTypesView] AS [UnitsTypesView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="UnitsView" EntityType="Self.UnitsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [UnitsView].[ID] AS [ID], 
-    [UnitsView].[Дескриптор] AS [Дескриптор], 
+    [UnitsView].[Наименование единицы измерения] AS [Наименование единицы измерения], 
+    [UnitsView].[Сокращенное наименование единицы измерения] AS [Сокращенное наименование единицы измерения], 
+    [UnitsView].[Описание единицы измерения] AS [Описание единицы измерения], 
     [UnitsView].[Общероссийский классификатор единиц измерения] AS [Общероссийский классификатор единиц измерения]
     FROM [dbo].[UnitsView] AS [UnitsView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VendorCodesView" EntityType="Self.VendorCodesView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VendorCodesView].[ID артикула] AS [ID артикула], 
+    [VendorCodesView].[ID продукта] AS [ID продукта], 
+    [VendorCodesView].[Артикул] AS [Артикул], 
+    [VendorCodesView].[Актуальность] AS [Актуальность], 
+    [VendorCodesView].[Тип] AS [Тип], 
+    [VendorCodesView].[Публичность] AS [Публичность], 
+    [VendorCodesView].[Артикул бухгалтерии] AS [Артикул бухгалтерии], 
+    [VendorCodesView].[Производитель] AS [Производитель]
+    FROM [dbo].[VendorCodesView] AS [VendorCodesView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewsTablesView" EntityType="Self.ViewsTablesView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewsTablesView].[ID] AS [ID], 
     [ViewsTablesView].[ID дескриптора представления] AS [ID дескриптора представления], 
     [ViewsTablesView].[Наименование представления] AS [Наименование представления], 
-    [ViewsTablesView].[Сокращенное Наименование представления] AS [Сокращенное Наименование представления], 
+    [ViewsTablesView].[Сокращенное наименование представления] AS [Сокращенное наименование представления], 
     [ViewsTablesView].[Отображаемое название представления] AS [Отображаемое название представления], 
     [ViewsTablesView].[Тип] AS [Тип], 
     [ViewsTablesView].[ID дескриптора таблицы] AS [ID дескриптора таблицы], 
@@ -1536,7 +1771,7 @@
             <DefiningQuery>SELECT 
     [ViewsView].[ID] AS [ID], 
     [ViewsView].[Наименование представления] AS [Наименование представления], 
-    [ViewsView].[Сокращенное Наименование представления] AS [Сокращенное Наименование представления], 
+    [ViewsView].[Сокращенное наименование представления] AS [Сокращенное наименование представления], 
     [ViewsView].[Отображаемое название представления] AS [Отображаемое название представления], 
     [ViewsView].[ID дескриптора представления] AS [ID дескриптора представления], 
     [ViewsView].[ID Типа] AS [ID Типа], 
@@ -1825,6 +2060,7 @@
           <EntitySet Name="CoversView" EntityType="DBSEModel.CoversView" />
           <EntitySet Name="DescriptorsView" EntityType="DBSEModel.DescriptorsView" />
           <EntitySet Name="DescriptorsViewDisplay" EntityType="DBSEModel.DescriptorsViewDisplay" />
+          <EntitySet Name="GroupsApplicationsView" EntityType="DBSEModel.GroupsApplicationsView" />
           <EntitySet Name="GroupsView" EntityType="DBSEModel.GroupsView" />
           <EntitySet Name="LoadDiagramsView" EntityType="DBSEModel.LoadDiagramsView" />
           <EntitySet Name="ManufacturersView" EntityType="DBSEModel.ManufacturersView" />
@@ -1832,6 +2068,8 @@
           <EntitySet Name="NormsView" EntityType="DBSEModel.NormsView" />
           <EntitySet Name="PackagesView" EntityType="DBSEModel.PackagesView" />
           <EntitySet Name="PerforationsView" EntityType="DBSEModel.PerforationsView" />
+          <EntitySet Name="ProductsVendorCodesView" EntityType="DBSEModel.ProductsVendorCodesView" />
+          <EntitySet Name="ProductsView" EntityType="DBSEModel.ProductsView" />
           <EntitySet Name="ResourcesView" EntityType="DBSEModel.ResourcesView" />
           <EntitySet Name="ResourceTypesView" EntityType="DBSEModel.ResourceTypesView" />
           <EntitySet Name="SubGroupsView" EntityType="DBSEModel.SubGroupsView" />
@@ -1839,6 +2077,7 @@
           <EntitySet Name="TablesViewsView" EntityType="DBSEModel.TablesViewsView" />
           <EntitySet Name="UnitsTypesView" EntityType="DBSEModel.UnitsTypesView" />
           <EntitySet Name="UnitsView" EntityType="DBSEModel.UnitsView" />
+          <EntitySet Name="VendorCodesView" EntityType="DBSEModel.VendorCodesView" />
           <EntitySet Name="ViewsTablesView" EntityType="DBSEModel.ViewsTablesView" />
           <EntitySet Name="ViewsView" EntityType="DBSEModel.ViewsView" />
           <EntitySet Name="ViewTypesView" EntityType="DBSEModel.ViewTypesView" />
@@ -2509,36 +2748,47 @@
         </EntityType>
         <EntityType Name="ApplicationsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_применения" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ID_Направления" Type="Int32" />
+          <Property Name="ID_применения" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_применения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_направления" Type="Int32" />
+          <Property Name="Наименование_направления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Файла_BIM_библиотеки" Type="Int32" />
+          <Property Name="ID_Файла_блоков_чертежей" Type="Int32" />
+          <Property Name="ID_Типового_альбома" Type="Int32" />
         </EntityType>
         <EntityType Name="BuisnessUnitsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_направления" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_направления" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_направления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ID_Файла_BIM_библиотеки" Type="Int32" />
           <Property Name="ID_Файла_блоков_чертежей" Type="Int32" />
           <Property Name="ID_Типового_альбома" Type="Int32" />
         </EntityType>
         <EntityType Name="ClassesView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_класса" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_класса" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Код_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="URL_изображения_класса" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CoversView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_покрытия" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_покрытия" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_покрытия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_покрытия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Обозначение_покрытия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Толщина_покрытия" Type="Int32" />
+          <Property Name="Название_стандарта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Номер_стандарта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DescriptorsView">
           <Key>
@@ -2546,7 +2796,7 @@
           </Key>
           <Property Name="ID_дескриптора" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Сокращенное_Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Отображаемое_название" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
@@ -2561,68 +2811,149 @@
           <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="GroupsApplicationsView">
+          <Key>
+            <PropertyRef Name="ID_применения_подгруппы" />
+          </Key>
+          <Property Name="ID_применения_подгруппы" Type="Int32" Nullable="false" />
+          <Property Name="ID_применения" Type="Int32" />
+          <Property Name="Наименование_применения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_направления" Type="Int32" />
+          <Property Name="Наименование_направления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Файла_BIM_библиотеки" Type="Int32" />
+          <Property Name="ID_Файла_блоков_чертежей" Type="Int32" />
+          <Property Name="ID_Типового_альбома" Type="Int32" />
+          <Property Name="ID_подгруппы" Type="Int32" />
+          <Property Name="Наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Код_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="URL_изображения_подгруппы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="ID_группы" Type="Int32" />
+          <Property Name="ID_схемы_нагрузок" Type="Int32" />
+          <Property Name="ID_дескриптора" Type="Int32" />
+          <Property Name="Наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Отображаемое_название_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Код_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Описание_схемы_нагрузок" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="GroupsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_группы" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ID_Класса" Type="Int32" />
+          <Property Name="ID_группы" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Код_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="URL_изображения_группы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="ID_класса" Type="Int32" />
         </EntityType>
         <EntityType Name="LoadDiagramsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_схемы_нагрузок" />
             <PropertyRef Name="ID_дескриптора" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID_схемы_нагрузок" Type="Int32" Nullable="false" />
           <Property Name="ID_дескриптора" Type="Int32" Nullable="false" />
-          <Property Name="Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Сокращенное_Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Отображаемое_название" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Отображаемое_название_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Код_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Описание_схемы_нагрузок" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ManufacturersView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_производителя" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Полное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Сокращенное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_производителя" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_производителя" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_производителя" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ИНН" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="MaterialsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_материала" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ID_Нормативного_документа" Type="Int32" />
-          <Property Name="ID_Норматива" Type="Int32" />
-          <Property Name="Обозначение_материала_или_марка_стали" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_материала" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Обозначение_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Обозначение_материала_марка_стали" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Стандарт_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Код_стандарта_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Стандарт_сырья" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Код_стандарта_сырья" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NormsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_документа" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_документа" Type="Int32" Nullable="false" />
+          <Property Name="Номер_документа" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_документа" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PackagesView">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Полное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Краткое_обозначение" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_упаковки" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_упаковки" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Описание_упаковки" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="ID_единицы_измерения" Type="Int32" />
+          <Property Name="Наименование_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_типа_измерения" Type="Int32" />
+          <Property Name="Наименование_типа_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PerforationsView">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_единицы_измерения" />
+            <PropertyRef Name="ID_типа_измерения" />
+            <PropertyRef Name="Наименование_типа_единицы_измерения" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_перфорации" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_перфорации" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Описание_перфорации" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="ID_единицы_измерения" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_типа_измерения" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_типа_единицы_измерения" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProductsVendorCodesView">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Продукт" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Артикул" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProductsView">
+          <Key>
+            <PropertyRef Name="ID_продукта" />
+          </Key>
+          <Property Name="ID_продукта" Type="Int32" Nullable="false" />
+          <Property Name="Артикул" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_продукта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_продукта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Описание_продукта" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Код_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="URL_изображения_подгруппы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Код_группы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="URL_изображения_группы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Код_класса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="URL_изображения_класса" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_покрытия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Название_стандарта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Обозначение_покрытия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Толщина_покрытия" Type="Int32" />
         </EntityType>
         <EntityType Name="ResourcesView">
           <Key>
@@ -2641,12 +2972,21 @@
         </EntityType>
         <EntityType Name="SubGroupsView">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_подгруппы" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ID_Группы" Type="Int32" />
-          <Property Name="Схема_нагрузки" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_подгруппы" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Код_подгруппы" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="URL_изображения_подгруппы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="ID_группы" Type="Int32" />
+          <Property Name="ID_схемы_нагрузок" Type="Int32" />
+          <Property Name="ID_дескриптора" Type="Int32" />
+          <Property Name="Наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Отображаемое_название_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Код_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Описание_схемы_нагрузок" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TablesView">
           <Key>
@@ -2656,7 +2996,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="ID_дескриптора" Type="Int32" Nullable="false" />
           <Property Name="Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Сокращенное_Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Отображаемое_название" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
@@ -2678,18 +3018,35 @@
         <EntityType Name="UnitsTypesView">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="Название_измерения" />
+            <PropertyRef Name="Наименование_типа_единицы_измерения" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Название_измерения" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_типа_единицы_измерения" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UnitsView">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Дескриптор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Описание_единицы_измерения" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
           <Property Name="Общероссийский_классификатор_единиц_измерения" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VendorCodesView">
+          <Key>
+            <PropertyRef Name="ID_артикула" />
+            <PropertyRef Name="Актуальность" />
+            <PropertyRef Name="Тип" />
+          </Key>
+          <Property Name="ID_артикула" Type="Int32" Nullable="false" />
+          <Property Name="ID_продукта" Type="Int32" />
+          <Property Name="Артикул" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Актуальность" Type="Boolean" Nullable="false" />
+          <Property Name="Тип" Type="Boolean" Nullable="false" />
+          <Property Name="Публичность" Type="Boolean" />
+          <Property Name="Артикул_бухгалтерии" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Производитель" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ViewsTablesView">
           <Key>
@@ -2700,7 +3057,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="ID_дескриптора_представления" Type="Int32" Nullable="false" />
           <Property Name="Наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Сокращенное_Наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Отображаемое_название_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Тип" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ID_дескриптора_таблицы" Type="Int32" Nullable="false" />
@@ -2716,7 +3073,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Сокращенное_Наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Сокращенное_наименование_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Отображаемое_название_представления" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ID_дескриптора_представления" Type="Int32" Nullable="false" />
           <Property Name="ID_Типа" Type="Int32" Nullable="false" />
@@ -3767,9 +4124,13 @@
           <EntitySetMapping Name="ApplicationsView">
             <EntityTypeMapping TypeName="DBSEModel.ApplicationsView">
               <MappingFragment StoreEntitySet="ApplicationsView">
-                <ScalarProperty Name="ID_Направления" ColumnName="ID Направления" />
-                <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Типового_альбома" ColumnName="ID Типового альбома" />
+                <ScalarProperty Name="ID_Файла_блоков_чертежей" ColumnName="ID Файла блоков чертежей" />
+                <ScalarProperty Name="ID_Файла_BIM_библиотеки" ColumnName="ID Файла BIM-библиотеки" />
+                <ScalarProperty Name="Наименование_направления" ColumnName="Наименование направления" />
+                <ScalarProperty Name="ID_направления" ColumnName="ID направления" />
+                <ScalarProperty Name="Наименование_применения" ColumnName="Наименование применения" />
+                <ScalarProperty Name="ID_применения" ColumnName="ID применения" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3779,25 +4140,32 @@
                 <ScalarProperty Name="ID_Типового_альбома" ColumnName="ID Типового альбома" />
                 <ScalarProperty Name="ID_Файла_блоков_чертежей" ColumnName="ID Файла блоков чертежей" />
                 <ScalarProperty Name="ID_Файла_BIM_библиотеки" ColumnName="ID Файла BIM-библиотеки" />
-                <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Наименование_направления" ColumnName="Наименование направления" />
+                <ScalarProperty Name="ID_направления" ColumnName="ID направления" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ClassesView">
             <EntityTypeMapping TypeName="DBSEModel.ClassesView">
               <MappingFragment StoreEntitySet="ClassesView">
-                <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URL_изображения_класса" ColumnName="URL изображения класса" />
+                <ScalarProperty Name="Код_класса" ColumnName="Код класса" />
+                <ScalarProperty Name="Сокращенное_наименование_класса" ColumnName="Сокращенное наименование класса" />
+                <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
+                <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CoversView">
             <EntityTypeMapping TypeName="DBSEModel.CoversView">
               <MappingFragment StoreEntitySet="CoversView">
+                <ScalarProperty Name="Номер_стандарта" ColumnName="Номер стандарта" />
+                <ScalarProperty Name="Название_стандарта" ColumnName="Название стандарта" />
                 <ScalarProperty Name="Толщина_покрытия" ColumnName="Толщина покрытия" />
-                <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Обозначение_покрытия" ColumnName="Обозначение покрытия" />
+                <ScalarProperty Name="Сокращенное_наименование_покрытия" ColumnName="Сокращенное наименование покрытия" />
+                <ScalarProperty Name="Наименование_покрытия" ColumnName="Наименование покрытия" />
+                <ScalarProperty Name="ID_покрытия" ColumnName="ID покрытия" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3807,7 +4175,7 @@
                 <ScalarProperty Name="Описание" ColumnName="Описание" />
                 <ScalarProperty Name="Код" ColumnName="Код" />
                 <ScalarProperty Name="Отображаемое_название" ColumnName="Отображаемое название" />
-                <ScalarProperty Name="Сокращенное_Наименование" ColumnName="Сокращенное Наименование" />
+                <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
                 <ScalarProperty Name="Наименование" ColumnName="Наименование" />
                 <ScalarProperty Name="ID_дескриптора" ColumnName="ID дескриптора" />
               </MappingFragment>
@@ -3824,25 +4192,55 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GroupsApplicationsView">
+            <EntityTypeMapping TypeName="DBSEModel.GroupsApplicationsView">
+              <MappingFragment StoreEntitySet="GroupsApplicationsView">
+                <ScalarProperty Name="Описание_схемы_нагрузок" ColumnName="Описание схемы нагрузок" />
+                <ScalarProperty Name="Код_схемы_нагрузок" ColumnName="Код схемы нагрузок" />
+                <ScalarProperty Name="Отображаемое_название_схемы_нагрузок" ColumnName="Отображаемое название схемы нагрузок" />
+                <ScalarProperty Name="Сокращенное_наименование_схемы_нагрузок" ColumnName="Сокращенное наименование схемы нагрузок" />
+                <ScalarProperty Name="Наименование_схемы_нагрузок" ColumnName="Наименование схемы нагрузок" />
+                <ScalarProperty Name="ID_дескриптора" ColumnName="ID дескриптора" />
+                <ScalarProperty Name="ID_схемы_нагрузок" ColumnName="ID схемы нагрузок" />
+                <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
+                <ScalarProperty Name="URL_изображения_подгруппы" ColumnName="URL изображения подгруппы" />
+                <ScalarProperty Name="Код_подгруппы" ColumnName="Код подгруппы" />
+                <ScalarProperty Name="Сокращенное_наименование_подгруппы" ColumnName="Сокращенное наименование подгруппы" />
+                <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
+                <ScalarProperty Name="ID_подгруппы" ColumnName="ID подгруппы" />
+                <ScalarProperty Name="ID_Типового_альбома" ColumnName="ID Типового альбома" />
+                <ScalarProperty Name="ID_Файла_блоков_чертежей" ColumnName="ID Файла блоков чертежей" />
+                <ScalarProperty Name="ID_Файла_BIM_библиотеки" ColumnName="ID Файла BIM-библиотеки" />
+                <ScalarProperty Name="Наименование_направления" ColumnName="Наименование направления" />
+                <ScalarProperty Name="ID_направления" ColumnName="ID направления" />
+                <ScalarProperty Name="Наименование_применения" ColumnName="Наименование применения" />
+                <ScalarProperty Name="ID_применения" ColumnName="ID применения" />
+                <ScalarProperty Name="ID_применения_подгруппы" ColumnName="ID применения подгруппы" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="GroupsView">
             <EntityTypeMapping TypeName="DBSEModel.GroupsView">
               <MappingFragment StoreEntitySet="GroupsView">
-                <ScalarProperty Name="ID_Класса" ColumnName="ID Класса" />
-                <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
+                <ScalarProperty Name="URL_изображения_группы" ColumnName="URL изображения группы" />
+                <ScalarProperty Name="Код_группы" ColumnName="Код группы" />
+                <ScalarProperty Name="Сокращенное_наименование_группы" ColumnName="Сокращенное наименование группы" />
+                <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
+                <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LoadDiagramsView">
             <EntityTypeMapping TypeName="DBSEModel.LoadDiagramsView">
               <MappingFragment StoreEntitySet="LoadDiagramsView">
-                <ScalarProperty Name="Описание" ColumnName="Описание" />
-                <ScalarProperty Name="Код" ColumnName="Код" />
-                <ScalarProperty Name="Отображаемое_название" ColumnName="Отображаемое название" />
-                <ScalarProperty Name="Сокращенное_Наименование" ColumnName="Сокращенное Наименование" />
-                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Описание_схемы_нагрузок" ColumnName="Описание схемы нагрузок" />
+                <ScalarProperty Name="Код_схемы_нагрузок" ColumnName="Код схемы нагрузок" />
+                <ScalarProperty Name="Отображаемое_название_схемы_нагрузок" ColumnName="Отображаемое название схемы нагрузок" />
+                <ScalarProperty Name="Сокращенное_наименование_схемы_нагрузок" ColumnName="Сокращенное наименование схемы нагрузок" />
+                <ScalarProperty Name="Наименование_схемы_нагрузок" ColumnName="Наименование схемы нагрузок" />
                 <ScalarProperty Name="ID_дескриптора" ColumnName="ID дескриптора" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_схемы_нагрузок" ColumnName="ID схемы нагрузок" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3850,37 +4248,46 @@
             <EntityTypeMapping TypeName="DBSEModel.ManufacturersView">
               <MappingFragment StoreEntitySet="ManufacturersView">
                 <ScalarProperty Name="ИНН" ColumnName="ИНН" />
-                <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
-                <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Сокращенное_наименование_производителя" ColumnName="Сокращенное наименование производителя" />
+                <ScalarProperty Name="Наименование_производителя" ColumnName="Наименование производителя" />
+                <ScalarProperty Name="ID_производителя" ColumnName="ID производителя" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MaterialsView">
             <EntityTypeMapping TypeName="DBSEModel.MaterialsView">
               <MappingFragment StoreEntitySet="MaterialsView">
-                <ScalarProperty Name="Обозначение_материала_или_марка_стали" ColumnName="Обозначение материала или марка стали" />
-                <ScalarProperty Name="ID_Норматива" ColumnName="ID Норматива" />
-                <ScalarProperty Name="ID_Нормативного_документа" ColumnName="ID Нормативного документа" />
-                <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Код_стандарта_сырья" ColumnName="Код стандарта сырья" />
+                <ScalarProperty Name="Стандарт_сырья" ColumnName="Стандарт сырья" />
+                <ScalarProperty Name="Код_стандарта_материала" ColumnName="Код стандарта материала" />
+                <ScalarProperty Name="Стандарт_материала" ColumnName="Стандарт материала" />
+                <ScalarProperty Name="Обозначение_материала_марка_стали" ColumnName="Обозначение материала/марка стали" />
+                <ScalarProperty Name="Обозначение_материала" ColumnName="Обозначение материала" />
+                <ScalarProperty Name="Сокращенное_наименование_материала" ColumnName="Сокращенное наименование материала" />
+                <ScalarProperty Name="Наименование_материала" ColumnName="Наименование материала" />
+                <ScalarProperty Name="ID_материала" ColumnName="ID материала" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NormsView">
             <EntityTypeMapping TypeName="DBSEModel.NormsView">
               <MappingFragment StoreEntitySet="NormsView">
-                <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Наименование_документа" ColumnName="Наименование документа" />
+                <ScalarProperty Name="Номер_документа" ColumnName="Номер документа" />
+                <ScalarProperty Name="ID_документа" ColumnName="ID документа" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PackagesView">
             <EntityTypeMapping TypeName="DBSEModel.PackagesView">
               <MappingFragment StoreEntitySet="PackagesView">
-                <ScalarProperty Name="Описание" ColumnName="Описание" />
-                <ScalarProperty Name="Краткое_обозначение" ColumnName="Краткое обозначение" />
-                <ScalarProperty Name="Полное_наименование" ColumnName="Полное наименование" />
+                <ScalarProperty Name="Наименование_типа_единицы_измерения" ColumnName="Наименование типа единицы измерения" />
+                <ScalarProperty Name="ID_типа_измерения" ColumnName="ID типа измерения" />
+                <ScalarProperty Name="Наименование_единицы_измерения" ColumnName="Наименование единицы измерения" />
+                <ScalarProperty Name="ID_единицы_измерения" ColumnName="ID единицы измерения" />
+                <ScalarProperty Name="Описание_упаковки" ColumnName="Описание упаковки" />
+                <ScalarProperty Name="Сокращенное_наименование_упаковки" ColumnName="Сокращенное наименование упаковки" />
+                <ScalarProperty Name="Наименование_упаковки" ColumnName="Наименование упаковки" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3888,8 +4295,50 @@
           <EntitySetMapping Name="PerforationsView">
             <EntityTypeMapping TypeName="DBSEModel.PerforationsView">
               <MappingFragment StoreEntitySet="PerforationsView">
-                <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
+                <ScalarProperty Name="Наименование_типа_единицы_измерения" ColumnName="Наименование типа единицы измерения" />
+                <ScalarProperty Name="ID_типа_измерения" ColumnName="ID типа измерения" />
+                <ScalarProperty Name="Наименование_единицы_измерения" ColumnName="Наименование единицы измерения" />
+                <ScalarProperty Name="ID_единицы_измерения" ColumnName="ID единицы измерения" />
+                <ScalarProperty Name="Описание_перфорации" ColumnName="Описание перфорации" />
+                <ScalarProperty Name="Сокращенное_наименование_перфорации" ColumnName="Сокращенное наименование перфорации" />
+                <ScalarProperty Name="Наименование_перфорации" ColumnName="Наименование перфорации" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductsVendorCodesView">
+            <EntityTypeMapping TypeName="DBSEModel.ProductsVendorCodesView">
+              <MappingFragment StoreEntitySet="ProductsVendorCodesView">
+                <ScalarProperty Name="Артикул" ColumnName="Артикул" />
+                <ScalarProperty Name="Продукт" ColumnName="Продукт" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductsView">
+            <EntityTypeMapping TypeName="DBSEModel.ProductsView">
+              <MappingFragment StoreEntitySet="ProductsView">
+                <ScalarProperty Name="Толщина_покрытия" ColumnName="Толщина покрытия" />
+                <ScalarProperty Name="Обозначение_покрытия" ColumnName="Обозначение покрытия" />
+                <ScalarProperty Name="Название_стандарта" ColumnName="Название стандарта" />
+                <ScalarProperty Name="Наименование_покрытия" ColumnName="Наименование покрытия" />
+                <ScalarProperty Name="URL_изображения_класса" ColumnName="URL изображения класса" />
+                <ScalarProperty Name="Код_класса" ColumnName="Код класса" />
+                <ScalarProperty Name="Сокращенное_наименование_класса" ColumnName="Сокращенное наименование класса" />
+                <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
+                <ScalarProperty Name="URL_изображения_группы" ColumnName="URL изображения группы" />
+                <ScalarProperty Name="Код_группы" ColumnName="Код группы" />
+                <ScalarProperty Name="Сокращенное_наименование_группы" ColumnName="Сокращенное наименование группы" />
+                <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
+                <ScalarProperty Name="URL_изображения_подгруппы" ColumnName="URL изображения подгруппы" />
+                <ScalarProperty Name="Код_подгруппы" ColumnName="Код подгруппы" />
+                <ScalarProperty Name="Сокращенное_наименование_подгруппы" ColumnName="Сокращенное наименование подгруппы" />
+                <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
+                <ScalarProperty Name="Описание_продукта" ColumnName="Описание продукта" />
+                <ScalarProperty Name="Сокращенное_наименование_продукта" ColumnName="Сокращенное наименование продукта" />
+                <ScalarProperty Name="Наименование_продукта" ColumnName="Наименование продукта" />
+                <ScalarProperty Name="Артикул" ColumnName="Артикул" />
+                <ScalarProperty Name="ID_продукта" ColumnName="ID продукта" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3912,10 +4361,19 @@
           <EntitySetMapping Name="SubGroupsView">
             <EntityTypeMapping TypeName="DBSEModel.SubGroupsView">
               <MappingFragment StoreEntitySet="SubGroupsView">
-                <ScalarProperty Name="Схема_нагрузки" ColumnName="Схема нагрузки" />
-                <ScalarProperty Name="ID_Группы" ColumnName="ID Группы" />
-                <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Описание_схемы_нагрузок" ColumnName="Описание схемы нагрузок" />
+                <ScalarProperty Name="Код_схемы_нагрузок" ColumnName="Код схемы нагрузок" />
+                <ScalarProperty Name="Отображаемое_название_схемы_нагрузок" ColumnName="Отображаемое название схемы нагрузок" />
+                <ScalarProperty Name="Сокращенное_наименование_схемы_нагрузок" ColumnName="Сокращенное наименование схемы нагрузок" />
+                <ScalarProperty Name="Наименование_схемы_нагрузок" ColumnName="Наименование схемы нагрузок" />
+                <ScalarProperty Name="ID_дескриптора" ColumnName="ID дескриптора" />
+                <ScalarProperty Name="ID_схемы_нагрузок" ColumnName="ID схемы нагрузок" />
+                <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
+                <ScalarProperty Name="URL_изображения_подгруппы" ColumnName="URL изображения подгруппы" />
+                <ScalarProperty Name="Код_подгруппы" ColumnName="Код подгруппы" />
+                <ScalarProperty Name="Сокращенное_наименование_подгруппы" ColumnName="Сокращенное наименование подгруппы" />
+                <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
+                <ScalarProperty Name="ID_подгруппы" ColumnName="ID подгруппы" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3925,7 +4383,7 @@
                 <ScalarProperty Name="Описание" ColumnName="Описание" />
                 <ScalarProperty Name="Код" ColumnName="Код" />
                 <ScalarProperty Name="Отображаемое_название" ColumnName="Отображаемое название" />
-                <ScalarProperty Name="Сокращенное_Наименование" ColumnName="Сокращенное Наименование" />
+                <ScalarProperty Name="Сокращенное_наименование" ColumnName="Сокращенное наименование" />
                 <ScalarProperty Name="Наименование" ColumnName="Наименование" />
                 <ScalarProperty Name="ID_дескриптора" ColumnName="ID дескриптора" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -3947,7 +4405,7 @@
           <EntitySetMapping Name="UnitsTypesView">
             <EntityTypeMapping TypeName="DBSEModel.UnitsTypesView">
               <MappingFragment StoreEntitySet="UnitsTypesView">
-                <ScalarProperty Name="Название_измерения" ColumnName="Название измерения" />
+                <ScalarProperty Name="Наименование_типа_единицы_измерения" ColumnName="Наименование типа единицы измерения" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3956,8 +4414,24 @@
             <EntityTypeMapping TypeName="DBSEModel.UnitsView">
               <MappingFragment StoreEntitySet="UnitsView">
                 <ScalarProperty Name="Общероссийский_классификатор_единиц_измерения" ColumnName="Общероссийский классификатор единиц измерения" />
-                <ScalarProperty Name="Дескриптор" ColumnName="Дескриптор" />
+                <ScalarProperty Name="Описание_единицы_измерения" ColumnName="Описание единицы измерения" />
+                <ScalarProperty Name="Сокращенное_наименование_единицы_измерения" ColumnName="Сокращенное наименование единицы измерения" />
+                <ScalarProperty Name="Наименование_единицы_измерения" ColumnName="Наименование единицы измерения" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorCodesView">
+            <EntityTypeMapping TypeName="DBSEModel.VendorCodesView">
+              <MappingFragment StoreEntitySet="VendorCodesView">
+                <ScalarProperty Name="Производитель" ColumnName="Производитель" />
+                <ScalarProperty Name="Артикул_бухгалтерии" ColumnName="Артикул бухгалтерии" />
+                <ScalarProperty Name="Публичность" ColumnName="Публичность" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+                <ScalarProperty Name="Актуальность" ColumnName="Актуальность" />
+                <ScalarProperty Name="Артикул" ColumnName="Артикул" />
+                <ScalarProperty Name="ID_продукта" ColumnName="ID продукта" />
+                <ScalarProperty Name="ID_артикула" ColumnName="ID артикула" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3970,7 +4444,7 @@
                 <ScalarProperty Name="ID_дескриптора_таблицы" ColumnName="ID дескриптора таблицы" />
                 <ScalarProperty Name="Тип" ColumnName="Тип" />
                 <ScalarProperty Name="Отображаемое_название_представления" ColumnName="Отображаемое название представления" />
-                <ScalarProperty Name="Сокращенное_Наименование_представления" ColumnName="Сокращенное Наименование представления" />
+                <ScalarProperty Name="Сокращенное_наименование_представления" ColumnName="Сокращенное наименование представления" />
                 <ScalarProperty Name="Наименование_представления" ColumnName="Наименование представления" />
                 <ScalarProperty Name="ID_дескриптора_представления" ColumnName="ID дескриптора представления" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -3984,7 +4458,7 @@
                 <ScalarProperty Name="ID_Типа" ColumnName="ID Типа" />
                 <ScalarProperty Name="ID_дескриптора_представления" ColumnName="ID дескриптора представления" />
                 <ScalarProperty Name="Отображаемое_название_представления" ColumnName="Отображаемое название представления" />
-                <ScalarProperty Name="Сокращенное_Наименование_представления" ColumnName="Сокращенное Наименование представления" />
+                <ScalarProperty Name="Сокращенное_наименование_представления" ColumnName="Сокращенное наименование представления" />
                 <ScalarProperty Name="Наименование_представления" ColumnName="Наименование представления" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

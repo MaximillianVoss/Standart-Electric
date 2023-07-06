@@ -5,62 +5,66 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4d2d441134b64fc8858ef14eb1030a32" Name="Diagram1" ZoomLevel="87">
-        <EntityTypeShape EntityType="DBSEModel.Applications" Width="1.5" PointX="5.25" PointY="45.125" />
-        <EntityTypeShape EntityType="DBSEModel.BuisnessUnits" Width="1.5" PointX="3" PointY="58.25" />
-        <EntityTypeShape EntityType="DBSEModel.Classes" Width="1.5" PointX="3" PointY="47.125" />
-        <EntityTypeShape EntityType="DBSEModel.Covers" Width="1.5" PointX="5.25" PointY="41.25" />
+        <EntityTypeShape EntityType="DBSEModel.Applications" Width="1.5" PointX="5.25" PointY="36.625" />
+        <EntityTypeShape EntityType="DBSEModel.BuisnessUnits" Width="1.5" PointX="3" PointY="45.25" />
+        <EntityTypeShape EntityType="DBSEModel.Classes" Width="1.5" PointX="3" PointY="56.875" />
+        <EntityTypeShape EntityType="DBSEModel.Covers" Width="1.5" PointX="8.25" PointY="24.875" />
         <EntityTypeShape EntityType="DBSEModel.Descriptors" Width="1.5" PointX="0.75" PointY="27.375" />
-        <EntityTypeShape EntityType="DBSEModel.DescriptorsResources" Width="1.5" PointX="6" PointY="29.375" />
-        <EntityTypeShape EntityType="DBSEModel.Fields" Width="1.5" PointX="3" PointY="29.25" />
-        <EntityTypeShape EntityType="DBSEModel.Groups" Width="1.5" PointX="5.25" PointY="37" />
-        <EntityTypeShape EntityType="DBSEModel.GroupsApplications" Width="1.5" PointX="10.5" PointY="45.25" />
+        <EntityTypeShape EntityType="DBSEModel.DescriptorsResources" Width="1.5" PointX="3" PointY="29.375" />
+        <EntityTypeShape EntityType="DBSEModel.Fields" Width="1.5" PointX="3" PointY="54.375" />
+        <EntityTypeShape EntityType="DBSEModel.Groups" Width="1.5" PointX="8.25" PointY="42.875" />
+        <EntityTypeShape EntityType="DBSEModel.GroupsApplications" Width="1.5" PointX="7.5" PointY="35.75" />
         <EntityTypeShape EntityType="DBSEModel.LoadDiagrams" Width="1.5" PointX="3" PointY="15.625" />
-        <EntityTypeShape EntityType="DBSEModel.Manufacturers" Width="1.5" PointX="3" PointY="31.75" />
-        <EntityTypeShape EntityType="DBSEModel.Materials" Width="1.5" PointX="8.25" PointY="41" />
-        <EntityTypeShape EntityType="DBSEModel.Norms" Width="1.5" PointX="3" PointY="55.125" />
-        <EntityTypeShape EntityType="DBSEModel.Packages" Width="1.5" PointX="3" PointY="52.375" />
-        <EntityTypeShape EntityType="DBSEModel.Perforations" Width="1.5" PointX="3" PointY="49.75" />
-        <EntityTypeShape EntityType="DBSEModel.Products" Width="1.5" PointX="12.75" PointY="39.375" />
-        <EntityTypeShape EntityType="DBSEModel.ProductsAnalogs" Width="1.5" PointX="15" PointY="46.875" />
-        <EntityTypeShape EntityType="DBSEModel.ProductsVendorCodes" Width="1.5" PointX="15" PointY="35.625" />
-        <EntityTypeShape EntityType="DBSEModel.Resources" Width="1.5" PointX="3.75" PointY="34.625" />
-        <EntityTypeShape EntityType="DBSEModel.ResourceTypes" Width="1.5" PointX="3.75" PointY="22" />
-        <EntityTypeShape EntityType="DBSEModel.SubGroups" Width="1.5" PointX="10.5" PointY="26" />
-        <EntityTypeShape EntityType="DBSEModel.Tables" Width="1.5" PointX="3" PointY="26.75" />
-        <EntityTypeShape EntityType="DBSEModel.Units" Width="1.5" PointX="3" PointY="37.625" />
-        <EntityTypeShape EntityType="DBSEModel.UnitsPakages" Width="1.5" PointX="5.25" PointY="48.75" />
-        <EntityTypeShape EntityType="DBSEModel.UnitsPerforations" Width="1.5" PointX="8.25" PointY="45.375" />
-        <EntityTypeShape EntityType="DBSEModel.UnitsProducts" Width="1.5" PointX="15" PointY="39.625" />
-        <EntityTypeShape EntityType="DBSEModel.UnitsTypes" Width="1.5" PointX="12.75" PointY="35.875" />
-        <EntityTypeShape EntityType="DBSEModel.VendorCodes" Width="1.5" PointX="8.25" PointY="29.125" />
-        <EntityTypeShape EntityType="DBSEModel.Views" Width="1.5" PointX="5.25" PointY="24.875" />
-        <EntityTypeShape EntityType="DBSEModel.ViewsTables" Width="1.5" PointX="7.5" PointY="25.75" />
-        <EntityTypeShape EntityType="DBSEModel.ViewTypes" Width="1.5" PointX="3" PointY="18.125" />
+        <EntityTypeShape EntityType="DBSEModel.Manufacturers" Width="1.5" PointX="3" PointY="48.875" />
+        <EntityTypeShape EntityType="DBSEModel.Materials" Width="1.5" PointX="5.25" PointY="24.625" />
+        <EntityTypeShape EntityType="DBSEModel.Norms" Width="1.5" PointX="3" PointY="18.125" />
+        <EntityTypeShape EntityType="DBSEModel.Packages" Width="1.5" PointX="3" PointY="51.625" />
+        <EntityTypeShape EntityType="DBSEModel.Perforations" Width="1.5" PointX="3" PointY="42.5" />
+        <EntityTypeShape EntityType="DBSEModel.Products" Width="1.5" PointX="12.75" PointY="33.375" />
+        <EntityTypeShape EntityType="DBSEModel.ProductsAnalogs" Width="1.5" PointX="15" PointY="38.125" />
+        <EntityTypeShape EntityType="DBSEModel.ProductsVendorCodes" Width="1.5" PointX="18" PointY="36.5" />
+        <EntityTypeShape EntityType="DBSEModel.Resources" Width="1.5" PointX="0.75" PointY="24.625" />
+        <EntityTypeShape EntityType="DBSEModel.ResourceTypes" Width="1.5" PointX="0.75" PointY="35" />
+        <EntityTypeShape EntityType="DBSEModel.SubGroups" Width="1.5" PointX="10.5" PointY="29" />
+        <EntityTypeShape EntityType="DBSEModel.Tables" Width="1.5" PointX="3" PointY="59.375" />
+        <EntityTypeShape EntityType="DBSEModel.Units" Width="1.5" PointX="3" PointY="39.375" />
+        <EntityTypeShape EntityType="DBSEModel.UnitsPakages" Width="1.5" PointX="5.25" PointY="45.25" />
+        <EntityTypeShape EntityType="DBSEModel.UnitsPerforations" Width="1.5" PointX="5.25" PointY="40.625" />
+        <EntityTypeShape EntityType="DBSEModel.UnitsProducts" Width="1.5" PointX="15" PointY="34.25" />
+        <EntityTypeShape EntityType="DBSEModel.UnitsTypes" Width="1.5" PointX="3" PointY="25.875" />
+        <EntityTypeShape EntityType="DBSEModel.VendorCodes" Width="1.5" PointX="8.25" PointY="38.625" />
+        <EntityTypeShape EntityType="DBSEModel.Views" Width="1.5" PointX="5.25" PointY="30.375" />
+        <EntityTypeShape EntityType="DBSEModel.ViewsTables" Width="1.5" PointX="7.5" PointY="45.875" />
+        <EntityTypeShape EntityType="DBSEModel.ViewTypes" Width="1.5" PointX="3" PointY="33.875" />
         <EntityTypeShape EntityType="DBSEModel.AllProductsInfoView" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBSEModel.AllProductUnitsInfoView" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBSEModel.ApplicationsView" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBSEModel.BuisnessUnitsView" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="DBSEModel.ClassesView" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DBSEModel.BuisnessUnitsView" Width="1.5" PointX="2.7444677756840679" PointY="4.756733985970139" />
+        <EntityTypeShape EntityType="DBSEModel.ClassesView" Width="1.5" PointX="4.75" PointY="4.75" />
         <EntityTypeShape EntityType="DBSEModel.CoversView" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBSEModel.DescriptorsView" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DBSEModel.DescriptorsViewDisplay" Width="1.5" PointX="4.75" PointY="6.75" />
-        <EntityTypeShape EntityType="DBSEModel.GroupsView" Width="1.5" PointX="6.75" PointY="6.75" />
-        <EntityTypeShape EntityType="DBSEModel.LoadDiagramsView" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DBSEModel.DescriptorsView" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DBSEModel.DescriptorsViewDisplay" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DBSEModel.GroupsApplicationsView" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DBSEModel.GroupsView" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DBSEModel.LoadDiagramsView" Width="1.5" PointX="6.75" PointY="7.75" />
         <EntityTypeShape EntityType="DBSEModel.ManufacturersView" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBSEModel.MaterialsView" Width="1.5" PointX="8.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DBSEModel.NormsView" Width="1.5" PointX="8.75" PointY="6.75" />
-        <EntityTypeShape EntityType="DBSEModel.PackagesView" Width="1.5" PointX="2.75" PointY="9.75" />
-        <EntityTypeShape EntityType="DBSEModel.PerforationsView" Width="1.5" PointX="4.75" PointY="9.75" />
-        <EntityTypeShape EntityType="DBSEModel.ResourcesView" Width="1.5" PointX="6.75" PointY="9.75" />
-        <EntityTypeShape EntityType="DBSEModel.ResourceTypesView" Width="1.5" PointX="8.75" PointY="9.75" />
-        <EntityTypeShape EntityType="DBSEModel.SubGroupsView" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBSEModel.TablesView" Width="1.5" PointX="10.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DBSEModel.TablesViewsView" Width="1.5" PointX="10.75" PointY="7.75" />
-        <EntityTypeShape EntityType="DBSEModel.UnitsTypesView" Width="1.5" PointX="10.75" PointY="10.75" />
-        <EntityTypeShape EntityType="DBSEModel.UnitsView" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBSEModel.ViewsTablesView" Width="1.5" PointX="12.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DBSEModel.ViewsView" Width="1.5" PointX="5.75" PointY="12.75" />
-        <EntityTypeShape EntityType="DBSEModel.ViewTypesView" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="DBSEModel.NormsView" Width="1.5" PointX="8.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DBSEModel.PackagesView" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBSEModel.PerforationsView" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DBSEModel.ProductsVendorCodesView" Width="1.5" PointX="10.75" PointY="8.75" />
+        <EntityTypeShape EntityType="DBSEModel.ProductsView" Width="1.5" PointX="5.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DBSEModel.ResourcesView" Width="1.5" PointX="7.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DBSEModel.ResourceTypesView" Width="1.5" PointX="9.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DBSEModel.SubGroupsView" Width="1.5" PointX="11.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DBSEModel.TablesView" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBSEModel.TablesViewsView" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DBSEModel.UnitsTypesView" Width="1.5" PointX="12.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DBSEModel.UnitsView" Width="1.5" PointX="13.75" PointY="10.75" />
+        <EntityTypeShape EntityType="DBSEModel.VendorCodesView" Width="1.5" PointX="13.75" PointY="13.75" />
+        <EntityTypeShape EntityType="DBSEModel.ViewsTablesView" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBSEModel.ViewsView" Width="1.5" PointX="14.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DBSEModel.ViewTypesView" Width="1.5" PointX="7.75" PointY="14.75" />
         <AssociationConnector Association="DBSEModel.FK__Applicati__idBui__66A4253A" />
         <AssociationConnector Association="DBSEModel.FK__Applicati__idDes__65B00101" />
         <AssociationConnector Association="DBSEModel.FK__GroupsApp__idApp__6D5122C9" />

@@ -66,6 +66,7 @@ namespace База_артикулов.Модели
         public virtual DbSet<CoversView> CoversView { get; set; }
         public virtual DbSet<DescriptorsView> DescriptorsView { get; set; }
         public virtual DbSet<DescriptorsViewDisplay> DescriptorsViewDisplay { get; set; }
+        public virtual DbSet<GroupsApplicationsView> GroupsApplicationsView { get; set; }
         public virtual DbSet<GroupsView> GroupsView { get; set; }
         public virtual DbSet<LoadDiagramsView> LoadDiagramsView { get; set; }
         public virtual DbSet<ManufacturersView> ManufacturersView { get; set; }
@@ -73,6 +74,8 @@ namespace База_артикулов.Модели
         public virtual DbSet<NormsView> NormsView { get; set; }
         public virtual DbSet<PackagesView> PackagesView { get; set; }
         public virtual DbSet<PerforationsView> PerforationsView { get; set; }
+        public virtual DbSet<ProductsVendorCodesView> ProductsVendorCodesView { get; set; }
+        public virtual DbSet<ProductsView> ProductsView { get; set; }
         public virtual DbSet<ResourcesView> ResourcesView { get; set; }
         public virtual DbSet<ResourceTypesView> ResourceTypesView { get; set; }
         public virtual DbSet<SubGroupsView> SubGroupsView { get; set; }
@@ -80,6 +83,7 @@ namespace База_артикулов.Модели
         public virtual DbSet<TablesViewsView> TablesViewsView { get; set; }
         public virtual DbSet<UnitsTypesView> UnitsTypesView { get; set; }
         public virtual DbSet<UnitsView> UnitsView { get; set; }
+        public virtual DbSet<VendorCodesView> VendorCodesView { get; set; }
         public virtual DbSet<ViewsTablesView> ViewsTablesView { get; set; }
         public virtual DbSet<ViewsView> ViewsView { get; set; }
         public virtual DbSet<ViewTypesView> ViewTypesView { get; set; }

@@ -12,9 +12,17 @@ namespace База_артикулов.Модели
     using System;
     using System.Collections.Generic;
     
-    public partial class SubGroupsView
+    public partial class GroupsApplicationsView
     {
-        public int ID_подгруппы { get; set; }
+        public int ID_применения_подгруппы { get; set; }
+        public Nullable<int> ID_применения { get; set; }
+        public string Наименование_применения { get; set; }
+        public Nullable<int> ID_направления { get; set; }
+        public string Наименование_направления { get; set; }
+        public Nullable<int> ID_Файла_BIM_библиотеки { get; set; }
+        public Nullable<int> ID_Файла_блоков_чертежей { get; set; }
+        public Nullable<int> ID_Типового_альбома { get; set; }
+        public Nullable<int> ID_подгруппы { get; set; }
         public string Наименование_подгруппы { get; set; }
         public string Сокращенное_наименование_подгруппы { get; set; }
         public string Код_подгруппы { get; set; }

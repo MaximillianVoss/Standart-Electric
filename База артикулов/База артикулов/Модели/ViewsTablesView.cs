@@ -17,7 +17,7 @@ namespace База_артикулов.Модели
         public int ID { get; set; }
         public int ID_дескриптора_представления { get; set; }
         public string Наименование_представления { get; set; }
-        public string Сокращенное_Наименование_представления { get; set; }
+        public string Сокращенное_наименование_представления { get; set; }
         public string Отображаемое_название_представления { get; set; }
         public string Тип { get; set; }
         public int ID_дескриптора_таблицы { get; set; }

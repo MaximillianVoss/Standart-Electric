@@ -14,9 +14,9 @@ namespace База_артикулов.Модели
     
     public partial class ManufacturersView
     {
-        public int ID { get; set; }
-        public string Полное_наименование { get; set; }
-        public string Сокращенное_наименование { get; set; }
+        public int ID_производителя { get; set; }
+        public string Наименование_производителя { get; set; }
+        public string Сокращенное_наименование_производителя { get; set; }
         public string ИНН { get; set; }
     }
 }

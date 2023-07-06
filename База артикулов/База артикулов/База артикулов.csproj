@@ -150,6 +150,9 @@
     <Compile Include="Модели\GroupsApplications.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Модели\GroupsApplicationsView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Модели\GroupsView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
@@ -210,6 +213,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductsModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Модели\ProductsVendorCodesView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Модели\ProductsView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Модели\ResourcesView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
@@ -232,6 +241,9 @@
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\UnitsView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Модели\VendorCodesView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\Views.cs">

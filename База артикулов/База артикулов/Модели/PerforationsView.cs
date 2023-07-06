@@ -15,6 +15,12 @@ namespace База_артикулов.Модели
     public partial class PerforationsView
     {
         public int ID { get; set; }
-        public string Дескриптор { get; set; }
+        public string Наименование_перфорации { get; set; }
+        public string Сокращенное_наименование_перфорации { get; set; }
+        public string Описание_перфорации { get; set; }
+        public int ID_единицы_измерения { get; set; }
+        public string Наименование_единицы_измерения { get; set; }
+        public int ID_типа_измерения { get; set; }
+        public string Наименование_типа_единицы_измерения { get; set; }
     }
 }

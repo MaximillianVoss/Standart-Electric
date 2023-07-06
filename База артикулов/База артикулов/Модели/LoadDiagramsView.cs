@@ -14,12 +14,12 @@ namespace База_артикулов.Модели
     
     public partial class LoadDiagramsView
     {
-        public int ID { get; set; }
+        public int ID_схемы_нагрузок { get; set; }
         public int ID_дескриптора { get; set; }
-        public string Наименование { get; set; }
-        public string Сокращенное_Наименование { get; set; }
-        public string Отображаемое_название { get; set; }
-        public string Код { get; set; }
-        public string Описание { get; set; }
+        public string Наименование_схемы_нагрузок { get; set; }
+        public string Сокращенное_наименование_схемы_нагрузок { get; set; }
+        public string Отображаемое_название_схемы_нагрузок { get; set; }
+        public string Код_схемы_нагрузок { get; set; }
+        public string Описание_схемы_нагрузок { get; set; }
     }
 }
