@@ -403,6 +403,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ProductsModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="БД\Standart-Electric.ssmssln" />
+    <None Include="БД\Standart-Electric.ssmssqlproj" />
+    <None Include="БД\Хлам\Для Chat GPT.ini" />
     <None Include="Модели\ProductsModel.edmx.diagram">
       <DependentUpon>ProductsModel.edmx</DependentUpon>
     </None>
@@ -415,6 +418,32 @@
     <Resource Include="Изображения\1257.png" />
     <Resource Include="Иконки\logo.ico" />
     <Resource Include="logo.ico" />
+    <Content Include="БД\--#region Представление ApplicationsView.sql" />
+    <Content Include="БД\--#region Пример выборки для представлен.sql" />
+    <Resource Include="БД\DB_Standart-Electric.xml" />
+    <Content Include="БД\БД.Заполнение.sql" />
+    <Content Include="БД\БД.Очистка.sql" />
+    <Content Include="БД\БД.Развертывание.sql" />
+    <Content Include="БД\Представление ProductsViewDisp.sql" />
+    <Content Include="БД\Представления.Проверка.sql" />
+    <Content Include="БД\Представления.Создание.sql" />
+    <Content Include="БД\Процедуры.Создание.sql" />
+    <Content Include="БД\Таблицы.Заполнение.sql" />
+    <Content Include="БД\Таблицы.Создание.sql" />
+    <Content Include="БД\Тестовый вызов файла.sql" />
+    <Content Include="БД\Триггеры.Создание.sql" />
+    <Content Include="БД\Хлам\-- Вставка данных в таблицу Descriptors.sql" />
+    <Content Include="БД\Хлам\БД.Данные экспорт.sql" />
+    <Content Include="БД\Хлам\БД.Создание.sql" />
+    <Content Include="БД\Хлам\БД.Создать таблицы,представления,функции.sql" />
+    <Content Include="БД\Хлам\БД.Таблицы.sql" />
+    <Content Include="БД\Хлам\Напиши скрипт, который вставит в таблицы.sql" />
+    <Content Include="БД\Хлам\Представления.Создание.Старая версия.sql" />
+    <Content Include="БД\Хлам\Представления.Тестирование.sql" />
+    <Content Include="БД\Хлам\Проверка таблиц.sql" />
+    <Content Include="БД\Хлам\Проверка триггеров.sql" />
+    <Content Include="БД\Хлам\Тестовый вызов файла.sql" />
+    <Content Include="БД\Шаблоны\Шаблон представления.sql" />
     <Content Include="Модели\ProductsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ProductsModel.Context.cs</LastGenOutput>

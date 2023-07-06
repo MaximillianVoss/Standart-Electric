@@ -8,6 +8,59 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/--%23region%20%d0%9f%d1%80%d0%b5%d0%b4%d1%81%d1%82%d0%b0%d0%b2%d0%bb" +
+    "%d0%b5%d0%bd%d0%b8%d0%b5%20applicationsview.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/--%23region%20%d0%9f%d1%80%d0%b8%d0%bc%d0%b5%d1%80%20%d0%b2%d1%8b%d0" +
+    "%b1%d0%be%d1%80%d0%ba%d0%b8%20%d0%b4%d0%bb%d1%8f%20%d0%bf%d1%80%d0%b5%d0%b4%d1%8" +
+    "1%d1%82%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%91%d0%94.%d0%97%d0%b0%d0%bf%d0%be%d0%bb%d0%bd%d0%b5%d0%bd%d0%b8%" +
+    "d0%b5.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%91%d0%94.%d0%9e%d1%87%d0%b8%d1%81%d1%82%d0%ba%d0%b0.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%91%d0%94.%d0%a0%d0%b0%d0%b7%d0%b2%d0%b5%d1%80%d1%82%d1%8b%d0%b2%" +
+    "d0%b0%d0%bd%d0%b8%d0%b5.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%9f%d1%80%d0%b5%d0%b4%d1%81%d1%82%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d" +
+    "0%b8%d0%b5%20productsviewdisp.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%9f%d1%80%d0%b5%d0%b4%d1%81%d1%82%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d" +
+    "0%b8%d1%8f.%d0%9f%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%9f%d1%80%d0%b5%d0%b4%d1%81%d1%82%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d" +
+    "0%b8%d1%8f.%d0%a1%d0%be%d0%b7%d0%b4%d0%b0%d0%bd%d0%b8%d0%b5.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%9f%d1%80%d0%be%d1%86%d0%b5%d0%b4%d1%83%d1%80%d1%8b.%d0%a1%d0%be%" +
+    "d0%b7%d0%b4%d0%b0%d0%bd%d0%b8%d0%b5.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a2%d0%b0%d0%b1%d0%bb%d0%b8%d1%86%d1%8b.%d0%97%d0%b0%d0%bf%d0%be%" +
+    "d0%bb%d0%bd%d0%b5%d0%bd%d0%b8%d0%b5.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a2%d0%b0%d0%b1%d0%bb%d0%b8%d1%86%d1%8b.%d0%a1%d0%be%d0%b7%d0%b4%" +
+    "d0%b0%d0%bd%d0%b8%d0%b5.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a2%d0%b5%d1%81%d1%82%d0%be%d0%b2%d1%8b%d0%b9%20%d0%b2%d1%8b%d0%b" +
+    "7%d0%be%d0%b2%20%d1%84%d0%b0%d0%b9%d0%bb%d0%b0.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a2%d1%80%d0%b8%d0%b3%d0%b3%d0%b5%d1%80%d1%8b.%d0%a1%d0%be%d0%b7%" +
+    "d0%b4%d0%b0%d0%bd%d0%b8%d0%b5.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a5%d0%bb%d0%b0%d0%bc/--%20%d0%92%d1%81%d1%82%d0%b0%d0%b2%d0%ba%d" +
+    "0%b0%20%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85%20%d0%b2%20%d1%82%d0%b0%d0%b1%d0%bb%" +
+    "d0%b8%d1%86%d1%83%20descriptors.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a5%d0%bb%d0%b0%d0%bc/%d0%91%d0%94.%d0%94%d0%b0%d0%bd%d0%bd%d1%8b" +
+    "%d0%b5%20%d1%8d%d0%ba%d1%81%d0%bf%d0%be%d1%80%d1%82.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a5%d0%bb%d0%b0%d0%bc/%d0%91%d0%94.%d0%a1%d0%be%d0%b7%d0%b4%d0%b0" +
+    "%d0%bd%d0%b8%d0%b5.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute(@"%d0%91%d0%94/%d0%a5%d0%bb%d0%b0%d0%bc/%d0%91%d0%94.%d0%a1%d0%be%d0%b7%d0%b4%d0%b0%d1%82%d1%8c%20%d1%82%d0%b0%d0%b1%d0%bb%d0%b8%d1%86%d1%8b,%d0%bf%d1%80%d0%b5%d0%b4%d1%81%d1%82%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8f,%d1%84%d1%83%d0%bd%d0%ba%d1%86%d0%b8%d0%b8.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a5%d0%bb%d0%b0%d0%bc/%d0%91%d0%94.%d0%a2%d0%b0%d0%b1%d0%bb%d0%b8" +
+    "%d1%86%d1%8b.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute(@"%d0%91%d0%94/%d0%a5%d0%bb%d0%b0%d0%bc/%d0%9d%d0%b0%d0%bf%d0%b8%d1%88%d0%b8%20%d1%81%d0%ba%d1%80%d0%b8%d0%bf%d1%82,%20%d0%ba%d0%be%d1%82%d0%be%d1%80%d1%8b%d0%b9%20%d0%b2%d1%81%d1%82%d0%b0%d0%b2%d0%b8%d1%82%20%d0%b2%20%d1%82%d0%b0%d0%b1%d0%bb%d0%b8%d1%86%d1%8b.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a5%d0%bb%d0%b0%d0%bc/%d0%9f%d1%80%d0%b5%d0%b4%d1%81%d1%82%d0%b0%" +
+    "d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8f.%d0%a1%d0%be%d0%b7%d0%b4%d0%b0%d0%bd%d0%b8%d" +
+    "0%b5.%d0%a1%d1%82%d0%b0%d1%80%d0%b0%d1%8f%20%d0%b2%d0%b5%d1%80%d1%81%d0%b8%d1%8f" +
+    ".sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a5%d0%bb%d0%b0%d0%bc/%d0%9f%d1%80%d0%b5%d0%b4%d1%81%d1%82%d0%b0%" +
+    "d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8f.%d0%a2%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d" +
+    "0%b2%d0%b0%d0%bd%d0%b8%d0%b5.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a5%d0%bb%d0%b0%d0%bc/%d0%9f%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%" +
+    "d0%b0%20%d1%82%d0%b0%d0%b1%d0%bb%d0%b8%d1%86.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a5%d0%bb%d0%b0%d0%bc/%d0%9f%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%" +
+    "d0%b0%20%d1%82%d1%80%d0%b8%d0%b3%d0%b3%d0%b5%d1%80%d0%be%d0%b2.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a5%d0%bb%d0%b0%d0%bc/%d0%a2%d0%b5%d1%81%d1%82%d0%be%d0%b2%d1%8b%" +
+    "d0%b9%20%d0%b2%d1%8b%d0%b7%d0%be%d0%b2%20%d1%84%d0%b0%d0%b9%d0%bb%d0%b0.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%91%d0%94/%d0%a8%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d1%8b/%d0%a8%d0%b0%d0%b1%d0%bb%" +
+    "d0%be%d0%bd%20%d0%bf%d1%80%d0%b5%d0%b4%d1%81%d1%82%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd" +
+    "%d0%b8%d1%8f.sql")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%9c%d0%be%d0%b4%d0%b5%d0%bb%d0%b8/productsmodel.context.tt")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%9c%d0%be%d0%b4%d0%b5%d0%bb%d0%b8/productsmodel.tt")]
 
