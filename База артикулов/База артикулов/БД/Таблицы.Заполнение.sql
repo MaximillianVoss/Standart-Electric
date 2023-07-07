@@ -447,6 +447,7 @@ VALUES
         WHERE titleShort = 'UnitsTypesView'));
 
 -- Обновление типа представлений
+-- Установка технических представлений
 UPDATE Views
 SET idType = (
     SELECT
@@ -454,9 +455,46 @@ SET idType = (
     id
 FROM
     ViewTypesView
-WHERE [Наименование] = 'Пользовательский'
+WHERE [Наименование] = 'Технический'
 );
 
+-- Установка пользовательских представлений
+UPDATE Views
+SET idType = ( SELECT
+    TOP 1
+    id
+FROM
+    ViewTypesView
+WHERE [Наименование] = 'Пользовательский'
+)
+WHERE id IN
+(
+SELECT
+    [ID]
+FROM
+    ViewsView
+WHERE [Наименование представления] IN
+(
+    
+'NormsView',
+    'UnitsView',
+    'UnitsTypesView',
+    'MaterialsView',
+    'ManufacturersView',
+    'ResourceTypesView',
+    'CoversView',
+    'PerforationsView',
+    'PackagesView',
+    'LoadDiagramsView',
+    'ProductsView'
+)
+);
+
+
+SELECT
+    *
+FROM
+    Views;
 
 SELECT
     *

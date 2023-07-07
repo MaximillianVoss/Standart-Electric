@@ -14,7 +14,7 @@ namespace База_артикулов.Модели
     
     public partial class PackagesView
     {
-        public int ID { get; set; }
+        public int ID_упаковки { get; set; }
         public string Наименование_упаковки { get; set; }
         public string Сокращенное_наименование_упаковки { get; set; }
         public string Описание_упаковки { get; set; }

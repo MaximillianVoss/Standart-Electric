@@ -1,4 +1,5 @@
-﻿using База_артикулов.Формы.Страницы;
+﻿using System.Windows;
+using База_артикулов.Формы.Страницы;
 
 namespace База_артикулов.Формы
 {
@@ -10,6 +11,10 @@ namespace База_артикулов.Формы
         public MainWindow()
         {
             this.InitializeComponent();
+            #region Set window size to 3/4 of the screen size
+            this.Width = SystemParameters.PrimaryScreenWidth * 0.75;
+            this.Height = SystemParameters.PrimaryScreenHeight * 0.75;
+            #endregion
             this.fTables.Content = new PageTables();
             this.fImport.Content = new PageImport();
         }

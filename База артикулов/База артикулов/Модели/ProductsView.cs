@@ -35,5 +35,13 @@ namespace База_артикулов.Модели
         public string Название_стандарта { get; set; }
         public string Обозначение_покрытия { get; set; }
         public Nullable<int> Толщина_покрытия { get; set; }
+        public string Наименование_материала { get; set; }
+        public string Код_стандарта_материала { get; set; }
+        public string Код_стандарта_сырья { get; set; }
+        public string Наименование_документа { get; set; }
+        public string Номер_документа { get; set; }
+        public string Описание { get; set; }
+        public bool В_наличии_на_заказ { get; set; }
+        public Nullable<double> Размер_перфорации { get; set; }
     }
 }

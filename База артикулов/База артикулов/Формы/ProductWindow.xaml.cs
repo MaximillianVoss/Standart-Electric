@@ -239,7 +239,7 @@ namespace База_артикулов.Формы
             #endregion
             #region Таблица измерений
             this.dgDimensions.ItemsSource = null;
-            this.dgDimensions.ItemsSource = this.ToList(this.DB.AllProductUnitsInfoView.Where(x => x.idProduct == product.id).ToList());
+            //this.dgDimensions.ItemsSource = this.ToList(this.DB.AllProductUnitsInfoView.Where(x => x.idProduct == product.id).ToList());
             #endregion
         }
 

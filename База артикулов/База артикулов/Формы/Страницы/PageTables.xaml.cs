@@ -14,6 +14,18 @@ using База_артикулов.Модели;
 
 namespace База_артикулов.Формы.Страницы
 {
+    public class TableData
+    {
+        public List<string> ColumnNames { get; set; }
+        public IEnumerable Rows { get; set; }
+
+        public List<string> GetCorrectColumnNames()
+        {
+            if (this.ColumnNames == null)
+                return null;
+            return this.ColumnNames.Select(x => x.Replace('_', ' ')).ToList();
+        }
+    }
     /// <summary>
     /// Логика взаимодействия для PageTables.xaml
     /// </summary>
@@ -81,20 +93,24 @@ namespace База_артикулов.Формы.Страницы
         /// </summary>
         /// <param name="tableName"></param>
         /// <returns></returns>
-        private IEnumerable GetTable(String tableName)
+        private TableData GetTable(String tableName)
         {
             var view = this.DB.ViewsTablesView.FirstOrDefault(x => x.Отображаемое_название_таблицы == tableName);
             var tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(
                 p => p.PropertyType.Name.StartsWith("DbSet") &&
                 p.Name == view.Наименование_представления);
+
             if (tableProperty != null)
             {
                 var dbSet = tableProperty.GetValue(this.DB, null);
                 Type dbSetType = dbSet.GetType().GetGenericArguments().First();
                 var collectionWithType = typeof(ObservableCollection<>).MakeGenericType(dbSetType);
                 this.tableItems = Activator.CreateInstance(collectionWithType, dbSet);
-                return (IEnumerable)this.tableItems;
+                var columnNames = dbSetType.GetProperties().Select(p => p.Name).ToList();
+
+                return new TableData { ColumnNames = columnNames, Rows = (IEnumerable)this.tableItems };
             }
+
             return null;
         }
 
@@ -117,7 +133,7 @@ namespace База_артикулов.Формы.Страницы
 
                     using (var writer = new StreamWriter(filePath, false, Encoding.UTF8))
                     {
-                        var entities = table.OfType<object>().ToList();
+                        var entities = table.Rows.OfType<object>().ToList();
                         if (entities.Any())
                         {
                             var propertyNames = entityType.GetProperties().Select(p => p.Name);
@@ -151,7 +167,30 @@ namespace База_артикулов.Формы.Страницы
             if (this.cmbTables.SelectedIndex != -1)
             {
                 this.DbSetType = this.GetTableItemsType(selectedTableName);
-                this.dgTable.ItemsSource = this.GetTable(selectedTableName);
+                //this.dgTable.ItemsSource = this.GetTable(selectedTableName);
+                this.UpdateDataGrid(selectedTableName);
+            }
+        }
+
+        private void UpdateDataGrid(string tableName)
+        {
+            var tableData = this.GetTable(tableName);
+            // Clear previous columns
+            this.dgTable.AutoGenerateColumns = false;
+            this.dgTable.Columns.Clear();
+            // Set ItemsSource
+            this.dgTable.ItemsSource = tableData.Rows;
+
+            // Create columns based on column names
+            foreach (var columnName in tableData.ColumnNames)
+            {
+                var column = new DataGridTextColumn
+                {
+                    Header = columnName.Replace('_', ' '),
+                    Binding = new System.Windows.Data.Binding(columnName)
+                };
+
+                this.dgTable.Columns.Add(column);
             }
         }
 
@@ -160,33 +199,10 @@ namespace База_артикулов.Формы.Страницы
         /// </summary>
         private void UpdateTablesComboBox()
         {
-            //var tables = this.DB.Tables.ToList();
-            var tables = this.DB.ViewsTablesView.ToList();
+            var tables = this.DB.ViewsTablesView.OrderBy(x => x.Отображаемое_название_таблицы).Where(x => x.Тип.ToLower() == "Пользовательский".ToLower()).ToList();
             foreach (var table in tables)
-            {
                 this.cmbTables.Add(table.Отображаемое_название_таблицы);
-            }
             this.cmbTables.Select("Продукты");
-            //foreach (var table in tables)
-            //{
-            //    //this.tablesEngRusNames.Add(table.Descriptors.title, table.titleDisplay);
-            //}
-            //var properties = this.DB.GetType().GetProperties();
-            //foreach (var property in properties)
-            //{
-            //    if (property.PropertyType.Name.Contains("DbSet"))
-            //    {
-            //        var rusName = this.GetRusName(property.Name);
-            //        this.cmbTables.Add(rusName);
-            //        this.tableRusEngNames.Add(rusName, property.Name);
-            //    }
-            //}
-            //if (this.cmbTables.Items.Count > 0)
-            //{
-            //    this.cmbTables.SelectedIndex = 0;
-            //}
-            //this.cmbTables.Select("Продукты");
-
         }
         #endregion
 
@@ -200,7 +216,7 @@ namespace База_артикулов.Формы.Страницы
         {
             if (this.cmbTables.SelectedIndex != -1)
             {
-                IEnumerable table = this.GetTable(this.cmbTables.SelectedItem);
+                IEnumerable table = this.GetTable(this.cmbTables.SelectedItem).Rows;
                 if (tableType == typeof(Products))
                 {
                     List<Products> products = (List<Products>)this.ToList(table, tableType);
@@ -303,8 +319,6 @@ namespace База_артикулов.Формы.Страницы
             try
             {
                 this.UpdateTreeView();
-                //ProductWindow productWindow = new ProductWindow(typeof(Products), this.db.Products.First().id);
-                //productWindow.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -333,7 +347,7 @@ namespace База_артикулов.Формы.Страницы
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message);
+                this.ShowError(ex);
             }
         }
         private void dgTable_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)

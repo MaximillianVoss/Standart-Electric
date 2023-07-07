@@ -99,12 +99,6 @@
     <Compile Include="Классы\Дополнения\UnitsTypes.cs" />
     <Compile Include="Классы\Дополнения\vAllProductUnitsInfo.cs" />
     <Compile Include="Классы\Дополнения\VendorCodes.cs" />
-    <Compile Include="Модели\AllProductsInfoView.cs">
-      <DependentUpon>ProductsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Модели\AllProductUnitsInfoView.cs">
-      <DependentUpon>ProductsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Модели\Applications.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
@@ -135,10 +129,10 @@
     <Compile Include="Модели\DescriptorsResources.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Модели\DescriptorsView.cs">
+    <Compile Include="Модели\DescriptorsResourcesView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Модели\DescriptorsViewDisplay.cs">
+    <Compile Include="Модели\DescriptorsView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\Fields.cs">
@@ -213,13 +207,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductsModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Модели\ProductsVendorCodesView.cs">
-      <DependentUpon>ProductsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Модели\ProductsView.cs">
-      <DependentUpon>ProductsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Модели\ResourcesView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\ResourceTypes.cs">
@@ -232,9 +220,6 @@
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\TablesView.cs">
-      <DependentUpon>ProductsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Модели\TablesViewsView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\UnitsTypesView.cs">

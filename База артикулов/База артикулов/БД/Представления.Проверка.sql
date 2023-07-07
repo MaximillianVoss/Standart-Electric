@@ -8,6 +8,38 @@ FROM
     DescriptorsView;
 --#endregion
 
+--#region Проверка представлений и их типов
+
+--#region Пример выборки для представления TablesView
+SELECT
+    *
+FROM
+    TablesView;
+--#endregion
+
+--#region Пример выборки для представления ViewTypesView
+SELECT
+    *
+FROM
+    ViewTypesView;
+--#endregion
+
+--#region Пример выборки для представления ViewsView
+SELECT
+    *
+FROM
+    ViewsView;
+--#endregion
+
+--#region Пример выборки для представления ViewsTablesView
+SELECT
+    *
+FROM
+    ViewsTablesView;
+--#endregion
+
+--#endregion
+
 --#region Пример выборки для представления DescriptorsResourcesView
 SELECT
     *

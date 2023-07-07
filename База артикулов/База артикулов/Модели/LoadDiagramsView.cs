@@ -15,7 +15,7 @@ namespace База_артикулов.Модели
     public partial class LoadDiagramsView
     {
         public int ID_схемы_нагрузок { get; set; }
-        public int ID_дескриптора { get; set; }
+        public int ID_дескриптора_схемы_нагрузок { get; set; }
         public string Наименование_схемы_нагрузок { get; set; }
         public string Сокращенное_наименование_схемы_нагрузок { get; set; }
         public string Отображаемое_название_схемы_нагрузок { get; set; }

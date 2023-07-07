@@ -35,14 +35,12 @@
     <EntitySet Name="Views" EntityType="DBSEModel.Views" />
     <EntitySet Name="ViewsTables" EntityType="DBSEModel.ViewsTables" />
     <EntitySet Name="ViewTypes" EntityType="DBSEModel.ViewTypes" />
-    <EntitySet Name="AllProductsInfoView" EntityType="DBSEModel.AllProductsInfoView" />
-    <EntitySet Name="AllProductUnitsInfoView" EntityType="DBSEModel.AllProductUnitsInfoView" />
     <EntitySet Name="ApplicationsView" EntityType="DBSEModel.ApplicationsView" />
     <EntitySet Name="BuisnessUnitsView" EntityType="DBSEModel.BuisnessUnitsView" />
     <EntitySet Name="ClassesView" EntityType="DBSEModel.ClassesView" />
     <EntitySet Name="CoversView" EntityType="DBSEModel.CoversView" />
+    <EntitySet Name="DescriptorsResourcesView" EntityType="DBSEModel.DescriptorsResourcesView" />
     <EntitySet Name="DescriptorsView" EntityType="DBSEModel.DescriptorsView" />
-    <EntitySet Name="DescriptorsViewDisplay" EntityType="DBSEModel.DescriptorsViewDisplay" />
     <EntitySet Name="GroupsApplicationsView" EntityType="DBSEModel.GroupsApplicationsView" />
     <EntitySet Name="GroupsView" EntityType="DBSEModel.GroupsView" />
     <EntitySet Name="LoadDiagramsView" EntityType="DBSEModel.LoadDiagramsView" />
@@ -51,244 +49,241 @@
     <EntitySet Name="NormsView" EntityType="DBSEModel.NormsView" />
     <EntitySet Name="PackagesView" EntityType="DBSEModel.PackagesView" />
     <EntitySet Name="PerforationsView" EntityType="DBSEModel.PerforationsView" />
-    <EntitySet Name="ProductsVendorCodesView" EntityType="DBSEModel.ProductsVendorCodesView" />
     <EntitySet Name="ProductsView" EntityType="DBSEModel.ProductsView" />
-    <EntitySet Name="ResourcesView" EntityType="DBSEModel.ResourcesView" />
     <EntitySet Name="ResourceTypesView" EntityType="DBSEModel.ResourceTypesView" />
     <EntitySet Name="SubGroupsView" EntityType="DBSEModel.SubGroupsView" />
     <EntitySet Name="TablesView" EntityType="DBSEModel.TablesView" />
-    <EntitySet Name="TablesViewsView" EntityType="DBSEModel.TablesViewsView" />
     <EntitySet Name="UnitsTypesView" EntityType="DBSEModel.UnitsTypesView" />
     <EntitySet Name="UnitsView" EntityType="DBSEModel.UnitsView" />
     <EntitySet Name="VendorCodesView" EntityType="DBSEModel.VendorCodesView" />
     <EntitySet Name="ViewsTablesView" EntityType="DBSEModel.ViewsTablesView" />
     <EntitySet Name="ViewsView" EntityType="DBSEModel.ViewsView" />
     <EntitySet Name="ViewTypesView" EntityType="DBSEModel.ViewTypesView" />
-    <AssociationSet Name="FK__Applicati__idBui__66A4253A" Association="DBSEModel.FK__Applicati__idBui__66A4253A">
+    <AssociationSet Name="FK__Applicati__idBui__6506C0E2" Association="DBSEModel.FK__Applicati__idBui__6506C0E2">
       <End Role="BuisnessUnits" EntitySet="BuisnessUnits" />
       <End Role="Applications" EntitySet="Applications" />
     </AssociationSet>
-    <AssociationSet Name="FK__Applicati__idDes__65B00101" Association="DBSEModel.FK__Applicati__idDes__65B00101">
+    <AssociationSet Name="FK__Applicati__idDes__64129CA9" Association="DBSEModel.FK__Applicati__idDes__64129CA9">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Applications" EntitySet="Applications" />
     </AssociationSet>
-    <AssociationSet Name="FK__GroupsApp__idApp__6D5122C9" Association="DBSEModel.FK__GroupsApp__idApp__6D5122C9">
+    <AssociationSet Name="FK__GroupsApp__idApp__6BB3BE71" Association="DBSEModel.FK__GroupsApp__idApp__6BB3BE71">
       <End Role="Applications" EntitySet="Applications" />
       <End Role="GroupsApplications" EntitySet="GroupsApplications" />
     </AssociationSet>
-    <AssociationSet Name="FK__BuisnessU__idBim__61DF701D" Association="DBSEModel.FK__BuisnessU__idBim__61DF701D">
+    <AssociationSet Name="FK__BuisnessU__idBim__60420BC5" Association="DBSEModel.FK__BuisnessU__idBim__60420BC5">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="BuisnessUnits" EntitySet="BuisnessUnits" />
     </AssociationSet>
-    <AssociationSet Name="FK__BuisnessU__idDes__60EB4BE4" Association="DBSEModel.FK__BuisnessU__idDes__60EB4BE4">
+    <AssociationSet Name="FK__BuisnessU__idDes__5F4DE78C" Association="DBSEModel.FK__BuisnessU__idDes__5F4DE78C">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="BuisnessUnits" EntitySet="BuisnessUnits" />
     </AssociationSet>
-    <AssociationSet Name="FK__BuisnessU__idDra__62D39456" Association="DBSEModel.FK__BuisnessU__idDra__62D39456">
+    <AssociationSet Name="FK__BuisnessU__idDra__61362FFE" Association="DBSEModel.FK__BuisnessU__idDra__61362FFE">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="BuisnessUnits" EntitySet="BuisnessUnits" />
     </AssociationSet>
-    <AssociationSet Name="FK__BuisnessU__idTyp__63C7B88F" Association="DBSEModel.FK__BuisnessU__idTyp__63C7B88F">
+    <AssociationSet Name="FK__BuisnessU__idTyp__622A5437" Association="DBSEModel.FK__BuisnessU__idTyp__622A5437">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="BuisnessUnits" EntitySet="BuisnessUnits" />
     </AssociationSet>
-    <AssociationSet Name="FK__Classes__idDescr__64BBDCC8" Association="DBSEModel.FK__Classes__idDescr__64BBDCC8">
+    <AssociationSet Name="FK__Classes__idDescr__631E7870" Association="DBSEModel.FK__Classes__idDescr__631E7870">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Classes" EntitySet="Classes" />
     </AssociationSet>
-    <AssociationSet Name="FK__Groups__idClass__5FF727AB" Association="DBSEModel.FK__Groups__idClass__5FF727AB">
+    <AssociationSet Name="FK__Groups__idClass__5E59C353" Association="DBSEModel.FK__Groups__idClass__5E59C353">
       <End Role="Classes" EntitySet="Classes" />
       <End Role="Groups" EntitySet="Groups" />
     </AssociationSet>
-    <AssociationSet Name="FK__Covers__idDescri__6F396B3B" Association="DBSEModel.FK__Covers__idDescri__6F396B3B">
+    <AssociationSet Name="FK__Covers__idDescri__6D9C06E3" Association="DBSEModel.FK__Covers__idDescri__6D9C06E3">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Covers" EntitySet="Covers" />
     </AssociationSet>
-    <AssociationSet Name="FK__Covers__idNorm__702D8F74" Association="DBSEModel.FK__Covers__idNorm__702D8F74">
+    <AssociationSet Name="FK__Covers__idNorm__6E902B1C" Association="DBSEModel.FK__Covers__idNorm__6E902B1C">
       <End Role="Norms" EntitySet="Norms" />
       <End Role="Covers" EntitySet="Covers" />
     </AssociationSet>
-    <AssociationSet Name="FK__Products__idCove__73FE2058" Association="DBSEModel.FK__Products__idCove__73FE2058">
+    <AssociationSet Name="FK__Products__idCove__7260BC00" Association="DBSEModel.FK__Products__idCove__7260BC00">
       <End Role="Covers" EntitySet="Covers" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__Descripto__idDes__0AE185B0" Association="DBSEModel.FK__Descripto__idDes__0AE185B0">
+    <AssociationSet Name="FK__Descripto__idDes__09442158" Association="DBSEModel.FK__Descripto__idDes__09442158">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="DescriptorsResources" EntitySet="DescriptorsResources" />
     </AssociationSet>
-    <AssociationSet Name="FK__Fields__idDescri__09ED6177" Association="DBSEModel.FK__Fields__idDescri__09ED6177">
+    <AssociationSet Name="FK__Fields__idDescri__084FFD1F" Association="DBSEModel.FK__Fields__idDescri__084FFD1F">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Fields" EntitySet="Fields" />
     </AssociationSet>
-    <AssociationSet Name="FK__Groups__idDescri__5F030372" Association="DBSEModel.FK__Groups__idDescri__5F030372">
+    <AssociationSet Name="FK__Groups__idDescri__5D659F1A" Association="DBSEModel.FK__Groups__idDescri__5D659F1A">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Groups" EntitySet="Groups" />
     </AssociationSet>
-    <AssociationSet Name="FK__LoadDiagr__idDes__6C5CFE90" Association="DBSEModel.FK__LoadDiagr__idDes__6C5CFE90">
+    <AssociationSet Name="FK__LoadDiagr__idDes__6ABF9A38" Association="DBSEModel.FK__LoadDiagr__idDes__6ABF9A38">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="LoadDiagrams" EntitySet="LoadDiagrams" />
     </AssociationSet>
-    <AssociationSet Name="FK__Manufactu__idDes__08051905" Association="DBSEModel.FK__Manufactu__idDes__08051905">
+    <AssociationSet Name="FK__Manufactu__idDes__0667B4AD" Association="DBSEModel.FK__Manufactu__idDes__0667B4AD">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Manufacturers" EntitySet="Manufacturers" />
     </AssociationSet>
-    <AssociationSet Name="FK__Materials__idDes__698091E5" Association="DBSEModel.FK__Materials__idDes__698091E5">
+    <AssociationSet Name="FK__Materials__idDes__67E32D8D" Association="DBSEModel.FK__Materials__idDes__67E32D8D">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Materials" EntitySet="Materials" />
     </AssociationSet>
-    <AssociationSet Name="FK__Norms__idDescrip__688C6DAC" Association="DBSEModel.FK__Norms__idDescrip__688C6DAC">
+    <AssociationSet Name="FK__Norms__idDescrip__66EF0954" Association="DBSEModel.FK__Norms__idDescrip__66EF0954">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Norms" EntitySet="Norms" />
     </AssociationSet>
-    <AssociationSet Name="FK__Packages__idDesc__01581B76" Association="DBSEModel.FK__Packages__idDesc__01581B76">
+    <AssociationSet Name="FK__Packages__idDesc__7FBAB71E" Association="DBSEModel.FK__Packages__idDesc__7FBAB71E">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Packages" EntitySet="Packages" />
     </AssociationSet>
-    <AssociationSet Name="FK__Perforati__idDes__67984973" Association="DBSEModel.FK__Perforati__idDes__67984973">
+    <AssociationSet Name="FK__Perforati__idDes__65FAE51B" Association="DBSEModel.FK__Perforati__idDes__65FAE51B">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Perforations" EntitySet="Perforations" />
     </AssociationSet>
-    <AssociationSet Name="FK__Products__idDesc__7121B3AD" Association="DBSEModel.FK__Products__idDesc__7121B3AD">
+    <AssociationSet Name="FK__Products__idDesc__6F844F55" Association="DBSEModel.FK__Products__idDesc__6F844F55">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__SubGroups__idDes__5C2696C7" Association="DBSEModel.FK__SubGroups__idDes__5C2696C7">
+    <AssociationSet Name="FK__SubGroups__idDes__5A89326F" Association="DBSEModel.FK__SubGroups__idDes__5A89326F">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="SubGroups" EntitySet="SubGroups" />
     </AssociationSet>
-    <AssociationSet Name="FK__Tables__idDescri__08F93D3E" Association="DBSEModel.FK__Tables__idDescri__08F93D3E">
+    <AssociationSet Name="FK__Tables__idDescri__075BD8E6" Association="DBSEModel.FK__Tables__idDescri__075BD8E6">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Tables" EntitySet="Tables" />
     </AssociationSet>
-    <AssociationSet Name="FK__Units__idDescrip__77CEB13C" Association="DBSEModel.FK__Units__idDescrip__77CEB13C">
+    <AssociationSet Name="FK__Units__idDescrip__76314CE4" Association="DBSEModel.FK__Units__idDescrip__76314CE4">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Units" EntitySet="Units" />
     </AssociationSet>
-    <AssociationSet Name="FK__VendorCod__idDes__7B9F4220" Association="DBSEModel.FK__VendorCod__idDes__7B9F4220">
+    <AssociationSet Name="FK__VendorCod__idDes__7A01DDC8" Association="DBSEModel.FK__VendorCod__idDes__7A01DDC8">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="VendorCodes" EntitySet="VendorCodes" />
     </AssociationSet>
-    <AssociationSet Name="FK__Views__idDescrip__109A5F06" Association="DBSEModel.FK__Views__idDescrip__109A5F06">
+    <AssociationSet Name="FK__Views__idDescrip__0EFCFAAE" Association="DBSEModel.FK__Views__idDescrip__0EFCFAAE">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="Views" EntitySet="Views" />
     </AssociationSet>
-    <AssociationSet Name="FK__ViewTypes__idDes__0FA63ACD" Association="DBSEModel.FK__ViewTypes__idDes__0FA63ACD">
+    <AssociationSet Name="FK__ViewTypes__idDes__0E08D675" Association="DBSEModel.FK__ViewTypes__idDes__0E08D675">
       <End Role="Descriptors" EntitySet="Descriptors" />
       <End Role="ViewTypes" EntitySet="ViewTypes" />
     </AssociationSet>
-    <AssociationSet Name="FK__Descripto__idRes__0BD5A9E9" Association="DBSEModel.FK__Descripto__idRes__0BD5A9E9">
+    <AssociationSet Name="FK__Descripto__idRes__0A384591" Association="DBSEModel.FK__Descripto__idRes__0A384591">
       <End Role="Resources" EntitySet="Resources" />
       <End Role="DescriptorsResources" EntitySet="DescriptorsResources" />
     </AssociationSet>
-    <AssociationSet Name="FK__Descripto__idRes__0CC9CE22" Association="DBSEModel.FK__Descripto__idRes__0CC9CE22">
+    <AssociationSet Name="FK__Descripto__idRes__0B2C69CA" Association="DBSEModel.FK__Descripto__idRes__0B2C69CA">
       <End Role="ResourceTypes" EntitySet="ResourceTypes" />
       <End Role="DescriptorsResources" EntitySet="DescriptorsResources" />
     </AssociationSet>
-    <AssociationSet Name="FK__SubGroups__idGro__5D1ABB00" Association="DBSEModel.FK__SubGroups__idGro__5D1ABB00">
+    <AssociationSet Name="FK__SubGroups__idGro__5B7D56A8" Association="DBSEModel.FK__SubGroups__idGro__5B7D56A8">
       <End Role="Groups" EntitySet="Groups" />
       <End Role="SubGroups" EntitySet="SubGroups" />
     </AssociationSet>
-    <AssociationSet Name="FK__GroupsApp__idSub__6E454702" Association="DBSEModel.FK__GroupsApp__idSub__6E454702">
+    <AssociationSet Name="FK__GroupsApp__idSub__6CA7E2AA" Association="DBSEModel.FK__GroupsApp__idSub__6CA7E2AA">
       <End Role="SubGroups" EntitySet="SubGroups" />
       <End Role="GroupsApplications" EntitySet="GroupsApplications" />
     </AssociationSet>
-    <AssociationSet Name="FK__SubGroups__idLoa__5E0EDF39" Association="DBSEModel.FK__SubGroups__idLoa__5E0EDF39">
+    <AssociationSet Name="FK__SubGroups__idLoa__5C717AE1" Association="DBSEModel.FK__SubGroups__idLoa__5C717AE1">
       <End Role="LoadDiagrams" EntitySet="LoadDiagrams" />
       <End Role="SubGroups" EntitySet="SubGroups" />
     </AssociationSet>
-    <AssociationSet Name="FK__VendorCod__idMan__7AAB1DE7" Association="DBSEModel.FK__VendorCod__idMan__7AAB1DE7">
+    <AssociationSet Name="FK__VendorCod__idMan__790DB98F" Association="DBSEModel.FK__VendorCod__idMan__790DB98F">
       <End Role="Manufacturers" EntitySet="Manufacturers" />
       <End Role="VendorCodes" EntitySet="VendorCodes" />
     </AssociationSet>
-    <AssociationSet Name="FK__Materials__idMat__6A74B61E" Association="DBSEModel.FK__Materials__idMat__6A74B61E">
+    <AssociationSet Name="FK__Materials__idMat__68D751C6" Association="DBSEModel.FK__Materials__idMat__68D751C6">
       <End Role="Norms" EntitySet="Norms" />
       <End Role="Materials" EntitySet="Materials" />
     </AssociationSet>
-    <AssociationSet Name="FK__Materials__idPre__6B68DA57" Association="DBSEModel.FK__Materials__idPre__6B68DA57">
+    <AssociationSet Name="FK__Materials__idPre__69CB75FF" Association="DBSEModel.FK__Materials__idPre__69CB75FF">
       <End Role="Norms" EntitySet="Norms" />
       <End Role="Materials" EntitySet="Materials" />
     </AssociationSet>
-    <AssociationSet Name="FK__Products__idMate__74F24491" Association="DBSEModel.FK__Products__idMate__74F24491">
+    <AssociationSet Name="FK__Products__idMate__7354E039" Association="DBSEModel.FK__Products__idMate__7354E039">
       <End Role="Materials" EntitySet="Materials" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__Products__idNorm__7215D7E6" Association="DBSEModel.FK__Products__idNorm__7215D7E6">
+    <AssociationSet Name="FK__Products__idNorm__7078738E" Association="DBSEModel.FK__Products__idNorm__7078738E">
       <End Role="Norms" EntitySet="Norms" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__Products__idPack__76DA8D03" Association="DBSEModel.FK__Products__idPack__76DA8D03">
+    <AssociationSet Name="FK__Products__idPack__753D28AB" Association="DBSEModel.FK__Products__idPack__753D28AB">
       <End Role="Packages" EntitySet="Packages" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__UnitsPaka__idPac__0528AC5A" Association="DBSEModel.FK__UnitsPaka__idPac__0528AC5A">
+    <AssociationSet Name="FK__UnitsPaka__idPac__038B4802" Association="DBSEModel.FK__UnitsPaka__idPac__038B4802">
       <End Role="Packages" EntitySet="Packages" />
       <End Role="UnitsPakages" EntitySet="UnitsPakages" />
     </AssociationSet>
-    <AssociationSet Name="FK__Products__idPerf__75E668CA" Association="DBSEModel.FK__Products__idPerf__75E668CA">
+    <AssociationSet Name="FK__Products__idPerf__74490472" Association="DBSEModel.FK__Products__idPerf__74490472">
       <End Role="Perforations" EntitySet="Perforations" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__UnitsPerf__idPer__024C3FAF" Association="DBSEModel.FK__UnitsPerf__idPer__024C3FAF">
+    <AssociationSet Name="FK__UnitsPerf__idPer__00AEDB57" Association="DBSEModel.FK__UnitsPerf__idPer__00AEDB57">
       <End Role="Perforations" EntitySet="Perforations" />
       <End Role="UnitsPerforations" EntitySet="UnitsPerforations" />
     </AssociationSet>
-    <AssociationSet Name="FK__Products__idSubG__7309FC1F" Association="DBSEModel.FK__Products__idSubG__7309FC1F">
+    <AssociationSet Name="FK__Products__idSubG__716C97C7" Association="DBSEModel.FK__Products__idSubG__716C97C7">
       <End Role="SubGroups" EntitySet="SubGroups" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductsA__idAna__7D878A92" Association="DBSEModel.FK__ProductsA__idAna__7D878A92">
+    <AssociationSet Name="FK__ProductsA__idAna__7BEA263A" Association="DBSEModel.FK__ProductsA__idAna__7BEA263A">
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductsAnalogs" EntitySet="ProductsAnalogs" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductsA__idOri__7C936659" Association="DBSEModel.FK__ProductsA__idOri__7C936659">
+    <AssociationSet Name="FK__ProductsA__idOri__7AF60201" Association="DBSEModel.FK__ProductsA__idOri__7AF60201">
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductsAnalogs" EntitySet="ProductsAnalogs" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductsV__idPro__78C2D575" Association="DBSEModel.FK__ProductsV__idPro__78C2D575">
+    <AssociationSet Name="FK__ProductsV__idPro__7725711D" Association="DBSEModel.FK__ProductsV__idPro__7725711D">
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductsVendorCodes" EntitySet="ProductsVendorCodes" />
     </AssociationSet>
-    <AssociationSet Name="FK__UnitsProd__idPro__7E7BAECB" Association="DBSEModel.FK__UnitsProd__idPro__7E7BAECB">
+    <AssociationSet Name="FK__UnitsProd__idPro__7CDE4A73" Association="DBSEModel.FK__UnitsProd__idPro__7CDE4A73">
       <End Role="Products" EntitySet="Products" />
       <End Role="UnitsProducts" EntitySet="UnitsProducts" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductsV__idCod__79B6F9AE" Association="DBSEModel.FK__ProductsV__idCod__79B6F9AE">
+    <AssociationSet Name="FK__ProductsV__idCod__78199556" Association="DBSEModel.FK__ProductsV__idCod__78199556">
       <End Role="VendorCodes" EntitySet="VendorCodes" />
       <End Role="ProductsVendorCodes" EntitySet="ProductsVendorCodes" />
     </AssociationSet>
-    <AssociationSet Name="FK__ViewsTabl__idTab__0DBDF25B" Association="DBSEModel.FK__ViewsTabl__idTab__0DBDF25B">
+    <AssociationSet Name="FK__ViewsTabl__idTab__0C208E03" Association="DBSEModel.FK__ViewsTabl__idTab__0C208E03">
       <End Role="Tables" EntitySet="Tables" />
       <End Role="ViewsTables" EntitySet="ViewsTables" />
     </AssociationSet>
-    <AssociationSet Name="FK__UnitsPaka__idUni__061CD093" Association="DBSEModel.FK__UnitsPaka__idUni__061CD093">
+    <AssociationSet Name="FK__UnitsPaka__idUni__047F6C3B" Association="DBSEModel.FK__UnitsPaka__idUni__047F6C3B">
       <End Role="Units" EntitySet="Units" />
       <End Role="UnitsPakages" EntitySet="UnitsPakages" />
     </AssociationSet>
-    <AssociationSet Name="FK__UnitsPerf__idUni__034063E8" Association="DBSEModel.FK__UnitsPerf__idUni__034063E8">
+    <AssociationSet Name="FK__UnitsPerf__idUni__01A2FF90" Association="DBSEModel.FK__UnitsPerf__idUni__01A2FF90">
       <End Role="Units" EntitySet="Units" />
       <End Role="UnitsPerforations" EntitySet="UnitsPerforations" />
     </AssociationSet>
-    <AssociationSet Name="FK__UnitsProd__idUni__7F6FD304" Association="DBSEModel.FK__UnitsProd__idUni__7F6FD304">
+    <AssociationSet Name="FK__UnitsProd__idUni__7DD26EAC" Association="DBSEModel.FK__UnitsProd__idUni__7DD26EAC">
       <End Role="Units" EntitySet="Units" />
       <End Role="UnitsProducts" EntitySet="UnitsProducts" />
     </AssociationSet>
-    <AssociationSet Name="FK__UnitsPaka__idTyp__0710F4CC" Association="DBSEModel.FK__UnitsPaka__idTyp__0710F4CC">
+    <AssociationSet Name="FK__UnitsPaka__idTyp__05739074" Association="DBSEModel.FK__UnitsPaka__idTyp__05739074">
       <End Role="UnitsTypes" EntitySet="UnitsTypes" />
       <End Role="UnitsPakages" EntitySet="UnitsPakages" />
     </AssociationSet>
-    <AssociationSet Name="FK__UnitsPerf__idTyp__04348821" Association="DBSEModel.FK__UnitsPerf__idTyp__04348821">
+    <AssociationSet Name="FK__UnitsPerf__idTyp__029723C9" Association="DBSEModel.FK__UnitsPerf__idTyp__029723C9">
       <End Role="UnitsTypes" EntitySet="UnitsTypes" />
       <End Role="UnitsPerforations" EntitySet="UnitsPerforations" />
     </AssociationSet>
-    <AssociationSet Name="FK__UnitsProd__idTyp__0063F73D" Association="DBSEModel.FK__UnitsProd__idTyp__0063F73D">
+    <AssociationSet Name="FK__UnitsProd__idTyp__7EC692E5" Association="DBSEModel.FK__UnitsProd__idTyp__7EC692E5">
       <End Role="UnitsTypes" EntitySet="UnitsTypes" />
       <End Role="UnitsProducts" EntitySet="UnitsProducts" />
     </AssociationSet>
-    <AssociationSet Name="FK__Views__idType__118E833F" Association="DBSEModel.FK__Views__idType__118E833F">
+    <AssociationSet Name="FK__Views__idType__0FF11EE7" Association="DBSEModel.FK__Views__idType__0FF11EE7">
       <End Role="ViewTypes" EntitySet="ViewTypes" />
       <End Role="Views" EntitySet="Views" />
     </AssociationSet>
-    <AssociationSet Name="FK__ViewsTabl__idVie__0EB21694" Association="DBSEModel.FK__ViewsTabl__idVie__0EB21694">
+    <AssociationSet Name="FK__ViewsTabl__idVie__0D14B23C" Association="DBSEModel.FK__ViewsTabl__idVie__0D14B23C">
       <End Role="Views" EntitySet="Views" />
       <End Role="ViewsTables" EntitySet="ViewsTables" />
     </AssociationSet>
@@ -300,9 +295,9 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
     <Property Name="idBuisnessUnit" Type="Int32" />
-    <NavigationProperty Name="BuisnessUnits" Relationship="DBSEModel.FK__Applicati__idBui__66A4253A" FromRole="Applications" ToRole="BuisnessUnits" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Applicati__idDes__65B00101" FromRole="Applications" ToRole="Descriptors" />
-    <NavigationProperty Name="GroupsApplications" Relationship="DBSEModel.FK__GroupsApp__idApp__6D5122C9" FromRole="Applications" ToRole="GroupsApplications" />
+    <NavigationProperty Name="BuisnessUnits" Relationship="DBSEModel.FK__Applicati__idBui__6506C0E2" FromRole="Applications" ToRole="BuisnessUnits" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Applicati__idDes__64129CA9" FromRole="Applications" ToRole="Descriptors" />
+    <NavigationProperty Name="GroupsApplications" Relationship="DBSEModel.FK__GroupsApp__idApp__6BB3BE71" FromRole="Applications" ToRole="GroupsApplications" />
   </EntityType>
   <EntityType Name="BuisnessUnits">
     <Key>
@@ -313,11 +308,11 @@
     <Property Name="idBimLibraryFile" Type="Int32" />
     <Property Name="idDrawBlocksFile" Type="Int32" />
     <Property Name="idTypicalAlbum" Type="Int32" />
-    <NavigationProperty Name="Applications" Relationship="DBSEModel.FK__Applicati__idBui__66A4253A" FromRole="BuisnessUnits" ToRole="Applications" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__BuisnessU__idBim__61DF701D" FromRole="BuisnessUnits" ToRole="Descriptors" />
-    <NavigationProperty Name="Descriptors1" Relationship="DBSEModel.FK__BuisnessU__idDes__60EB4BE4" FromRole="BuisnessUnits" ToRole="Descriptors" />
-    <NavigationProperty Name="Descriptors2" Relationship="DBSEModel.FK__BuisnessU__idDra__62D39456" FromRole="BuisnessUnits" ToRole="Descriptors" />
-    <NavigationProperty Name="Descriptors3" Relationship="DBSEModel.FK__BuisnessU__idTyp__63C7B88F" FromRole="BuisnessUnits" ToRole="Descriptors" />
+    <NavigationProperty Name="Applications" Relationship="DBSEModel.FK__Applicati__idBui__6506C0E2" FromRole="BuisnessUnits" ToRole="Applications" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__BuisnessU__idBim__60420BC5" FromRole="BuisnessUnits" ToRole="Descriptors" />
+    <NavigationProperty Name="Descriptors1" Relationship="DBSEModel.FK__BuisnessU__idDes__5F4DE78C" FromRole="BuisnessUnits" ToRole="Descriptors" />
+    <NavigationProperty Name="Descriptors2" Relationship="DBSEModel.FK__BuisnessU__idDra__61362FFE" FromRole="BuisnessUnits" ToRole="Descriptors" />
+    <NavigationProperty Name="Descriptors3" Relationship="DBSEModel.FK__BuisnessU__idTyp__622A5437" FromRole="BuisnessUnits" ToRole="Descriptors" />
   </EntityType>
   <EntityType Name="Classes">
     <Key>
@@ -325,8 +320,8 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Classes__idDescr__64BBDCC8" FromRole="Classes" ToRole="Descriptors" />
-    <NavigationProperty Name="Groups" Relationship="DBSEModel.FK__Groups__idClass__5FF727AB" FromRole="Classes" ToRole="Groups" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Classes__idDescr__631E7870" FromRole="Classes" ToRole="Descriptors" />
+    <NavigationProperty Name="Groups" Relationship="DBSEModel.FK__Groups__idClass__5E59C353" FromRole="Classes" ToRole="Groups" />
   </EntityType>
   <EntityType Name="Covers">
     <Key>
@@ -336,9 +331,9 @@
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
     <Property Name="idNorm" Type="Int32" Nullable="false" />
     <Property Name="thickness" Type="Int32" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Covers__idDescri__6F396B3B" FromRole="Covers" ToRole="Descriptors" />
-    <NavigationProperty Name="Norms" Relationship="DBSEModel.FK__Covers__idNorm__702D8F74" FromRole="Covers" ToRole="Norms" />
-    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idCove__73FE2058" FromRole="Covers" ToRole="Products" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Covers__idDescri__6D9C06E3" FromRole="Covers" ToRole="Descriptors" />
+    <NavigationProperty Name="Norms" Relationship="DBSEModel.FK__Covers__idNorm__6E902B1C" FromRole="Covers" ToRole="Norms" />
+    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idCove__7260BC00" FromRole="Covers" ToRole="Products" />
   </EntityType>
   <EntityType Name="Descriptors">
     <Key>
@@ -350,29 +345,29 @@
     <Property Name="titleShort" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="titleDisplay" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="description" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Applications" Relationship="DBSEModel.FK__Applicati__idDes__65B00101" FromRole="Descriptors" ToRole="Applications" />
-    <NavigationProperty Name="BuisnessUnits" Relationship="DBSEModel.FK__BuisnessU__idBim__61DF701D" FromRole="Descriptors" ToRole="BuisnessUnits" />
-    <NavigationProperty Name="BuisnessUnits1" Relationship="DBSEModel.FK__BuisnessU__idDes__60EB4BE4" FromRole="Descriptors" ToRole="BuisnessUnits" />
-    <NavigationProperty Name="BuisnessUnits2" Relationship="DBSEModel.FK__BuisnessU__idDra__62D39456" FromRole="Descriptors" ToRole="BuisnessUnits" />
-    <NavigationProperty Name="BuisnessUnits3" Relationship="DBSEModel.FK__BuisnessU__idTyp__63C7B88F" FromRole="Descriptors" ToRole="BuisnessUnits" />
-    <NavigationProperty Name="Classes" Relationship="DBSEModel.FK__Classes__idDescr__64BBDCC8" FromRole="Descriptors" ToRole="Classes" />
-    <NavigationProperty Name="Covers" Relationship="DBSEModel.FK__Covers__idDescri__6F396B3B" FromRole="Descriptors" ToRole="Covers" />
-    <NavigationProperty Name="DescriptorsResources" Relationship="DBSEModel.FK__Descripto__idDes__0AE185B0" FromRole="Descriptors" ToRole="DescriptorsResources" />
-    <NavigationProperty Name="Fields" Relationship="DBSEModel.FK__Fields__idDescri__09ED6177" FromRole="Descriptors" ToRole="Fields" />
-    <NavigationProperty Name="Groups" Relationship="DBSEModel.FK__Groups__idDescri__5F030372" FromRole="Descriptors" ToRole="Groups" />
-    <NavigationProperty Name="LoadDiagrams" Relationship="DBSEModel.FK__LoadDiagr__idDes__6C5CFE90" FromRole="Descriptors" ToRole="LoadDiagrams" />
-    <NavigationProperty Name="Manufacturers" Relationship="DBSEModel.FK__Manufactu__idDes__08051905" FromRole="Descriptors" ToRole="Manufacturers" />
-    <NavigationProperty Name="Materials" Relationship="DBSEModel.FK__Materials__idDes__698091E5" FromRole="Descriptors" ToRole="Materials" />
-    <NavigationProperty Name="Norms" Relationship="DBSEModel.FK__Norms__idDescrip__688C6DAC" FromRole="Descriptors" ToRole="Norms" />
-    <NavigationProperty Name="Packages" Relationship="DBSEModel.FK__Packages__idDesc__01581B76" FromRole="Descriptors" ToRole="Packages" />
-    <NavigationProperty Name="Perforations" Relationship="DBSEModel.FK__Perforati__idDes__67984973" FromRole="Descriptors" ToRole="Perforations" />
-    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idDesc__7121B3AD" FromRole="Descriptors" ToRole="Products" />
-    <NavigationProperty Name="SubGroups" Relationship="DBSEModel.FK__SubGroups__idDes__5C2696C7" FromRole="Descriptors" ToRole="SubGroups" />
-    <NavigationProperty Name="Tables" Relationship="DBSEModel.FK__Tables__idDescri__08F93D3E" FromRole="Descriptors" ToRole="Tables" />
-    <NavigationProperty Name="Units" Relationship="DBSEModel.FK__Units__idDescrip__77CEB13C" FromRole="Descriptors" ToRole="Units" />
-    <NavigationProperty Name="VendorCodes" Relationship="DBSEModel.FK__VendorCod__idDes__7B9F4220" FromRole="Descriptors" ToRole="VendorCodes" />
-    <NavigationProperty Name="Views" Relationship="DBSEModel.FK__Views__idDescrip__109A5F06" FromRole="Descriptors" ToRole="Views" />
-    <NavigationProperty Name="ViewTypes" Relationship="DBSEModel.FK__ViewTypes__idDes__0FA63ACD" FromRole="Descriptors" ToRole="ViewTypes" />
+    <NavigationProperty Name="Applications" Relationship="DBSEModel.FK__Applicati__idDes__64129CA9" FromRole="Descriptors" ToRole="Applications" />
+    <NavigationProperty Name="BuisnessUnits" Relationship="DBSEModel.FK__BuisnessU__idBim__60420BC5" FromRole="Descriptors" ToRole="BuisnessUnits" />
+    <NavigationProperty Name="BuisnessUnits1" Relationship="DBSEModel.FK__BuisnessU__idDes__5F4DE78C" FromRole="Descriptors" ToRole="BuisnessUnits" />
+    <NavigationProperty Name="BuisnessUnits2" Relationship="DBSEModel.FK__BuisnessU__idDra__61362FFE" FromRole="Descriptors" ToRole="BuisnessUnits" />
+    <NavigationProperty Name="BuisnessUnits3" Relationship="DBSEModel.FK__BuisnessU__idTyp__622A5437" FromRole="Descriptors" ToRole="BuisnessUnits" />
+    <NavigationProperty Name="Classes" Relationship="DBSEModel.FK__Classes__idDescr__631E7870" FromRole="Descriptors" ToRole="Classes" />
+    <NavigationProperty Name="Covers" Relationship="DBSEModel.FK__Covers__idDescri__6D9C06E3" FromRole="Descriptors" ToRole="Covers" />
+    <NavigationProperty Name="DescriptorsResources" Relationship="DBSEModel.FK__Descripto__idDes__09442158" FromRole="Descriptors" ToRole="DescriptorsResources" />
+    <NavigationProperty Name="Fields" Relationship="DBSEModel.FK__Fields__idDescri__084FFD1F" FromRole="Descriptors" ToRole="Fields" />
+    <NavigationProperty Name="Groups" Relationship="DBSEModel.FK__Groups__idDescri__5D659F1A" FromRole="Descriptors" ToRole="Groups" />
+    <NavigationProperty Name="LoadDiagrams" Relationship="DBSEModel.FK__LoadDiagr__idDes__6ABF9A38" FromRole="Descriptors" ToRole="LoadDiagrams" />
+    <NavigationProperty Name="Manufacturers" Relationship="DBSEModel.FK__Manufactu__idDes__0667B4AD" FromRole="Descriptors" ToRole="Manufacturers" />
+    <NavigationProperty Name="Materials" Relationship="DBSEModel.FK__Materials__idDes__67E32D8D" FromRole="Descriptors" ToRole="Materials" />
+    <NavigationProperty Name="Norms" Relationship="DBSEModel.FK__Norms__idDescrip__66EF0954" FromRole="Descriptors" ToRole="Norms" />
+    <NavigationProperty Name="Packages" Relationship="DBSEModel.FK__Packages__idDesc__7FBAB71E" FromRole="Descriptors" ToRole="Packages" />
+    <NavigationProperty Name="Perforations" Relationship="DBSEModel.FK__Perforati__idDes__65FAE51B" FromRole="Descriptors" ToRole="Perforations" />
+    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idDesc__6F844F55" FromRole="Descriptors" ToRole="Products" />
+    <NavigationProperty Name="SubGroups" Relationship="DBSEModel.FK__SubGroups__idDes__5A89326F" FromRole="Descriptors" ToRole="SubGroups" />
+    <NavigationProperty Name="Tables" Relationship="DBSEModel.FK__Tables__idDescri__075BD8E6" FromRole="Descriptors" ToRole="Tables" />
+    <NavigationProperty Name="Units" Relationship="DBSEModel.FK__Units__idDescrip__76314CE4" FromRole="Descriptors" ToRole="Units" />
+    <NavigationProperty Name="VendorCodes" Relationship="DBSEModel.FK__VendorCod__idDes__7A01DDC8" FromRole="Descriptors" ToRole="VendorCodes" />
+    <NavigationProperty Name="Views" Relationship="DBSEModel.FK__Views__idDescrip__0EFCFAAE" FromRole="Descriptors" ToRole="Views" />
+    <NavigationProperty Name="ViewTypes" Relationship="DBSEModel.FK__ViewTypes__idDes__0E08D675" FromRole="Descriptors" ToRole="ViewTypes" />
   </EntityType>
   <EntityType Name="DescriptorsResources">
     <Key>
@@ -382,9 +377,9 @@
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
     <Property Name="idResource" Type="Int32" Nullable="false" />
     <Property Name="idResourceType" Type="Int32" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Descripto__idDes__0AE185B0" FromRole="DescriptorsResources" ToRole="Descriptors" />
-    <NavigationProperty Name="Resources" Relationship="DBSEModel.FK__Descripto__idRes__0BD5A9E9" FromRole="DescriptorsResources" ToRole="Resources" />
-    <NavigationProperty Name="ResourceTypes" Relationship="DBSEModel.FK__Descripto__idRes__0CC9CE22" FromRole="DescriptorsResources" ToRole="ResourceTypes" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Descripto__idDes__09442158" FromRole="DescriptorsResources" ToRole="Descriptors" />
+    <NavigationProperty Name="Resources" Relationship="DBSEModel.FK__Descripto__idRes__0A384591" FromRole="DescriptorsResources" ToRole="Resources" />
+    <NavigationProperty Name="ResourceTypes" Relationship="DBSEModel.FK__Descripto__idRes__0B2C69CA" FromRole="DescriptorsResources" ToRole="ResourceTypes" />
   </EntityType>
   <EntityType Name="Fields">
     <Key>
@@ -393,7 +388,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" />
     <Property Name="titleRus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Fields__idDescri__09ED6177" FromRole="Fields" ToRole="Descriptors" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Fields__idDescri__084FFD1F" FromRole="Fields" ToRole="Descriptors" />
   </EntityType>
   <EntityType Name="Groups">
     <Key>
@@ -402,9 +397,9 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
     <Property Name="idClass" Type="Int32" />
-    <NavigationProperty Name="Classes" Relationship="DBSEModel.FK__Groups__idClass__5FF727AB" FromRole="Groups" ToRole="Classes" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Groups__idDescri__5F030372" FromRole="Groups" ToRole="Descriptors" />
-    <NavigationProperty Name="SubGroups" Relationship="DBSEModel.FK__SubGroups__idGro__5D1ABB00" FromRole="Groups" ToRole="SubGroups" />
+    <NavigationProperty Name="Classes" Relationship="DBSEModel.FK__Groups__idClass__5E59C353" FromRole="Groups" ToRole="Classes" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Groups__idDescri__5D659F1A" FromRole="Groups" ToRole="Descriptors" />
+    <NavigationProperty Name="SubGroups" Relationship="DBSEModel.FK__SubGroups__idGro__5B7D56A8" FromRole="Groups" ToRole="SubGroups" />
   </EntityType>
   <EntityType Name="GroupsApplications">
     <Key>
@@ -413,8 +408,8 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idApplication" Type="Int32" />
     <Property Name="idSubGroup" Type="Int32" />
-    <NavigationProperty Name="Applications" Relationship="DBSEModel.FK__GroupsApp__idApp__6D5122C9" FromRole="GroupsApplications" ToRole="Applications" />
-    <NavigationProperty Name="SubGroups" Relationship="DBSEModel.FK__GroupsApp__idSub__6E454702" FromRole="GroupsApplications" ToRole="SubGroups" />
+    <NavigationProperty Name="Applications" Relationship="DBSEModel.FK__GroupsApp__idApp__6BB3BE71" FromRole="GroupsApplications" ToRole="Applications" />
+    <NavigationProperty Name="SubGroups" Relationship="DBSEModel.FK__GroupsApp__idSub__6CA7E2AA" FromRole="GroupsApplications" ToRole="SubGroups" />
   </EntityType>
   <EntityType Name="LoadDiagrams">
     <Key>
@@ -422,8 +417,8 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__LoadDiagr__idDes__6C5CFE90" FromRole="LoadDiagrams" ToRole="Descriptors" />
-    <NavigationProperty Name="SubGroups" Relationship="DBSEModel.FK__SubGroups__idLoa__5E0EDF39" FromRole="LoadDiagrams" ToRole="SubGroups" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__LoadDiagr__idDes__6ABF9A38" FromRole="LoadDiagrams" ToRole="Descriptors" />
+    <NavigationProperty Name="SubGroups" Relationship="DBSEModel.FK__SubGroups__idLoa__5C717AE1" FromRole="LoadDiagrams" ToRole="SubGroups" />
   </EntityType>
   <EntityType Name="Manufacturers">
     <Key>
@@ -432,8 +427,8 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
     <Property Name="TIN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Manufactu__idDes__08051905" FromRole="Manufacturers" ToRole="Descriptors" />
-    <NavigationProperty Name="VendorCodes" Relationship="DBSEModel.FK__VendorCod__idMan__7AAB1DE7" FromRole="Manufacturers" ToRole="VendorCodes" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Manufactu__idDes__0667B4AD" FromRole="Manufacturers" ToRole="Descriptors" />
+    <NavigationProperty Name="VendorCodes" Relationship="DBSEModel.FK__VendorCod__idMan__790DB98F" FromRole="Manufacturers" ToRole="VendorCodes" />
   </EntityType>
   <EntityType Name="Materials">
     <Key>
@@ -444,10 +439,10 @@
     <Property Name="idMaterialNorm" Type="Int32" />
     <Property Name="idPrepackNorm" Type="Int32" />
     <Property Name="type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Materials__idDes__698091E5" FromRole="Materials" ToRole="Descriptors" />
-    <NavigationProperty Name="Norms" Relationship="DBSEModel.FK__Materials__idMat__6A74B61E" FromRole="Materials" ToRole="Norms" />
-    <NavigationProperty Name="Norms1" Relationship="DBSEModel.FK__Materials__idPre__6B68DA57" FromRole="Materials" ToRole="Norms" />
-    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idMate__74F24491" FromRole="Materials" ToRole="Products" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Materials__idDes__67E32D8D" FromRole="Materials" ToRole="Descriptors" />
+    <NavigationProperty Name="Norms" Relationship="DBSEModel.FK__Materials__idMat__68D751C6" FromRole="Materials" ToRole="Norms" />
+    <NavigationProperty Name="Norms1" Relationship="DBSEModel.FK__Materials__idPre__69CB75FF" FromRole="Materials" ToRole="Norms" />
+    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idMate__7354E039" FromRole="Materials" ToRole="Products" />
   </EntityType>
   <EntityType Name="Norms">
     <Key>
@@ -455,11 +450,11 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Covers" Relationship="DBSEModel.FK__Covers__idNorm__702D8F74" FromRole="Norms" ToRole="Covers" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Norms__idDescrip__688C6DAC" FromRole="Norms" ToRole="Descriptors" />
-    <NavigationProperty Name="Materials" Relationship="DBSEModel.FK__Materials__idMat__6A74B61E" FromRole="Norms" ToRole="Materials" />
-    <NavigationProperty Name="Materials1" Relationship="DBSEModel.FK__Materials__idPre__6B68DA57" FromRole="Norms" ToRole="Materials" />
-    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idNorm__7215D7E6" FromRole="Norms" ToRole="Products" />
+    <NavigationProperty Name="Covers" Relationship="DBSEModel.FK__Covers__idNorm__6E902B1C" FromRole="Norms" ToRole="Covers" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Norms__idDescrip__66EF0954" FromRole="Norms" ToRole="Descriptors" />
+    <NavigationProperty Name="Materials" Relationship="DBSEModel.FK__Materials__idMat__68D751C6" FromRole="Norms" ToRole="Materials" />
+    <NavigationProperty Name="Materials1" Relationship="DBSEModel.FK__Materials__idPre__69CB75FF" FromRole="Norms" ToRole="Materials" />
+    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idNorm__7078738E" FromRole="Norms" ToRole="Products" />
   </EntityType>
   <EntityType Name="Packages">
     <Key>
@@ -467,9 +462,9 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Packages__idDesc__01581B76" FromRole="Packages" ToRole="Descriptors" />
-    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idPack__76DA8D03" FromRole="Packages" ToRole="Products" />
-    <NavigationProperty Name="UnitsPakages" Relationship="DBSEModel.FK__UnitsPaka__idPac__0528AC5A" FromRole="Packages" ToRole="UnitsPakages" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Packages__idDesc__7FBAB71E" FromRole="Packages" ToRole="Descriptors" />
+    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idPack__753D28AB" FromRole="Packages" ToRole="Products" />
+    <NavigationProperty Name="UnitsPakages" Relationship="DBSEModel.FK__UnitsPaka__idPac__038B4802" FromRole="Packages" ToRole="UnitsPakages" />
   </EntityType>
   <EntityType Name="Perforations">
     <Key>
@@ -477,9 +472,9 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Perforati__idDes__67984973" FromRole="Perforations" ToRole="Descriptors" />
-    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idPerf__75E668CA" FromRole="Perforations" ToRole="Products" />
-    <NavigationProperty Name="UnitsPerforations" Relationship="DBSEModel.FK__UnitsPerf__idPer__024C3FAF" FromRole="Perforations" ToRole="UnitsPerforations" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Perforati__idDes__65FAE51B" FromRole="Perforations" ToRole="Descriptors" />
+    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idPerf__74490472" FromRole="Perforations" ToRole="Products" />
+    <NavigationProperty Name="UnitsPerforations" Relationship="DBSEModel.FK__UnitsPerf__idPer__00AEDB57" FromRole="Perforations" ToRole="UnitsPerforations" />
   </EntityType>
   <EntityType Name="Products">
     <Key>
@@ -494,17 +489,17 @@
     <Property Name="idPerforation" Type="Int32" />
     <Property Name="idPackage" Type="Int32" />
     <Property Name="isInStock" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Covers" Relationship="DBSEModel.FK__Products__idCove__73FE2058" FromRole="Products" ToRole="Covers" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Products__idDesc__7121B3AD" FromRole="Products" ToRole="Descriptors" />
-    <NavigationProperty Name="Materials" Relationship="DBSEModel.FK__Products__idMate__74F24491" FromRole="Products" ToRole="Materials" />
-    <NavigationProperty Name="Norms" Relationship="DBSEModel.FK__Products__idNorm__7215D7E6" FromRole="Products" ToRole="Norms" />
-    <NavigationProperty Name="Packages" Relationship="DBSEModel.FK__Products__idPack__76DA8D03" FromRole="Products" ToRole="Packages" />
-    <NavigationProperty Name="Perforations" Relationship="DBSEModel.FK__Products__idPerf__75E668CA" FromRole="Products" ToRole="Perforations" />
-    <NavigationProperty Name="SubGroups" Relationship="DBSEModel.FK__Products__idSubG__7309FC1F" FromRole="Products" ToRole="SubGroups" />
-    <NavigationProperty Name="ProductsAnalogs" Relationship="DBSEModel.FK__ProductsA__idAna__7D878A92" FromRole="Products" ToRole="ProductsAnalogs" />
-    <NavigationProperty Name="ProductsAnalogs1" Relationship="DBSEModel.FK__ProductsA__idOri__7C936659" FromRole="Products" ToRole="ProductsAnalogs" />
-    <NavigationProperty Name="ProductsVendorCodes" Relationship="DBSEModel.FK__ProductsV__idPro__78C2D575" FromRole="Products" ToRole="ProductsVendorCodes" />
-    <NavigationProperty Name="UnitsProducts" Relationship="DBSEModel.FK__UnitsProd__idPro__7E7BAECB" FromRole="Products" ToRole="UnitsProducts" />
+    <NavigationProperty Name="Covers" Relationship="DBSEModel.FK__Products__idCove__7260BC00" FromRole="Products" ToRole="Covers" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Products__idDesc__6F844F55" FromRole="Products" ToRole="Descriptors" />
+    <NavigationProperty Name="Materials" Relationship="DBSEModel.FK__Products__idMate__7354E039" FromRole="Products" ToRole="Materials" />
+    <NavigationProperty Name="Norms" Relationship="DBSEModel.FK__Products__idNorm__7078738E" FromRole="Products" ToRole="Norms" />
+    <NavigationProperty Name="Packages" Relationship="DBSEModel.FK__Products__idPack__753D28AB" FromRole="Products" ToRole="Packages" />
+    <NavigationProperty Name="Perforations" Relationship="DBSEModel.FK__Products__idPerf__74490472" FromRole="Products" ToRole="Perforations" />
+    <NavigationProperty Name="SubGroups" Relationship="DBSEModel.FK__Products__idSubG__716C97C7" FromRole="Products" ToRole="SubGroups" />
+    <NavigationProperty Name="ProductsAnalogs" Relationship="DBSEModel.FK__ProductsA__idAna__7BEA263A" FromRole="Products" ToRole="ProductsAnalogs" />
+    <NavigationProperty Name="ProductsAnalogs1" Relationship="DBSEModel.FK__ProductsA__idOri__7AF60201" FromRole="Products" ToRole="ProductsAnalogs" />
+    <NavigationProperty Name="ProductsVendorCodes" Relationship="DBSEModel.FK__ProductsV__idPro__7725711D" FromRole="Products" ToRole="ProductsVendorCodes" />
+    <NavigationProperty Name="UnitsProducts" Relationship="DBSEModel.FK__UnitsProd__idPro__7CDE4A73" FromRole="Products" ToRole="UnitsProducts" />
   </EntityType>
   <EntityType Name="ProductsAnalogs">
     <Key>
@@ -513,8 +508,8 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idOriginal" Type="Int32" />
     <Property Name="idAnalog" Type="Int32" />
-    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__ProductsA__idAna__7D878A92" FromRole="ProductsAnalogs" ToRole="Products" />
-    <NavigationProperty Name="Products1" Relationship="DBSEModel.FK__ProductsA__idOri__7C936659" FromRole="ProductsAnalogs" ToRole="Products" />
+    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__ProductsA__idAna__7BEA263A" FromRole="ProductsAnalogs" ToRole="Products" />
+    <NavigationProperty Name="Products1" Relationship="DBSEModel.FK__ProductsA__idOri__7AF60201" FromRole="ProductsAnalogs" ToRole="Products" />
   </EntityType>
   <EntityType Name="ProductsVendorCodes">
     <Key>
@@ -523,8 +518,8 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idProduct" Type="Int32" Nullable="false" />
     <Property Name="idCode" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__ProductsV__idPro__78C2D575" FromRole="ProductsVendorCodes" ToRole="Products" />
-    <NavigationProperty Name="VendorCodes" Relationship="DBSEModel.FK__ProductsV__idCod__79B6F9AE" FromRole="ProductsVendorCodes" ToRole="VendorCodes" />
+    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__ProductsV__idPro__7725711D" FromRole="ProductsVendorCodes" ToRole="Products" />
+    <NavigationProperty Name="VendorCodes" Relationship="DBSEModel.FK__ProductsV__idCod__78199556" FromRole="ProductsVendorCodes" ToRole="VendorCodes" />
   </EntityType>
   <EntityType Name="Resources">
     <Key>
@@ -532,7 +527,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="URL" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="DescriptorsResources" Relationship="DBSEModel.FK__Descripto__idRes__0BD5A9E9" FromRole="Resources" ToRole="DescriptorsResources" />
+    <NavigationProperty Name="DescriptorsResources" Relationship="DBSEModel.FK__Descripto__idRes__0A384591" FromRole="Resources" ToRole="DescriptorsResources" />
   </EntityType>
   <EntityType Name="ResourceTypes">
     <Key>
@@ -540,7 +535,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="DescriptorsResources" Relationship="DBSEModel.FK__Descripto__idRes__0CC9CE22" FromRole="ResourceTypes" ToRole="DescriptorsResources" />
+    <NavigationProperty Name="DescriptorsResources" Relationship="DBSEModel.FK__Descripto__idRes__0B2C69CA" FromRole="ResourceTypes" ToRole="DescriptorsResources" />
   </EntityType>
   <EntityType Name="SubGroups">
     <Key>
@@ -550,11 +545,11 @@
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
     <Property Name="idGroup" Type="Int32" />
     <Property Name="idLoadDiagram" Type="Int32" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__SubGroups__idDes__5C2696C7" FromRole="SubGroups" ToRole="Descriptors" />
-    <NavigationProperty Name="Groups" Relationship="DBSEModel.FK__SubGroups__idGro__5D1ABB00" FromRole="SubGroups" ToRole="Groups" />
-    <NavigationProperty Name="GroupsApplications" Relationship="DBSEModel.FK__GroupsApp__idSub__6E454702" FromRole="SubGroups" ToRole="GroupsApplications" />
-    <NavigationProperty Name="LoadDiagrams" Relationship="DBSEModel.FK__SubGroups__idLoa__5E0EDF39" FromRole="SubGroups" ToRole="LoadDiagrams" />
-    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idSubG__7309FC1F" FromRole="SubGroups" ToRole="Products" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__SubGroups__idDes__5A89326F" FromRole="SubGroups" ToRole="Descriptors" />
+    <NavigationProperty Name="Groups" Relationship="DBSEModel.FK__SubGroups__idGro__5B7D56A8" FromRole="SubGroups" ToRole="Groups" />
+    <NavigationProperty Name="GroupsApplications" Relationship="DBSEModel.FK__GroupsApp__idSub__6CA7E2AA" FromRole="SubGroups" ToRole="GroupsApplications" />
+    <NavigationProperty Name="LoadDiagrams" Relationship="DBSEModel.FK__SubGroups__idLoa__5C717AE1" FromRole="SubGroups" ToRole="LoadDiagrams" />
+    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__Products__idSubG__716C97C7" FromRole="SubGroups" ToRole="Products" />
   </EntityType>
   <EntityType Name="Tables">
     <Key>
@@ -562,8 +557,8 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Tables__idDescri__08F93D3E" FromRole="Tables" ToRole="Descriptors" />
-    <NavigationProperty Name="ViewsTables" Relationship="DBSEModel.FK__ViewsTabl__idTab__0DBDF25B" FromRole="Tables" ToRole="ViewsTables" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Tables__idDescri__075BD8E6" FromRole="Tables" ToRole="Descriptors" />
+    <NavigationProperty Name="ViewsTables" Relationship="DBSEModel.FK__ViewsTabl__idTab__0C208E03" FromRole="Tables" ToRole="ViewsTables" />
   </EntityType>
   <EntityType Name="Units">
     <Key>
@@ -572,10 +567,10 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
     <Property Name="OKEI" Type="Int32" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Units__idDescrip__77CEB13C" FromRole="Units" ToRole="Descriptors" />
-    <NavigationProperty Name="UnitsPakages" Relationship="DBSEModel.FK__UnitsPaka__idUni__061CD093" FromRole="Units" ToRole="UnitsPakages" />
-    <NavigationProperty Name="UnitsPerforations" Relationship="DBSEModel.FK__UnitsPerf__idUni__034063E8" FromRole="Units" ToRole="UnitsPerforations" />
-    <NavigationProperty Name="UnitsProducts" Relationship="DBSEModel.FK__UnitsProd__idUni__7F6FD304" FromRole="Units" ToRole="UnitsProducts" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Units__idDescrip__76314CE4" FromRole="Units" ToRole="Descriptors" />
+    <NavigationProperty Name="UnitsPakages" Relationship="DBSEModel.FK__UnitsPaka__idUni__047F6C3B" FromRole="Units" ToRole="UnitsPakages" />
+    <NavigationProperty Name="UnitsPerforations" Relationship="DBSEModel.FK__UnitsPerf__idUni__01A2FF90" FromRole="Units" ToRole="UnitsPerforations" />
+    <NavigationProperty Name="UnitsProducts" Relationship="DBSEModel.FK__UnitsProd__idUni__7DD26EAC" FromRole="Units" ToRole="UnitsProducts" />
   </EntityType>
   <EntityType Name="UnitsPakages">
     <Key>
@@ -586,9 +581,9 @@
     <Property Name="idUnit" Type="Int32" />
     <Property Name="idType" Type="Int32" />
     <Property Name="Value" Type="Double" />
-    <NavigationProperty Name="Packages" Relationship="DBSEModel.FK__UnitsPaka__idPac__0528AC5A" FromRole="UnitsPakages" ToRole="Packages" />
-    <NavigationProperty Name="Units" Relationship="DBSEModel.FK__UnitsPaka__idUni__061CD093" FromRole="UnitsPakages" ToRole="Units" />
-    <NavigationProperty Name="UnitsTypes" Relationship="DBSEModel.FK__UnitsPaka__idTyp__0710F4CC" FromRole="UnitsPakages" ToRole="UnitsTypes" />
+    <NavigationProperty Name="Packages" Relationship="DBSEModel.FK__UnitsPaka__idPac__038B4802" FromRole="UnitsPakages" ToRole="Packages" />
+    <NavigationProperty Name="Units" Relationship="DBSEModel.FK__UnitsPaka__idUni__047F6C3B" FromRole="UnitsPakages" ToRole="Units" />
+    <NavigationProperty Name="UnitsTypes" Relationship="DBSEModel.FK__UnitsPaka__idTyp__05739074" FromRole="UnitsPakages" ToRole="UnitsTypes" />
   </EntityType>
   <EntityType Name="UnitsPerforations">
     <Key>
@@ -599,9 +594,9 @@
     <Property Name="idUnit" Type="Int32" Nullable="false" />
     <Property Name="idType" Type="Int32" Nullable="false" />
     <Property Name="Value" Type="Double" Nullable="false" />
-    <NavigationProperty Name="Perforations" Relationship="DBSEModel.FK__UnitsPerf__idPer__024C3FAF" FromRole="UnitsPerforations" ToRole="Perforations" />
-    <NavigationProperty Name="Units" Relationship="DBSEModel.FK__UnitsPerf__idUni__034063E8" FromRole="UnitsPerforations" ToRole="Units" />
-    <NavigationProperty Name="UnitsTypes" Relationship="DBSEModel.FK__UnitsPerf__idTyp__04348821" FromRole="UnitsPerforations" ToRole="UnitsTypes" />
+    <NavigationProperty Name="Perforations" Relationship="DBSEModel.FK__UnitsPerf__idPer__00AEDB57" FromRole="UnitsPerforations" ToRole="Perforations" />
+    <NavigationProperty Name="Units" Relationship="DBSEModel.FK__UnitsPerf__idUni__01A2FF90" FromRole="UnitsPerforations" ToRole="Units" />
+    <NavigationProperty Name="UnitsTypes" Relationship="DBSEModel.FK__UnitsPerf__idTyp__029723C9" FromRole="UnitsPerforations" ToRole="UnitsTypes" />
   </EntityType>
   <EntityType Name="UnitsProducts">
     <Key>
@@ -612,9 +607,9 @@
     <Property Name="idUnit" Type="Int32" />
     <Property Name="idType" Type="Int32" />
     <Property Name="value" Type="Double" Nullable="false" />
-    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__UnitsProd__idPro__7E7BAECB" FromRole="UnitsProducts" ToRole="Products" />
-    <NavigationProperty Name="Units" Relationship="DBSEModel.FK__UnitsProd__idUni__7F6FD304" FromRole="UnitsProducts" ToRole="Units" />
-    <NavigationProperty Name="UnitsTypes" Relationship="DBSEModel.FK__UnitsProd__idTyp__0063F73D" FromRole="UnitsProducts" ToRole="UnitsTypes" />
+    <NavigationProperty Name="Products" Relationship="DBSEModel.FK__UnitsProd__idPro__7CDE4A73" FromRole="UnitsProducts" ToRole="Products" />
+    <NavigationProperty Name="Units" Relationship="DBSEModel.FK__UnitsProd__idUni__7DD26EAC" FromRole="UnitsProducts" ToRole="Units" />
+    <NavigationProperty Name="UnitsTypes" Relationship="DBSEModel.FK__UnitsProd__idTyp__7EC692E5" FromRole="UnitsProducts" ToRole="UnitsTypes" />
   </EntityType>
   <EntityType Name="UnitsTypes">
     <Key>
@@ -622,9 +617,9 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="UnitsPakages" Relationship="DBSEModel.FK__UnitsPaka__idTyp__0710F4CC" FromRole="UnitsTypes" ToRole="UnitsPakages" />
-    <NavigationProperty Name="UnitsPerforations" Relationship="DBSEModel.FK__UnitsPerf__idTyp__04348821" FromRole="UnitsTypes" ToRole="UnitsPerforations" />
-    <NavigationProperty Name="UnitsProducts" Relationship="DBSEModel.FK__UnitsProd__idTyp__0063F73D" FromRole="UnitsTypes" ToRole="UnitsProducts" />
+    <NavigationProperty Name="UnitsPakages" Relationship="DBSEModel.FK__UnitsPaka__idTyp__05739074" FromRole="UnitsTypes" ToRole="UnitsPakages" />
+    <NavigationProperty Name="UnitsPerforations" Relationship="DBSEModel.FK__UnitsPerf__idTyp__029723C9" FromRole="UnitsTypes" ToRole="UnitsPerforations" />
+    <NavigationProperty Name="UnitsProducts" Relationship="DBSEModel.FK__UnitsProd__idTyp__7EC692E5" FromRole="UnitsTypes" ToRole="UnitsProducts" />
   </EntityType>
   <EntityType Name="VendorCodes">
     <Key>
@@ -637,9 +632,9 @@
     <Property Name="isSale" Type="Boolean" Nullable="false" />
     <Property Name="isPublic" Type="Boolean" />
     <Property Name="codeAccountant" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__VendorCod__idDes__7B9F4220" FromRole="VendorCodes" ToRole="Descriptors" />
-    <NavigationProperty Name="Manufacturers" Relationship="DBSEModel.FK__VendorCod__idMan__7AAB1DE7" FromRole="VendorCodes" ToRole="Manufacturers" />
-    <NavigationProperty Name="ProductsVendorCodes" Relationship="DBSEModel.FK__ProductsV__idCod__79B6F9AE" FromRole="VendorCodes" ToRole="ProductsVendorCodes" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__VendorCod__idDes__7A01DDC8" FromRole="VendorCodes" ToRole="Descriptors" />
+    <NavigationProperty Name="Manufacturers" Relationship="DBSEModel.FK__VendorCod__idMan__790DB98F" FromRole="VendorCodes" ToRole="Manufacturers" />
+    <NavigationProperty Name="ProductsVendorCodes" Relationship="DBSEModel.FK__ProductsV__idCod__78199556" FromRole="VendorCodes" ToRole="ProductsVendorCodes" />
   </EntityType>
   <EntityType Name="Views">
     <Key>
@@ -648,9 +643,9 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" />
     <Property Name="idType" Type="Int32" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Views__idDescrip__109A5F06" FromRole="Views" ToRole="Descriptors" />
-    <NavigationProperty Name="ViewTypes" Relationship="DBSEModel.FK__Views__idType__118E833F" FromRole="Views" ToRole="ViewTypes" />
-    <NavigationProperty Name="ViewsTables" Relationship="DBSEModel.FK__ViewsTabl__idVie__0EB21694" FromRole="Views" ToRole="ViewsTables" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__Views__idDescrip__0EFCFAAE" FromRole="Views" ToRole="Descriptors" />
+    <NavigationProperty Name="ViewTypes" Relationship="DBSEModel.FK__Views__idType__0FF11EE7" FromRole="Views" ToRole="ViewTypes" />
+    <NavigationProperty Name="ViewsTables" Relationship="DBSEModel.FK__ViewsTabl__idVie__0D14B23C" FromRole="Views" ToRole="ViewsTables" />
   </EntityType>
   <EntityType Name="ViewsTables">
     <Key>
@@ -659,8 +654,8 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idTable" Type="Int32" />
     <Property Name="idView" Type="Int32" />
-    <NavigationProperty Name="Tables" Relationship="DBSEModel.FK__ViewsTabl__idTab__0DBDF25B" FromRole="ViewsTables" ToRole="Tables" />
-    <NavigationProperty Name="Views" Relationship="DBSEModel.FK__ViewsTabl__idVie__0EB21694" FromRole="ViewsTables" ToRole="Views" />
+    <NavigationProperty Name="Tables" Relationship="DBSEModel.FK__ViewsTabl__idTab__0C208E03" FromRole="ViewsTables" ToRole="Tables" />
+    <NavigationProperty Name="Views" Relationship="DBSEModel.FK__ViewsTabl__idVie__0D14B23C" FromRole="ViewsTables" ToRole="Views" />
   </EntityType>
   <EntityType Name="ViewTypes">
     <Key>
@@ -668,66 +663,8 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idDescriptor" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__ViewTypes__idDes__0FA63ACD" FromRole="ViewTypes" ToRole="Descriptors" />
-    <NavigationProperty Name="Views" Relationship="DBSEModel.FK__Views__idType__118E833F" FromRole="ViewTypes" ToRole="Views" />
-  </EntityType>
-  <EntityType Name="AllProductsInfoView">
-    <Key>
-      <PropertyRef Name="id" />
-      <PropertyRef Name="idDescriptor" />
-      <PropertyRef Name="isInStock" />
-      <PropertyRef Name="idDescriptorNorm" />
-      <PropertyRef Name="idDescriptorSubGroups" />
-      <PropertyRef Name="idNormCovers" />
-      <PropertyRef Name="idDescriptorPerforations" />
-      <PropertyRef Name="idDescriptorPackages" />
-      <PropertyRef Name="idDescriptorMaterials" />
-      <PropertyRef Name="idDescriptorCovers" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="idDescriptor" Type="Int32" Nullable="false" />
-    <Property Name="idNorm" Type="Int32" />
-    <Property Name="idSubGroup" Type="Int32" />
-    <Property Name="idCover" Type="Int32" />
-    <Property Name="idMaterial" Type="Int32" />
-    <Property Name="isInStock" Type="Boolean" Nullable="false" />
-    <Property Name="idPerforation" Type="Int32" />
-    <Property Name="idPackage" Type="Int32" />
-    <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="titleShort" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="description" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
-    <Property Name="idDescriptorNorm" Type="Int32" Nullable="false" />
-    <Property Name="idGroup" Type="Int32" />
-    <Property Name="idDescriptorSubGroups" Type="Int32" Nullable="false" />
-    <Property Name="idLoadDiagram" Type="Int32" />
-    <Property Name="thickness" Type="Int32" />
-    <Property Name="idNormCovers" Type="Int32" Nullable="false" />
-    <Property Name="typeMaterials" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="idMaterialNorm" Type="Int32" />
-    <Property Name="idPrepackNorm" Type="Int32" />
-    <Property Name="idDescriptorPerforations" Type="Int32" Nullable="false" />
-    <Property Name="idDescriptorPackages" Type="Int32" Nullable="false" />
-    <Property Name="idDescriptorMaterials" Type="Int32" Nullable="false" />
-    <Property Name="idDescriptorCovers" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="AllProductUnitsInfoView">
-    <Key>
-      <PropertyRef Name="id" />
-      <PropertyRef Name="idProduct" />
-      <PropertyRef Name="value" />
-      <PropertyRef Name="titleUnitType" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="idProduct" Type="Int32" Nullable="false" />
-    <Property Name="idUnit" Type="Int32" />
-    <Property Name="idType" Type="Int32" />
-    <Property Name="value" Type="Double" Nullable="false" />
-    <Property Name="titleUnitType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="OKEI" Type="Int32" />
-    <Property Name="titleUnit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="descriptionUnit" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
-    <Property Name="titleShortUnit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Descriptors" Relationship="DBSEModel.FK__ViewTypes__idDes__0E08D675" FromRole="ViewTypes" ToRole="Descriptors" />
+    <NavigationProperty Name="Views" Relationship="DBSEModel.FK__Views__idType__0FF11EE7" FromRole="ViewTypes" ToRole="Views" />
   </EntityType>
   <EntityType Name="ApplicationsView">
     <Key>
@@ -773,6 +710,19 @@
     <Property Name="Название_стандарта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Номер_стандарта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="DescriptorsResourcesView">
+    <Key>
+      <PropertyRef Name="ID_дескриптора_ресурса" />
+    </Key>
+    <Property Name="ID_дескриптора_ресурса" Type="Int32" Nullable="false" />
+    <Property Name="Наименование_ресурса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Сокращенное_наименование_ресурса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Отображаемое_название_ресурса" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Код_ресурса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Описание_ресурса" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="URL_ресурса" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="Тип_ресурса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="DescriptorsView">
     <Key>
       <PropertyRef Name="ID_дескриптора" />
@@ -781,16 +731,6 @@
     <Property Name="Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Сокращенное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Отображаемое_название" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="DescriptorsViewDisplay">
-    <Key>
-      <PropertyRef Name="ID_дексриптора" />
-    </Key>
-    <Property Name="ID_дексриптора" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Сокращенное_наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
   </EntityType>
@@ -813,7 +753,7 @@
     <Property Name="URL_изображения_подгруппы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
     <Property Name="ID_группы" Type="Int32" />
     <Property Name="ID_схемы_нагрузок" Type="Int32" />
-    <Property Name="ID_дескриптора" Type="Int32" />
+    <Property Name="ID_дескриптора_схемы_нагрузок" Type="Int32" />
     <Property Name="Наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Сокращенное_наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Отображаемое_название_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -834,10 +774,10 @@
   <EntityType Name="LoadDiagramsView">
     <Key>
       <PropertyRef Name="ID_схемы_нагрузок" />
-      <PropertyRef Name="ID_дескриптора" />
+      <PropertyRef Name="ID_дескриптора_схемы_нагрузок" />
     </Key>
     <Property Name="ID_схемы_нагрузок" Type="Int32" Nullable="false" />
-    <Property Name="ID_дескриптора" Type="Int32" Nullable="false" />
+    <Property Name="ID_дескриптора_схемы_нагрузок" Type="Int32" Nullable="false" />
     <Property Name="Наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Сокращенное_наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Отображаемое_название_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -877,9 +817,9 @@
   </EntityType>
   <EntityType Name="PackagesView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_упаковки" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ID_упаковки" Type="Int32" Nullable="false" />
     <Property Name="Наименование_упаковки" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Сокращенное_наименование_упаковки" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Описание_упаковки" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
@@ -890,31 +830,26 @@
   </EntityType>
   <EntityType Name="PerforationsView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_перфорации" />
+      <PropertyRef Name="Размер_перфорации" />
       <PropertyRef Name="ID_единицы_измерения" />
       <PropertyRef Name="ID_типа_измерения" />
       <PropertyRef Name="Наименование_типа_единицы_измерения" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ID_перфорации" Type="Int32" Nullable="false" />
     <Property Name="Наименование_перфорации" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Сокращенное_наименование_перфорации" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Описание_перфорации" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="Размер_перфорации" Type="Double" Nullable="false" />
     <Property Name="ID_единицы_измерения" Type="Int32" Nullable="false" />
     <Property Name="Наименование_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ID_типа_измерения" Type="Int32" Nullable="false" />
     <Property Name="Наименование_типа_единицы_измерения" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="ProductsVendorCodesView">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Продукт" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Артикул" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="ProductsView">
     <Key>
       <PropertyRef Name="ID_продукта" />
+      <PropertyRef Name="В_наличии_на_заказ" />
     </Key>
     <Property Name="ID_продукта" Type="Int32" Nullable="false" />
     <Property Name="Артикул" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -937,21 +872,22 @@
     <Property Name="Название_стандарта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Обозначение_покрытия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Толщина_покрытия" Type="Int32" />
-  </EntityType>
-  <EntityType Name="ResourcesView">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="URL_ресурса" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Код_стандарта_материала" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Код_стандарта_сырья" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_документа" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Номер_документа" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="В_наличии_на_заказ" Type="Boolean" Nullable="false" />
+    <Property Name="Размер_перфорации" Type="Double" />
   </EntityType>
   <EntityType Name="ResourceTypesView">
     <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="Наименование" />
+      <PropertyRef Name="ID_типа_ресурсов" />
+      <PropertyRef Name="Наименование_типа_ресурса" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Наименование" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ID_типа_ресурсов" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование_типа_ресурса" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="SubGroupsView">
     <Key>
@@ -964,7 +900,7 @@
     <Property Name="URL_изображения_подгруппы" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
     <Property Name="ID_группы" Type="Int32" />
     <Property Name="ID_схемы_нагрузок" Type="Int32" />
-    <Property Name="ID_дескриптора" Type="Int32" />
+    <Property Name="ID_дескриптора_схемы_нагрузок" Type="Int32" />
     <Property Name="Наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Сокращенное_наименование_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Отображаемое_название_схемы_нагрузок" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -984,33 +920,19 @@
     <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Описание" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="TablesViewsView">
-    <Key>
-      <PropertyRef Name="ID_таблицы" />
-      <PropertyRef Name="ID_представления" />
-      <PropertyRef Name="ID_типа_представления" />
-      <PropertyRef Name="ID_дескриптора_типа_представления" />
-    </Key>
-    <Property Name="ID_таблицы" Type="Int32" Nullable="false" />
-    <Property Name="ID_дескриптора_таблицы" Type="Int32" />
-    <Property Name="ID_представления" Type="Int32" Nullable="false" />
-    <Property Name="ID_дескриптора_представления" Type="Int32" />
-    <Property Name="ID_типа_представления" Type="Int32" Nullable="false" />
-    <Property Name="ID_дескриптора_типа_представления" Type="Int32" Nullable="false" />
-  </EntityType>
   <EntityType Name="UnitsTypesView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_типа_измерения" />
       <PropertyRef Name="Наименование_типа_единицы_измерения" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_типа_измерения" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Наименование_типа_единицы_измерения" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="UnitsView">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_единицы_измерения" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ID_единицы_измерения" Type="Int32" Nullable="false" />
     <Property Name="Наименование_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Сокращенное_наименование_единицы_измерения" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Описание_единицы_измерения" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
@@ -1069,7 +991,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
-  <Association Name="FK__Applicati__idBui__66A4253A">
+  <Association Name="FK__Applicati__idBui__6506C0E2">
     <End Type="DBSEModel.BuisnessUnits" Role="BuisnessUnits" Multiplicity="0..1" />
     <End Type="DBSEModel.Applications" Role="Applications" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1081,7 +1003,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Applicati__idDes__65B00101">
+  <Association Name="FK__Applicati__idDes__64129CA9">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.Applications" Role="Applications" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1093,7 +1015,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__GroupsApp__idApp__6D5122C9">
+  <Association Name="FK__GroupsApp__idApp__6BB3BE71">
     <End Type="DBSEModel.Applications" Role="Applications" Multiplicity="0..1" />
     <End Type="DBSEModel.GroupsApplications" Role="GroupsApplications" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1105,7 +1027,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BuisnessU__idBim__61DF701D">
+  <Association Name="FK__BuisnessU__idBim__60420BC5">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="0..1" />
     <End Type="DBSEModel.BuisnessUnits" Role="BuisnessUnits" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1117,7 +1039,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BuisnessU__idDes__60EB4BE4">
+  <Association Name="FK__BuisnessU__idDes__5F4DE78C">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.BuisnessUnits" Role="BuisnessUnits" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1129,7 +1051,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BuisnessU__idDra__62D39456">
+  <Association Name="FK__BuisnessU__idDra__61362FFE">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="0..1" />
     <End Type="DBSEModel.BuisnessUnits" Role="BuisnessUnits" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1141,7 +1063,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BuisnessU__idTyp__63C7B88F">
+  <Association Name="FK__BuisnessU__idTyp__622A5437">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="0..1" />
     <End Type="DBSEModel.BuisnessUnits" Role="BuisnessUnits" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1153,7 +1075,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Classes__idDescr__64BBDCC8">
+  <Association Name="FK__Classes__idDescr__631E7870">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.Classes" Role="Classes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1165,7 +1087,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Groups__idClass__5FF727AB">
+  <Association Name="FK__Groups__idClass__5E59C353">
     <End Type="DBSEModel.Classes" Role="Classes" Multiplicity="0..1" />
     <End Type="DBSEModel.Groups" Role="Groups" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1177,7 +1099,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Covers__idDescri__6F396B3B">
+  <Association Name="FK__Covers__idDescri__6D9C06E3">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.Covers" Role="Covers" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1189,7 +1111,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Covers__idNorm__702D8F74">
+  <Association Name="FK__Covers__idNorm__6E902B1C">
     <End Type="DBSEModel.Norms" Role="Norms" Multiplicity="1" />
     <End Type="DBSEModel.Covers" Role="Covers" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1201,7 +1123,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Products__idCove__73FE2058">
+  <Association Name="FK__Products__idCove__7260BC00">
     <End Type="DBSEModel.Covers" Role="Covers" Multiplicity="0..1" />
     <End Type="DBSEModel.Products" Role="Products" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1213,7 +1135,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Descripto__idDes__0AE185B0">
+  <Association Name="FK__Descripto__idDes__09442158">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.DescriptorsResources" Role="DescriptorsResources" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1225,7 +1147,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Fields__idDescri__09ED6177">
+  <Association Name="FK__Fields__idDescri__084FFD1F">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="0..1" />
     <End Type="DBSEModel.Fields" Role="Fields" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1237,7 +1159,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Groups__idDescri__5F030372">
+  <Association Name="FK__Groups__idDescri__5D659F1A">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.Groups" Role="Groups" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1249,7 +1171,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LoadDiagr__idDes__6C5CFE90">
+  <Association Name="FK__LoadDiagr__idDes__6ABF9A38">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="0..1" />
     <End Type="DBSEModel.LoadDiagrams" Role="LoadDiagrams" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1261,7 +1183,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Manufactu__idDes__08051905">
+  <Association Name="FK__Manufactu__idDes__0667B4AD">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.Manufacturers" Role="Manufacturers" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1273,7 +1195,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Materials__idDes__698091E5">
+  <Association Name="FK__Materials__idDes__67E32D8D">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.Materials" Role="Materials" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1285,7 +1207,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Norms__idDescrip__688C6DAC">
+  <Association Name="FK__Norms__idDescrip__66EF0954">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.Norms" Role="Norms" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1297,7 +1219,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Packages__idDesc__01581B76">
+  <Association Name="FK__Packages__idDesc__7FBAB71E">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.Packages" Role="Packages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1309,7 +1231,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Perforati__idDes__67984973">
+  <Association Name="FK__Perforati__idDes__65FAE51B">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.Perforations" Role="Perforations" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1321,7 +1243,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Products__idDesc__7121B3AD">
+  <Association Name="FK__Products__idDesc__6F844F55">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.Products" Role="Products" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1333,7 +1255,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__SubGroups__idDes__5C2696C7">
+  <Association Name="FK__SubGroups__idDes__5A89326F">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.SubGroups" Role="SubGroups" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1345,7 +1267,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Tables__idDescri__08F93D3E">
+  <Association Name="FK__Tables__idDescri__075BD8E6">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="0..1" />
     <End Type="DBSEModel.Tables" Role="Tables" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1357,7 +1279,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Units__idDescrip__77CEB13C">
+  <Association Name="FK__Units__idDescrip__76314CE4">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.Units" Role="Units" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1369,7 +1291,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VendorCod__idDes__7B9F4220">
+  <Association Name="FK__VendorCod__idDes__7A01DDC8">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.VendorCodes" Role="VendorCodes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1381,7 +1303,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Views__idDescrip__109A5F06">
+  <Association Name="FK__Views__idDescrip__0EFCFAAE">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="0..1" />
     <End Type="DBSEModel.Views" Role="Views" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1393,7 +1315,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ViewTypes__idDes__0FA63ACD">
+  <Association Name="FK__ViewTypes__idDes__0E08D675">
     <End Type="DBSEModel.Descriptors" Role="Descriptors" Multiplicity="1" />
     <End Type="DBSEModel.ViewTypes" Role="ViewTypes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1405,7 +1327,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Descripto__idRes__0BD5A9E9">
+  <Association Name="FK__Descripto__idRes__0A384591">
     <End Type="DBSEModel.Resources" Role="Resources" Multiplicity="1" />
     <End Type="DBSEModel.DescriptorsResources" Role="DescriptorsResources" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1417,7 +1339,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Descripto__idRes__0CC9CE22">
+  <Association Name="FK__Descripto__idRes__0B2C69CA">
     <End Type="DBSEModel.ResourceTypes" Role="ResourceTypes" Multiplicity="0..1" />
     <End Type="DBSEModel.DescriptorsResources" Role="DescriptorsResources" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1429,7 +1351,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__SubGroups__idGro__5D1ABB00">
+  <Association Name="FK__SubGroups__idGro__5B7D56A8">
     <End Type="DBSEModel.Groups" Role="Groups" Multiplicity="0..1" />
     <End Type="DBSEModel.SubGroups" Role="SubGroups" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1441,7 +1363,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__GroupsApp__idSub__6E454702">
+  <Association Name="FK__GroupsApp__idSub__6CA7E2AA">
     <End Type="DBSEModel.SubGroups" Role="SubGroups" Multiplicity="0..1" />
     <End Type="DBSEModel.GroupsApplications" Role="GroupsApplications" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1453,7 +1375,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__SubGroups__idLoa__5E0EDF39">
+  <Association Name="FK__SubGroups__idLoa__5C717AE1">
     <End Type="DBSEModel.LoadDiagrams" Role="LoadDiagrams" Multiplicity="0..1" />
     <End Type="DBSEModel.SubGroups" Role="SubGroups" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1465,7 +1387,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VendorCod__idMan__7AAB1DE7">
+  <Association Name="FK__VendorCod__idMan__790DB98F">
     <End Type="DBSEModel.Manufacturers" Role="Manufacturers" Multiplicity="1" />
     <End Type="DBSEModel.VendorCodes" Role="VendorCodes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1477,7 +1399,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Materials__idMat__6A74B61E">
+  <Association Name="FK__Materials__idMat__68D751C6">
     <End Type="DBSEModel.Norms" Role="Norms" Multiplicity="0..1" />
     <End Type="DBSEModel.Materials" Role="Materials" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1489,7 +1411,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Materials__idPre__6B68DA57">
+  <Association Name="FK__Materials__idPre__69CB75FF">
     <End Type="DBSEModel.Norms" Role="Norms" Multiplicity="0..1" />
     <End Type="DBSEModel.Materials" Role="Materials" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1501,7 +1423,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Products__idMate__74F24491">
+  <Association Name="FK__Products__idMate__7354E039">
     <End Type="DBSEModel.Materials" Role="Materials" Multiplicity="0..1" />
     <End Type="DBSEModel.Products" Role="Products" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1513,7 +1435,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Products__idNorm__7215D7E6">
+  <Association Name="FK__Products__idNorm__7078738E">
     <End Type="DBSEModel.Norms" Role="Norms" Multiplicity="0..1" />
     <End Type="DBSEModel.Products" Role="Products" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1525,7 +1447,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Products__idPack__76DA8D03">
+  <Association Name="FK__Products__idPack__753D28AB">
     <End Type="DBSEModel.Packages" Role="Packages" Multiplicity="0..1" />
     <End Type="DBSEModel.Products" Role="Products" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1537,7 +1459,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UnitsPaka__idPac__0528AC5A">
+  <Association Name="FK__UnitsPaka__idPac__038B4802">
     <End Type="DBSEModel.Packages" Role="Packages" Multiplicity="1" />
     <End Type="DBSEModel.UnitsPakages" Role="UnitsPakages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1549,7 +1471,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Products__idPerf__75E668CA">
+  <Association Name="FK__Products__idPerf__74490472">
     <End Type="DBSEModel.Perforations" Role="Perforations" Multiplicity="0..1" />
     <End Type="DBSEModel.Products" Role="Products" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1561,7 +1483,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UnitsPerf__idPer__024C3FAF">
+  <Association Name="FK__UnitsPerf__idPer__00AEDB57">
     <End Type="DBSEModel.Perforations" Role="Perforations" Multiplicity="1" />
     <End Type="DBSEModel.UnitsPerforations" Role="UnitsPerforations" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1573,7 +1495,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Products__idSubG__7309FC1F">
+  <Association Name="FK__Products__idSubG__716C97C7">
     <End Type="DBSEModel.SubGroups" Role="SubGroups" Multiplicity="0..1" />
     <End Type="DBSEModel.Products" Role="Products" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1585,7 +1507,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductsA__idAna__7D878A92">
+  <Association Name="FK__ProductsA__idAna__7BEA263A">
     <End Type="DBSEModel.Products" Role="Products" Multiplicity="0..1" />
     <End Type="DBSEModel.ProductsAnalogs" Role="ProductsAnalogs" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1597,7 +1519,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductsA__idOri__7C936659">
+  <Association Name="FK__ProductsA__idOri__7AF60201">
     <End Type="DBSEModel.Products" Role="Products" Multiplicity="0..1" />
     <End Type="DBSEModel.ProductsAnalogs" Role="ProductsAnalogs" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1609,7 +1531,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductsV__idPro__78C2D575">
+  <Association Name="FK__ProductsV__idPro__7725711D">
     <End Type="DBSEModel.Products" Role="Products" Multiplicity="1" />
     <End Type="DBSEModel.ProductsVendorCodes" Role="ProductsVendorCodes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1621,7 +1543,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UnitsProd__idPro__7E7BAECB">
+  <Association Name="FK__UnitsProd__idPro__7CDE4A73">
     <End Type="DBSEModel.Products" Role="Products" Multiplicity="1" />
     <End Type="DBSEModel.UnitsProducts" Role="UnitsProducts" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1633,7 +1555,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductsV__idCod__79B6F9AE">
+  <Association Name="FK__ProductsV__idCod__78199556">
     <End Type="DBSEModel.VendorCodes" Role="VendorCodes" Multiplicity="1" />
     <End Type="DBSEModel.ProductsVendorCodes" Role="ProductsVendorCodes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1645,7 +1567,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ViewsTabl__idTab__0DBDF25B">
+  <Association Name="FK__ViewsTabl__idTab__0C208E03">
     <End Type="DBSEModel.Tables" Role="Tables" Multiplicity="0..1" />
     <End Type="DBSEModel.ViewsTables" Role="ViewsTables" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1657,7 +1579,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UnitsPaka__idUni__061CD093">
+  <Association Name="FK__UnitsPaka__idUni__047F6C3B">
     <End Type="DBSEModel.Units" Role="Units" Multiplicity="0..1" />
     <End Type="DBSEModel.UnitsPakages" Role="UnitsPakages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1669,7 +1591,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UnitsPerf__idUni__034063E8">
+  <Association Name="FK__UnitsPerf__idUni__01A2FF90">
     <End Type="DBSEModel.Units" Role="Units" Multiplicity="1" />
     <End Type="DBSEModel.UnitsPerforations" Role="UnitsPerforations" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1681,7 +1603,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UnitsProd__idUni__7F6FD304">
+  <Association Name="FK__UnitsProd__idUni__7DD26EAC">
     <End Type="DBSEModel.Units" Role="Units" Multiplicity="0..1" />
     <End Type="DBSEModel.UnitsProducts" Role="UnitsProducts" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1693,7 +1615,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UnitsPaka__idTyp__0710F4CC">
+  <Association Name="FK__UnitsPaka__idTyp__05739074">
     <End Type="DBSEModel.UnitsTypes" Role="UnitsTypes" Multiplicity="0..1" />
     <End Type="DBSEModel.UnitsPakages" Role="UnitsPakages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1705,7 +1627,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UnitsPerf__idTyp__04348821">
+  <Association Name="FK__UnitsPerf__idTyp__029723C9">
     <End Type="DBSEModel.UnitsTypes" Role="UnitsTypes" Multiplicity="1" />
     <End Type="DBSEModel.UnitsPerforations" Role="UnitsPerforations" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1717,7 +1639,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UnitsProd__idTyp__0063F73D">
+  <Association Name="FK__UnitsProd__idTyp__7EC692E5">
     <End Type="DBSEModel.UnitsTypes" Role="UnitsTypes" Multiplicity="0..1" />
     <End Type="DBSEModel.UnitsProducts" Role="UnitsProducts" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1729,7 +1651,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Views__idType__118E833F">
+  <Association Name="FK__Views__idType__0FF11EE7">
     <End Type="DBSEModel.ViewTypes" Role="ViewTypes" Multiplicity="0..1" />
     <End Type="DBSEModel.Views" Role="Views" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1741,7 +1663,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ViewsTabl__idVie__0EB21694">
+  <Association Name="FK__ViewsTabl__idVie__0D14B23C">
     <End Type="DBSEModel.Views" Role="Views" Multiplicity="0..1" />
     <End Type="DBSEModel.ViewsTables" Role="ViewsTables" Multiplicity="*" />
     <ReferentialConstraint>

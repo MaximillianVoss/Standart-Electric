@@ -21,7 +21,7 @@ namespace База_артикулов.Модели
         public string URL_изображения_подгруппы { get; set; }
         public Nullable<int> ID_группы { get; set; }
         public Nullable<int> ID_схемы_нагрузок { get; set; }
-        public Nullable<int> ID_дескриптора { get; set; }
+        public Nullable<int> ID_дескриптора_схемы_нагрузок { get; set; }
         public string Наименование_схемы_нагрузок { get; set; }
         public string Сокращенное_наименование_схемы_нагрузок { get; set; }
         public string Отображаемое_название_схемы_нагрузок { get; set; }
