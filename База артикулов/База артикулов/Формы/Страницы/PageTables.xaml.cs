@@ -426,7 +426,20 @@ namespace База_артикулов.Формы.Страницы
 
         }
 
+        private void miAdd_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void miEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void miDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
     #endregion
 }
