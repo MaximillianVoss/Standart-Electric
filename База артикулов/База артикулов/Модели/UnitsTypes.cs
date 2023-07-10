@@ -17,7 +17,7 @@ namespace База_артикулов.Модели
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UnitsTypes()
         {
-            this.UnitsPakages = new HashSet<UnitsPakages>();
+            this.UnitsPackages = new HashSet<UnitsPackages>();
             this.UnitsPerforations = new HashSet<UnitsPerforations>();
             this.UnitsProducts = new HashSet<UnitsProducts>();
         }
@@ -26,7 +26,7 @@ namespace База_артикулов.Модели
         public string title { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UnitsPakages> UnitsPakages { get; set; }
+        public virtual ICollection<UnitsPackages> UnitsPackages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UnitsPerforations> UnitsPerforations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

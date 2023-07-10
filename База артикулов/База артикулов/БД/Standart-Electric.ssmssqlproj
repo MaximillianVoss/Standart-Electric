@@ -49,6 +49,12 @@
           <AssociatedConnUserName />
           <FullPath>БД.Развертывание.sql</FullPath>
         </FileNode>
+        <FileNode Name="БД.Развертывание.Иван.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-BBFM8MMD\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LAPTOP-BBFM8MMD\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>БД.Развертывание.Иван.sql</FullPath>
+        </FileNode>
         <FileNode Name="Представление ProductsViewDisp.sql">
           <AssociatedConnectionMoniker />
           <AssociatedConnSrvName />

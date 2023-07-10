@@ -218,9 +218,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UnitsPakages">
-      <EntityTypeMapping TypeName="DBSEModel.UnitsPakages">
-        <MappingFragment StoreEntitySet="UnitsPakages">
+    <EntitySetMapping Name="UnitsPackages">
+      <EntityTypeMapping TypeName="DBSEModel.UnitsPackages">
+        <MappingFragment StoreEntitySet="UnitsPackages">
           <ScalarProperty Name="Value" ColumnName="Value" />
           <ScalarProperty Name="idType" ColumnName="idType" />
           <ScalarProperty Name="idUnit" ColumnName="idUnit" />

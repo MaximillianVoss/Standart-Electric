@@ -390,7 +390,7 @@ AS
     FROM
         Packages PK
         JOIN DescriptorsView DV ON PK.[idDescriptor] = DV.[ID дескриптора]
-        LEFT JOIN UnitsPakages UP ON UP.idPackage = PK.id
+        LEFT JOIN UnitsPackages UP ON UP.idPackage = PK.id
         LEFT JOIN UnitsView UV ON UV.[ID единицы измерения] = UP.idUnit
         LEFT JOIN UnitsTypesView UTV ON UTV.[ID типа измерения] = UP.idType
 );

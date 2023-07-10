@@ -22,8 +22,6 @@ namespace База_артикулов.Формы.Страницы
     public partial class PageImport : CustomPage
     {
 
-
-
         #region Поля
         private Log log;
         private ExcelParser excelParser;
@@ -71,13 +69,17 @@ namespace База_артикулов.Формы.Страницы
         #endregion
 
         #region Свойства
-        private ExcelParser ExcelParser { get => this.excelParser; set => this.excelParser = value; }
-        public Log Log { get => this.log; set => this.log = value; }
-        public double Progress
+        private double Progress
         {
             get => this.pbProgress.Value;
             set => this.pbProgress.Value = value;
         }
+        /// <summary>
+        /// Число файлов для импорта
+        /// </summary>
+        private int totalRowsLeft { set; get; }
+        private ExcelParser ExcelParser { get => this.excelParser; set => this.excelParser = value; }
+        public Log Log { get => this.log; set => this.log = value; }
         #endregion
 
         #region Методы
@@ -286,6 +288,12 @@ namespace База_артикулов.Формы.Страницы
             foreach (string path in filesPath)
             {
                 this.Log.Add("Обработка файла {0}", Path.GetFileName(path));
+                int rowsCount = File.ReadLines(path).Count();
+                if (this.isContainsHeaders)
+                    rowsCount--;
+                if (this.isContainsDescription)
+                    rowsCount--;
+                this.totalRowsLeft += rowsCount;
                 var tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(p => p.PropertyType.Name.StartsWith("DbSet") && p.Name == Path.GetFileNameWithoutExtension(path));
                 #region Если таблицы нет в БД
                 if (tableProperty == null)
@@ -490,6 +498,7 @@ namespace База_артикулов.Формы.Страницы
             this.InitializeComponent();
             this.UpdateChbHeaders();
             this.UpdateChbDescriptions();
+            this.totalRowsLeft = 0;
             this.pbProgress.Maximum = 100;
             this.ExcelParser = new ExcelParser();
             this.Log = new Log();
@@ -592,7 +601,19 @@ namespace База_артикулов.Формы.Страницы
         }
         private void btnImportOne_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            try
+            {
+                #region Получение списка файлов от пользователя
+                List<string> fileNames = this.GetLoadFilePath("Файлы Excel(*.xlsx,*.csv)|*.xlsx;*.csv|Книга Excel|*.xlsx|CSV UTF-8|*.csv", true, 1).ToList();
+                #endregion
 
+                _ = this.UpdateSelectedItems(fileNames);
+                this.ImportFiles(fileNames, this.isContainsHeaders, this.isContainsDescription);
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
         private void btnImportAll_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -623,9 +644,14 @@ namespace База_артикулов.Формы.Страницы
                 this.ShowError(ex);
             }
         }
+
+
         #endregion
 
-
-
+        private void CustomPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.gbProgress.Visibility = System.Windows.Visibility.Collapsed;
+            this.pbProgress.Visibility = System.Windows.Visibility.Collapsed;
+        }
     }
 }

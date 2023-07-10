@@ -222,6 +222,9 @@
     <Compile Include="Модели\TablesView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Модели\UnitsPackages.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Модели\UnitsTypesView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
@@ -254,6 +257,9 @@
     <Compile Include="Формы\FilesWindow.xaml.cs">
       <DependentUpon>FilesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Формы\WindowEdit.xaml.cs">
+      <DependentUpon>WindowEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Формы\WindowMain.xaml.cs">
       <DependentUpon>WindowMain.xaml</DependentUpon>
     </Compile>
@@ -271,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Формы\ImportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Формы\WindowEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -315,9 +325,6 @@
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\Units.cs">
-      <DependentUpon>ProductsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Модели\UnitsPakages.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\UnitsPerforations.cs">

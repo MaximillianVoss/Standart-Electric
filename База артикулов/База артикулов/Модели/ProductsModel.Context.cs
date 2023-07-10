@@ -50,7 +50,7 @@ namespace База_артикулов.Модели
         public virtual DbSet<SubGroups> SubGroups { get; set; }
         public virtual DbSet<Tables> Tables { get; set; }
         public virtual DbSet<Units> Units { get; set; }
-        public virtual DbSet<UnitsPakages> UnitsPakages { get; set; }
+        public virtual DbSet<UnitsPackages> UnitsPackages { get; set; }
         public virtual DbSet<UnitsPerforations> UnitsPerforations { get; set; }
         public virtual DbSet<UnitsProducts> UnitsProducts { get; set; }
         public virtual DbSet<UnitsTypes> UnitsTypes { get; set; }

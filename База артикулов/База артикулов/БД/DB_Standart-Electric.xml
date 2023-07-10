@@ -596,7 +596,7 @@
                   <part>id</part>
             </key>
       </table>
-      <table x="295" y="764" name="UnitsPakages">
+      <table x="295" y="763" name="UnitsPackages">
             <row name="id" null="0" autoincrement="1">
                   <datatype>int</datatype>
                   <default>NULL</default>
@@ -761,7 +761,7 @@
                   <part>id</part>
             </key>
       </table>
-      <table x="523" y="1022.1571960449219" name="Views">
+      <table x="523" y="1022" name="Views">
             <row name="id" null="1" autoincrement="1">
                   <datatype>int</datatype>
                   <default>NULL</default>

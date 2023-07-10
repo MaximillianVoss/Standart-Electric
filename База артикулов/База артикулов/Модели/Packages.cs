@@ -18,7 +18,7 @@ namespace База_артикулов.Модели
         public Packages()
         {
             this.Products = new HashSet<Products>();
-            this.UnitsPakages = new HashSet<UnitsPakages>();
+            this.UnitsPackages = new HashSet<UnitsPackages>();
         }
     
         public int id { get; set; }
@@ -28,6 +28,6 @@ namespace База_артикулов.Модели
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UnitsPakages> UnitsPakages { get; set; }
+        public virtual ICollection<UnitsPackages> UnitsPackages { get; set; }
     }
 }

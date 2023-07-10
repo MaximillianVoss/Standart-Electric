@@ -265,7 +265,7 @@ CREATE TABLE [UnitsPerforations]
 ) ON [PRIMARY]
 GO
 
-CREATE TABLE [UnitsPakages]
+CREATE TABLE [UnitsPackages]
 (
     [id]        INT   NOT NULL IDENTITY (1, 1) ,
     [idPackage] INT   NOT NULL ,
@@ -440,11 +440,11 @@ ALTER TABLE [UnitsPerforations] ADD FOREIGN KEY (idUnit) REFERENCES [Units] ([id
 
 ALTER TABLE [UnitsPerforations] ADD FOREIGN KEY (idType) REFERENCES [UnitsTypes] ([id]);
 
-ALTER TABLE [UnitsPakages] ADD FOREIGN KEY (idPackage) REFERENCES [Packages] ([id]);
+ALTER TABLE [UnitsPackages] ADD FOREIGN KEY (idPackage) REFERENCES [Packages] ([id]);
 
-ALTER TABLE [UnitsPakages] ADD FOREIGN KEY (idUnit) REFERENCES [Units] ([id]);
+ALTER TABLE [UnitsPackages] ADD FOREIGN KEY (idUnit) REFERENCES [Units] ([id]);
 
-ALTER TABLE [UnitsPakages] ADD FOREIGN KEY (idType) REFERENCES [UnitsTypes] ([id]);
+ALTER TABLE [UnitsPackages] ADD FOREIGN KEY (idType) REFERENCES [UnitsTypes] ([id]);
 
 ALTER TABLE [Manufacturers] ADD FOREIGN KEY (idDescriptor) REFERENCES [Descriptors] ([id]);
 

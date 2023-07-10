@@ -12,7 +12,7 @@ namespace База_артикулов.Модели
     using System;
     using System.Collections.Generic;
     
-    public partial class UnitsPakages
+    public partial class UnitsPackages
     {
         public int id { get; set; }
         public int idPackage { get; set; }

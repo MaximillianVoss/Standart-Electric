@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,15 +17,14 @@ namespace База_артикулов.Формы.Страницы
 {
     public class TableData
     {
+        public String title { set; get; }
+        public String titleDisplay { set; get; }
+        /// <summary>
+        /// Тип элементов, которые хранятся в коллекции
+        /// </summary>
+        public Type itemsType { set; get; }
         public List<string> ColumnNames { get; set; }
         public IEnumerable Rows { get; set; }
-
-        public List<string> GetCorrectColumnNames()
-        {
-            if (this.ColumnNames == null)
-                return null;
-            return this.ColumnNames.Select(x => x.Replace('_', ' ')).ToList();
-        }
     }
     /// <summary>
     /// Логика взаимодействия для PageTables.xaml
@@ -32,40 +32,18 @@ namespace База_артикулов.Формы.Страницы
     public partial class PageTables : CustomPage
     {
         #region Поля
-        private Dictionary<string, string> tablesEngRusNames = new Dictionary<string, string>()
-        {
-            //{ "ArticulBase","Главная таблица" },
-            //{ "BIMLibraryFile","Библиотека БИМ"},
-            //{ "Covers","Покрытия"},
-            //{ "DrawBlocksFile","Блоки"},
-            //{ "EdIzm","Единицы измерения"},
-            //{ "GroupsInApplication","Группы применения"},
-            //{ "LoadTypePictures","Схемы нагрузки"},
-            //{ "Materials","Метриалы"},
-            //{ "Norms","Нормативы"},
-            //{ "PerforationSizes","Размеры перфорации"},
-            //{ "TovarApplication","Применения"},
-            //{ "TovarClasses","Товарные классы"},
-            //{ "TovarDirections","Товарные направления"},
-            //{ "TovarGroups","Товарные группы"},
-            //{ "TovarSubGroups","Товарные подгруппы"},
-            //{ "TypicalAlbums","Типовые альбомы"},
-            //{ "vEdIzm" ,"Единицы измерения (представление)"}
 
-        };
-        private Dictionary<string, string> tableRusEngNames = new Dictionary<string, string>();
-        private Object tableItems;
-        private Type dbSetType;
-        private int selectedItemId;
         #endregion
 
         #region Свойства
-        public Type DbSetType { get => this.dbSetType; set => this.dbSetType = value; }
-        public int SelectedItemId { get => this.selectedItemId; set => this.selectedItemId = value; }
+        public Type DbSetType { set; get; }
+        public object treeViewSelectedObject { set; get; }
+        public int IdSelectedItem { set; get; }
         #endregion
 
         #region Методы
 
+        #region Работа с таблицей
         /// <summary>
         /// 
         /// </summary>
@@ -93,25 +71,39 @@ namespace База_артикулов.Формы.Страницы
         /// </summary>
         /// <param name="tableName"></param>
         /// <returns></returns>
-        private TableData GetTable(String tableName)
+        private TableData GetTable(string tableName)
         {
             var view = this.DB.ViewsTablesView.FirstOrDefault(x => x.Отображаемое_название_таблицы == tableName);
-            var tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(
-                p => p.PropertyType.Name.StartsWith("DbSet") &&
-                p.Name == view.Наименование_представления);
+            if (view == null)
+                throw new Exception($"Не найдена таблица с именем {tableName}");
 
-            if (tableProperty != null)
+            var tableProperty = this.DB.GetType()
+                .GetProperties()
+                .FirstOrDefault(p => p.PropertyType.Name.StartsWith("DbSet") && p.Name == view.Наименование_представления);
+
+            if (tableProperty == null)
+                throw new Exception($"Не найдено свойство DbSet для таблицы {tableName}");
+
+            var dbSet = tableProperty.GetValue(this.DB, null);
+            if (dbSet == null)
+                throw new Exception($"Не удалось получить значение DbSet для таблицы {tableName}");
+
+            if (!dbSet.GetType().IsGenericType || !dbSet.GetType().GetGenericArguments().Any())
+                throw new Exception("Не удалось получить тип данных для этой таблицы!");
+
+            Type dbSetType = dbSet.GetType().GetGenericArguments().First();
+            var collectionWithType = typeof(ObservableCollection<>).MakeGenericType(dbSetType);
+            var tableItems = Activator.CreateInstance(collectionWithType, dbSet);
+            var columnNames = dbSetType.GetProperties().Select(p => p.Name).ToList();
+
+            return new TableData
             {
-                var dbSet = tableProperty.GetValue(this.DB, null);
-                Type dbSetType = dbSet.GetType().GetGenericArguments().First();
-                var collectionWithType = typeof(ObservableCollection<>).MakeGenericType(dbSetType);
-                this.tableItems = Activator.CreateInstance(collectionWithType, dbSet);
-                var columnNames = dbSetType.GetProperties().Select(p => p.Name).ToList();
-
-                return new TableData { ColumnNames = columnNames, Rows = (IEnumerable)this.tableItems };
-            }
-
-            return null;
+                title = view.Наименование_представления,
+                titleDisplay = view.Отображаемое_название_представления,
+                itemsType = dbSetType,
+                ColumnNames = columnNames,
+                Rows = (IEnumerable)tableItems
+            };
         }
 
         /// <summary>
@@ -119,40 +111,44 @@ namespace База_артикулов.Формы.Страницы
         /// TODO: сделать экспорт для каждой таблицы
         /// </summary>
         /// <param name="outputFolderPath"></param>
-        private void Export(string outputFolderPath)
+        private void Export(string outputFilePath, bool isDeleteUnderline = true)
         {
             if (this.cmbTables.SelectedIndex != -1)
             {
                 var selectedTableName = this.cmbTables.SelectedItem.ToString();
                 var table = this.GetTable(selectedTableName);
-                var entityType = this.GetTableItemsType(selectedTableName);
 
-                if (table != null && entityType != null)
+                if (table != null && table.itemsType != null)
                 {
-                    var filePath = System.IO.Path.Combine(outputFolderPath, $"{selectedTableName}.csv");
-
-                    using (var writer = new StreamWriter(filePath, false, Encoding.UTF8))
+                    using (var writer = new StreamWriter(outputFilePath, false, Encoding.UTF8))
                     {
                         var entities = table.Rows.OfType<object>().ToList();
                         if (entities.Any())
                         {
-                            var propertyNames = entityType.GetProperties().Select(p => p.Name);
-                            var header = string.Join(",", propertyNames);
+                            var propertyNames = table.itemsType.GetProperties().Select(p => isDeleteUnderline ? p.Name.Replace("_", " ") : p.Name);
+
+                            string separator = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
+
+                            var header = string.Join(separator, propertyNames);
                             writer.WriteLine(header);
 
                             foreach (var entity in entities)
                             {
-                                var values = propertyNames.Select(p => entity.GetType().GetProperty(p)?.GetValue(entity)?.ToString());
-                                var line = string.Join(",", values);
+                                var values = propertyNames.Select(p =>
+                                {
+                                    var value = entity.GetType().GetProperty(isDeleteUnderline ? p.Replace(" ", "_") : p)?.GetValue(entity)?.ToString();
+                                    return string.IsNullOrEmpty(value) ? value : $"\"{value.Replace("\"", "\"\"")}\"";
+                                });
+
+                                var line = string.Join(separator, values);
                                 writer.WriteLine(line);
                             }
                         }
                     }
-
-                    this.ShowMessage("Таблица успешно экспортирована!");
                 }
             }
         }
+        #endregion
 
 
         #region Выпадающий список
@@ -174,7 +170,11 @@ namespace База_артикулов.Формы.Страницы
 
         private void UpdateDataGrid(string tableName)
         {
-            var tableData = this.GetTable(tableName);
+            this.UpdateDataGrid(this.GetTable(tableName));
+        }
+
+        private void UpdateDataGrid(TableData tableData)
+        {
             // Clear previous columns
             this.dgTable.AutoGenerateColumns = false;
             this.dgTable.Columns.Clear();
@@ -214,34 +214,34 @@ namespace База_артикулов.Формы.Страницы
         /// <param name="object"></param>
         private void FilterTableByTreeView(Type tableType, object @object)
         {
-            if (this.cmbTables.SelectedIndex != -1)
+            if (this.cmbTables.SelectedIndex == -1)
+                return;
+            TableData table = this.GetTable(this.cmbTables.SelectedItem);
+            if (table.itemsType != typeof(ProductsView) && !table.titleDisplay.Equals("Продукты", StringComparison.OrdinalIgnoreCase))
             {
-                IEnumerable table = this.GetTable(this.cmbTables.SelectedItem).Rows;
-                if (tableType == typeof(Products))
-                {
-                    List<Products> products = (List<Products>)this.ToList(table, tableType);
-                    products = products.Where(x => x.SubGroups != null).ToList();
-                    products = products.Where(x => x.SubGroups.Groups != null).ToList();
-                    products = products.Where(x => x.SubGroups.Groups.Classes != null).ToList();
-                    if (@object.GetType().BaseType == typeof(Classes))
-                    {
-                        Classes @class = (Classes)@object;
-                        products = products.Where(x => x.SubGroups.Groups.Classes.Descriptors.title == @class.Descriptors.title).ToList();
-                    }
-                    if (@object.GetType().BaseType == typeof(Groups))
-                    {
-                        Groups group = (Groups)@object;
-                        products = products.Where(x => x.SubGroups.Groups.Descriptors.title == group.Descriptors.title).ToList();
-                    }
-                    if (@object.GetType().BaseType == typeof(SubGroups))
-                    {
-                        SubGroups group = (SubGroups)@object;
-                        products = products.Where(x => x.SubGroups.Descriptors.title == group.Descriptors.title).ToList();
-                    }
-                    this.dgTable.ItemsSource = products;
-                }
+                this.UpdateDataGrid(this.cmbTables.SelectedItem);
+                return;
             }
+            IEnumerable<ProductsView> productsViews = table.Rows.OfType<ProductsView>();
+            switch (@object)
+            {
+                case Classes @class:
+                    productsViews = productsViews.Where(x => x.Наименование_класса == @class.Descriptors.title);
+                    break;
+
+                case Groups group:
+                    productsViews = productsViews.Where(x => x.Наименование_группы == group.Descriptors.title);
+                    break;
+
+                case SubGroups subGroup:
+                    productsViews = productsViews.Where(x => x.Наименование_подгруппы == subGroup.Descriptors.title);
+                    break;
+            }
+
+            table.Rows = productsViews.ToList();
+            this.UpdateDataGrid(table);
         }
+
 
         /// <summary>
         /// 
@@ -356,66 +356,74 @@ namespace База_артикулов.Формы.Страницы
             {
                 if (this.DbSetType != null && this.cmbTables.SelectedIndex != -1)
                 {
-                    var item = this.dgTable.SelectedItem;
-                    this.SelectedItemId = (int)this.GetObjectFieldValue(item, "id");
+                    if (this.dgTable.SelectedCells.Count > 0)
+                    {
+                        var table = this.GetTable(this.cmbTables.SelectedItem);
+                        int columnIndex = this.dgTable.SelectedCells[0].Column.DisplayIndex;
+                        if (table.ColumnNames.Count == 0)
+                            throw new Exception("В таблице нет столбцов!");
+                        var item = this.dgTable.SelectedItem;
+                        this.IdSelectedItem = (int)this.GetObjectFieldValue(item, table.ColumnNames[columnIndex]);
+                        // Now you have the selected column index
+                    }
                 }
             }
             catch (Exception ex)
             {
                 this.ShowError(ex.Message);
             }
-
         }
         private void tvGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (e.NewValue != null)
             {
+                this.treeViewSelectedObject = e.NewValue;
                 this.FilterTableByTreeView(this.DbSetType, ((TreeViewItemCustom)e.NewValue).Value);
             }
         }
+
+        #region Кнопки контекстного меню
+
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
 
         }
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (this.DbSetType == typeof(Products))
-            {
-                ProductWindow productWindow = new ProductWindow(this.DbSetType, this.selectedItemId);
-                productWindow.ShowDialog();
-            }
-        }
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
 
         }
-        private void btnImport_Click(object sender, RoutedEventArgs e)
+
+        #endregion
+
+
+        #region Кнопки верхнего меню
+
+        private void miExport_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                ImportWindow importWindow = new ImportWindow();
-                importWindow.ShowDialog();
-
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex);
-            }
-        }
-        private void btnExport_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using (var dialog = new FolderBrowserDialog())
+                using (var dialog = new SaveFileDialog())
                 {
-                    dialog.Description = "Select Output Folder";
-                    dialog.ShowNewFolderButton = true;
+                    dialog.Filter = "CSV files (*.csv)|*.csv|Excel Files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                    dialog.FilterIndex = 1;
+                    dialog.RestoreDirectory = true;
+
+                    var selectedTableName = "";
+                    if (this.cmbTables.SelectedIndex != -1)
+                    {
+                        selectedTableName = this.cmbTables.SelectedItem.ToString();
+                        dialog.FileName = selectedTableName;
+                    }
+                    else
+                    {
+                        throw new Exception("Не выбрана таблица для экспорта");
+                    }
 
                     if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        var outputFolderPath = dialog.SelectedPath;
-                        this.Export(outputFolderPath);
-                        this.ShowMessage("Экспорт завершен!");
+                        var outputFilePath = dialog.FileName;
+                        this.Export(outputFilePath);
+                        this.ShowMessage($"Экспорт таблицы {selectedTableName} завершен!");
                     }
                 }
             }
@@ -423,23 +431,32 @@ namespace База_артикулов.Формы.Страницы
             {
                 this.ShowError(ex);
             }
-
         }
-
         private void miAdd_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
         private void miEdit_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (this.DbSetType != typeof(ProductsView))
+                    throw new Exception("Редактирование других таблиц недоступно");
 
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+            ProductWindow productWindow = new ProductWindow(this.DbSetType, this.IdSelectedItem);
+            productWindow.ShowDialog();
         }
-
         private void miDelete_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+        #endregion
     }
     #endregion
 }

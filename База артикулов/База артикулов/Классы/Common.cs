@@ -48,7 +48,6 @@
                 public static string id = "id";
                 public static string idDescriptor = "idDescriptor";
             }
-
             public static class Path
             {
                 public static class Cloud
@@ -63,6 +62,16 @@
                     public static string imagesFolderName = "Изображения";
                     public static string imagesCachedFolderName = "Кешированные";
                     public static string cache = "Изображения/Кешированные/";
+                }
+            }
+            public static class Titles
+            {
+                public static class Windows
+                {
+                    public static string noAction = "Действие для окна не указано";
+                    public static string add = "Добавление элемента";
+                    public static string edit = "Редактирование элемента";
+                    public static string delete = "Удаление элемента";
                 }
             }
         }
