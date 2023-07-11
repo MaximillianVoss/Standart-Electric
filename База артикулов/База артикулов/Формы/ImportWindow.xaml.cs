@@ -427,9 +427,9 @@ namespace База_артикулов.Формы
                 {
                     this.Dispatcher.Invoke(() =>
                     {
-                        if (this.excelParser != null && this.excelParser.TotalCells != 0)
+                        if (this.excelParser != null && this.excelParser.CountLinesTotal != 0)
                         {
-                            this.Progress = 100 * this.ExcelParser.ReadCells / this.ExcelParser.TotalCells;
+                            this.Progress = 100 * this.ExcelParser.CountLinesCurrent / this.ExcelParser.CountLinesTotal;
                         }
                         else
                         {

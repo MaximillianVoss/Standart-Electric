@@ -6,6 +6,7 @@ BEGIN
 END
 --#endregion
 GO
+--#endregion
 USE [DBSE]
 GO
 --#region Очистка БД

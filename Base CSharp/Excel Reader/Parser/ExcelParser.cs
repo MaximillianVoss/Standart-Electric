@@ -23,14 +23,23 @@ namespace ExcelReader.Parser
         private Workbooks workbooks = null;
         private Workbook workbook = null;
         private Hashtable sheets;
-        private int readCells;
-        private int totalCells;
+        private int countLinesCurrent;
+        private int countLinesTotal;
         private Log log = new Log();
         #endregion
 
         #region Свойства
-        public int ReadCells => this.readCells;
-        public int TotalCells => this.totalCells;
+        /// <summary>
+        /// Обработанное число строк на данный момент
+        /// </summary>
+        public int CountLinesCurrent => this.countLinesCurrent;
+        /// <summary>
+        /// Общее число строк в данном файле
+        /// </summary>
+        public int CountLinesTotal => this.countLinesTotal;
+        /// <summary>
+        /// Лог действий
+        /// </summary>
         public Log Log => this.log;
         #endregion
 
@@ -112,8 +121,8 @@ namespace ExcelReader.Parser
             {
                 var reader = new StreamReader(path);
                 #region Подсчет прогресса выполнения
-                this.totalCells = System.IO.File.ReadAllLines(path).Length;
-                this.readCells = 0;
+                this.countLinesTotal = System.IO.File.ReadAllLines(path).Length;
+                this.countLinesCurrent = 0;
                 #endregion
                 for (int i = 0; !reader.EndOfStream; i++)
                 {
@@ -183,7 +192,7 @@ namespace ExcelReader.Parser
                         }
                     }
                     #endregion
-                    this.readCells++;
+                    this.countLinesCurrent++;
                 }
                 document.Sort();
             }
@@ -202,8 +211,8 @@ namespace ExcelReader.Parser
                 Worksheet worksheet = this.workbook.Worksheets[sheetName] as Worksheet;
                 Range range = worksheet.UsedRange;
                 #region Подсчет прогресса выполнения
-                this.totalCells = range.Columns.Count * range.Rows.Count;
-                this.readCells = 0;
+                this.countLinesTotal = range.Columns.Count * range.Rows.Count;
+                this.countLinesCurrent = 0;
                 #endregion
                 #region Запись строк в документ
                 #region Получение заголовков таблицы
@@ -220,7 +229,7 @@ namespace ExcelReader.Parser
                         {
                             document.Add(new ExcelField(String.Format("Столбец {0}", j)));
                         }
-                        this.readCells++;
+                        this.countLinesCurrent++;
                     }
                 }
                 #endregion
@@ -236,7 +245,7 @@ namespace ExcelReader.Parser
                         for (int j = 1; j <= range.Columns.Count; j++)
                         {
                             document.Headers[j - 1].Description = this.GetCellData(range, i, j);
-                            this.readCells++;
+                            this.countLinesCurrent++;
                         }
                     }
                     #endregion
@@ -251,7 +260,7 @@ namespace ExcelReader.Parser
                         for (int j = 1; j <= range.Columns.Count; j++)
                         {
                             @object.Add(new ExcelField(document.Headers[j - 1].Title, this.GetCellData(range, i, j), document.Headers[j - 1].Description));
-                            this.readCells++;
+                            this.countLinesCurrent++;
                         }
                         document.Add(@object);
                     }

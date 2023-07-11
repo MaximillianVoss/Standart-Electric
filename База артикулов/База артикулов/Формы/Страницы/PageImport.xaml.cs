@@ -27,6 +27,7 @@ namespace База_артикулов.Формы.Страницы
         private ExcelParser excelParser;
         private bool isContainsHeaders = true;
         private bool isContainsDescription = true;
+        #region Списки таблиц для начального заполнения БД
         private List<string> Таблицы_справочники = new List<string>()
         {
             "Tables.csv",
@@ -63,92 +64,78 @@ namespace База_артикулов.Формы.Страницы
             "Products.csv",
             "ProductsVendorCodes.csv",
             "UnitsPerforations.csv",
-            "UnitsPakages.csv",
+            "UnitsPackages.csv",
             "UnitsProducts.csv"
         };
         #endregion
+        #endregion
 
         #region Свойства
+        /// <summary>
+        /// Прогресс обработки файлов, работает с прогресс баром
+        /// </summary>
         private double Progress
         {
-            get => this.pbProgress.Value;
-            set => this.pbProgress.Value = value;
+            get => this.pbImportProgress.Value;
+            set => this.pbImportProgress.Value = value;
         }
         /// <summary>
-        /// Число файлов для импорта
+        /// Обработанное число строк в файлах для импорта
         /// </summary>
-        private int totalRowsLeft { set; get; }
+        private int CountCurrentRows { set; get; }
+        /// <summary>
+        /// Общее число строк в файлах для импорта
+        /// </summary>
+        private int CountTotalRows { set; get; }
+        /// <summary>
+        /// Парсер Excel
+        /// </summary>
         private ExcelParser ExcelParser { get => this.excelParser; set => this.excelParser = value; }
+        /// <summary>
+        /// Лог для записи и вывода сообщений
+        /// </summary>
         public Log Log { get => this.log; set => this.log = value; }
+        /// <summary>
+        /// Содержит ли таблица заголовки
+        /// </summary>
+        public bool IsContainsHeaders { get => this.isContainsHeaders; set => this.isContainsHeaders = value; }
+        /// <summary>
+        /// Содержит ли таблица строку описания заголовков - это вторая строка под заголовками
+        /// </summary>
+        public bool IsContainsDescription { get => this.isContainsDescription; set => this.isContainsDescription = value; }
         #endregion
 
         #region Методы
 
-        private void LogClear()
-        {
-            //this.lvLog.Items.Clear();
-        }
-
+        #region Работа с логом
         /// <summary>
-        /// Добавляет сообщение в лог
+        /// Обновляет лог
         /// </summary>
-        /// <param name="message"></param>
-        private void LogMessage(String message)
+        /// <returns></returns>
+        private async Task UpdateLog()
         {
             this.Dispatcher.Invoke(() =>
             {
-                //this.lvLog.Items.Add(String.Format("{0} : {1}", DateTime.Now, message));
+                this.gvLog.DataContext = null;
+                this.gvLog.DataContext = this.Log.ToTable().DefaultView;
+                if (this.gvLog.Items.Count > 0)
+                {
+                    var border = VisualTreeHelper.GetChild(this.gvLog, 0) as Decorator;
+                    if (border != null)
+                    {
+                        var scroll = border.Child as ScrollViewer;
+                        if (scroll != null)
+                        {
+                            scroll.ScrollToEnd();
+                        }
+                    }
+                }
+
             });
         }
+        #endregion
 
-        /// <summary>
-        /// Добавляет сообщение в лог
-        /// </summary>
-        /// <param name="format"></param>
-        /// <param name="args"></param>
-        private void LogMessage(string format, params object[] args)
-        {
-            this.LogMessage(String.Format(format, args));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
-        private void AddToLog(String message)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="format"></param>
-        /// <param name="args"></param>
-        private void AddToLog(string format, params object[] args)
-        {
-
-        }
-
-        /// <summary>
-        /// Получает список названий столбоц таблицы из БД
-        /// </summary>
-        /// <param name="tableName"></param>
-        /// <returns></returns>
-        private List<string> GetDBTableColumns(string tableName)
-        {
-            List<String> columns = new List<String>();
-            var tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(p => p.PropertyType.Name.StartsWith("DbSet") && p.Name == tableName);
-            var dbSet = tableProperty.GetValue(this.DB, null);
-            Type dbSetType = dbSet.GetType().GetGenericArguments().First();
-            var typeProperties = dbSetType.GetProperties();
-            foreach (var property in typeProperties)
-            {
-                columns.Add(property.Name);
-            }
-            return columns;
-        }
-
+        #region Импорт файлов
         /// <summary>
         /// Импортирует данные из указанных файлов
         /// </summary>
@@ -235,12 +222,12 @@ namespace База_артикулов.Формы.Страницы
                         #endregion
                     }
                     #endregion
+                    this.CountCurrentRows += this.ExcelParser.CountLinesCurrent;
                 }
                 else
                 {
                     this.Log.Add("Не удалось создать документ из файла '{0}'", Path.GetFileNameWithoutExtension(path));
                 }
-
                 return Task.CompletedTask;
             });
             return queries;
@@ -280,20 +267,26 @@ namespace База_артикулов.Формы.Страницы
         /// <exception cref="Exception"></exception>
         private async void ImportFiles(List<string> filesPath, bool isHasHeaders, bool isHasDescriptions)
         {
-            this.LogClear();
+            this.pbImportProgress.Title = Common.Strings.Messages.importStarted;
+            this.Log.Clear();
+            this.ShowProgress(true);
             if (filesPath == null || filesPath.Count == 0)
             {
                 throw new Exception("Указан некорректный путь до файлов!");
             }
             foreach (string path in filesPath)
             {
-                this.Log.Add("Обработка файла {0}", Path.GetFileName(path));
                 int rowsCount = File.ReadLines(path).Count();
-                if (this.isContainsHeaders)
+                if (this.IsContainsHeaders)
                     rowsCount--;
-                if (this.isContainsDescription)
+                if (this.IsContainsDescription)
                     rowsCount--;
-                this.totalRowsLeft += rowsCount;
+                this.CountTotalRows += rowsCount;
+            }
+            foreach (string path in filesPath)
+            {
+                this.Log.Add("Обработка файла {0}", Path.GetFileName(path));
+
                 var tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(p => p.PropertyType.Name.StartsWith("DbSet") && p.Name == Path.GetFileNameWithoutExtension(path));
                 #region Если таблицы нет в БД
                 if (tableProperty == null)
@@ -304,7 +297,7 @@ namespace База_артикулов.Формы.Страницы
                 #region Если таблица есть в БД
                 else
                 {
-                    List<string> queries = await this.Import(path, this.isContainsHeaders, this.isContainsDescription);
+                    List<string> queries = await this.Import(path, this.IsContainsHeaders, this.IsContainsDescription);
                     if (queries != null)
                     {
                         foreach (var query in queries)
@@ -334,29 +327,16 @@ namespace База_артикулов.Формы.Страницы
             }
             this.Log.Add("Обработка файлов завершена!");
         }
+        #endregion
 
-        /// <summary>
-        /// Добавляет путь до файлов и расширение для тестовых таблиц
-        /// </summary>
-        /// <param name="fileNames"></param>
-        /// <returns></returns>
-        private List<string> GetTestFilesList(List<string> fileNames)
-        {
-            string folderName = "C:\\Users\\ivan.ivanov\\Desktop\\Данные для импорта\\csv";
-            for (int i = 0; i < fileNames.Count; i++)
-            {
-                fileNames[i] = String.Format("{0}\\{1}", folderName, fileNames[i]);
-            }
-            return fileNames;
-        }
-
+        #region Работа с флажковыми переключателями для заголовков и описания 
         /// <summary>
         /// 
         /// </summary>
         private void UpdateChbHeaders()
         {
-            this.chbIsHasHeaders.IsChecked = this.isContainsHeaders;
-            if (this.isContainsHeaders)
+            this.chbIsHasHeaders.IsChecked = this.IsContainsHeaders;
+            if (this.IsContainsHeaders)
             {
                 this.chbIsHasHeaders.Content = Common.Strings.Controls.isContainsHeaders;
             }
@@ -371,8 +351,8 @@ namespace База_артикулов.Формы.Страницы
         /// </summary>
         private void UpdateChbDescriptions()
         {
-            this.chbIsHasDescriptions.IsChecked = this.isContainsDescription;
-            if (this.isContainsDescription)
+            this.chbIsHasDescriptions.IsChecked = this.IsContainsDescription;
+            if (this.IsContainsDescription)
             {
                 this.chbIsHasDescriptions.Content = Common.Strings.Controls.isContainsDescription;
             }
@@ -381,7 +361,22 @@ namespace База_артикулов.Формы.Страницы
                 this.chbIsHasDescriptions.Content = Common.Strings.Controls.isNotContainsDescription;
             }
         }
+        #endregion
 
+        #region Работа со списком выбранных файлов
+        /// <summary>
+        /// Получение списка файлов из указанной папки
+        /// </summary>
+        /// <param name="folderPath"></param>
+        /// <param name="extension"></param>
+        /// <returns></returns>
+        private List<string> GetFilesFromFolder(string folderPath, string extension = "*.csv")
+        {
+            // Получение списка имен файлов из указанной папки напрямую, без создания промежуточного списка
+            return Directory.GetFiles(folderPath, extension)
+                            .Select(filePath => Path.GetFileName(filePath))
+                            .ToList();
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -409,7 +404,9 @@ namespace База_артикулов.Формы.Страницы
                 }
             });
         }
+        #endregion
 
+        #region Работа с прогресс баром имопрта файлов
         /// <summary>
         /// Обновляет прогресс обработки файла
         /// </summary>
@@ -422,22 +419,21 @@ namespace База_артикулов.Формы.Страницы
                 {
                     this.Dispatcher.Invoke(() =>
                     {
-                        if (this.excelParser != null && this.excelParser.TotalCells != 0)
+                        if (this.excelParser != null && this.excelParser.CountLinesTotal != 0)
                         {
-                            this.Progress = 100 * this.ExcelParser.ReadCells / this.ExcelParser.TotalCells;
+                            if (this.pbImportProgress.Value > 0)
+                                this.pbImportProgress.Header = String.Format("Выполнено: {0:F0}%", this.pbImportProgress.Value);
+                            if (this.CountTotalRows != 0)
+                                this.Progress = 100 * (double)this.CountCurrentRows / this.CountTotalRows;
+                            else
+                                this.Progress = 100;
+
                         }
                         else
                         {
                             this.Progress = 0;
                         }
                     });
-
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        if (this.pbProgress.Value > 0)
-                            this.gbProgress.Header = String.Format("Выполнено:{0}", this.pbProgress.Value);
-                    });
-
                 }
                 catch (Exception ex)
                 {
@@ -446,50 +442,48 @@ namespace База_артикулов.Формы.Страницы
             });
         }
 
+
         /// <summary>
-        /// Обновляет лог
+        /// Скрывает или показывает элемент управления прогресса импорта файлов
         /// </summary>
+        /// <param name="isShow">Показывать прогресс импорта файлов или нет</param>
+        private void ShowProgress(bool isShow = true)
+        {
+            if (isShow)
+            {
+                this.pbImportProgress.Visibility = System.Windows.Visibility.Visible;
+                this.pbImportProgress.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                this.pbImportProgress.Visibility = System.Windows.Visibility.Collapsed;
+                this.pbImportProgress.Visibility = System.Windows.Visibility.Collapsed;
+            }
+
+        }
+        #endregion
+
+        #region Прочее
+        /// <summary>
+        /// Получает список названий столбоц таблицы из БД
+        /// </summary>
+        /// <param name="tableName"></param>
         /// <returns></returns>
-        private async Task UpdateLog()
+        private List<string> GetDBTableColumns(string tableName)
         {
-            this.Dispatcher.Invoke(() =>
-            {
-                this.gvLog.DataContext = null;
-                this.gvLog.DataContext = this.Log.ToTable().DefaultView;
-                if (this.gvLog.Items.Count > 0)
-                {
-                    var border = VisualTreeHelper.GetChild(this.gvLog, 0) as Decorator;
-                    if (border != null)
-                    {
-                        var scroll = border.Child as ScrollViewer;
-                        if (scroll != null)
-                        {
-                            scroll.ScrollToEnd();
-                        }
-                    }
-                }
-
-            });
-            await Task.Run(() =>
-            {
-                //List<LogMessage> messages = this.Log.Messages;
-                //for (int i = 0; i < messages.Count; i++)
-                //{
-                //    this.LogMessage(messages[i].Text);
-                //}
-            });
+            var tableProperty = this.DB.GetType()
+                                       .GetProperties()
+                                       .FirstOrDefault(p => p.PropertyType.Name.StartsWith("DbSet") && p.Name == tableName);
+            var dbSet = tableProperty?.GetValue(this.DB, null);
+            if (dbSet == null)
+                return new List<string>();
+            Type dbSetType = dbSet.GetType().GetGenericArguments().First();
+            return dbSetType.GetProperties()
+                            .Select(property => property.Name)
+                            .ToList();
         }
+        #endregion
 
-        private List<string> GetFilesFromFolder(string folderPath)
-        {
-            List<string> fileNames = new List<string>();
-            // Получение списка файлов из указанной папки
-            // Например, используя метод Directory.GetFiles
-            // Здесь предполагается, что файлы имеют расширение .csv, вы можете изменить это в соответствии с вашими требованиями
-            string[] filePaths = Directory.GetFiles(folderPath, "*.csv");
-            fileNames.AddRange(filePaths.Select(filePath => Path.GetFileName(filePath)));
-            return fileNames;
-        }
         #endregion
 
         #region Конструкторы/Деструкторы
@@ -498,8 +492,9 @@ namespace База_артикулов.Формы.Страницы
             this.InitializeComponent();
             this.UpdateChbHeaders();
             this.UpdateChbDescriptions();
-            this.totalRowsLeft = 0;
-            this.pbProgress.Maximum = 100;
+            this.CountTotalRows = 0;
+            this.pbImportProgress.Maximum = 100;
+            this.pbImportProgress.Title = Common.Strings.Messages.importNotStarted;
             this.ExcelParser = new ExcelParser();
             this.Log = new Log();
             this.Log.Messages.CollectionChanged += this.Log_CollectionChanged;
@@ -517,6 +512,10 @@ namespace База_артикулов.Формы.Страницы
         #endregion
 
         #region Обработчики событий
+        private void CustomPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.ShowProgress(false);
+        }
         private void Log_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             //list changed - an item was added.
@@ -541,7 +540,7 @@ namespace База_артикулов.Формы.Страницы
                 //fileNamesFromUser.AddRange(GetTestFilesList(this.Главные_таблицы));
                 #endregion
                 _ = this.UpdateSelectedItems(fileNames);
-                this.ImportFiles(fileNames, this.isContainsHeaders, this.isContainsDescription);
+                this.ImportFiles(fileNames, this.IsContainsHeaders, this.IsContainsDescription);
             }
             catch (Exception ex)
             {
@@ -558,12 +557,12 @@ namespace База_артикулов.Формы.Страницы
         }
         private void chbIsHasHeaders_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            this.isContainsHeaders = (bool)this.chbIsHasHeaders.IsChecked;
+            this.IsContainsHeaders = (bool)this.chbIsHasHeaders.IsChecked;
             this.UpdateChbHeaders();
         }
         private void chbIsHasDescriptions_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            this.isContainsDescription = (bool)this.chbIsHasDescriptions.IsChecked;
+            this.IsContainsDescription = (bool)this.chbIsHasDescriptions.IsChecked;
             this.UpdateChbDescriptions();
         }
         private void btnShowTables_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -608,7 +607,7 @@ namespace База_артикулов.Формы.Страницы
                 #endregion
 
                 _ = this.UpdateSelectedItems(fileNames);
-                this.ImportFiles(fileNames, this.isContainsHeaders, this.isContainsDescription);
+                this.ImportFiles(fileNames, this.IsContainsHeaders, this.IsContainsDescription);
             }
             catch (Exception ex)
             {
@@ -637,7 +636,7 @@ namespace База_артикулов.Формы.Страницы
                 }
 
                 _ = this.UpdateSelectedItems(fileNames);
-                this.ImportFiles(fileNames, this.isContainsHeaders, this.isContainsDescription);
+                this.ImportFiles(fileNames, this.IsContainsHeaders, this.IsContainsDescription);
             }
             catch (Exception ex)
             {
@@ -648,10 +647,5 @@ namespace База_артикулов.Формы.Страницы
 
         #endregion
 
-        private void CustomPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-            this.gbProgress.Visibility = System.Windows.Visibility.Collapsed;
-            this.pbProgress.Visibility = System.Windows.Visibility.Collapsed;
-        }
     }
 }

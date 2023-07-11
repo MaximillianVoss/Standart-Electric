@@ -1,11 +1,12 @@
 ﻿<local1:CustomPage 
       xmlns:local1="clr-namespace:База_артикулов.Формы"
-      x:Class="База_артикулов.Формы.Страницы.PageImport"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:База_артикулов.Формы.Страницы"
+      xmlns:CustomControlsWPF="clr-namespace:CustomControlsWPF;assembly=CustomControlsWPF"
+      x:Class="База_артикулов.Формы.Страницы.PageImport"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PageImport" Loaded="CustomPage_Loaded">
@@ -18,10 +19,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <GroupBox x:Name="gbProgress" Header="Прогресс обработки файлов" Margin="5,5,5,5" Grid.Row="3" Height="40">
-            <ProgressBar x:Name="pbProgress" Height="10" Margin="5,0,5,0" VerticalAlignment="Center" Foreground="#FF0D6EFD"/>
-        </GroupBox>
         <GroupBox x:Name="gbSelectedItems" Header="Выбранные файлы" Margin="5,5,5,5" Grid.Row="2">
             <ListView x:Name="lvSelectedItems" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListView.View>
@@ -47,6 +44,8 @@
                 <MenuItem x:Name="btnImportAll" Header="Иморт всех таблиц из указанной папки" Click="btnImportAll_Click" />
             </MenuItem>
         </Menu>
+
+        <CustomControlsWPF:LabeledProgressBar x:Name="pbImportProgress" Grid.Row="3" VerticalAlignment="Center" Height="40" Value="50" ForegroundColor="#FF0D6EFD" Margin="10,0,10,0"/>
 
     </Grid>
 </local1:CustomPage>

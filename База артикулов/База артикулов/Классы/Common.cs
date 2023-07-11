@@ -26,7 +26,8 @@
             }
             public static class Messages
             {
-
+                public static string importNotStarted = "Импорт файлов еще не запущен!";
+                public static string importStarted = "Импорт файлов запущен!";
             }
             public static class Controls
             {
@@ -73,6 +74,11 @@
                     public static string edit = "Редактирование элемента";
                     public static string delete = "Удаление элемента";
                 }
+                public static class Controls
+                {
+
+                }
+
             }
         }
     }
