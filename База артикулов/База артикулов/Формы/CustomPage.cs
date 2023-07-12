@@ -142,11 +142,15 @@ namespace База_артикулов.Формы
         #region Конструкторы/Деструкторы
         public CustomPage()
         {
+            #region Подпись на события при выборе дрегой строки подключения
             Settings.Connections.CurrentConnectionStringChanged += (newConnectionString) =>
-            {
-                this.DB = new DBSEEntities(newConnectionString);
-            };
+               {
+                   this.DB = new DBSEEntities(newConnectionString);
+               };
+            #endregion
+            #region Пересоздаем контекст БД в зависимости от выбранной стройки подключения
             this.DB = new DBSEEntities(Settings.Connections.CurrentConnectionString);
+            #endregion
         }
         #endregion
 
