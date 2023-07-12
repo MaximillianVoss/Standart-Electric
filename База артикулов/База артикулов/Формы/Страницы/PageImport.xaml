@@ -16,7 +16,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition x:Name="pbRow" Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <GroupBox x:Name="gbSelectedItems" Header="Выбранные файлы" Margin="5,5,5,5" Grid.Row="2">
@@ -32,7 +32,7 @@
         <GroupBox x:Name="gbLog" Header="Вывод" Margin="5,5,5,5" Grid.Row="4">
             <DataGrid x:Name="gvLog" ItemsSource="{Binding}"/>
         </GroupBox>
-        <GroupBox Header="Заголовок" Margin="5,60,5,5" Grid.Row="1" Height="40">
+        <GroupBox Header="Заголовок" Margin="5,60,5,5" Grid.Row="1">
             <CheckBox x:Name="chbIsHasHeaders" Content="CheckBox" VerticalAlignment="Top" Margin="0,0,-2,0" Checked="chbIsHasHeaders_Checked" IsChecked="False" Click="chbIsHasHeaders_Click"/>
         </GroupBox>
         <GroupBox Header="Описание столбцов" Margin="5,5,5,0" Grid.Row="1" Height="40" VerticalAlignment="Top">
@@ -45,7 +45,7 @@
             </MenuItem>
         </Menu>
 
-        <CustomControlsWPF:LabeledProgressBar x:Name="pbImportProgress" Grid.Row="3" VerticalAlignment="Center" Height="40" Value="50" ForegroundColor="#FF0D6EFD" Margin="10,0,10,0"/>
+        <CustomControlsWPF:LabeledProgressBar x:Name="pbImportProgress" Grid.Row="3" Value="50" ForegroundColor="#FF0D6EFD" Margin="10,0,10,0" Height="40"/>
 
     </Grid>
 </local1:CustomPage>

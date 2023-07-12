@@ -68,11 +68,11 @@ namespace CustomControlsWPF
         /// <summary>
         /// Видимость элемента управления
         /// </summary>
-        public new System.Windows.Visibility Visibility
-        {
-            set => this.gbMain.Visibility = value;
-            get => this.gbMain.Visibility;
-        }
+        //public new System.Windows.Visibility Visibility
+        //{
+        //    set => this.gbMain.Visibility = value;
+        //    get => this.gbMain.Visibility;
+        //}
         #endregion
 
         #region Методы

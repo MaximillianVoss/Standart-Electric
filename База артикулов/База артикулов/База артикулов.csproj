@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Классы\Common.cs" />
+    <Compile Include="Классы\Settings.cs" />
     <Compile Include="Классы\WDClient.cs" />
     <Compile Include="Классы\Дополнения\Covers.cs" />
     <Compile Include="Классы\Дополнения\Descriptors.cs" />
@@ -269,6 +270,9 @@
     <Compile Include="Формы\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Формы\Страницы\PageSettings.xaml.cs">
+      <DependentUpon>PageSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Формы\Страницы\PageTables.xaml.cs">
       <DependentUpon>PageTables.xaml</DependentUpon>
     </Compile>
@@ -357,6 +361,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Формы\TestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Формы\Страницы\PageSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

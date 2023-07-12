@@ -209,3 +209,11 @@ FROM
 --#region Проверка остальных таблиц/представлений
 
 --#endregion
+
+
+--#region Пример выборки для представления XXX
+SELECT
+    *
+FROM
+    XXX;
+--#endregion

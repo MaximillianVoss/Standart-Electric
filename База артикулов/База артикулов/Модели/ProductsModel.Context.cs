@@ -14,19 +14,24 @@ namespace База_артикулов.Модели
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+
     public partial class DBSEEntities : DbContext
     {
         public DBSEEntities()
             : base("name=DBSEEntities")
         {
         }
-    
+
+        public DBSEEntities(string connectionName)
+    : base($"name={connectionName}")
+        {
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Applications> Applications { get; set; }
         public virtual DbSet<BuisnessUnits> BuisnessUnits { get; set; }
         public virtual DbSet<Classes> Classes { get; set; }
@@ -82,17 +87,17 @@ namespace База_артикулов.Модели
         public virtual DbSet<ViewsTablesView> ViewsTablesView { get; set; }
         public virtual DbSet<ViewsView> ViewsView { get; set; }
         public virtual DbSet<ViewTypesView> ViewTypesView { get; set; }
-    
+
         public virtual int InsertProductImages()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertProductImages");
         }
-    
+
         public virtual int AddProductImagePaths()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddProductImagePaths");
         }
-    
+
         public virtual int AddSubGroupImagePaths()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddSubGroupImagePaths");

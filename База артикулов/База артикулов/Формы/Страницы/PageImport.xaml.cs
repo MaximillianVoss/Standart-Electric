@@ -158,7 +158,7 @@ namespace База_артикулов.Формы.Страницы
                         #region Удаление столбца idDescriptor
                         document.Remove(Common.Strings.Columns.idDescriptor);
                         #endregion
-                        var connectionString = ConfigurationManager.ConnectionStrings["DBSEEntities"].ConnectionString;
+                        var connectionString = ConfigurationManager.ConnectionStrings[Settings.Connections.CurrentConnectionString].ConnectionString;
                         string providerConnectionString = new EntityConnectionStringBuilder(connectionString).ProviderConnectionString;
                         using (SqlConnection connection = new SqlConnection(providerConnectionString))
                         {
@@ -498,6 +498,8 @@ namespace База_артикулов.Формы.Страницы
             this.ExcelParser = new ExcelParser();
             this.Log = new Log();
             this.Log.Messages.CollectionChanged += this.Log_CollectionChanged;
+
+
             #region Подсчет прогресса выполнения
             System.Timers.Timer timer = new System.Timers.Timer(100);
             timer.Elapsed += async (sender, e) => await this.UpdateProgress();

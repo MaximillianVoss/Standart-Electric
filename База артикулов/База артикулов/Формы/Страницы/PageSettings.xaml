@@ -1,0 +1,23 @@
+﻿<local1:CustomPage
+    xmlns:local1="clr-namespace:База_артикулов.Формы"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:База_артикулов.Формы.Страницы"
+      xmlns:CustomControlsWPF="clr-namespace:CustomControlsWPF;assembly=CustomControlsWPF" x:Class="База_артикулов.Формы.Страницы.PageSettings"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageSettings" Loaded="Page_Loaded">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <CustomControlsWPF:LabeledComboBox x:Name="cmbConnectionStrings" Margin="10,10,10,0" Height="75" VerticalAlignment="Top" Title="Доступные подключения к БД" SelectionChanged="cmbConnectionStrings_SelectionChanged"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnSave" Grid.Row="1" Margin="10,10,10,10" Height="40" Text="Сохранить настройки"/>
+
+    </Grid>
+</local1:CustomPage>

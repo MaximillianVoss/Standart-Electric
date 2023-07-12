@@ -202,6 +202,20 @@ namespace CustomControlsWPF
 
         #region Методы
         /// <summary>
+        /// Очищает элементы выпадающего списка
+        /// </summary>
+        public void Clear()
+        {
+            if (this.Items != null)
+            {
+                this.Items.Clear();
+            }
+            if (this.cbItems != null && this.cbItems.Items != null)
+            {
+                this.cbItems.Items.Clear();
+            }
+        }
+        /// <summary>
         /// Получает указанное свойство из объекта
         /// </summary>
         /// <param name="obj">объект</param>

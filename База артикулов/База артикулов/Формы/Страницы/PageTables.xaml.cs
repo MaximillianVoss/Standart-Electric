@@ -302,10 +302,16 @@ namespace База_артикулов.Формы.Страницы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageTables()
+        public PageTables() : base()
         {
-            this.InitializeComponent();
-            this.UpdateTablesComboBox();
+            try
+            {
+                this.InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
         #endregion
 
@@ -318,6 +324,8 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
+
+                this.UpdateTablesComboBox();
                 this.UpdateTreeView();
             }
             catch (Exception ex)

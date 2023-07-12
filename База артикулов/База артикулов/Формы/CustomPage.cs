@@ -140,7 +140,14 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Конструкторы/Деструкторы
-
+        public CustomPage()
+        {
+            Settings.Connections.CurrentConnectionStringChanged += (newConnectionString) =>
+            {
+                this.DB = new DBSEEntities(newConnectionString);
+            };
+            this.DB = new DBSEEntities(Settings.Connections.CurrentConnectionString);
+        }
         #endregion
 
         #region Операторы

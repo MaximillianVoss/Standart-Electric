@@ -1,0 +1,15 @@
+    'NormsView',
+    'UnitsView',
+    'UnitsTypesView',
+    'MaterialsView',
+    'ManufacturersView',
+    'ResourceTypesView',
+    'CoversView',
+    'PerforationsView',
+    'PackagesView',
+    'LoadDiagramsView',
+    'ProductsView'
+
+
+    UnitsPakages
+    UnitsPackages
