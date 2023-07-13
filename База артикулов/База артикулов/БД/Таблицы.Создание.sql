@@ -322,8 +322,9 @@ GO
 
 CREATE TABLE [ResourceTypes]
 (
-    [id]    INT           IDENTITY (1, 1) ,
-    [title] NVARCHAR(255) NOT NULL ,
+    [id]         INT           IDENTITY (1, 1) ,
+    [title]      NVARCHAR(255) NOT NULL ,
+    [extension ] VARCHAR(255) ,
     PRIMARY KEY ([id])
 ) ON [PRIMARY]
 GO

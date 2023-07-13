@@ -14,7 +14,8 @@ namespace База_артикулов.Модели
     
     public partial class ResourceTypesView
     {
-        public int ID_типа_ресурсов { get; set; }
+        public int ID_типа_ресурса { get; set; }
         public string Наименование_типа_ресурса { get; set; }
+        public string Расширение_ресурса { get; set; }
     }
 }

@@ -18,9 +18,9 @@ namespace База_артикулов.Модели
         public string Наименование_упаковки { get; set; }
         public string Сокращенное_наименование_упаковки { get; set; }
         public string Описание_упаковки { get; set; }
-        public Nullable<int> ID_единицы_измерения { get; set; }
-        public string Наименование_единицы_измерения { get; set; }
-        public Nullable<int> ID_типа_измерения { get; set; }
-        public string Наименование_типа_единицы_измерения { get; set; }
+        public Nullable<double> Вес_упаковки__кг { get; set; }
+        public Nullable<double> Ширина_упаковки__мм { get; set; }
+        public Nullable<double> Длина_упаковки__мм { get; set; }
+        public Nullable<double> Высота_упаковки__мм { get; set; }
     }
 }

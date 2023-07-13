@@ -1,0 +1,23 @@
+﻿id;title;titleRus;description
+;;;
+1;title;Наименование;
+2;titleShort;Наименование сокращенное;
+3;thickness;Толщина;
+4;type;Тип;
+5;description;Описание;
+6;Value;Значение;
+7;amountInPackage;Количество в упаковке;
+8;minimumOrder;Минимальный заказ;
+9;multiplicityOrder;Кратность заказа;
+10;pointLoadCapacity;Точечная нагрузка;
+11;distributedLoadCapacity;Распределенная нагрузка;
+12;isActual;Действующий артикул;
+13;isSale;Доступность в продаже;
+14;TIN;ИНН;
+15;siteURL;URL;
+16;OKEI;ОКЕИ;
+17;titleRus;Русское название;
+18;code;Код;
+19;fileURL;Ссылка на файл;
+20;imageURL;Ссылка на изображение;
+21;codeAccountant;Бухгалтерский код;

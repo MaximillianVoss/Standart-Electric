@@ -88,6 +88,7 @@
     <Compile Include="Классы\Settings.cs" />
     <Compile Include="Классы\WDClient.cs" />
     <Compile Include="Классы\Дополнения\Covers.cs" />
+    <Compile Include="Классы\Дополнения\DBSEEntities.cs" />
     <Compile Include="Классы\Дополнения\Descriptors.cs" />
     <Compile Include="Классы\Дополнения\Materials.cs" />
     <Compile Include="Классы\Дополнения\Norms.cs" />
@@ -193,6 +194,9 @@
     <Compile Include="Модели\ProductsAnalogs.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Модели\ProductsAnalogsView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Модели\ProductsModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -209,6 +213,15 @@
       <DependentUpon>ProductsModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Модели\ProductsView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Модели\ProductUnitsView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Модели\ResourcesView.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Модели\ResourcesViewProducts.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\ResourceTypes.cs">
@@ -275,6 +288,12 @@
     </Compile>
     <Compile Include="Формы\Страницы\PageTables.xaml.cs">
       <DependentUpon>PageTables.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Формы\Страницы\Редактирование\PageEditClass.xaml.cs">
+      <DependentUpon>PageEditClass.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Формы\Страницы\Редактирование\PageEditProduct.xaml.cs">
+      <DependentUpon>PageEditProduct.xaml</DependentUpon>
     </Compile>
     <Page Include="Формы\FilesWindow.xaml">
       <SubType>Designer</SubType>
@@ -369,6 +388,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Формы\Страницы\PageTables.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Формы\Страницы\Редактирование\PageEditClass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Формы\Страницы\Редактирование\PageEditProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

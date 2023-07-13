@@ -37,8 +37,15 @@ namespace База_артикулов.Формы.Страницы
 
         #region Свойства
         public Type DbSetType { set; get; }
-        public object treeViewSelectedObject { set; get; }
+        public object TreeViewSelectedObject { set; get; }
+        /// <summary>
+        /// ID элемента, выбранного в таблице
+        /// </summary>
         public int IdSelectedItem { set; get; }
+        /// <summary>
+        /// Элемент, выбранный в таблице
+        /// </summary>
+        public object SelectedItem { set; get; }
         #endregion
 
         #region Методы
@@ -149,7 +156,6 @@ namespace База_артикулов.Формы.Страницы
             }
         }
         #endregion
-
 
         #region Выпадающий список
 
@@ -324,7 +330,6 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-
                 this.UpdateTablesComboBox();
                 this.UpdateTreeView();
             }
@@ -370,9 +375,10 @@ namespace База_артикулов.Формы.Страницы
                         int columnIndex = this.dgTable.SelectedCells[0].Column.DisplayIndex;
                         if (table.ColumnNames.Count == 0)
                             throw new Exception("В таблице нет столбцов!");
-                        var item = this.dgTable.SelectedItem;
-                        this.IdSelectedItem = (int)this.GetObjectFieldValue(item, table.ColumnNames[columnIndex]);
+                        this.SelectedItem = this.dgTable.SelectedItem;
+                        this.IdSelectedItem = (int)this.GetObjectFieldValue(this.SelectedItem, table.ColumnNames[columnIndex]);
                         // Now you have the selected column index
+
                     }
                 }
             }
@@ -385,24 +391,43 @@ namespace База_артикулов.Формы.Страницы
         {
             if (e.NewValue != null)
             {
-                this.treeViewSelectedObject = e.NewValue;
+                this.TreeViewSelectedObject = e.NewValue;
                 this.FilterTableByTreeView(this.DbSetType, ((TreeViewItemCustom)e.NewValue).Value);
             }
         }
 
-        #region Кнопки контекстного меню
+        #region Кнопки контекстного меню таблицы
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                var windowEdit = new WindowEdit();
+                windowEdit.ShowDialog();
+                //this.SelectTable(this.cmbTables.SelectedItem);
+                //this.UpdateTreeView();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                var windowEdit = new WindowEdit(this.SelectedItem);
+                windowEdit.ShowDialog();
+                //this.SelectTable(this.cmbTables.SelectedItem);
+                //this.UpdateTreeView();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
 
         #endregion
-
 
         #region Кнопки верхнего меню
 
@@ -463,8 +488,21 @@ namespace База_артикулов.Формы.Страницы
         {
 
         }
-
         #endregion
+
+        #region Контекстное меню иерархического дерева
+        private void miTreeAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var windowEdit = new WindowEdit();
+            windowEdit.ShowDialog();
+        }
+        private void miTreeEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var windowEdit = new WindowEdit(this.TreeViewSelectedObject);
+            windowEdit.ShowDialog();
+        }
+        #endregion
+
     }
     #endregion
 }

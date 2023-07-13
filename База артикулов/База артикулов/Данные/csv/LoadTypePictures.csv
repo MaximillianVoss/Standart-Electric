@@ -1,0 +1,5 @@
+﻿id;LoadPictureURL;LoadPictureDescription
+;Ссылка на картинку аватарку схемы нагрузки;Описание схемы нагрузки
+1;./webfiles/Loadpicture1.png;Балка на двух опорах, усилие сосредоточено посередине 
+2;./webfiles/Loadpicture2.png;Усилие сосредоточенное на краю консоли
+3;./webfiles/Loadpicture3.png;Вертикальный стержень, усилие вертикально вниз

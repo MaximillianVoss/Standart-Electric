@@ -348,22 +348,31 @@ CREATE VIEW dbo.[PerforationsView]
 AS
     (
     SELECT
-        PER.id AS 'ID перфорации',
-        DV.[Наименование] AS 'Наименование перфорации',
-        DV.[Сокращенное наименование] AS 'Сокращенное наименование перфорации',
-        DV.[Описание] AS 'Описание перфорации',
-        UP.[Value] AS 'Размер перфорации',
-        UV.[ID единицы измерения],
-        UV.[Наименование единицы измерения],
-        UTV.[ID типа измерения],
-        UTV.[Наименование типа единицы измерения]
-
+        *,
+        PivotTable.[Шаг] AS 'Шаг перфорации, мм',
+        PivotTable.[Ширина] AS 'Ширина перфорации, мм',
+        PivotTable.[Длина] AS 'Длина перфорации, мм'
     FROM
-        Perforations PER
-        JOIN DescriptorsView DV ON PER.[idDescriptor] = DV.[ID дескриптора]
-        JOIN UnitsPerforations UP ON UP.idPerforation = PER.id
-        JOIN UnitsView UV ON UV.[ID единицы измерения] = UP.idUnit
-        JOIN UnitsTypesView UTV ON UTV.[ID типа измерения] = UP.idType
+        (
+        SELECT
+            PER.id AS 'ID перфорации',
+            DV.[Наименование] AS 'Наименование перфорации',
+            DV.[Сокращенное наименование] AS 'Сокращенное наименование перфорации',
+            DV.[Описание] AS 'Описание перфорации',
+            UP.[Value] AS 'Размер перфорации',
+            UTV.[Наименование типа единицы измерения] AS 'Единица измерения'
+        FROM
+            Perforations PER
+            JOIN DescriptorsView DV ON PER.[idDescriptor] = DV.[ID дескриптора]
+            JOIN UnitsPerforations UP ON UP.idPerforation = PER.id
+            JOIN UnitsView UV ON UV.[ID единицы измерения] = UP.idUnit
+            JOIN UnitsTypesView UTV ON UTV.[ID типа измерения] = UP.idType
+        ) AS SourceTable
+    PIVOT
+        (
+        MAX([Размер перфорации])
+        FOR [Единица измерения] IN ([Шаг], [Ширина], [Длина])
+        ) AS PivotTable
 );
 --#endregion
 --#endregion
@@ -377,22 +386,68 @@ DROP VIEW IF EXISTS dbo.[PackagesView];
 GO
 CREATE VIEW dbo.[PackagesView]
 AS
-    (
     SELECT
         PK.id AS 'ID упаковки',
         DV.[Наименование] AS 'Наименование упаковки',
         DV.[Сокращенное наименование] AS 'Сокращенное наименование упаковки',
         DV.[Описание] AS 'Описание упаковки',
-        UV.[ID единицы измерения],
-        UV.[Наименование единицы измерения],
-        UTV.[ID типа измерения],
-        UTV.[Наименование типа единицы измерения]
+        PivotTable.[Вес] AS 'Вес упаковки, кг',
+        PivotTable.[Ширина] AS 'Ширина упаковки, мм',
+        PivotTable.[Длина] AS 'Длина упаковки, мм',
+        PivotTable.[Высота] AS 'Высота упаковки, мм'
     FROM
-        Packages PK
-        JOIN DescriptorsView DV ON PK.[idDescriptor] = DV.[ID дескриптора]
-        LEFT JOIN UnitsPackages UP ON UP.idPackage = PK.id
-        LEFT JOIN UnitsView UV ON UV.[ID единицы измерения] = UP.idUnit
-        LEFT JOIN UnitsTypesView UTV ON UTV.[ID типа измерения] = UP.idType
+        (
+    SELECT
+            PK.id,
+            UTV.[Наименование типа единицы измерения],
+            UP.[Value]
+        FROM
+            Packages PK
+            JOIN DescriptorsView DV ON PK.[idDescriptor] = DV.[ID дескриптора]
+            LEFT JOIN UnitsPackages UP ON UP.idPackage = PK.id
+            LEFT JOIN UnitsView UV ON UV.[ID единицы измерения] = UP.idUnit
+            LEFT JOIN UnitsTypesView UTV ON UTV.[ID типа измерения] = UP.idType
+    ) AS SourceTable
+PIVOT (
+    MAX([Value])
+    FOR [Наименование типа единицы измерения] IN 
+    (
+        [Вес], 
+        [Ширина], 
+        [Длина], 
+        [Высота]
+    )
+) AS PivotTable
+        JOIN Packages PK ON PivotTable.id = PK.id
+        JOIN DescriptorsView DV ON PK.[idDescriptor] = DV.[ID дескриптора];
+
+--#endregion
+--#endregion
+
+--#region Представление ProductUnitsView
+--#region Удаление
+GO
+DROP VIEW IF EXISTS dbo.[ProductUnitsView]; 
+--#endregion
+--#region Создание
+GO
+CREATE VIEW dbo.[ProductUnitsView]
+AS
+    (
+    SELECT
+        P.id AS 'ID товара',
+        P.idDescriptor AS 'ID дескриптора товара',
+        U.[ID единицы измерения],
+        U.[Наименование единицы измерения],
+        U.[Сокращенное наименование единицы измерения],
+        UT.[ID типа измерения],
+        UT.[Наименование типа единицы измерения],
+        UP.[value] AS 'Значение'
+    FROM
+        Products P
+        LEFT JOIN UnitsProducts UP ON UP.idProduct = P.id
+        LEFT JOIN UnitsView U ON U.[ID единицы измерения] = UP.idUnit
+        LEFT JOIN UnitsTypesView UT ON UT.[ID типа измерения] = UP.idType
 );
 --#endregion
 --#endregion
@@ -539,7 +594,7 @@ AS
         VC.[isActual] AS 'Актуальность',
         VC.[isSale] AS 'Тип',
         VC.[isPublic] AS 'Публичность',
-        VC.[codeAccountant] AS 'Артикул бухгалтерии',
+        VC.[codeAccountant] AS 'Бухгалтерский код',
         M.[Наименование производителя] AS 'Производитель'
     FROM
         VendorCodes VC
@@ -547,6 +602,92 @@ AS
         LEFT JOIN ManufacturersView M ON VC.[idManufacturer] = M.[ID производителя]
         LEFT JOIN ProductsVendorCodes PVC ON PVC.idCode  = VC.id
         LEFT JOIN Products P ON P.id = PVC.idProduct
+);
+--#endregion
+--#endregion
+
+--#region Представление ResourceTypesView
+--#region Удаление
+GO
+DROP VIEW IF EXISTS dbo.[ResourceTypesView]; 
+--#endregion
+--#region Создание
+GO
+CREATE VIEW dbo.[ResourceTypesView]
+AS
+    (
+    SELECT
+        RT.id AS 'ID типа ресурса',
+        RT.title AS 'Наименование типа ресурса',
+        RT.[extension ] AS 'Расширение ресурса'
+    FROM
+        ResourceTypes RT
+);
+--#endregion
+--#endregion
+
+--#region Представление ResourcesView
+--#region Удаление
+GO
+DROP VIEW IF EXISTS dbo.[ResourcesView]; 
+--#endregion
+--#region Создание
+GO
+CREATE VIEW dbo.[ResourcesView]
+AS
+    (
+    SELECT
+        R.id AS 'ID ресурса',
+        R.[URL] AS 'URL ресурса',
+        DV.Наименование AS 'Наименование ресурса',
+        DV.[ID дескриптора] AS 'ID дескриптора ресурса',
+        RTV.[ID типа ресурса],
+        RTV.[Наименование типа ресурса],
+        RTV.[Расширение ресурса]
+    FROM
+        Resources R
+        JOIN DescriptorsResources DR ON DR.idResource = R.id
+        LEFT JOIN DescriptorsView DV ON DV.[ID дескриптора] = DR.idDescriptor
+        LEFT JOIN ResourceTypesView RTV ON RTV.[ID типа ресурса] = DR.idResourceType
+
+);
+--#endregion
+--#endregion
+
+-- Проверить файлы
+--#region Представление ResourcesViewProducts
+--#region Удаление
+GO
+DROP VIEW IF EXISTS dbo.[ResourcesViewProducts]; 
+--#endregion
+--#region Создание
+GO
+CREATE VIEW dbo.[ResourcesViewProducts]
+AS
+    (
+    SELECT
+        [ID ресурса],
+        [Наименование ресурса],
+        [Динамические блоки Autocad, Наименование],
+        [Библиотека BIM для Revit, Наименование],
+        [Альбом типовых узлов, Наименование]
+    FROM
+        (
+        SELECT
+            *
+        FROM
+            ResourcesView
+        ) AS SourceTable
+    PIVOT
+        (
+            MAX([Расширение ресурса])
+            FOR [Наименование типа ресурса] IN 
+                (
+                    [Динамические блоки Autocad, Наименование], 
+                    [Библиотека BIM для Revit, Наименование],
+                    [Альбом типовых узлов, Наименование]
+                )
+        ) AS PivotTable
 );
 --#endregion
 --#endregion
@@ -560,78 +701,94 @@ DROP VIEW IF EXISTS dbo.[ProductsView];
 GO
 CREATE VIEW dbo.[ProductsView]
 AS
-    (
     SELECT
-        P.id AS 'ID продукта',
-        VC.Артикул,
-        DV.[Наименование] AS 'Наименование продукта',
-        DV.[Сокращенное наименование] AS 'Сокращенное наименование продукта',
-        DV.Описание AS 'Описание продукта',
-        SG.[Наименование подгруппы],
-        SG.[Сокращенное наименование подгруппы],
-        SG.[Код подгруппы],
-        SG.[URL изображения подгруппы],
-        G.[Наименование группы],
-        G.[Сокращенное наименование группы],
-        G.[Код группы],
-        G.[URL изображения группы],
-        C.[Наименование класса],
-        C.[Сокращенное наименование класса],
-        C.[Код класса],
-        C.[URL изображения класса],
-        -- TODO: добавить единицы измерения
-        Cov.[Наименование покрытия],
-        Cov.[Название стандарта],
-        Cov.[Обозначение покрытия],
-        Cov.[Толщина покрытия],
-        --
-        Mat.[Наименование материала],
-        Mat.[Код стандарта материала],
-        Mat.[Код стандарта сырья],
-        PNorm.[Наименование документа],
-        PNorm.[Номер документа],
-        DV.Описание,
-        P.isInStock AS 'В наличии/на заказ',
-        PerfV.[Размер перфорации]
-
-
-
-
+        *
     FROM
-        Products P
-        JOIN DescriptorsView DV ON P.[idDescriptor] = DV.[ID дескриптора]
-        LEFT JOIN VendorCodesView VC ON P.id = VC.[ID продукта]
-        LEFT JOIN SubGroupsView SG ON SG.[ID подгруппы] = P.idSubGroup
-        LEFT JOIN GroupsView G ON G.[ID группы] = SG.[ID группы]
-        LEFT JOIN ClassesView C ON c.[ID класса] = G.[ID класса]
-        LEFT JOIN CoversView Cov ON cov.[ID покрытия] = p.idCover
-        LEFT JOIN MaterialsView Mat ON Mat.[ID материала] = p.idMaterial
-        LEFT JOIN NormsView PNorm ON PNorm.[ID документа] = p.idNorm
-        LEFT JOIN PerforationsView PerfV ON PerfV.[ID перфорации] = p.idPerforation
-
-
-
-);
+        (
+    SELECT
+            P.id AS 'ID продукта',
+            VC.Артикул,
+            DV.[Наименование] AS 'Наименование продукта',
+            DV.[Сокращенное наименование] AS 'Сокращенное наименование продукта',
+            DV.Описание AS 'Описание продукта',
+            SG.[Наименование подгруппы],
+            SG.[Сокращенное наименование подгруппы],
+            SG.[Код подгруппы],
+            SG.[URL изображения подгруппы],
+            G.[Наименование группы],
+            G.[Сокращенное наименование группы],
+            G.[Код группы],
+            G.[URL изображения группы],
+            C.[Наименование класса],
+            C.[Сокращенное наименование класса],
+            C.[Код класса],
+            C.[URL изображения класса],
+            Cov.[Наименование покрытия],
+            Cov.[Название стандарта],
+            Cov.[Обозначение покрытия],
+            Cov.[Толщина покрытия],
+            Mat.[Наименование материала],
+            Mat.[Код стандарта материала],
+            Mat.[Код стандарта сырья],
+            PNorm.[Наименование документа],
+            PNorm.[Номер документа],
+            DV.Описание,
+            P.isInStock AS 'В наличии/на заказ',
+            PerfV.[Шаг перфорации, мм],
+            UT.[Наименование типа единицы измерения],
+            UP.[value] AS 'Значение',
+            PacV.*,
+            VCV.Актуальность AS 'Актуальность артикула',
+            VCV.Публичность AS 'Публичность артикула',
+            VCV.Тип AS 'В продаже',
+            VCV.[Бухгалтерский код],
+            VCV.Производитель
+        FROM
+            Products P
+            JOIN DescriptorsView DV ON P.[idDescriptor] = DV.[ID дескриптора]
+            LEFT JOIN VendorCodesView VC ON P.id = VC.[ID продукта]
+            LEFT JOIN SubGroupsView SG ON SG.[ID подгруппы] = P.idSubGroup
+            LEFT JOIN GroupsView G ON G.[ID группы] = SG.[ID группы]
+            LEFT JOIN ClassesView C ON c.[ID класса] = G.[ID класса]
+            LEFT JOIN CoversView Cov ON cov.[ID покрытия] = p.idCover
+            LEFT JOIN MaterialsView Mat ON Mat.[ID материала] = p.idMaterial
+            LEFT JOIN NormsView PNorm ON PNorm.[ID документа] = p.idNorm
+            LEFT JOIN PerforationsView PerfV ON PerfV.[ID перфорации] = p.idPerforation
+            LEFT JOIN UnitsProducts UP ON UP.idProduct = P.id
+            LEFT JOIN UnitsTypesView UT ON UT.[ID типа измерения] = UP.idType
+            LEFT JOIN PackagesView PacV ON PacV.[ID упаковки] = P.idPackage
+            LEFT JOIN VendorCodesView VCV ON VCV.[ID продукта] = P.id
+    ) AS SourceTable
+PIVOT (
+    MAX([Значение])
+    FOR [Наименование типа единицы измерения] IN 
+    (
+        [Вес], 
+        [Длина], 
+        [Ширина], 
+        [Высота], 
+        [Объем], 
+        [Количество], 
+        [Сосредоточенная нагрузка], 
+        [Распределенная нагрузка], 
+        [Толщина], 
+        [Количество в упаковке], 
+        [Минимальный заказ], 
+        [Кратность заказа]
+    )
+) AS PivotTable;
 --#endregion
 --#endregion
-
--- SELECT * FROM SubGroupsView WHERE [ID подгруппы] = 100
--- SELECT * FROM Products
 GO
 SELECT
-    U.[Наименование единицы измерения],
-    U.[Сокращенное наименование единицы измерения],
-    UT.[Наименование типа единицы измерения]
+    *
 FROM
-    UnitsProducts UP
-    LEFT JOIN UnitsView U ON U.[ID единицы измерения] = UP.idUnit
-    LEFT JOIN UnitsTypesView UT ON UT.[ID типа измерения] = UP.idType
-WHERE idProduct =1
-
+    ProductsView
 
 
 -- Представления ниже нуждаются в проверке!
 
+--Пока что отключено 
 --#region Представление ProductsVendorCodesView
 --#region Удаление
 GO
@@ -661,55 +818,22 @@ DROP VIEW IF EXISTS dbo.[ProductsAnalogsView];
 --#endregion
 --#region Создание
 GO
--- CREATE VIEW dbo.[ProductsAnalogsView]
--- AS
---     (
---     SELECT
---         PA.id AS 'ID',
---         P1.[Наименование] AS 'Оригинал',
---         P2.[Наименование] AS 'Аналог'
---     FROM
---         ProductsAnalogs PA
---         JOIN ProductsView P1 ON PA.[idOriginal] = P1.[ID]
---         JOIN ProductsView P2 ON PA.[idAnalog] = P2.[ID]
--- );
---#endregion
---#endregion
-
---#region Представление ResourcesView
---#region Удаление
-GO
-DROP VIEW IF EXISTS dbo.[ResourcesView]; 
---#endregion
---#region Создание
-GO
--- CREATE VIEW dbo.[ResourcesView]
--- AS
---     (
---     SELECT
---         R.id AS 'ID',
---         R.[URL] AS 'URL ресурса'
---     FROM
---         Resources R
--- );
---#endregion
---#endregion
-
---#region Представление ResourceTypesView
---#region Удаление
-GO
-DROP VIEW IF EXISTS dbo.[ResourceTypesView]; 
---#endregion
---#region Создание
-GO
-CREATE VIEW dbo.[ResourceTypesView]
+CREATE VIEW dbo.[ProductsAnalogsView]
 AS
     (
     SELECT
-        RT.id AS 'ID типа ресурсов',
-        RT.title AS 'Наименование типа ресурса'
+        PA.id AS 'ID',
+        P1.[ID продукта] AS 'ID Оригинала',
+        P1.[Наименование продукта] AS 'Наименование оригинала',
+        P2.[ID продукта] AS 'ID Аналога',
+        P2.[Наименование продукта] AS 'Наименование аналога'
     FROM
-        ResourceTypes RT
+        ProductsAnalogs PA
+        JOIN ProductsView P1 ON PA.[idOriginal] = P1.[ID продукта]
+        JOIN ProductsView P2 ON PA.[idAnalog] = P2.[ID продукта]
 );
 --#endregion
 --#endregion
+
+
+

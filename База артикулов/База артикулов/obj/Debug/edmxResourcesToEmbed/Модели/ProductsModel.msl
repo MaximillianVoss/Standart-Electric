@@ -186,6 +186,7 @@
     <EntitySetMapping Name="ResourceTypes">
       <EntityTypeMapping TypeName="DBSEModel.ResourceTypes">
         <MappingFragment StoreEntitySet="ResourceTypes">
+          <ScalarProperty Name="extension_" ColumnName="extension " />
           <ScalarProperty Name="title" ColumnName="title" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
@@ -461,10 +462,10 @@
     <EntitySetMapping Name="PackagesView">
       <EntityTypeMapping TypeName="DBSEModel.PackagesView">
         <MappingFragment StoreEntitySet="PackagesView">
-          <ScalarProperty Name="Наименование_типа_единицы_измерения" ColumnName="Наименование типа единицы измерения" />
-          <ScalarProperty Name="ID_типа_измерения" ColumnName="ID типа измерения" />
-          <ScalarProperty Name="Наименование_единицы_измерения" ColumnName="Наименование единицы измерения" />
-          <ScalarProperty Name="ID_единицы_измерения" ColumnName="ID единицы измерения" />
+          <ScalarProperty Name="Высота_упаковки__мм" ColumnName="Высота упаковки, мм" />
+          <ScalarProperty Name="Длина_упаковки__мм" ColumnName="Длина упаковки, мм" />
+          <ScalarProperty Name="Ширина_упаковки__мм" ColumnName="Ширина упаковки, мм" />
+          <ScalarProperty Name="Вес_упаковки__кг" ColumnName="Вес упаковки, кг" />
           <ScalarProperty Name="Описание_упаковки" ColumnName="Описание упаковки" />
           <ScalarProperty Name="Сокращенное_наименование_упаковки" ColumnName="Сокращенное наименование упаковки" />
           <ScalarProperty Name="Наименование_упаковки" ColumnName="Наименование упаковки" />
@@ -475,11 +476,12 @@
     <EntitySetMapping Name="PerforationsView">
       <EntityTypeMapping TypeName="DBSEModel.PerforationsView">
         <MappingFragment StoreEntitySet="PerforationsView">
-          <ScalarProperty Name="Наименование_типа_единицы_измерения" ColumnName="Наименование типа единицы измерения" />
-          <ScalarProperty Name="ID_типа_измерения" ColumnName="ID типа измерения" />
-          <ScalarProperty Name="Наименование_единицы_измерения" ColumnName="Наименование единицы измерения" />
-          <ScalarProperty Name="ID_единицы_измерения" ColumnName="ID единицы измерения" />
-          <ScalarProperty Name="Размер_перфорации" ColumnName="Размер перфорации" />
+          <ScalarProperty Name="Длина_перфорации__мм" ColumnName="Длина перфорации, мм" />
+          <ScalarProperty Name="Ширина_перфорации__мм" ColumnName="Ширина перфорации, мм" />
+          <ScalarProperty Name="Шаг_перфорации__мм" ColumnName="Шаг перфорации, мм" />
+          <ScalarProperty Name="Длина" ColumnName="Длина" />
+          <ScalarProperty Name="Ширина" ColumnName="Ширина" />
+          <ScalarProperty Name="Шаг" ColumnName="Шаг" />
           <ScalarProperty Name="Описание_перфорации" ColumnName="Описание перфорации" />
           <ScalarProperty Name="Сокращенное_наименование_перфорации" ColumnName="Сокращенное наименование перфорации" />
           <ScalarProperty Name="Наименование_перфорации" ColumnName="Наименование перфорации" />
@@ -487,10 +489,46 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductsAnalogsView">
+      <EntityTypeMapping TypeName="DBSEModel.ProductsAnalogsView">
+        <MappingFragment StoreEntitySet="ProductsAnalogsView">
+          <ScalarProperty Name="Наименование_аналога" ColumnName="Наименование аналога" />
+          <ScalarProperty Name="ID_Аналога" ColumnName="ID Аналога" />
+          <ScalarProperty Name="Наименование_оригинала" ColumnName="Наименование оригинала" />
+          <ScalarProperty Name="ID_Оригинала" ColumnName="ID Оригинала" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ProductsView">
       <EntityTypeMapping TypeName="DBSEModel.ProductsView">
         <MappingFragment StoreEntitySet="ProductsView">
-          <ScalarProperty Name="Размер_перфорации" ColumnName="Размер перфорации" />
+          <ScalarProperty Name="Кратность_заказа" ColumnName="Кратность заказа" />
+          <ScalarProperty Name="Минимальный_заказ" ColumnName="Минимальный заказ" />
+          <ScalarProperty Name="Количество_в_упаковке" ColumnName="Количество в упаковке" />
+          <ScalarProperty Name="Толщина" ColumnName="Толщина" />
+          <ScalarProperty Name="Распределенная_нагрузка" ColumnName="Распределенная нагрузка" />
+          <ScalarProperty Name="Сосредоточенная_нагрузка" ColumnName="Сосредоточенная нагрузка" />
+          <ScalarProperty Name="Количество" ColumnName="Количество" />
+          <ScalarProperty Name="Объем" ColumnName="Объем" />
+          <ScalarProperty Name="Высота" ColumnName="Высота" />
+          <ScalarProperty Name="Ширина" ColumnName="Ширина" />
+          <ScalarProperty Name="Длина" ColumnName="Длина" />
+          <ScalarProperty Name="Вес" ColumnName="Вес" />
+          <ScalarProperty Name="Производитель" ColumnName="Производитель" />
+          <ScalarProperty Name="Бухгалтерский_код" ColumnName="Бухгалтерский код" />
+          <ScalarProperty Name="В_продаже" ColumnName="В продаже" />
+          <ScalarProperty Name="Публичность_артикула" ColumnName="Публичность артикула" />
+          <ScalarProperty Name="Актуальность_артикула" ColumnName="Актуальность артикула" />
+          <ScalarProperty Name="Высота_упаковки__мм" ColumnName="Высота упаковки, мм" />
+          <ScalarProperty Name="Длина_упаковки__мм" ColumnName="Длина упаковки, мм" />
+          <ScalarProperty Name="Ширина_упаковки__мм" ColumnName="Ширина упаковки, мм" />
+          <ScalarProperty Name="Вес_упаковки__кг" ColumnName="Вес упаковки, кг" />
+          <ScalarProperty Name="Описание_упаковки" ColumnName="Описание упаковки" />
+          <ScalarProperty Name="Сокращенное_наименование_упаковки" ColumnName="Сокращенное наименование упаковки" />
+          <ScalarProperty Name="Наименование_упаковки" ColumnName="Наименование упаковки" />
+          <ScalarProperty Name="ID_упаковки" ColumnName="ID упаковки" />
+          <ScalarProperty Name="Шаг_перфорации__мм" ColumnName="Шаг перфорации, мм" />
           <ScalarProperty Name="В_наличии_на_заказ" ColumnName="В наличии/на заказ" />
           <ScalarProperty Name="Описание" ColumnName="Описание" />
           <ScalarProperty Name="Номер_документа" ColumnName="Номер документа" />
@@ -522,11 +560,50 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductUnitsView">
+      <EntityTypeMapping TypeName="DBSEModel.ProductUnitsView">
+        <MappingFragment StoreEntitySet="ProductUnitsView">
+          <ScalarProperty Name="Значение" ColumnName="Значение" />
+          <ScalarProperty Name="Наименование_типа_единицы_измерения" ColumnName="Наименование типа единицы измерения" />
+          <ScalarProperty Name="ID_типа_измерения" ColumnName="ID типа измерения" />
+          <ScalarProperty Name="Сокращенное_наименование_единицы_измерения" ColumnName="Сокращенное наименование единицы измерения" />
+          <ScalarProperty Name="Наименование_единицы_измерения" ColumnName="Наименование единицы измерения" />
+          <ScalarProperty Name="ID_единицы_измерения" ColumnName="ID единицы измерения" />
+          <ScalarProperty Name="ID_дескриптора_товара" ColumnName="ID дескриптора товара" />
+          <ScalarProperty Name="ID_товара" ColumnName="ID товара" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResourcesView">
+      <EntityTypeMapping TypeName="DBSEModel.ResourcesView">
+        <MappingFragment StoreEntitySet="ResourcesView">
+          <ScalarProperty Name="Расширение_ресурса" ColumnName="Расширение ресурса" />
+          <ScalarProperty Name="Наименование_типа_ресурса" ColumnName="Наименование типа ресурса" />
+          <ScalarProperty Name="ID_типа_ресурса" ColumnName="ID типа ресурса" />
+          <ScalarProperty Name="ID_дескриптора_ресурса" ColumnName="ID дескриптора ресурса" />
+          <ScalarProperty Name="Наименование_ресурса" ColumnName="Наименование ресурса" />
+          <ScalarProperty Name="URL_ресурса" ColumnName="URL ресурса" />
+          <ScalarProperty Name="ID_ресурса" ColumnName="ID ресурса" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResourcesViewProducts">
+      <EntityTypeMapping TypeName="DBSEModel.ResourcesViewProducts">
+        <MappingFragment StoreEntitySet="ResourcesViewProducts">
+          <ScalarProperty Name="Альбом_типовых_узлов__Наименование" ColumnName="Альбом типовых узлов, Наименование" />
+          <ScalarProperty Name="Библиотека_BIM_для_Revit__Наименование" ColumnName="Библиотека BIM для Revit, Наименование" />
+          <ScalarProperty Name="Динамические_блоки_Autocad__Наименование" ColumnName="Динамические блоки Autocad, Наименование" />
+          <ScalarProperty Name="Наименование_ресурса" ColumnName="Наименование ресурса" />
+          <ScalarProperty Name="ID_ресурса" ColumnName="ID ресурса" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ResourceTypesView">
       <EntityTypeMapping TypeName="DBSEModel.ResourceTypesView">
         <MappingFragment StoreEntitySet="ResourceTypesView">
+          <ScalarProperty Name="Расширение_ресурса" ColumnName="Расширение ресурса" />
           <ScalarProperty Name="Наименование_типа_ресурса" ColumnName="Наименование типа ресурса" />
-          <ScalarProperty Name="ID_типа_ресурсов" ColumnName="ID типа ресурсов" />
+          <ScalarProperty Name="ID_типа_ресурса" ColumnName="ID типа ресурса" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -585,7 +662,7 @@
       <EntityTypeMapping TypeName="DBSEModel.VendorCodesView">
         <MappingFragment StoreEntitySet="VendorCodesView">
           <ScalarProperty Name="Производитель" ColumnName="Производитель" />
-          <ScalarProperty Name="Артикул_бухгалтерии" ColumnName="Артикул бухгалтерии" />
+          <ScalarProperty Name="Бухгалтерский_код" ColumnName="Бухгалтерский код" />
           <ScalarProperty Name="Публичность" ColumnName="Публичность" />
           <ScalarProperty Name="Тип" ColumnName="Тип" />
           <ScalarProperty Name="Актуальность" ColumnName="Актуальность" />

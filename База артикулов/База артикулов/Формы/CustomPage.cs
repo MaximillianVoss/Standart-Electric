@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Windows;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
@@ -136,6 +137,18 @@ namespace База_артикулов.Формы
             return this.customBase.ToList<T>(items);
         }
         #endregion
+
+        /// <summary>
+        /// Закрывает родительское окно
+        /// </summary>
+        public void CloseWindow()
+        {
+            var window = Window.GetWindow(this);
+            if (window != null)
+            {
+                window.Close();
+            }
+        }
 
         #endregion
 

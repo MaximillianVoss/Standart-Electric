@@ -42,6 +42,31 @@ namespace База_артикулов.Модели
         public string Номер_документа { get; set; }
         public string Описание { get; set; }
         public bool В_наличии_на_заказ { get; set; }
-        public Nullable<double> Размер_перфорации { get; set; }
+        public Nullable<double> Шаг_перфорации__мм { get; set; }
+        public Nullable<int> ID_упаковки { get; set; }
+        public string Наименование_упаковки { get; set; }
+        public string Сокращенное_наименование_упаковки { get; set; }
+        public string Описание_упаковки { get; set; }
+        public Nullable<double> Вес_упаковки__кг { get; set; }
+        public Nullable<double> Ширина_упаковки__мм { get; set; }
+        public Nullable<double> Длина_упаковки__мм { get; set; }
+        public Nullable<double> Высота_упаковки__мм { get; set; }
+        public Nullable<bool> Актуальность_артикула { get; set; }
+        public Nullable<bool> Публичность_артикула { get; set; }
+        public Nullable<bool> В_продаже { get; set; }
+        public string Бухгалтерский_код { get; set; }
+        public string Производитель { get; set; }
+        public Nullable<double> Вес { get; set; }
+        public Nullable<double> Длина { get; set; }
+        public Nullable<double> Ширина { get; set; }
+        public Nullable<double> Высота { get; set; }
+        public Nullable<double> Объем { get; set; }
+        public Nullable<double> Количество { get; set; }
+        public Nullable<double> Сосредоточенная_нагрузка { get; set; }
+        public Nullable<double> Распределенная_нагрузка { get; set; }
+        public Nullable<double> Толщина { get; set; }
+        public Nullable<double> Количество_в_упаковке { get; set; }
+        public Nullable<double> Минимальный_заказ { get; set; }
+        public Nullable<double> Кратность_заказа { get; set; }
     }
 }

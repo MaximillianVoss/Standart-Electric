@@ -76,7 +76,13 @@
                 }
                 public static class Controls
                 {
-
+                    public static class Buttons
+                    {
+                        public static string createItem = "Создать";
+                        public static string addItem = "Добавить";
+                        public static string saveChanges = "Сохранить изменения";
+                        public static string cancel = "Отменить";
+                    }
                 }
 
             }

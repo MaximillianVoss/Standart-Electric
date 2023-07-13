@@ -20,7 +20,7 @@ namespace База_артикулов.Модели
         public bool Актуальность { get; set; }
         public bool Тип { get; set; }
         public Nullable<bool> Публичность { get; set; }
-        public string Артикул_бухгалтерии { get; set; }
+        public string Бухгалтерский_код { get; set; }
         public string Производитель { get; set; }
     }
 }

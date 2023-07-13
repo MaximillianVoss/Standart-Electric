@@ -736,3 +736,46 @@ SELECT
 FROM
     dbo.[ViewsTables];
 --#endregion
+
+--#region Заполнение типов файлов ResourceTypes
+--DELETE FROM ResourceTypes;
+INSERT INTO [ResourceTypes]
+    ([title], [extension])
+VALUES
+    ('Текстовый документ', '.txt'),
+    ('Документ Word', '.docx'),
+    ('Таблица Excel', '.xlsx'),
+    ('Презентация PowerPoint', '.pptx'),
+    ('Изображение JPEG', '.jpeg'),
+    ('Изображение PNG', '.png'),
+    ('Изображение GIF', '.gif'),
+    ('Изображение BMP', '.bmp'),
+    ('Изображение TIFF', '.tiff'),
+    ('Изображение PSD', '.psd'),
+    ('PDF документ', '.pdf'),
+    ('Аудиофайл MP3', '.mp3'),
+    ('Видеофайл MP4', '.mp4'),
+    ('Архив ZIP', '.zip'),
+    ('Архив RAR', '.rar'),
+    ('Архив 7Z', '.7z'),
+    ('Архив GZ', '.gz'),
+    ('Архив TAR', '.tar'),
+    ('Исходный код C#', '.cs'),
+    ('Веб-страница HTML', '.html'),
+    ('Стили CSS', '.css'),
+    ('Скрипт JavaScript', '.js'),
+    ('База данных SQLite', '.sqlite'),
+    ('База данных SQL Server', '.mdf'),
+    ('Файл CAD STEP', '.step'),
+    ('Файл CAD DWG', '.dwg'),
+    ('Файл CAD DXF', '.dxf'),
+    ('Файл Revit RVT', '.rvt'),
+    ('Файл Revit RFA', '.rfa');
+
+
+GO
+SELECT
+    *
+FROM
+    dbo.[ResourceTypes];
+--#endregion

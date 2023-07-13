@@ -1,0 +1,65 @@
+﻿<формы:CustomPage  xmlns:формы="clr-namespace:База_артикулов.Формы"
+                   x:Class="База_артикулов.Формы.Страницы.Редактирование.PageEditProduct"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:База_артикулов.Формы.Страницы.Редактирование" xmlns:CustomControlsWPF="clr-namespace:CustomControlsWPF;assembly=CustomControlsWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageEditProduct">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <CustomControlsWPF:LabeledTextBox x:Name="txbFieldName" Margin="10,5,10,5" Text="" Title="Имя поля" TextChanged="txbFieldName_TextChanged" Grid.Row="0"/>
+        <Grid Margin="0,5,0,10" Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  Grid.RowSpan="2">
+                <Grid x:Name="gridFields"  Background="#FFD8D8D8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <CustomControlsWPF:LabeledTextBox x:Name="txbPath" Margin="120,0,10,0" Text="" IsEnabled="False"  Height="75" VerticalAlignment="Center" Grid.Row="0" />
+                    <CustomControlsWPF:LabeledTextBox x:Name="txbTitle" Margin="10,0,10,0" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="1" />
+                    <CustomControlsWPF:LabeledTextBox x:Name="txbTitleShort" Margin="10,0,10,0" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="2" />
+                    <CustomControlsWPF:LabeledTextBox x:Name="txbDescription" Margin="10,0,10,0" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="3" />
+                    <CustomControlsWPF:LabeledTextBox x:Name="txbVendorCode" Margin="10,0,10,0" Title="Артикул" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="4" />
+                    <CustomControlsWPF:LabeledTextBox x:Name="txbCodeAccountant" Margin="10,0,10,0" Title="Бухгалтерский код" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="5" />
+                    <CustomControlsWPF:LabeledComboBox x:Name="cmbNorm" Margin="10,0,10,0" Title="Норматив" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="6" />
+                    <CustomControlsWPF:LabeledComboBox x:Name="cmbSubGroup" Margin="10,0,10,0" Title="Подгруппа" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="7" />
+                    <CustomControlsWPF:LabeledComboBox x:Name="cmbCover" Margin="10,0,10,0" Title="Покрытие" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="8" />
+                    <CustomControlsWPF:LabeledComboBox x:Name="cmbMaterial" Margin="10,0,10,0" Title="Материал" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="9" />
+                    <CustomControlsWPF:LabeledComboBox x:Name="cmbPerforation" Margin="10,0,10,0" Title="Перфорация" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="10" />
+                    <CustomControlsWPF:LabeledComboBox x:Name="cmbPackage" Margin="10,0,10,0" Title="Упаковка" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="11" />
+                    <CustomControlsWPF:LabeledCheckBox x:Name="chbInStock" Margin="10,0,10,0" Title="В налчии"  Height="75" VerticalAlignment="Center" Grid.Row="12" />
+                    <DataGrid x:Name="dgDimensions" Margin="10" Height="200" Grid.Row="13"/>
+                    <CustomControlsWPF:ButtonPrimary x:Name="btnAddDimension"  Text="Добавить измерение" Height="40" Margin="10,0,10,0"  Click="btnAddDimension_Click" Grid.Row="14"/>
+                    <Image x:Name="imgPreview" Margin="5,5,0,5" Height="100" HorizontalAlignment="Left" Width="100">
+                    </Image>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnOk" Margin="10" Text="Сохранить"  Height="40" VerticalAlignment="Top" Grid.Row="2" Click="btnOk_Click"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnCancel" Margin="10" Text="Отмена" Color="danger"  Height="40" VerticalAlignment="Top" Grid.Row="3" Click="btnCancel_Click"/>
+    </Grid>
+</формы:CustomPage>

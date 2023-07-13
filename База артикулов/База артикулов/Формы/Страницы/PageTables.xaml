@@ -19,13 +19,21 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dgTable" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,80,5,5" Background="Gray" CellEditEnding="dgTable_CellEditEnding" MouseDown="dgTable_MouseDown" AddingNewItem="dgTable_AddingNewItem" SelectedCellsChanged="dgTable_SelectedCellsChanged" Grid.Column="1" Grid.Row="1"/>
+        <DataGrid x:Name="dgTable" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,80,5,5" Background="Gray" CellEditEnding="dgTable_CellEditEnding" MouseDown="dgTable_MouseDown" AddingNewItem="dgTable_AddingNewItem" SelectedCellsChanged="dgTable_SelectedCellsChanged" Grid.Column="1" Grid.Row="1">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="btnTableAdd" Header="Добавить" Click="btnAdd_Click"/>
+                    <MenuItem x:Name="btnTableEdit" Header="Редактировать" Click="btnEdit_Click"/>
+                    <!-- Add more menu items as needed -->
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
         <CustomControlsWPF:LabeledComboBox x:Name="cmbTables" Margin="5,5,5,0" VerticalAlignment="Top" Title="Таблицы" SelectionChanged="cmbTables_SelectionChanged" Height="75" Grid.ColumnSpan="2" Grid.Row="1"/>
         <TreeView x:Name="tvGroups" Margin="5,80,5,5" SelectedItemChanged="tvGroups_SelectedItemChanged" Grid.Row="1" MinWidth="200">
             <TreeView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem x:Name="miAdd" Header="Добавить" Click="miAdd_Click"/>
-                    <MenuItem x:Name="miEdit" Header="Редактировать" Click="miEdit_Click"/>
+                    <MenuItem x:Name="miTreeAdd" Header="Добавить" Click="miTreeAdd_Click"/>
+                    <MenuItem x:Name="miTreeEdit" Header="Редактировать" Click="miTreeEdit_Click"/>
                     <!--Функция удаления отключена-->
                     <!--<MenuItem x:Name="miDelete" Header="Удалить" Click="miDelete_Click"/>-->
                 </ContextMenu>

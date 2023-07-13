@@ -1,0 +1,4 @@
+﻿id;Perforation_Size_String;Perforation_Size_Width;Perforation_Size_Legth;Perforation_Size_Step
+;Обозначение перфорации;Ширина отверстия перфорации;Длина отверстия перфорации;Шаг перфорации
+1;13х25;13;25;50
+2;7х35;7;35;50

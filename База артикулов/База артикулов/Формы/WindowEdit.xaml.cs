@@ -1,37 +1,98 @@
-﻿using System;
+﻿using BaseWindow_WPF.Classes;
+using System;
 using System.Windows;
 using База_артикулов.Классы;
+using База_артикулов.Модели;
+using База_артикулов.Формы.Страницы.Редактирование;
 
 namespace База_артикулов.Формы
 {
     /// <summary>
     /// Логика взаимодействия для WindowEdit.xaml
     /// </summary>
-    public partial class WindowEdit : Window
+    public partial class WindowEdit : CustomWindow
     {
-        public Type itemType { set; get; }
-        public object currentItem { set; get; }
+
+
+        #region Поля
+
+        #endregion
+
+        #region Свойства
+        public Type ItemType { get; set; }
+        public object CurrentItem { get; set; }
+        #endregion
+
+        #region Методы
+
+        #endregion
+
+        #region Конструкторы/Деструкторы
         public WindowEdit()
         {
             this.InitializeComponent();
             this.Title = Common.Strings.Titles.Windows.noAction;
-            this.itemType = null;
-        }
-        public WindowEdit(Type itemType)
-        {
-            this.itemType = itemType;
-        }
-        public WindowEdit(Type itemType, object item)
-        {
-            this.itemType = itemType;
+            this.ItemType = null;
         }
 
-        public WindowEdit(string title, Type itemType, object item)
+        public WindowEdit(object item)
         {
             this.InitializeComponent();
-            this.itemType = itemType;
-            this.Title = title;
-            this.currentItem = item;
+            this.CurrentItem = item;
+            if (item != null)
+                this.ItemType = item.GetType();
         }
+
+        public WindowEdit(string title, object item)
+        {
+            this.InitializeComponent();
+            this.Title = title;
+            this.CurrentItem = item;
+            this.ItemType = item.GetType();
+        }
+        #endregion
+
+        #region Операторы
+
+        #endregion
+
+        #region Обработчики событий
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (this.ItemType == typeof(TreeViewItemCustom))
+                {
+                    object objValue = ((TreeViewItemCustom)this.CurrentItem).Value;
+                    if (objValue != null)
+                    {
+                        Type objBaseType = objValue.GetType().BaseType;
+                        if (objBaseType == typeof(Classes))
+                        {
+                            this.fMain.Content = new PageEditClass(objValue);
+                        }
+
+                    }
+                }
+                else
+                {
+                    object objValue = this.CurrentItem;
+                    Type objBaseType = objValue.GetType().BaseType;
+                    if (objBaseType == typeof(Products) ||
+                        objBaseType == typeof(ProductsView) ||
+                        objValue.GetType() == typeof(ProductsView))
+                    {
+                        this.fMain.Content = new PageEditProduct(objValue);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+
+        #endregion
+
     }
 }
