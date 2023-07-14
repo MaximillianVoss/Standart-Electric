@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:База_артикулов.Формы"
-        mc:Ignorable="d"
-        Title="WindowEdit" Height="400" Width="400" Loaded="Window_Loaded">
+        xmlns:local="clr-namespace:База_артикулов.Формы" xmlns:редактирование="clr-namespace:База_артикулов.Формы.Страницы.Редактирование"
+                    mc:Ignorable="d"
+        Title="WindowEdit" Height="600" Width="600" Loaded="Window_Loaded">
     <Grid>
         <Frame x:Name="fMain" Content="Frame" NavigationUIVisibility="Hidden"/>
     </Grid>
+    <!--<редактирование:PageEditProduct></редактирование:PageEditProduct>-->
 </local:CustomWindow>

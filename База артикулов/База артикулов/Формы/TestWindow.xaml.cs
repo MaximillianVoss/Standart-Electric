@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Windows;
-using База_артикулов.Модели;
+﻿using System.Windows;
 
 namespace База_артикулов.Формы
 {
@@ -43,8 +41,8 @@ namespace База_артикулов.Формы
             //productUnitsWindow.Show();
             //FilesWindow filesWindow = new FilesWindow();
             //filesWindow.Show();
-            ProductWindow productWindow = new ProductWindow(typeof(Products), this.DB.Products.First().id);
-            productWindow.ShowDialog();
+            //ProductWindow productWindow = new ProductWindow(typeof(Products), this.DB.Products.First().id);
+            //productWindow.ShowDialog();
 
         }
         #endregion

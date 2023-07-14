@@ -1,7 +1,6 @@
 ﻿using BaseWindow_WPF.Classes;
 using System;
 using System.Windows;
-using База_артикулов.Классы;
 using База_артикулов.Модели;
 using База_артикулов.Формы.Страницы.Редактирование;
 
@@ -28,27 +27,24 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public WindowEdit()
+        public WindowEdit() : this("WindowEdit", null)
         {
-            this.InitializeComponent();
-            this.Title = Common.Strings.Titles.Windows.noAction;
-            this.ItemType = null;
+
         }
 
-        public WindowEdit(object item)
+        public WindowEdit(object item) : this("WindowEdit", item)
         {
-            this.InitializeComponent();
-            this.CurrentItem = item;
-            if (item != null)
-                this.ItemType = item.GetType();
+
         }
 
         public WindowEdit(string title, object item)
         {
             this.InitializeComponent();
+            this.SetCenter();
             this.Title = title;
             this.CurrentItem = item;
-            this.ItemType = item.GetType();
+            if (item != null)
+                this.ItemType = item.GetType();
         }
         #endregion
 
@@ -82,7 +78,8 @@ namespace База_артикулов.Формы
                         objBaseType == typeof(ProductsView) ||
                         objValue.GetType() == typeof(ProductsView))
                     {
-                        this.fMain.Content = new PageEditProduct(objValue);
+                        var windowsEdit = new ProductWindow(objValue);
+                        //this.fMain.Content = new PageEditProduct(objValue);
                     }
                 }
             }

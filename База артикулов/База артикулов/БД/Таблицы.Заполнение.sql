@@ -738,7 +738,7 @@ FROM
 --#endregion
 
 --#region Заполнение типов файлов ResourceTypes
---DELETE FROM ResourceTypes;
+DELETE FROM ResourceTypes;
 INSERT INTO [ResourceTypes]
     ([title], [extension])
 VALUES
@@ -753,6 +753,8 @@ VALUES
     ('Изображение TIFF', '.tiff'),
     ('Изображение PSD', '.psd'),
     ('PDF документ', '.pdf'),
+    ('Схема нагрузки', '.pdf'),
+    ('Альбом типовых узлов', '.pdf'),
     ('Аудиофайл MP3', '.mp3'),
     ('Видеофайл MP4', '.mp4'),
     ('Архив ZIP', '.zip'),
@@ -771,8 +773,6 @@ VALUES
     ('Файл CAD DXF', '.dxf'),
     ('Файл Revit RVT', '.rvt'),
     ('Файл Revit RFA', '.rfa');
-
-
 GO
 SELECT
     *

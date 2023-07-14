@@ -449,7 +449,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var windowEdit = new WindowEdit(this.SelectedItem);
+                var windowEdit = new ProductWindow(this.SelectedItem);
                 windowEdit.ShowDialog();
                 //this.SelectTable(this.cmbTables.SelectedItem);
                 //this.UpdateTreeView();
@@ -514,8 +514,8 @@ namespace База_артикулов.Формы.Страницы
             {
                 this.ShowError(ex);
             }
-            ProductWindow productWindow = new ProductWindow(this.DbSetType, this.IdSelectedItem);
-            productWindow.ShowDialog();
+            //ProductWindow productWindow = new ProductWindow(this.DbSetType, this.IdSelectedItem);
+            //productWindow.ShowDialog();
         }
         private void miDelete_Click(object sender, RoutedEventArgs e)
         {

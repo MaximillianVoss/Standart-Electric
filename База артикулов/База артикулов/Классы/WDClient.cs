@@ -85,46 +85,32 @@ namespace База_артикулов.Классы
 
             return false;
         }
-        public void DownloadFile(string saveFilePath, string cloudFilePath)
+        public async Task DownloadFile(string saveFilePath, string cloudFilePath)
         {
-            Item file = this.Client.GetFile(cloudFilePath).Result;
-            this.DownloadFile(saveFilePath, file);
+            Item file = await this.Client.GetFile(cloudFilePath).ConfigureAwait(false);
+            await this.DownloadFile(saveFilePath, file).ConfigureAwait(false);
         }
-        public void DownloadFile(string saveFilePath, Item file)
+
+        public async Task DownloadFile(string saveFilePath, Item file)
         {
-            //using (var tempFile = File.OpenWrite(saveFilePath))
-            //using (var stream = await this.Client.Download(file.Href))
-            //{
-            //    await stream.CopyToAsync(tempFile);
-            //    stream.Dispose();
-            //    stream.Close();
-            //}
             if (File.Exists(saveFilePath))
             {
-                using (var fileStream = new FileStream(saveFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                {
-                    fileStream.Close();
-                }
+                File.Delete(saveFilePath);
             }
 
-            using (var tempFile = File.OpenWrite(saveFilePath))
-            using (var stream = this.Client.Download(file.Href).Result)
+            using (var tempFile = new FileStream(saveFilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
+            using (var stream = await this.Client.Download(file.Href).ConfigureAwait(false))
             {
-                stream.CopyToAsync(tempFile).Wait();
-                stream.Dispose();
-                stream.Close();
+                await stream.CopyToAsync(tempFile).ConfigureAwait(false);
             }
+        }
 
-        }
-        public async void UploadFile(string openFilePath, string cloudFolderPath)
+        public async Task UploadFile(string openFilePath, string cloudFolderPath)
         {
-            Item folder = await this.Client.GetFolder(cloudFolderPath);
-            await this.UploadFile(openFilePath, folder);
-            // Получение папки на сервере
-            //Item file = this.Client.GetFolder(cloudFolderPath).Result;
-            // Загрузка файла на сервер
-            //this.UploadFile(openFilePath, file).Wait();
+            Item folder = await this.Client.GetFolder(cloudFolderPath).ConfigureAwait(false);
+            await this.UploadFile(openFilePath, folder).ConfigureAwait(false);
         }
+
         public async Task UploadFile(string openFilePath, Item folder)
         {
             if (!folder.IsCollection)

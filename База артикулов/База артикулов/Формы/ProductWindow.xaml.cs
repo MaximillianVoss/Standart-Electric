@@ -21,11 +21,13 @@ namespace База_артикулов.Формы
         #region Поля
         private Type dbSetType;
         private int idProduct;
+        private ProductsView currentProduct;
         #endregion
 
         #region Свойства
         public int? IdProduct { get => this.idProduct; set => this.idProduct = (int)value; }
         public Type DbSetType { get => this.dbSetType; set => this.dbSetType = value; }
+        public ProductsView CurrentProduct { get => this.currentProduct; set => this.currentProduct = value; }
         #endregion
 
         #region Методы
@@ -266,7 +268,8 @@ namespace База_артикулов.Формы
                     foreach (var childControl in this.gridFields.Children)
                     {
                         var control = childControl as UserControl;
-                        control.Visibility = System.Windows.Visibility.Visible;
+                        if (control != null)
+                            control.Visibility = System.Windows.Visibility.Visible;
                     }
                 }
                 #endregion
@@ -377,14 +380,16 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public ProductWindow(Type dbSetType, int? idProduct = null)
+        public ProductWindow(object product)
         {
             this.InitializeComponent();
             try
             {
+                if (product.GetType() != typeof(ProductsView))
+                    throw new Exception("Ожидался объект типа ProductsView");
+                this.CurrentProduct = (ProductsView)product;
+                this.IdProduct = this.CurrentProduct.ID_продукта;
                 this.UpdateFieldsTitles();
-                this.DbSetType = dbSetType;
-                this.IdProduct = idProduct;
                 this.UpdateForm(this.IdProduct);
             }
             catch (Exception ex)

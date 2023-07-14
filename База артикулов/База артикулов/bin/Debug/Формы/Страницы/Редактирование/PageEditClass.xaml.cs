@@ -1,0 +1,113 @@
+﻿
+using BaseWindow_WPF.Classes;
+using System;
+using System.Linq;
+using System.Windows;
+using База_артикулов.Классы;
+using База_артикулов.Модели;
+
+namespace База_артикулов.Формы.Страницы.Редактирование
+{
+    /// <summary>
+    /// Логика взаимодействия для PageEditClass.xaml
+    /// </summary>
+    public partial class PageEditClass : CustomPage
+    {
+
+
+        #region Поля
+
+        #endregion
+
+        #region Свойства
+        public object CurrentItem { get; set; }
+        #endregion
+
+        #region Методы
+        private void UpdateFields(object obj)
+        {
+            Classes currentClass = null;
+            if (obj.GetType().BaseType == typeof(TreeViewItemCustom))
+            {
+                currentClass = ((TreeViewItemCustom)obj).Value as Classes;
+            }
+            if (obj.GetType().BaseType == typeof(Classes))
+                currentClass = obj as Classes;
+            if (currentClass != null)
+            {
+                ClassesView classView = this.DB.ClassesView.FirstOrDefault(x => x.ID_класса == currentClass.id);
+                if (classView == null)
+                    throw new System.Exception($"Не удалось найти класса с id:{currentClass.id} ");
+                this.txbTitle.Text = classView.Наименование_класса;
+                this.txbTitleShort.Text = classView.Сокращенное_наименование_класса;
+                this.txbCode.Text = classView.Код_класса;
+                this.txbUrlPicture.Text = classView.URL_изображения_класса;
+            }
+        }
+
+        public void Save()
+        {
+            if (this.CurrentItem != null)
+            {
+
+            }
+            else
+            {
+                //Descriptors descriptors = new Descriptors(
+                //    this.txbCode.Text,
+                //    this.txbTitle.Text,
+                //    this.txbTitleShort.Text,
+                //    null
+                //    );
+                //descriptors.
+            }
+        }
+        #endregion
+
+        #region Конструкторы/Деструкторы
+        public PageEditClass(object item = null)
+        {
+            this.InitializeComponent();
+            this.CurrentItem = item;
+            this.btnOk.Text = this.CurrentItem != null ?
+            Common.Strings.Titles.Controls.Buttons.saveChanges :
+            Common.Strings.Titles.Controls.Buttons.createItem;
+            if (this.CurrentItem != null)
+                this.UpdateFields(this.CurrentItem);
+        }
+        #endregion
+
+        #region Операторы
+
+        #endregion
+
+        #region Обработчики событий
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+        private void gMain_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void btnOk_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Save();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.CloseWindow();
+        }
+        #endregion
+
+
+    }
+}

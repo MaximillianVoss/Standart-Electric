@@ -395,8 +395,8 @@ namespace База_артикулов.Формы
         {
             if (this.DbSetType == typeof(Products))
             {
-                ProductWindow productWindow = new ProductWindow(this.DbSetType, this.selectedItemId);
-                productWindow.ShowDialog();
+                //ProductWindow productWindow = new ProductWindow(this.DbSetType, this.selectedItemId);
+                //productWindow.ShowDialog();
             }
         }
         private void tvGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

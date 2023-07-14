@@ -7,9 +7,9 @@
       xmlns:local="clr-namespace:База_артикулов.Формы.Страницы.Редактирование" xmlns:CustomControlsWPF="clr-namespace:CustomControlsWPF;assembly=CustomControlsWPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageEditProduct">
+      Title="PageEditProduct" Background="Black">
 
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1*" />
@@ -18,7 +18,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <CustomControlsWPF:LabeledTextBox x:Name="txbFieldName" Margin="10,5,10,5" Text="" Title="Имя поля" TextChanged="txbFieldName_TextChanged" Grid.Row="0"/>
+        <CustomControlsWPF:LabeledTextBox x:Name="txbFieldName" Margin="10,5,10,5" Text="" Title="Найти свойство продукта" TextChanged="txbFieldName_TextChanged" Grid.Row="0"/>
         <Grid Margin="0,5,0,10" Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  Grid.RowSpan="2">
                 <Grid x:Name="gridFields"  Background="#FFD8D8D8">
@@ -39,7 +39,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <CustomControlsWPF:LabeledTextBox x:Name="txbPath" Margin="120,0,10,0" Text="" IsEnabled="False"  Height="75" VerticalAlignment="Center" Grid.Row="0" />
+                    <CustomControlsWPF:LabeledTextBox x:Name="txbPath" Margin="120,0,10,0" Text="" IsEnabled="False"  Height="75" VerticalAlignment="Center" Grid.Row="0" Title="Расположение товара" />
                     <CustomControlsWPF:LabeledTextBox x:Name="txbTitle" Margin="10,0,10,0" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="1" />
                     <CustomControlsWPF:LabeledTextBox x:Name="txbTitleShort" Margin="10,0,10,0" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="2" />
                     <CustomControlsWPF:LabeledTextBox x:Name="txbDescription" Margin="10,0,10,0" Text=""  Height="75" VerticalAlignment="Center" Grid.Row="3" />
@@ -54,7 +54,7 @@
                     <CustomControlsWPF:LabeledCheckBox x:Name="chbInStock" Margin="10,0,10,0" Title="В налчии"  Height="75" VerticalAlignment="Center" Grid.Row="12" />
                     <DataGrid x:Name="dgDimensions" Margin="10" Height="200" Grid.Row="13"/>
                     <CustomControlsWPF:ButtonPrimary x:Name="btnAddDimension"  Text="Добавить измерение" Height="40" Margin="10,0,10,0"  Click="btnAddDimension_Click" Grid.Row="14"/>
-                    <Image x:Name="imgPreview" Margin="5,5,0,5" Height="100" HorizontalAlignment="Left" Width="100">
+                    <Image x:Name="imgPreview" Margin="10,5,0,5" Height="100" HorizontalAlignment="Left" Width="100">
                     </Image>
                 </Grid>
             </ScrollViewer>
