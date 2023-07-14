@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -25,7 +26,37 @@ namespace База_артикулов.Формы.Страницы
         public Type itemsType { set; get; }
         public List<string> ColumnNames { get; set; }
         public IEnumerable Rows { get; set; }
+
+        // Возвращает элементы указанной страницы. Нумерация страниц начинается с 1.
+        public IEnumerable GetPage(int pageNumber, int itemsPerPage)
+        {
+            if (this.Rows is IEnumerable<object> objectRows)
+            {
+                return objectRows
+                    .Skip((pageNumber - 1) * itemsPerPage)
+                    .Take(itemsPerPage)
+                    .ToList();
+            }
+            else
+            {
+                throw new Exception("Rows is not a generic IEnumerable!");
+            }
+        }
+
+        // Проверяет, существует ли указанная страница
+        public bool HasPage(int pageNumber, int itemsPerPage)
+        {
+            if (this.Rows is IEnumerable<object> objectRows)
+            {
+                return objectRows.Skip((pageNumber - 1) * itemsPerPage).Any();
+            }
+            else
+            {
+                throw new Exception("Rows is not a generic IEnumerable!");
+            }
+        }
     }
+
     /// <summary>
     /// Логика взаимодействия для PageTables.xaml
     /// </summary>
@@ -185,6 +216,8 @@ namespace База_артикулов.Формы.Страницы
             this.dgTable.AutoGenerateColumns = false;
             this.dgTable.Columns.Clear();
             // Set ItemsSource
+            //TODO: доделать реализацию страниц(пагинации)
+            //this.dgTable.ItemsSource = tableData.GetPage(1, 10);
             this.dgTable.ItemsSource = tableData.Rows;
 
             // Create columns based on column names
