@@ -8,3 +8,5 @@
 *.suo
 *.vsidx
 *.suo
+*.baml
+*.cache

@@ -3,7 +3,10 @@ using CustomControlsWPF;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
@@ -14,6 +17,10 @@ namespace База_артикулов.Формы
 
 
         #region Поля
+        /// <summary>
+        /// Здесь хранится имя, не сама строка подключения!
+        /// </summary>
+        private string currentConnectionString;
         private CustomBase customBase = new CustomBase();
         #endregion
 
@@ -139,10 +146,54 @@ namespace База_артикулов.Формы
         }
         #endregion
 
+        /// <summary>
+        /// Пересоздаем контекст БД в зависимости от выбранной строки подключения
+        /// </summary>
+        public void InitDB(bool isForce = false)
+        {
+            if (!isForce)
+            {
+                if (this.currentConnectionString != Settings.Connections.CurrentConnectionString)
+                {
+                    this.currentConnectionString = Settings.Connections.CurrentConnectionString;
+                }
+                if (this.DB == null)
+                {
+                    this.DB = new DBSEEntities(this.currentConnectionString);
+                }
+                else
+                {
+                    var builder1 = new SqlConnectionStringBuilder(this.DB.Database.Connection.ConnectionString);
+                    EntityConnectionStringBuilder entityBuilder2 = new EntityConnectionStringBuilder(ConfigurationManager.ConnectionStrings[this.currentConnectionString].ConnectionString);
+                    string sqlConnectionString2 = entityBuilder2.ProviderConnectionString;
+                    SqlConnectionStringBuilder builder2 = new SqlConnectionStringBuilder(sqlConnectionString2);
+                    if (builder1.DataSource != builder2.DataSource || builder1.InitialCatalog != builder2.InitialCatalog)
+                    {
+                        // строки подключения отличаются
+                        this.DB = new DBSEEntities(this.currentConnectionString);
+                    }
+
+                }
+            }
+            else
+            {
+                this.DB = new DBSEEntities(this.currentConnectionString);
+            }
+        }
+
         #endregion
 
         #region Конструкторы/Деструкторы
-
+        public CustomWindow()
+        {
+            this.InitDB();
+            #region Подпись на события при выборе другой строки подключения
+            Settings.Connections.CurrentConnectionStringChanged += (newConnectionString) =>
+            {
+                this.InitDB();
+            };
+            #endregion
+        }
         #endregion
 
         #region Операторы
