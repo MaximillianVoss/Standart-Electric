@@ -191,6 +191,7 @@ AS
         SG.id AS 'ID подгруппы',
         DV.[Наименование ресурса] AS 'Наименование подгруппы',
         DV.[Сокращенное наименование ресурса] AS 'Сокращенное наименование подгруппы',
+        DV.[Описание ресурса] AS 'Описание подгруппы',
         DV.[Код ресурса] AS 'Код подгруппы',
         DV.[URL ресурса] AS 'URL изображения подгруппы',
         SG.[idGroup] AS 'ID группы',
@@ -217,6 +218,7 @@ AS
         G.id AS 'ID группы',
         DV.[Наименование ресурса] AS 'Наименование группы',
         DV.[Сокращенное наименование ресурса] AS 'Сокращенное наименование группы',
+        DV.[Описание ресурса] AS 'Описание группы',
         DV.[Код ресурса] AS 'Код группы',
         DV.[URL ресурса] AS 'URL изображения группы',
         G.[idClass] AS 'ID класса'
@@ -241,6 +243,7 @@ AS
         C.id AS 'ID класса',
         DV.[Наименование ресурса] AS 'Наименование класса',
         DV.[Сокращенное наименование ресурса] AS 'Сокращенное наименование класса',
+        DV.[Описание ресурса] AS 'Описание класса',
         DV.[Код ресурса] AS 'Код класса',
         DV.[URL ресурса] AS 'URL изображения класса'
     FROM
@@ -263,12 +266,26 @@ AS
     SELECT
         BU.id AS 'ID направления',
         DV.[Наименование] AS 'Наименование направления',
+        BU.idDescriptor AS 'ID схемы нагрузки',
+        DRV1.[Наименование ресурса] AS 'Наименование схема нагрузки',
+        DRV1.[URL ресурса] AS 'URL схемы нагрузки',
         BU.[idBimLibraryFile] AS 'ID Файла BIM-библиотеки',
+        DRV2.[Наименование ресурса]AS 'Наименование BIM-библиотеки',
+        DRV2.[URL ресурса]AS 'URL BIM-библиотеки',
         BU.[idDrawBlocksFile] AS 'ID Файла блоков чертежей',
-        BU.[idTypicalAlbum] AS 'ID Типового альбома'
+        DRV3.[Наименование ресурса]AS 'Наименование файла блоков чертежей',
+        DRV3.[URL ресурса]AS 'URL блоков чертежей',
+        BU.[idTypicalAlbum] AS 'ID Альбома типовых узлов',
+        DRV4.[Наименование ресурса]AS 'Наименование альбома типовых узлов',
+        DRV4.[URL ресурса]AS 'URL альбома типовых узлов'
     FROM
         BuisnessUnits BU
         JOIN DescriptorsView DV ON BU.[idDescriptor] = DV.[ID дескриптора]
+        LEFT JOIN DescriptorsResourcesView DRV1 ON BU.[idDescriptor] = DRV1.[ID дескриптора ресурса]
+        LEFT JOIN DescriptorsResourcesView DRV2 ON BU.[idBimLibraryFile] = DRV2.[ID дескриптора ресурса]
+        LEFT JOIN DescriptorsResourcesView DRV3 ON BU.[idDrawBlocksFile] = DRV3.[ID дескриптора ресурса]
+        LEFT JOIN DescriptorsResourcesView DRV4 ON BU.[idTypicalAlbum] = DRV4.[ID дескриптора ресурса]
+
 );
 --#endregion
 --#endregion
@@ -646,7 +663,7 @@ AS
         RTV.[Расширение ресурса]
     FROM
         Resources R
-        JOIN DescriptorsResources DR ON DR.idResource = R.id
+        LEFT JOIN DescriptorsResources DR ON DR.idResource = R.id
         LEFT JOIN DescriptorsView DV ON DV.[ID дескриптора] = DR.idDescriptor
         LEFT JOIN ResourceTypesView RTV ON RTV.[ID типа ресурса] = DR.idResourceType
 
@@ -749,7 +766,15 @@ AS
             VCV.Публичность AS 'Публичность артикула',
             VCV.Тип AS 'В продаже',
             VCV.[Бухгалтерский код],
-            VCV.Производитель
+            VCV.Производитель,
+            BUV.[Наименование схема нагрузки],
+            BUV.[URL схемы нагрузки],
+            BUV.[Наименование BIM-библиотеки],
+            BUV.[URL BIM-библиотеки],
+            BUV.[Наименование альбома типовых узлов],
+            BUV.[URL альбома типовых узлов],
+            BUV.[Наименование файла блоков чертежей],
+            BUV.[URL блоков чертежей]
         FROM
             Products P
             JOIN DescriptorsView DV ON P.[idDescriptor] = DV.[ID дескриптора]
@@ -765,6 +790,9 @@ AS
             LEFT JOIN UnitsTypesView UT ON UT.[ID типа измерения] = UP.idType
             LEFT JOIN PackagesView PacV ON PacV.[ID упаковки] = P.idPackage
             LEFT JOIN VendorCodesView VCV ON VCV.[ID продукта] = P.id
+            LEFT JOIN GroupsApplicationsView GAV ON GAV.[ID подгруппы] = P.idSubGroup
+            LEFT JOIN ApplicationsView AV ON AV.[ID направления] = GAV.[ID направления]
+            LEFT JOIN BuisnessUnitsView BUV ON AV.[ID направления] = BUV.[ID направления]
     ) AS SourceTable
 PIVOT (
     MAX([Значение])

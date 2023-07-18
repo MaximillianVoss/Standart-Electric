@@ -15,6 +15,7 @@ namespace База_артикулов.Модели
     public partial class ResourcesViewProducts
     {
         public int ID_ресурса { get; set; }
+        public string URL_ресурса { get; set; }
         public string Наименование_ресурса { get; set; }
         public string Динамические_блоки_Autocad__Наименование { get; set; }
         public string Библиотека_BIM_для_Revit__Наименование { get; set; }

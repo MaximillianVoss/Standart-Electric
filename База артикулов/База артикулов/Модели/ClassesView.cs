@@ -17,6 +17,7 @@ namespace База_артикулов.Модели
         public int ID_класса { get; set; }
         public string Наименование_класса { get; set; }
         public string Сокращенное_наименование_класса { get; set; }
+        public string Описание_класса { get; set; }
         public string Код_класса { get; set; }
         public string URL_изображения_класса { get; set; }
     }

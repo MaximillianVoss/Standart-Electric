@@ -12,14 +12,15 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="16*"/>
-            <RowDefinition Height="209*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dgTable" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,80,5,5" Background="Gray" CellEditEnding="dgTable_CellEditEnding" MouseDown="dgTable_MouseDown" AddingNewItem="dgTable_AddingNewItem" SelectedCellsChanged="dgTable_SelectedCellsChanged" Grid.Column="1" Grid.Row="1">
+        <DataGrid x:Name="dgTable" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,5,5,66" Background="Gray" CellEditEnding="dgTable_CellEditEnding" MouseDown="dgTable_MouseDown" AddingNewItem="dgTable_AddingNewItem" SelectedCellsChanged="dgTable_SelectedCellsChanged" Grid.Column="1" Grid.Row="2">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="btnTableAdd" Header="Добавить" Click="btnAdd_Click"/>
@@ -28,8 +29,8 @@
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
-        <CustomControlsWPF:LabeledComboBox x:Name="cmbTables" Margin="5,5,5,0" VerticalAlignment="Top" Title="Таблицы" SelectionChanged="cmbTables_SelectionChanged" Height="75" Grid.ColumnSpan="2" Grid.Row="1"/>
-        <TreeView x:Name="tvGroups" Margin="5,80,5,5" SelectedItemChanged="tvGroups_SelectedItemChanged" Grid.Row="1" MinWidth="200">
+        <CustomControlsWPF:LabeledComboBox x:Name="cmbTables" Title="Таблицы" SelectionChanged="cmbTables_SelectionChanged" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <TreeView x:Name="tvGroups" Margin="5,5,5,5" SelectedItemChanged="tvGroups_SelectedItemChanged" Grid.Row="2" MinWidth="200" PreviewMouseLeftButtonDown="tvGroups_PreviewMouseLeftButtonDown" PreviewMouseRightButtonDown="tvGroups_PreviewMouseRightButtonDown" IsTextSearchEnabled="True">
             <TreeView.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="miTreeAdd" Header="Добавить" Click="miTreeAdd_Click"/>
@@ -39,7 +40,7 @@
                 </ContextMenu>
             </TreeView.ContextMenu>
         </TreeView>
-        <Menu Margin="0,0,0,5" Grid.ColumnSpan="2">
+        <Menu Grid.ColumnSpan="2">
             <MenuItem Header="Файл">
                 <MenuItem x:Name="btnExport"  Header="Экспорт текущей таблицы в файл" Click="miExport_Click" />
             </MenuItem>
@@ -50,6 +51,7 @@
                 <!--<MenuItem x:Name="btnDelete" Header="Удалить" Click="btnDelete_Click" />-->
             </MenuItem>
         </Menu>
+        <CustomControlsWPF:PagingControl x:Name="pcProducts" Margin="45,0,45,0" Grid.Row="2" Grid.Column="1" PageChanged="PagingControl_PageChanged" PageSizeChanged="pcProducts_PageSizeChanged" Height="50" VerticalAlignment="Bottom"/>
 
     </Grid>
 </local1:CustomPage>

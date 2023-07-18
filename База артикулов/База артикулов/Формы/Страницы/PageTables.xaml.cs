@@ -23,7 +23,7 @@ namespace База_артикулов.Формы.Страницы
         /// <summary>
         /// Тип элементов, которые хранятся в коллекции
         /// </summary>
-        public Type itemsType { set; get; }
+        public Type ItemsType { set; get; }
         public List<string> ColumnNames { get; set; }
         public IEnumerable Rows { get; set; }
 
@@ -43,6 +43,24 @@ namespace База_артикулов.Формы.Страницы
             }
         }
 
+        public int GetRowsCount()
+        {
+            if (this.Rows is ICollection collection)
+            {
+                return collection.Count;
+            }
+            else
+            {
+                // Падаем назад на перечисление, если Rows не является ICollection
+                int count = 0;
+                foreach (var item in this.Rows)
+                {
+                    count++;
+                }
+                return count;
+            }
+        }
+
         // Проверяет, существует ли указанная страница
         public bool HasPage(int pageNumber, int itemsPerPage)
         {
@@ -55,6 +73,7 @@ namespace База_артикулов.Формы.Страницы
                 throw new Exception("Rows is not a generic IEnumerable!");
             }
         }
+
     }
 
     /// <summary>
@@ -63,11 +82,10 @@ namespace База_артикулов.Формы.Страницы
     public partial class PageTables : CustomPage
     {
         #region Поля
-
+        private Dictionary<int, bool> treeState;
         #endregion
 
         #region Свойства
-        public Type DbSetType { set; get; }
         public object TreeViewSelectedObject { set; get; }
         /// <summary>
         /// ID элемента, выбранного в таблице
@@ -77,6 +95,10 @@ namespace База_артикулов.Формы.Страницы
         /// Элемент, выбранный в таблице
         /// </summary>
         public object SelectedItem { set; get; }
+        /// <summary>
+        /// Данные из текущей выбранной таблицы
+        /// </summary>
+        public TableData CurrentTableData { set; get; }
         #endregion
 
         #region Методы
@@ -103,7 +125,6 @@ namespace База_артикулов.Формы.Страницы
             }
             return typeof(object);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -138,12 +159,11 @@ namespace База_артикулов.Формы.Страницы
             {
                 title = view.Наименование_представления,
                 titleDisplay = view.Отображаемое_название_представления,
-                itemsType = dbSetType,
+                ItemsType = dbSetType,
                 ColumnNames = columnNames,
                 Rows = (IEnumerable)tableItems
             };
         }
-
         /// <summary>
         /// Экспорт таблицы в CSV
         /// TODO: сделать экспорт для каждой таблицы
@@ -156,14 +176,14 @@ namespace База_артикулов.Формы.Страницы
                 var selectedTableName = this.cmbTables.SelectedItem.ToString();
                 var table = this.GetTable(selectedTableName);
 
-                if (table != null && table.itemsType != null)
+                if (table != null && table.ItemsType != null)
                 {
                     using (var writer = new StreamWriter(outputFilePath, false, Encoding.UTF8))
                     {
                         var entities = table.Rows.OfType<object>().ToList();
                         if (entities.Any())
                         {
-                            var propertyNames = table.itemsType.GetProperties().Select(p => isDeleteUnderline ? p.Name.Replace("_", " ") : p.Name);
+                            var propertyNames = table.ItemsType.GetProperties().Select(p => isDeleteUnderline ? p.Name.Replace("_", " ") : p.Name);
 
                             string separator = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
 
@@ -186,39 +206,31 @@ namespace База_артикулов.Формы.Страницы
                 }
             }
         }
-        #endregion
-
-        #region Выпадающий список
-
         /// <summary>
-        /// Заполняет данные из указанной таблицы в DataGrid
+        /// Заполняет элемент управления DataGrid записями из указанной таблицы
         /// </summary>
-        /// <param name="selectedTableName">имя таблицы на русском</param>
-        /// <exception cref="Exception"></exception>
-        private void SelectTable(String selectedTableName)
-        {
-            if (this.cmbTables.SelectedIndex != -1)
-            {
-                this.DbSetType = this.GetTableItemsType(selectedTableName);
-                //this.dgTable.ItemsSource = this.GetTable(selectedTableName);
-                this.UpdateDataGrid(selectedTableName);
-            }
-        }
-
+        /// <param name="tableName">имя таблицы</param>
         private void UpdateDataGrid(string tableName)
         {
-            this.UpdateDataGrid(this.GetTable(tableName));
+            this.UpdateDataGrid(this.GetTable(tableName), this.pcProducts.CurrentPage, this.pcProducts.PageSize);
         }
-
-        private void UpdateDataGrid(TableData tableData)
+        /// <summary>
+        /// Заполняет элемент управления DataGrid записями из указанной таблицы
+        /// </summary>
+        /// <param name="tableData">имя таблицы</param>
+        private void UpdateDataGrid(TableData tableData, int pageNumber, int itemsPerPage)
         {
+            this.InitDB(true);
+            int rowCount = this.CurrentTableData.GetRowsCount();
+            int pageSize = this.pcProducts.PageSize;
+            this.pcProducts.PagesCount = rowCount / pageSize;
             // Clear previous columns
             this.dgTable.AutoGenerateColumns = false;
             this.dgTable.Columns.Clear();
             // Set ItemsSource
             //TODO: доделать реализацию страниц(пагинации)
-            //this.dgTable.ItemsSource = tableData.GetPage(1, 10);
-            this.dgTable.ItemsSource = tableData.Rows;
+            this.dgTable.ItemsSource = tableData.GetPage(pageNumber, itemsPerPage);
+            //this.dgTable.ItemsSource = tableData.Rows;
 
             // Create columns based on column names
             foreach (var columnName in tableData.ColumnNames)
@@ -232,6 +244,10 @@ namespace База_артикулов.Формы.Страницы
                 this.dgTable.Columns.Add(column);
             }
         }
+        #endregion
+
+        #region Выпадающий список
+
 
         /// <summary>
         /// Добавляет элементов в ComboBox
@@ -256,7 +272,7 @@ namespace База_артикулов.Формы.Страницы
             if (this.cmbTables.SelectedIndex == -1)
                 return;
             TableData table = this.GetTable(this.cmbTables.SelectedItem);
-            if (table.itemsType != typeof(ProductsView) && !table.titleDisplay.Equals("Продукты", StringComparison.OrdinalIgnoreCase))
+            if (table.ItemsType != typeof(ProductsView) && !table.titleDisplay.Equals("Продукты", StringComparison.OrdinalIgnoreCase))
             {
                 this.UpdateDataGrid(this.cmbTables.SelectedItem);
                 return;
@@ -278,15 +294,14 @@ namespace База_артикулов.Формы.Страницы
             }
 
             table.Rows = productsViews.ToList();
-            this.UpdateDataGrid(table);
+            this.UpdateDataGrid(table, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
         }
-
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="class"></param>
-        private void AddToTreeView(Classes @class)
+        private TreeViewItemCustom AddToTreeView(Classes @class)
         {
             TreeViewItemCustom classItem = new TreeViewItemCustom(@class.Descriptors.title, @class);
             foreach (var group in @class.Groups)
@@ -299,6 +314,7 @@ namespace База_артикулов.Формы.Страницы
                 classItem.Add(groupItem);
             }
             this.tvGroups.Items.Add(classItem);
+            return classItem; // Возвращаем созданный объект TreeViewItemCustom
         }
 
         /// <summary>
@@ -317,18 +333,52 @@ namespace База_артикулов.Формы.Страницы
             this.tvGroups.Visibility = Visibility.Collapsed;
         }
 
+        private void SaveTreeState(ItemCollection items)
+        {
+            foreach (var obj in items)
+            {
+                var item = obj as TreeViewItemCustom;
+                if (item == null)
+                    continue;
+
+                if (item.Value is Classes @class)
+                {
+                    this.treeState[@class.id] = item.IsExpanded;
+                }
+                // Сохраняем состояние каждого дочернего элемента
+                if (item.Items.Count > 0)
+                {
+                    this.SaveTreeState(item.Items);
+                }
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
         private void UpdateTreeView()
         {
-            if (this.DbSetType == typeof(Products))
+            if (this.CurrentTableData.ItemsType == typeof(Products) ||
+                this.CurrentTableData.ItemsType == typeof(ProductsView))
             {
+                // Сохраняем текущее состояние дерева перед его очисткой
+                this.treeState = new Dictionary<int, bool>();
+                this.SaveTreeState(this.tvGroups.Items);
+
                 this.tvGroups.Items.Clear();
+                this.tvGroups.UpdateLayout();
+                this.InitDB(true);
+
                 foreach (var @class in this.DB.Classes)
                 {
-                    this.AddToTreeView(@class);
+                    var classItem = this.AddToTreeView(@class);
+                    // Восстанавливаем состояние для каждого элемента
+                    if (this.treeState.TryGetValue(@class.id, out bool isExpanded))
+                    {
+                        classItem.IsExpanded = isExpanded;
+                    }
                 }
+
                 this.ShowTreeView();
             }
             else
@@ -387,9 +437,12 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                this.SelectTable(this.cmbTables.SelectedItem);
-                this.UpdateTreeView();
-
+                if (this.cmbTables.SelectedItem != null)
+                {
+                    this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
+                    this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
+                    this.UpdateTreeView();
+                }
             }
             catch (Exception ex)
             {
@@ -400,18 +453,15 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                if (this.DbSetType != null && this.cmbTables.SelectedIndex != -1)
+                if (this.CurrentTableData.ItemsType != null && this.cmbTables.SelectedIndex != -1)
                 {
                     if (this.dgTable.SelectedCells.Count > 0)
                     {
-                        var table = this.GetTable(this.cmbTables.SelectedItem);
                         int columnIndex = this.dgTable.SelectedCells[0].Column.DisplayIndex;
-                        if (table.ColumnNames.Count == 0)
+                        if (this.CurrentTableData.ColumnNames.Count == 0)
                             throw new Exception("В таблице нет столбцов!");
                         this.SelectedItem = this.dgTable.SelectedItem;
-                        this.IdSelectedItem = (int)this.GetObjectFieldValue(this.SelectedItem, table.ColumnNames[columnIndex]);
-                        // Now you have the selected column index
-
+                        this.IdSelectedItem = (int)this.GetObjectFieldValue(this.SelectedItem, this.CurrentTableData.ColumnNames[columnIndex]);
                     }
                 }
             }
@@ -420,17 +470,53 @@ namespace База_артикулов.Формы.Страницы
                 this.ShowError(ex.Message);
             }
         }
+        #region События иерархического списка
+
+        #region Нажатия левой/правой кнопкой мыши
         private void tvGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (e.NewValue != null)
             {
                 this.TreeViewSelectedObject = e.NewValue;
-                this.FilterTableByTreeView(this.DbSetType, ((TreeViewItemCustom)e.NewValue).Value);
+                this.FilterTableByTreeView(this.CurrentTableData.ItemsType, ((TreeViewItemCustom)e.NewValue).Value);
             }
         }
 
-        #region Кнопки контекстного меню таблицы
+        private void tvGroups_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //var item = this.tvGroups.SelectedItem as TreeViewItemCustom;
+            //if (item != null)
+            //{
+            //    this.TreeViewSelectedObject = item;
+            //    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, item.Value);
+            //}
+        }
 
+        private void tvGroups_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        #endregion
+
+
+        #region Кнопки контекстного меню иерархического списка
+        private void miTreeAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var windowEdit = new WindowEdit("Создание", new Classes(), WindowEditModes.Create);
+            windowEdit.ShowDialog();
+            this.UpdateTreeView();
+        }
+        private void miTreeEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var windowEdit = new WindowEdit("Редактирование", this.TreeViewSelectedObject);
+            windowEdit.ShowDialog();
+            this.UpdateTreeView();
+        }
+        #endregion
+
+        #endregion
+
+        #region Кнопки контекстного меню таблицы
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -451,18 +537,15 @@ namespace База_артикулов.Формы.Страницы
             {
                 var windowEdit = new ProductWindow(this.SelectedItem);
                 windowEdit.ShowDialog();
-                //this.SelectTable(this.cmbTables.SelectedItem);
-                //this.UpdateTreeView();
+                this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
+                this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
             }
             catch (Exception ex)
             {
                 this.ShowError(ex);
             }
         }
-
-        #endregion
-
-        #region Кнопки верхнего меню
+        #endregion 
 
         private void miExport_Click(object sender, RoutedEventArgs e)
         {
@@ -506,7 +589,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                if (this.DbSetType != typeof(ProductsView))
+                if (this.CurrentTableData.ItemsType != typeof(ProductsView))
                     throw new Exception("Редактирование других таблиц недоступно");
 
             }
@@ -521,20 +604,44 @@ namespace База_артикулов.Формы.Страницы
         {
 
         }
+
+
+
+
+
+
+        #region Обработчики нажатий страниц
+        private void PagingControl_PageChanged(object sender, CustomControlsWPF.PageChangedEventArgs e)
+        {
+            try
+            {
+                this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+        private void pcProducts_PageSizeChanged(object sender, CustomControlsWPF.PageSizeChangedEventArgs e)
+        {
+            try
+            {
+                int rowCount = this.CurrentTableData.GetRowsCount();
+                int pageSize = this.pcProducts.PageSize;
+                this.pcProducts.PagesCount = rowCount / pageSize;
+                if (rowCount % pageSize != 0)
+                {
+                    this.pcProducts.PagesCount++;
+                }
+                this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
         #endregion
 
-        #region Контекстное меню иерархического дерева
-        private void miTreeAdd_Click(object sender, RoutedEventArgs e)
-        {
-            var windowEdit = new WindowEdit();
-            windowEdit.ShowDialog();
-        }
-        private void miTreeEdit_Click(object sender, RoutedEventArgs e)
-        {
-            var windowEdit = new WindowEdit(this.TreeViewSelectedObject);
-            windowEdit.ShowDialog();
-        }
-        #endregion
 
     }
     #endregion

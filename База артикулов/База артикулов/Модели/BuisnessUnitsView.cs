@@ -16,8 +16,17 @@ namespace База_артикулов.Модели
     {
         public int ID_направления { get; set; }
         public string Наименование_направления { get; set; }
+        public int ID_схемы_нагрузки { get; set; }
+        public string Наименование_схема_нагрузки { get; set; }
+        public string URL_схемы_нагрузки { get; set; }
         public Nullable<int> ID_Файла_BIM_библиотеки { get; set; }
+        public string Наименование_BIM_библиотеки { get; set; }
+        public string URL_BIM_библиотеки { get; set; }
         public Nullable<int> ID_Файла_блоков_чертежей { get; set; }
-        public Nullable<int> ID_Типового_альбома { get; set; }
+        public string Наименование_файла_блоков_чертежей { get; set; }
+        public string URL_блоков_чертежей { get; set; }
+        public Nullable<int> ID_Альбома_типовых_узлов { get; set; }
+        public string Наименование_альбома_типовых_узлов { get; set; }
+        public string URL_альбома_типовых_узлов { get; set; }
     }
 }

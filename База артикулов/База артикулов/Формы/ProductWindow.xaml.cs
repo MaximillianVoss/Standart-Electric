@@ -201,7 +201,7 @@ namespace База_артикулов.Формы
                 if (currentProductVendorCodes.VendorCodes != null && currentProductVendorCodes.VendorCodes.Descriptors != null)
                 {
                     this.txbVendorCode.Text = currentProductVendorCodes.VendorCodes.Descriptors.title;
-                    await this.UpdateImageAsync(currentProductVendorCodes.VendorCodes.Descriptors.title);
+                    //await this.UpdateImageAsync(currentProductVendorCodes.VendorCodes.Descriptors.title);
                 }
             }
             #endregion

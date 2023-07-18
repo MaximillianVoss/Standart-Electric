@@ -37,31 +37,59 @@ namespace База_артикулов.Формы.Страницы.Редакти
             {
                 ClassesView classView = this.DB.ClassesView.FirstOrDefault(x => x.ID_класса == currentClass.id);
                 if (classView == null)
-                    throw new System.Exception($"Не удалось найти класса с id:{currentClass.id} ");
+                    throw new System.Exception($"Не удалось найти класс с id:{currentClass.id} ");
                 this.txbTitle.Text = classView.Наименование_класса;
                 this.txbTitleShort.Text = classView.Сокращенное_наименование_класса;
                 this.txbCode.Text = classView.Код_класса;
-                this.txbUrlPicture.Text = classView.URL_изображения_класса;
+                this.txbDescription.Text = classView.Описание_класса;
+                //this.txbUrlPicture.Text = classView.URL_изображения_класса;
             }
         }
 
         public void Save()
         {
+            Descriptors descriptor;
+
+            // Проверяем, задан ли CurrentItem
             if (this.CurrentItem != null)
             {
+                // Проверяем, является ли CurrentItem объектом Classes
+                if (!(this.CurrentItem is Classes currentClass))
+                    throw new Exception("Редактируемый элемент не является классом");
 
+                // Сохраняем descriptor
+                descriptor = this.Save(
+                    currentClass.idDescriptor,
+                    this.txbCode.Text,
+                    this.txbTitle.Text,
+                    this.txbTitleShort.Text,
+                    "",
+                    this.txbDescription.Text
+                );
+
+                // Обновляем текущий класс
+                currentClass.Descriptors = descriptor;
             }
             else
             {
-                //Descriptors descriptors = new Descriptors(
-                //    this.txbCode.Text,
-                //    this.txbTitle.Text,
-                //    this.txbTitleShort.Text,
-                //    null
-                //    );
-                //descriptors.
+                // Создаем новый объект Descriptors и добавляем его в базу данных
+                descriptor = new Descriptors(
+                    this.txbCode.Text,
+                    this.txbTitle.Text,
+                    this.txbTitleShort.Text,
+                    this.txbDescription.Text
+                );
+
+                descriptor = this.DB.Descriptors.Add(descriptor);
+
+                // Создаем новый объект Classes и добавляем его в базу данных
+                this.DB.Classes.Add(new Classes(descriptor));
             }
+
+            // Сохраняем изменения в базу данных
+            this.DB.SaveChanges();
         }
+
         #endregion
 
         #region Конструкторы/Деструкторы
@@ -88,6 +116,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         }
         private void gMain_Loaded(object sender, RoutedEventArgs e)
+
         {
 
         }
@@ -96,6 +125,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             try
             {
                 this.Save();
+                this.CloseWindow();
             }
             catch (Exception ex)
             {

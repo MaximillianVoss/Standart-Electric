@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:База_артикулов.Формы" xmlns:редактирование="clr-namespace:База_артикулов.Формы.Страницы.Редактирование"
                     mc:Ignorable="d"
-        Title="WindowEdit" Height="600" Width="600" Loaded="Window_Loaded">
+        Title="WindowEdit" Height="800" Width="600" Loaded="Window_Loaded">
     <Grid>
         <Frame x:Name="fMain" Content="Frame" NavigationUIVisibility="Hidden"/>
     </Grid>

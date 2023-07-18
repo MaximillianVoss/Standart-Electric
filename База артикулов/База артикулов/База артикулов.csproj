@@ -102,9 +102,15 @@
     <Compile Include="Классы\Common.cs" />
     <Compile Include="Классы\Settings.cs" />
     <Compile Include="Классы\WDClient.cs" />
+    <Compile Include="Классы\Дополнения\Applications.cs" />
+    <Compile Include="Классы\Дополнения\Classes.cs" />
     <Compile Include="Классы\Дополнения\Covers.cs" />
     <Compile Include="Классы\Дополнения\DBSEEntities.cs" />
     <Compile Include="Классы\Дополнения\Descriptors.cs" />
+    <Compile Include="Классы\Дополнения\Groups.cs" />
+    <Compile Include="Классы\Дополнения\GroupsApplications.cs" />
+    <Compile Include="Классы\Дополнения\IToObject.cs" />
+    <Compile Include="Классы\Дополнения\LoadDiagrams.cs" />
     <Compile Include="Классы\Дополнения\Materials.cs" />
     <Compile Include="Классы\Дополнения\Norms.cs" />
     <Compile Include="Классы\Дополнения\Packages.cs" />
@@ -308,9 +314,15 @@
       <DependentUpon>PageEditClass.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Формы\Страницы\Редактирование\PageEditGroup.xaml.cs">
+      <DependentUpon>PageEditGroup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Формы\Страницы\Редактирование\PageEditProduct.xaml.cs">
       <DependentUpon>PageEditProduct.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Формы\Страницы\Редактирование\PageEditSubGroup.xaml.cs">
+      <DependentUpon>PageEditSubGroup.xaml</DependentUpon>
     </Compile>
     <Page Include="Формы\FilesWindow.xaml">
       <SubType>Designer</SubType>
@@ -412,7 +424,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Формы\Страницы\Редактирование\PageEditGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Формы\Страницы\Редактирование\PageEditProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Формы\Страницы\Редактирование\PageEditSubGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

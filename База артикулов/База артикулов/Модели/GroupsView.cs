@@ -17,6 +17,7 @@ namespace База_артикулов.Модели
         public int ID_группы { get; set; }
         public string Наименование_группы { get; set; }
         public string Сокращенное_наименование_группы { get; set; }
+        public string Описание_группы { get; set; }
         public string Код_группы { get; set; }
         public string URL_изображения_группы { get; set; }
         public Nullable<int> ID_класса { get; set; }

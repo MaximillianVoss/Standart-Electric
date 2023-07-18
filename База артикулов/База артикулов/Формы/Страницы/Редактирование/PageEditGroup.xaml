@@ -1,0 +1,23 @@
+﻿<формы:CustomPage
+    xmlns:формы="clr-namespace:База_артикулов.Формы"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:База_артикулов.Формы.Страницы.Редактирование"
+      xmlns:CustomControlsWPF="clr-namespace:CustomControlsWPF;assembly=CustomControlsWPF" x:Class="База_артикулов.Формы.Страницы.Редактирование.PageEditGroup"
+      mc:Ignorable="d" d:DesignWidth="800"
+      Title="PageEditGroup" Height="459">
+
+    <Grid Background="White">
+
+        <CustomControlsWPF:LabeledTextBox x:Name="txbTitle" Margin="10,10,10,0" VerticalAlignment="Top" Title="Наименование группы" Text=""/>
+        <CustomControlsWPF:LabeledTextBox x:Name="txbTitleShort" Margin="10,85,10,0" VerticalAlignment="Top" Title="Сокращенное наименование группы" Text=""/>
+        <CustomControlsWPF:LabeledTextBox x:Name="txbCode" Margin="10,160,10,0" VerticalAlignment="Top" Title="Код группы" Text=""/>
+        <CustomControlsWPF:LabeledTextBox x:Name="txbDescription" Margin="10,235,10,0" VerticalAlignment="Top" Title="Описание" Text=""/>
+        <CustomControlsWPF:LabeledComboBox x:Name="cmbClass" Margin="10,310,10,0" VerticalAlignment="Top" Title="Класс"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnOk" Margin="10,0,10,45" Text="ТЕКСТ ДЕЙСТВИЯ" Click="btnOk_Click" Height="30" VerticalAlignment="Bottom"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnCancel" Margin="10,0,10,10" Color="danger" Text="Отмена" Height="30" Click="btnCancel_Click" VerticalAlignment="Bottom"/>
+
+    </Grid>
+</формы:CustomPage>

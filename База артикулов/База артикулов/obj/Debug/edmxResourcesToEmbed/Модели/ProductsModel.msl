@@ -302,9 +302,18 @@
     <EntitySetMapping Name="ApplicationsView">
       <EntityTypeMapping TypeName="DBSEModel.ApplicationsView">
         <MappingFragment StoreEntitySet="ApplicationsView">
-          <ScalarProperty Name="ID_Типового_альбома" ColumnName="ID Типового альбома" />
+          <ScalarProperty Name="URL_альбома_типовых_узлов" ColumnName="URL альбома типовых узлов" />
+          <ScalarProperty Name="Наименование_альбома_типовых_узлов" ColumnName="Наименование альбома типовых узлов" />
+          <ScalarProperty Name="ID_Альбома_типовых_узлов" ColumnName="ID Альбома типовых узлов" />
+          <ScalarProperty Name="URL_блоков_чертежей" ColumnName="URL блоков чертежей" />
+          <ScalarProperty Name="Наименование_файла_блоков_чертежей" ColumnName="Наименование файла блоков чертежей" />
           <ScalarProperty Name="ID_Файла_блоков_чертежей" ColumnName="ID Файла блоков чертежей" />
+          <ScalarProperty Name="URL_BIM_библиотеки" ColumnName="URL BIM-библиотеки" />
+          <ScalarProperty Name="Наименование_BIM_библиотеки" ColumnName="Наименование BIM-библиотеки" />
           <ScalarProperty Name="ID_Файла_BIM_библиотеки" ColumnName="ID Файла BIM-библиотеки" />
+          <ScalarProperty Name="URL_схемы_нагрузки" ColumnName="URL схемы нагрузки" />
+          <ScalarProperty Name="Наименование_схема_нагрузки" ColumnName="Наименование схема нагрузки" />
+          <ScalarProperty Name="ID_схемы_нагрузки" ColumnName="ID схемы нагрузки" />
           <ScalarProperty Name="Наименование_направления" ColumnName="Наименование направления" />
           <ScalarProperty Name="ID_направления" ColumnName="ID направления" />
           <ScalarProperty Name="Наименование_применения" ColumnName="Наименование применения" />
@@ -315,9 +324,18 @@
     <EntitySetMapping Name="BuisnessUnitsView">
       <EntityTypeMapping TypeName="DBSEModel.BuisnessUnitsView">
         <MappingFragment StoreEntitySet="BuisnessUnitsView">
-          <ScalarProperty Name="ID_Типового_альбома" ColumnName="ID Типового альбома" />
+          <ScalarProperty Name="URL_альбома_типовых_узлов" ColumnName="URL альбома типовых узлов" />
+          <ScalarProperty Name="Наименование_альбома_типовых_узлов" ColumnName="Наименование альбома типовых узлов" />
+          <ScalarProperty Name="ID_Альбома_типовых_узлов" ColumnName="ID Альбома типовых узлов" />
+          <ScalarProperty Name="URL_блоков_чертежей" ColumnName="URL блоков чертежей" />
+          <ScalarProperty Name="Наименование_файла_блоков_чертежей" ColumnName="Наименование файла блоков чертежей" />
           <ScalarProperty Name="ID_Файла_блоков_чертежей" ColumnName="ID Файла блоков чертежей" />
+          <ScalarProperty Name="URL_BIM_библиотеки" ColumnName="URL BIM-библиотеки" />
+          <ScalarProperty Name="Наименование_BIM_библиотеки" ColumnName="Наименование BIM-библиотеки" />
           <ScalarProperty Name="ID_Файла_BIM_библиотеки" ColumnName="ID Файла BIM-библиотеки" />
+          <ScalarProperty Name="URL_схемы_нагрузки" ColumnName="URL схемы нагрузки" />
+          <ScalarProperty Name="Наименование_схема_нагрузки" ColumnName="Наименование схема нагрузки" />
+          <ScalarProperty Name="ID_схемы_нагрузки" ColumnName="ID схемы нагрузки" />
           <ScalarProperty Name="Наименование_направления" ColumnName="Наименование направления" />
           <ScalarProperty Name="ID_направления" ColumnName="ID направления" />
         </MappingFragment>
@@ -328,6 +346,7 @@
         <MappingFragment StoreEntitySet="ClassesView">
           <ScalarProperty Name="URL_изображения_класса" ColumnName="URL изображения класса" />
           <ScalarProperty Name="Код_класса" ColumnName="Код класса" />
+          <ScalarProperty Name="Описание_класса" ColumnName="Описание класса" />
           <ScalarProperty Name="Сокращенное_наименование_класса" ColumnName="Сокращенное наименование класса" />
           <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
           <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
@@ -386,12 +405,22 @@
           <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
           <ScalarProperty Name="URL_изображения_подгруппы" ColumnName="URL изображения подгруппы" />
           <ScalarProperty Name="Код_подгруппы" ColumnName="Код подгруппы" />
+          <ScalarProperty Name="Описание_подгруппы" ColumnName="Описание подгруппы" />
           <ScalarProperty Name="Сокращенное_наименование_подгруппы" ColumnName="Сокращенное наименование подгруппы" />
           <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
           <ScalarProperty Name="ID_подгруппы" ColumnName="ID подгруппы" />
-          <ScalarProperty Name="ID_Типового_альбома" ColumnName="ID Типового альбома" />
+          <ScalarProperty Name="URL_альбома_типовых_узлов" ColumnName="URL альбома типовых узлов" />
+          <ScalarProperty Name="Наименование_альбома_типовых_узлов" ColumnName="Наименование альбома типовых узлов" />
+          <ScalarProperty Name="ID_Альбома_типовых_узлов" ColumnName="ID Альбома типовых узлов" />
+          <ScalarProperty Name="URL_блоков_чертежей" ColumnName="URL блоков чертежей" />
+          <ScalarProperty Name="Наименование_файла_блоков_чертежей" ColumnName="Наименование файла блоков чертежей" />
           <ScalarProperty Name="ID_Файла_блоков_чертежей" ColumnName="ID Файла блоков чертежей" />
+          <ScalarProperty Name="URL_BIM_библиотеки" ColumnName="URL BIM-библиотеки" />
+          <ScalarProperty Name="Наименование_BIM_библиотеки" ColumnName="Наименование BIM-библиотеки" />
           <ScalarProperty Name="ID_Файла_BIM_библиотеки" ColumnName="ID Файла BIM-библиотеки" />
+          <ScalarProperty Name="URL_схемы_нагрузки" ColumnName="URL схемы нагрузки" />
+          <ScalarProperty Name="Наименование_схема_нагрузки" ColumnName="Наименование схема нагрузки" />
+          <ScalarProperty Name="ID_схемы_нагрузки" ColumnName="ID схемы нагрузки" />
           <ScalarProperty Name="Наименование_направления" ColumnName="Наименование направления" />
           <ScalarProperty Name="ID_направления" ColumnName="ID направления" />
           <ScalarProperty Name="Наименование_применения" ColumnName="Наименование применения" />
@@ -406,6 +435,7 @@
           <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
           <ScalarProperty Name="URL_изображения_группы" ColumnName="URL изображения группы" />
           <ScalarProperty Name="Код_группы" ColumnName="Код группы" />
+          <ScalarProperty Name="Описание_группы" ColumnName="Описание группы" />
           <ScalarProperty Name="Сокращенное_наименование_группы" ColumnName="Сокращенное наименование группы" />
           <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
           <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
@@ -515,20 +545,27 @@
           <ScalarProperty Name="Ширина" ColumnName="Ширина" />
           <ScalarProperty Name="Длина" ColumnName="Длина" />
           <ScalarProperty Name="Вес" ColumnName="Вес" />
+          <ScalarProperty Name="URL_блоков_чертежей" ColumnName="URL блоков чертежей" />
+          <ScalarProperty Name="Наименование_файла_блоков_чертежей" ColumnName="Наименование файла блоков чертежей" />
+          <ScalarProperty Name="URL_альбома_типовых_узлов" ColumnName="URL альбома типовых узлов" />
+          <ScalarProperty Name="Наименование_альбома_типовых_узлов" ColumnName="Наименование альбома типовых узлов" />
+          <ScalarProperty Name="URL_BIM_библиотеки" ColumnName="URL BIM-библиотеки" />
+          <ScalarProperty Name="Наименование_BIM_библиотеки" ColumnName="Наименование BIM-библиотеки" />
+          <ScalarProperty Name="URL_схемы_нагрузки" ColumnName="URL схемы нагрузки" />
+          <ScalarProperty Name="Наименование_схема_нагрузки" ColumnName="Наименование схема нагрузки" />
           <ScalarProperty Name="Производитель" ColumnName="Производитель" />
           <ScalarProperty Name="Бухгалтерский_код" ColumnName="Бухгалтерский код" />
           <ScalarProperty Name="В_продаже" ColumnName="В продаже" />
           <ScalarProperty Name="Публичность_артикула" ColumnName="Публичность артикула" />
           <ScalarProperty Name="Актуальность_артикула" ColumnName="Актуальность артикула" />
           <ScalarProperty Name="Высота_упаковки__мм" ColumnName="Высота упаковки, мм" />
-          <ScalarProperty Name="Длина_упаковки__мм" ColumnName="Длина упаковки, мм" />
           <ScalarProperty Name="Ширина_упаковки__мм" ColumnName="Ширина упаковки, мм" />
+          <ScalarProperty Name="Длина_упаковки__мм" ColumnName="Длина упаковки, мм" />
           <ScalarProperty Name="Вес_упаковки__кг" ColumnName="Вес упаковки, кг" />
-          <ScalarProperty Name="Описание_упаковки" ColumnName="Описание упаковки" />
           <ScalarProperty Name="Сокращенное_наименование_упаковки" ColumnName="Сокращенное наименование упаковки" />
           <ScalarProperty Name="Наименование_упаковки" ColumnName="Наименование упаковки" />
-          <ScalarProperty Name="ID_упаковки" ColumnName="ID упаковки" />
           <ScalarProperty Name="Шаг_перфорации__мм" ColumnName="Шаг перфорации, мм" />
+          <ScalarProperty Name="Наименование_перфорации" ColumnName="Наименование перфорации" />
           <ScalarProperty Name="В_наличии_на_заказ" ColumnName="В наличии/на заказ" />
           <ScalarProperty Name="Описание" ColumnName="Описание" />
           <ScalarProperty Name="Номер_документа" ColumnName="Номер документа" />
@@ -594,6 +631,7 @@
           <ScalarProperty Name="Библиотека_BIM_для_Revit__Наименование" ColumnName="Библиотека BIM для Revit, Наименование" />
           <ScalarProperty Name="Динамические_блоки_Autocad__Наименование" ColumnName="Динамические блоки Autocad, Наименование" />
           <ScalarProperty Name="Наименование_ресурса" ColumnName="Наименование ресурса" />
+          <ScalarProperty Name="URL_ресурса" ColumnName="URL ресурса" />
           <ScalarProperty Name="ID_ресурса" ColumnName="ID ресурса" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -620,6 +658,7 @@
           <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
           <ScalarProperty Name="URL_изображения_подгруппы" ColumnName="URL изображения подгруппы" />
           <ScalarProperty Name="Код_подгруппы" ColumnName="Код подгруппы" />
+          <ScalarProperty Name="Описание_подгруппы" ColumnName="Описание подгруппы" />
           <ScalarProperty Name="Сокращенное_наименование_подгруппы" ColumnName="Сокращенное наименование подгруппы" />
           <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
           <ScalarProperty Name="ID_подгруппы" ColumnName="ID подгруппы" />

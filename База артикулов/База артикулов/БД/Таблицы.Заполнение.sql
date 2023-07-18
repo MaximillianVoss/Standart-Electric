@@ -753,8 +753,6 @@ VALUES
     ('Изображение TIFF', '.tiff'),
     ('Изображение PSD', '.psd'),
     ('PDF документ', '.pdf'),
-    ('Схема нагрузки', '.pdf'),
-    ('Альбом типовых узлов', '.pdf'),
     ('Аудиофайл MP3', '.mp3'),
     ('Видеофайл MP4', '.mp4'),
     ('Архив ZIP', '.zip'),
@@ -768,9 +766,14 @@ VALUES
     ('Скрипт JavaScript', '.js'),
     ('База данных SQLite', '.sqlite'),
     ('База данных SQL Server', '.mdf'),
+    -- Технические типы Стандарт Электрик
+    ('Схема нагрузки', '.png'),
+    ('Альбом типовых узлов', '.pdf'),
     ('Файл CAD STEP', '.step'),
     ('Файл CAD DWG', '.dwg'),
+    -- Динамические блоки Autocad
     ('Файл CAD DXF', '.dxf'),
+    -- Библиотека BIM для Revit
     ('Файл Revit RVT', '.rvt'),
     ('Файл Revit RFA', '.rfa');
 GO
@@ -778,4 +781,139 @@ SELECT
     *
 FROM
     dbo.[ResourceTypes];
+--#endregion
+
+
+--#region Добавление дескрипторов, файлов и напрвлений для них для теста
+
+--#region Добавление новых дескрипторов, если они еще не существуют
+INSERT INTO Descriptors
+    (title)
+SELECT
+    'Схема нагрузки'
+WHERE NOT EXISTS (
+    SELECT
+    TOP 1
+    title
+FROM
+    Descriptors
+WHERE title = 'Схема нагрузки'
+);
+
+INSERT INTO Descriptors
+    (title)
+SELECT
+    'Альбом типовых узлов'
+WHERE NOT EXISTS (
+    SELECT
+    TOP 1
+    title
+FROM
+    Descriptors
+WHERE title = 'Альбом типовых узлов'
+);
+
+INSERT INTO Descriptors
+    (title)
+SELECT
+    'Файл CAD DXF'
+WHERE NOT EXISTS (
+    SELECT
+    TOP 1
+    title
+FROM
+    Descriptors
+WHERE title = 'Файл CAD DXF'
+);
+
+INSERT INTO Descriptors
+    (title)
+SELECT
+    'Файл Revit RVT'
+WHERE NOT EXISTS (
+    SELECT
+    TOP 1
+    title
+FROM
+    Descriptors
+WHERE title = 'Файл Revit RVT'
+);
+-- #endregion
+
+--#region Добавление связей в DescriptorsResources, предполагая, что они еще не существуют
+INSERT INTO DescriptorsResources
+    (idDescriptor, idResource)
+SELECT
+    Descriptors.id,
+    Resources.id
+FROM
+    Descriptors,
+    Resources
+WHERE Descriptors.title = 'Схема нагрузки' AND Resources.url = 'http://example.com/схема_нагрузки.png';
+
+INSERT INTO DescriptorsResources
+    (idDescriptor, idResource)
+SELECT
+    Descriptors.id,
+    Resources.id
+FROM
+    Descriptors,
+    Resources
+WHERE Descriptors.title = 'Альбом типовых узлов' AND Resources.url = 'http://example.com/альбом_типовых_узлов.pdf';
+
+INSERT INTO DescriptorsResources
+    (idDescriptor, idResource)
+SELECT
+    Descriptors.id,
+    Resources.id
+FROM
+    Descriptors,
+    Resources
+WHERE Descriptors.title = 'Файл CAD DXF' AND Resources.url = 'http://example.com/файл_CAD_DXF.dxf';
+
+INSERT INTO DescriptorsResources
+    (idDescriptor, idResource)
+SELECT
+    Descriptors.id,
+    Resources.id
+FROM
+    Descriptors,
+    Resources
+WHERE Descriptors.title = 'Файл Revit RVT' AND Resources.url = 'http://example.com/файл_Revit_RVT.rvt';
+
+--#endregion
+
+--#region
+INSERT INTO BuisnessUnits
+    (
+    idDescriptor,
+    idBimLibraryFile,
+    idDrawBlocksFile,
+    idTypicalAlbum
+    )
+VALUES(
+        (SELECT
+            TOP 1
+            id
+        FROM
+            Descriptors
+        WHERE title = 'Схема нагрузки'),
+        (SELECT
+            TOP 1
+            id
+        FROM
+            Descriptors
+        WHERE title = 'Альбом типовых узлов'),
+        (SELECT
+            id
+        FROM
+            Descriptors
+        WHERE title = 'Файл CAD DXF'),
+        (SELECT
+            id
+        FROM
+            Descriptors
+        WHERE title = 'Файл Revit RVT'))
+--#endregion
+
 --#endregion

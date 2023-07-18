@@ -6,9 +6,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:База_артикулов.Формы.Страницы.Редактирование"
       xmlns:CustomControlsWPF="clr-namespace:CustomControlsWPF;assembly=CustomControlsWPF" x:Class="База_артикулов.Формы.Страницы.Редактирование.PageEditClass"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageEditClass" Loaded="Page_Loaded">
+      mc:Ignorable="d" d:DesignWidth="800"
+      Title="PageEditClass" Loaded="Page_Loaded" Height="569">
 
     <Grid x:Name="gMain" Background="White" Loaded="gMain_Loaded">
         <Grid.RowDefinitions>
@@ -20,9 +19,9 @@
         <CustomControlsWPF:LabeledTextBox x:Name="txbTitle" Margin="10,10,10,0" VerticalAlignment="Top" Title="Наименование класса" Text=""/>
         <CustomControlsWPF:LabeledTextBox x:Name="txbTitleShort" Margin="10,85,10,0" VerticalAlignment="Top" Title="Сокращенное наименование класса" Text=""/>
         <CustomControlsWPF:LabeledTextBox x:Name="txbCode" Margin="10,160,10,0" VerticalAlignment="Top" Title="Код класса" Text=""/>
-        <CustomControlsWPF:LabeledTextBox x:Name="txbUrlPicture" Margin="10,235,10,0" VerticalAlignment="Top" Title="URL изображения класса" Text=""/>
         <CustomControlsWPF:ButtonPrimary x:Name="btnOk" Margin="10,5,10,5" Height="30" VerticalAlignment="Center" Grid.Row="1" Text="ТЕКСТ ДЕЙСТВИЯ" Click="btnOk_Click"/>
         <CustomControlsWPF:ButtonPrimary x:Name="btnCancel" Grid.Row="2" Margin="10,5,10,10" Color="danger" Text="Отмена" Height="30" Click="btnCancel_Click"/>
+        <CustomControlsWPF:LabeledTextBox x:Name="txbDescription" Margin="10,235,10,0" VerticalAlignment="Top" Title="Описание" Text=""/>
 
     </Grid>
 </формы:CustomPage>
