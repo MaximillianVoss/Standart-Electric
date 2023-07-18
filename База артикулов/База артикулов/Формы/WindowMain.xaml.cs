@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using База_артикулов.Классы;
 //using База_артикулов.Properties;
 using База_артикулов.Формы.Страницы;
 
@@ -12,7 +11,6 @@ namespace База_артикулов.Формы
     {
         public MainWindow()
         {
-            Settings.Connections.CurrentConnectionString = "Подключение к LAPTOP-BBFM8MMD";
             this.InitializeComponent();
             #region Set window size to 3/4 of the screen size
             this.Width = SystemParameters.PrimaryScreenWidth * 0.75;

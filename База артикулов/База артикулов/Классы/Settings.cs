@@ -7,7 +7,8 @@ namespace База_артикулов.Классы
         public static class Connections
         {
 
-            private static string _currentConnectionString;
+            //private static string _currentConnectionString = "Подключение к SPB-NB004";
+            private static string _currentConnectionString = "Подключение к LAPTOP-BBFM8MMD";
 
             public static string CurrentConnectionString
             {
