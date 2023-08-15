@@ -567,7 +567,6 @@
           <ScalarProperty Name="Шаг_перфорации__мм" ColumnName="Шаг перфорации, мм" />
           <ScalarProperty Name="Наименование_перфорации" ColumnName="Наименование перфорации" />
           <ScalarProperty Name="В_наличии_на_заказ" ColumnName="В наличии/на заказ" />
-          <ScalarProperty Name="Описание" ColumnName="Описание" />
           <ScalarProperty Name="Номер_документа" ColumnName="Номер документа" />
           <ScalarProperty Name="Наименование_документа" ColumnName="Наименование документа" />
           <ScalarProperty Name="Код_стандарта_сырья" ColumnName="Код стандарта сырья" />

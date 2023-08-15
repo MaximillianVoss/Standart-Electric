@@ -40,7 +40,6 @@ namespace База_артикулов.Модели
         public string Код_стандарта_сырья { get; set; }
         public string Наименование_документа { get; set; }
         public string Номер_документа { get; set; }
-        public string Описание { get; set; }
         public bool В_наличии_на_заказ { get; set; }
         public string Наименование_перфорации { get; set; }
         public Nullable<double> Шаг_перфорации__мм { get; set; }

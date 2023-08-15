@@ -142,24 +142,6 @@ namespace База_артикулов.Формы
 
 
         #region Выпадающий список
-        /// <summary>
-        /// Получает русское имя таблицы, 
-        /// если оно есть в словаре, иначе возвращает оригинальное имя
-        /// </summary>
-        /// <param name="tableName">имя таблицы</param>
-        /// <returns></returns>
-        private String GetRusName(String tableName)
-        {
-            try
-            {
-                return this.tablesEngRusNames[tableName];
-            }
-            catch (Exception ex)
-            {
-                return String.Format("{0} ({1})", tableName, ex.Message);
-            }
-        }
-
 
         /// <summary>
         /// Заполняет данные из указанной таблицы в DataGrid
@@ -315,10 +297,6 @@ namespace База_артикулов.Формы
             this.InitializeComponent();
             this.UpdateTablesComboBox();
         }
-
-        #endregion
-
-        #region Операторы
 
         #endregion
 

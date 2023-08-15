@@ -20,7 +20,8 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dgTable" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,5,5,66" Background="Gray" CellEditEnding="dgTable_CellEditEnding" MouseDown="dgTable_MouseDown" AddingNewItem="dgTable_AddingNewItem" SelectedCellsChanged="dgTable_SelectedCellsChanged" Grid.Column="1" Grid.Row="2">
+        <!--d:ItemsSource="{d:SampleData ItemCount=5}"-->
+        <DataGrid x:Name="dgTable"  Margin="5,5,5,66" Background="Gray" CellEditEnding="dgTable_CellEditEnding" MouseDown="dgTable_MouseDown" AddingNewItem="dgTable_AddingNewItem" SelectedCellsChanged="dgTable_SelectedCellsChanged" Grid.Column="1" Grid.Row="2">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="btnTableAdd" Header="Добавить" Click="btnAdd_Click"/>

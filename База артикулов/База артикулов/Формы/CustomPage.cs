@@ -26,6 +26,11 @@ namespace База_артикулов.Формы
 
         #region Свойства
         /// <summary>
+        /// Была ли коллекция обновлена.
+        /// Например, бул удален или добавлен, изменен элемент любой из таблиц.
+        /// </summary>
+        public bool IsCollectionUpdated { set; get; }
+        /// <summary>
         /// webDAV-клиент
         /// </summary>
         public WDClient WDClient
@@ -211,6 +216,7 @@ namespace База_артикулов.Формы
         /// <summary>
         /// Пересоздаем контекст БД в зависимости от выбранной строки подключения
         /// </summary>
+        /// <param name="isForce">Обновить принудительно или нет</param>
         public void InitDB(bool isForce = false)
         {
             if (!isForce)
@@ -248,7 +254,6 @@ namespace База_артикулов.Формы
         #region Конструкторы/Деструкторы
         public CustomPage()
         {
-            this.InitDB();
             #region Подпись на события при выборе другой строки подключения
             Settings.Connections.CurrentConnectionStringChanged += (newConnectionString) =>
             {
