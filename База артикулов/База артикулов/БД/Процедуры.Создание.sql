@@ -186,4 +186,35 @@ END
 --#endregion
 --#endregion
 
+
+--#region Создание хранимой процедуры
+GO
+DROP PROCEDURE IF EXISTS GetFilteredProducts
+GO
+CREATE PROCEDURE GetFilteredProducts
+    @Group NVARCHAR(255) = NULL,
+    @Class NVARCHAR(255) = NULL,
+    @SubGroup NVARCHAR(255) = NULL
+AS
+BEGIN
+
+    -- Выборка из представления с учетом фильтров
+    SELECT
+        *
+    FROM
+        dbo.[ProductsView]
+    WHERE
+        (@Group IS NULL OR [Наименование группы] = @Group) AND
+        (@Class IS NULL OR [Наименование класса] = @Class) AND
+        (@SubGroup IS NULL OR [Наименование подгруппы] = @SubGroup)
+
+    -- Применение сортировки по ID продукта
+    ORDER BY [ID продукта];
+
+END
+
+--#endregion
+
+
+
 --#endregion

@@ -101,5 +101,22 @@ namespace База_артикулов.Модели
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddSubGroupImagePaths");
         }
+    
+        public virtual ObjectResult<GetFilteredProducts_Result> GetFilteredProducts(string group, string @class, string subGroup)
+        {
+            var groupParameter = group != null ?
+                new ObjectParameter("Group", group) :
+                new ObjectParameter("Group", typeof(string));
+    
+            var classParameter = @class != null ?
+                new ObjectParameter("Class", @class) :
+                new ObjectParameter("Class", typeof(string));
+    
+            var subGroupParameter = subGroup != null ?
+                new ObjectParameter("SubGroup", subGroup) :
+                new ObjectParameter("SubGroup", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFilteredProducts_Result>("GetFilteredProducts", groupParameter, classParameter, subGroupParameter);
+        }
     }
 }

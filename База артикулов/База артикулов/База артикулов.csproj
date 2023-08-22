@@ -116,6 +116,7 @@
     <Compile Include="Классы\Дополнения\Packages.cs" />
     <Compile Include="Классы\Дополнения\Perforations.cs" />
     <Compile Include="Классы\Дополнения\ProductsVendorCodes.cs" />
+    <Compile Include="Классы\Дополнения\ProductsView.cs" />
     <Compile Include="Классы\Дополнения\SubGroups.cs" />
     <Compile Include="Классы\Дополнения\Units.cs" />
     <Compile Include="Классы\Дополнения\UnitsProducts.cs" />
@@ -159,6 +160,9 @@
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\Fields.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Модели\GetFilteredProducts_Result.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\Groups.cs">

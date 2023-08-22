@@ -39,7 +39,6 @@ namespace CustomControlsWPF
     public partial class PagingControl : UserControl
     {
 
-
         #region Поля
         // 1. Определение делегата для события
         public delegate void PageChangedEventHandler(object sender, PageChangedEventArgs e);
@@ -48,9 +47,16 @@ namespace CustomControlsWPF
         // Определение делегата и события для изменения размера страницы
         public delegate void PageSizeChangedEventHandler(object sender, PageSizeChangedEventArgs e);
         public event PageSizeChangedEventHandler PageSizeChanged;
+        /// <summary>
+        /// Число страниц
+        /// </summary>
         private int pagesCount;
         private int currentPage;
         private int pageSize;
+        /// <summary>
+        /// Число элементов в коллекции (не путать со страницами)
+        /// </summary>
+        private int itemsCount;
         private List<int> pageSizes = new List<int>();
         #endregion
 
@@ -62,8 +68,9 @@ namespace CustomControlsWPF
             {
                 if (value < 0)
                     throw new Exception("Число страниц не может быть меньше нуля");
+
                 this.pagesCount = value;
-                this.lblCurrentPage.Content = $"{this.currentPage}/{this.PagesCount}";
+                this.UpdateCurrentItemsLabel();
             }
         }
 
@@ -80,12 +87,15 @@ namespace CustomControlsWPF
                 var oldValue = this.currentPage;
                 this.currentPage = value;
 
-                this.lblCurrentPage.Content = $"{this.currentPage}/{this.PagesCount}";
+                this.UpdateCurrentPage();
+                // Обновляем метку с текущими элементами
+                this.UpdateCurrentItemsLabel();
 
-                // 3. Вызов события
+                // Вызов события
                 PageChanged?.Invoke(this, new PageChangedEventArgs(oldValue, value));
             }
         }
+
 
         public int PageSize
         {
@@ -116,6 +126,8 @@ namespace CustomControlsWPF
             }
             get => this.pageSizes;
         }
+
+        public int ItemsCount { get => this.itemsCount; set => this.itemsCount = value; }
         #endregion
 
         #region Методы
@@ -130,6 +142,18 @@ namespace CustomControlsWPF
             this.cmbItemsPerPage.SelectedIndex = 0;
             this.currentPage = 1;
             this.PagesCount = 10;
+        }
+
+        private void UpdateCurrentPage()
+        {
+            this.lblCurrentPage.Content = this.CurrentPage.ToString();
+        }
+
+        private void UpdateCurrentItemsLabel()
+        {
+            int startItem = ((this.CurrentPage - 1) * this.PageSize) + 1;
+            int endItem = Math.Min(this.CurrentPage * this.PageSize, this.ItemsCount);
+            this.lblCurrentItems.Content = $"{startItem}-{endItem} из {this.ItemsCount} элементов";
         }
 
         private void UpdateButtons()
@@ -166,6 +190,18 @@ namespace CustomControlsWPF
                 this.PageSize = this.PageSizes[this.cmbItemsPerPage.SelectedIndex];
             else
                 this.PageSize = 0;
+        }
+
+        private void btnAtBegin_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.CurrentPage = 1;
+            this.UpdateButtons();
+        }
+
+        private void btnAtEnd_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.CurrentPage = this.PagesCount;
+            this.UpdateButtons();
         }
 
         #endregion

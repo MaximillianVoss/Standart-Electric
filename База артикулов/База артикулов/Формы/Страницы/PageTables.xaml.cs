@@ -1,13 +1,16 @@
 ﻿using BaseWindow_WPF.Classes;
+using CustomControlsWPF;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -16,68 +19,7 @@ using База_артикулов.Модели;
 
 namespace База_артикулов.Формы.Страницы
 {
-    public class TableData
-    {
-        public String title { set; get; }
-        public String titleDisplay { set; get; }
 
-        /// <summary>
-        /// Тип элементов, которые хранятся в коллекции
-        /// </summary>
-        public Type ItemsType { set; get; }
-        public List<string> ColumnNames { get; set; }
-
-        // Коллекция всех элементов
-        public ObservableCollection<object> ItemsAll { get; set; } = new ObservableCollection<object>();
-
-        // Коллекция отфильтрованных элементов
-        public ObservableCollection<object> ItemsFiltered { get; set; } = new ObservableCollection<object>();
-
-        // Получение элементов указанной страницы из отфильтрованных элементов.
-        // Нумерация страниц начинается с 1.
-        public IEnumerable GetPage(int pageNumber, int itemsPerPage)
-        {
-            return this.ItemsFiltered
-                .Skip((pageNumber - 1) * itemsPerPage)
-                .Take(itemsPerPage)
-                .ToList();
-        }
-
-        public int GetRowsCount()
-        {
-            return this.ItemsFiltered.Count;
-        }
-
-        // Проверяет, существует ли указанная страница
-        public bool HasPage(int pageNumber, int itemsPerPage)
-        {
-            return this.ItemsFiltered.Skip((pageNumber - 1) * itemsPerPage).Any();
-        }
-
-        // Метод фильтрации элементов по определенному условию. Вы можете его изменить под ваши нужды.
-        public void ApplyFilter(Predicate<object> filterCriteria)
-        {
-            this.ItemsFiltered.Clear();
-
-            foreach (var item in this.ItemsAll)
-            {
-                if (filterCriteria(item))
-                {
-                    this.ItemsFiltered.Add(item);
-                }
-            }
-        }
-
-        // Если вы хотите вернуть все элементы в FilteredItems, например, при сбросе фильтра
-        public void ResetFilter()
-        {
-            this.ItemsFiltered.Clear();
-            foreach (var item in this.ItemsAll)
-            {
-                this.ItemsFiltered.Add(item);
-            }
-        }
-    }
 
     /// <summary>
     /// Логика взаимодействия для PageTables.xaml
@@ -89,15 +31,6 @@ namespace База_артикулов.Формы.Страницы
         #endregion
 
         #region Свойства
-
-        /// <summary>
-        /// ID элемента, выбранного в таблице
-        /// </summary>
-        private int SelectedItemTableId { set; get; }
-        /// <summary>
-        /// Элемент, выбранный в таблице
-        /// </summary>
-        private object SelectedItemTable { set; get; }
         /// <summary>
         /// Текущий объект, выбранный в иерархическом списке
         /// Само значение лежит в  поле Value
@@ -107,7 +40,6 @@ namespace База_артикулов.Формы.Страницы
         /// Данные из текущей выбранной таблицы
         /// </summary>
         private TableData CurrentTableData { set; get; }
-
         #endregion
 
         #region Методы
@@ -115,84 +47,92 @@ namespace База_артикулов.Формы.Страницы
         #region Работа с элементами таблиц
         private void Create()
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
 
         private void Update()
         {
+            try
+            {
+                var windowEdit = new ProductWindow(this.dgTable.SelectedItem);
+                windowEdit.ShowDialog();
+                this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
+                this.dgTable.Update();
+                //this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
+                //this.UpdateDataGrid(this.CurrentTableData);
 
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
 
         private void Delete()
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
         #endregion
 
         #region Работа с таблицей
         /// <summary>
-        /// 
+        /// Получает данные таблицы с указанными именем
         /// </summary>
-        /// <param name="tableName"></param>
-        /// <returns></returns>
-        private Type GetTableItemsType(String tableName)
-        {
-            var tableView = this.DB.ViewsTablesView.FirstOrDefault(x => x.Отображаемое_название_таблицы.StartsWith(tableName) && x.Тип == "Пользовательский");
-            if (tableView != null)
-            {
-                var tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(
-                p => p.PropertyType.Name.StartsWith("DbSet") &&
-                p.Name == tableView.Наименование_таблицы);
-                if (tableProperty != null)
-                {
-                    var dbSet = tableProperty.GetValue(this.DB, null);
-                    return dbSet.GetType().GetGenericArguments().First();
-                }
-            }
-            return typeof(object);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tableName"></param>
+        /// <param name="tableName">имя таблицы</param>
         /// <returns></returns>
         private TableData GetTable(string tableName)
         {
+            // Предполагаем, что ViewsTablesView имеет индекс по Отображаемое_название_таблицы для ускорения поиска
             var view = this.DB.ViewsTablesView.FirstOrDefault(x => x.Отображаемое_название_таблицы == tableName);
+
             if (view == null)
                 throw new Exception($"Не найдена таблица с именем {tableName}");
 
-            var tableProperty = this.DB.GetType()
-                .GetProperties()
-                .FirstOrDefault(p => p.PropertyType.Name.StartsWith("DbSet") && p.Name == view.Наименование_представления);
+            // Кэшируем свойства
+            var dbProperties = this.DB.GetType().GetProperties().Where(p => p.PropertyType.Name.StartsWith("DbSet")).ToDictionary(p => p.Name, p => p);
 
-            if (tableProperty == null)
+            if (!dbProperties.TryGetValue(view.Наименование_представления, out var tableProperty))
                 throw new Exception($"Не найдено свойство DbSet для таблицы {tableName}");
 
-            var dbSet = tableProperty.GetValue(this.DB, null);
+            var dbSet = tableProperty.GetValue(this.DB) as IEnumerable;
+
             if (dbSet == null)
                 throw new Exception($"Не удалось получить значение DbSet для таблицы {tableName}");
 
-            if (!dbSet.GetType().IsGenericType || !dbSet.GetType().GetGenericArguments().Any())
+            // Допускаем только один вызов GetGenericArguments
+            var genericArguments = dbSet.GetType().GetGenericArguments();
+
+            if (!genericArguments.Any())
                 throw new Exception("Не удалось получить тип данных для этой таблицы!");
 
-            Type dbSetType = dbSet.GetType().GetGenericArguments().First();
+            Type dbSetType = genericArguments.First();
             var columnNames = dbSetType.GetProperties().Select(p => p.Name).ToList();
 
-            TableData tableData = new TableData
-            {
-                title = view.Наименование_представления,
-                titleDisplay = view.Отображаемое_название_таблицы,
-                ItemsType = dbSetType,
-                ColumnNames = columnNames,
-            };
+            TableData tableData = new TableData(
+                view.Наименование_представления,
+                view.Отображаемое_название_таблицы,
+                dbSetType,
+                columnNames
+            );
 
-            foreach (var item in (IEnumerable)dbSet)
-            {
-                tableData.ItemsAll.Add(item);
-            }
 
-            // Сброс фильтра, чтобы скопировать все элементы из AllItems в FilteredItems
+            tableData.AddRange(dbSet);
+
+            // Сброс фильтра
             tableData.ResetFilter();
 
             return tableData;
@@ -200,7 +140,6 @@ namespace База_артикулов.Формы.Страницы
 
         /// <summary>
         /// Экспорт таблицы в CSV
-        /// TODO: сделать экспорт для каждой таблицы
         /// </summary>
         /// <param name="outputFolderPath"></param>
         private void Export(string outputFilePath, bool isDeleteUnderline = true)
@@ -243,52 +182,15 @@ namespace База_артикулов.Формы.Страницы
         /// <summary>
         /// Заполняет элемент управления DataGrid записями из указанной таблицы
         /// </summary>
-        /// <param name="tableName">имя таблицы</param>
-        private void UpdateDataGrid(string tableName)
-        {
-            this.UpdateDataGrid(this.GetTable(tableName), this.pcProducts.CurrentPage, this.pcProducts.PageSize);
-        }
-        /// <summary>
-        /// Заполняет элемент управления DataGrid записями из указанной таблицы
-        /// </summary>
         /// <param name="tableData">имя таблицы</param>
-        private void UpdateDataGrid(TableData tableData, int pageNumber, int itemsPerPage)
+        private Task UpdateDataGrid(TableData tableData)
         {
-            #region Обновление фильтра
-            if (this.tvGroups.Visibility == Visibility.Visible && this.SelectedItemTreeView != null && this.SelectedItemTreeView.Value != null)
-            {
-                this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
-            }
-            #endregion
-            this.InitDB(this.IsCollectionUpdated);
-            // Clear previous columns
-            this.dgTable.AutoGenerateColumns = false;
-            this.dgTable.Columns.Clear();
-            // Set ItemsSource
-            //this.dgTable.ItemsSource = tableData.GetPage(pageNumber, itemsPerPage);
-            this.dgTable.DataContext = tableData;
-            this.dgTable.ItemsSource = tableData.ItemsFiltered;
-            //Обновить количество страниц
-            int rowCount = this.CurrentTableData.GetRowsCount();
-            int pageSize = this.pcProducts.PageSize;
-            this.pcProducts.PagesCount = rowCount / pageSize;
-
-            foreach (var columnName in tableData.ColumnNames)
-            {
-                var column = new DataGridTextColumn
-                {
-                    Header = columnName.Replace('_', ' '),
-                    Binding = new System.Windows.Data.Binding(columnName)
-                };
-
-                this.dgTable.Columns.Add(column);
-            }
+            this.dgTable.TableData = tableData;
+            return Task.CompletedTask;
         }
         #endregion
 
         #region Выпадающий список
-
-
         /// <summary>
         /// Добавляет элементов в ComboBox
         /// </summary>
@@ -307,43 +209,43 @@ namespace База_артикулов.Формы.Страницы
         /// </summary>
         /// <param name="tableType"></param>
         /// <param name="object"></param>
-        private void FilterTableByTreeView(Type tableType, object @object)
+        private Task FilterTableByTreeView(Type tableType, object @object)
         {
             if (this.cmbTables.SelectedIndex == -1)
-                return;
+                return Task.CompletedTask;
+            if (this.CurrentTableData.ItemsType != typeof(ProductsView))
+                return Task.CompletedTask;
 
-            //TableData table = this.GetTable(this.cmbTables.SelectedItem);
 
-            if (this.CurrentTableData.ItemsType != typeof(ProductsView)
-                && !this.CurrentTableData.titleDisplay.Equals("Продукты", StringComparison.OrdinalIgnoreCase))
-            {
-                //this.UpdateDataGrid(this.cmbTables.SelectedItem);
-                return;
-            }
-
-            IEnumerable<ProductsView> productsViews = this.CurrentTableData.ItemsAll.OfType<ProductsView>();
+            string className = null;
+            string groupName = null;
+            string subGroupName = null;
 
             switch (@object)
             {
                 case Classes @class:
-                    productsViews = productsViews.Where(x => x.Наименование_класса == @class.Descriptors.title);
+                    className = @class.Descriptors.title;
                     break;
 
                 case Groups group:
-                    productsViews = productsViews.Where(x => x.Наименование_группы == group.Descriptors.title);
+                    groupName = group.Descriptors.title;
                     break;
 
                 case SubGroups subGroup:
-                    productsViews = productsViews.Where(x => x.Наименование_подгруппы == subGroup.Descriptors.title);
+                    subGroupName = subGroup.Descriptors.title;
                     break;
             }
 
-            this.CurrentTableData.ItemsFiltered = new ObservableCollection<object>(productsViews);
+            List<GetFilteredProducts_Result> results = this.DB.GetFilteredProducts(
+                groupName,
+                className,
+                subGroupName
+            ).ToList();
 
-            // Обновите ваш DataGrid (если это необходимо) 
-            //this.UpdateDataGrid(table, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
+            List<ProductsView> filteredProducts = results.Select(result => new ProductsView(result)).ToList();
+            this.CurrentTableData.ItemsAll = new ObservableCollection<object>(filteredProducts);
+            return Task.CompletedTask;
         }
-
 
         /// <summary>
         /// 
@@ -364,7 +266,6 @@ namespace База_артикулов.Формы.Страницы
             this.tvGroups.Items.Add(classItem);
             return classItem; // Возвращаем созданный объект TreeViewItemCustom
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -373,7 +274,6 @@ namespace База_артикулов.Формы.Страницы
             this.tvGroups.Visibility = Visibility.Visible;
 
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -381,7 +281,11 @@ namespace База_артикулов.Формы.Страницы
         {
             this.tvGroups.Visibility = Visibility.Collapsed;
         }
-
+        /// <summary>
+        /// Сохраняет состояние "открыто"/"закрыто" для веток иерархического списка
+        /// TODO: доделать для групп, подгрупп, сохранение идет только для классов
+        /// </summary>
+        /// <param name="items"></param>
         private void SaveTreeState(ItemCollection items)
         {
             foreach (var obj in items)
@@ -401,7 +305,6 @@ namespace База_артикулов.Формы.Страницы
                 }
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -416,7 +319,7 @@ namespace База_артикулов.Формы.Страницы
 
                 this.tvGroups.Items.Clear();
                 this.tvGroups.UpdateLayout();
-                this.InitDB(this.IsCollectionUpdated);
+                //this.InitDB(this.IsCollectionUpdated);
 
                 foreach (var @class in this.DB.Classes)
                 {
@@ -472,7 +375,6 @@ namespace База_артикулов.Формы.Страницы
             try
             {
                 this.UpdateTablesComboBox();
-                this.UpdateTreeView();
             }
             catch (Exception ex)
             {
@@ -498,8 +400,8 @@ namespace База_артикулов.Формы.Страницы
                 if (this.cmbTables.SelectedItem != null)
                 {
                     this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
-                    this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
                     this.UpdateTreeView();
+                    this.UpdateDataGrid(this.CurrentTableData);
                 }
             }
             catch (Exception ex)
@@ -511,32 +413,41 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                if (this.CurrentTableData.ItemsType != null && this.cmbTables.SelectedIndex != -1)
-                {
-                    if (this.dgTable.SelectedCells.Count > 0)
-                    {
-                        int columnIndex = this.dgTable.SelectedCells[0].Column.DisplayIndex;
-                        if (this.CurrentTableData.ColumnNames.Count == 0)
-                            throw new Exception("В таблице нет столбцов!");
-                        this.SelectedItemTable = this.dgTable.SelectedItem;
-                        this.SelectedItemTableId = (int)this.GetObjectFieldValue(this.SelectedItemTable, this.CurrentTableData.ColumnNames[columnIndex]);
-                    }
-                }
+                //if (this.CurrentTableData.ItemsType != null && this.cmbTables.SelectedIndex != -1)
+                //{
+                //    if (this.dgTable.SelectedCells.Count > 0)
+                //    {
+                //        int columnIndex = this.dgTable.SelectedCells[0].Column.DisplayIndex;
+                //        if (this.CurrentTableData.ColumnNames.Count == 0)
+                //            throw new Exception("В таблице нет столбцов!");
+                //        this.SelectedItemTable = this.dgTable.SelectedItem;
+                //        this.SelectedItemTableId = (int)this.GetObjectFieldValue(this.SelectedItemTable, this.CurrentTableData.ColumnNames[columnIndex]);
+                //    }
+                //}
             }
             catch (Exception ex)
             {
                 this.ShowError(ex.Message);
             }
         }
+
         #region События иерархического списка
 
         #region Нажатия левой/правой кнопкой мыши
-        private void tvGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private async void tvGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (e.NewValue != null)
+            try
             {
-                this.SelectedItemTreeView = (TreeViewItemCustom)e.NewValue;
-                this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
+                if (e.NewValue != null)
+                {
+                    this.SelectedItemTreeView = (TreeViewItemCustom)e.NewValue;
+                    await this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
+                    await this.UpdateDataGrid(this.CurrentTableData);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
             }
         }
 
@@ -593,10 +504,10 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var windowEdit = new ProductWindow(this.SelectedItemTable);
-                windowEdit.ShowDialog();
-                this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
-                this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
+                //var windowEdit = new ProductWindow(this.SelectedItemTable);
+                //windowEdit.ShowDialog();
+                //this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
+                //this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
             }
             catch (Exception ex)
             {
@@ -604,6 +515,31 @@ namespace База_артикулов.Формы.Страницы
             }
         }
 
+
+        private void dgTable_RightClickSelectedCellChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgTable_LeftClickSelectedCellChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgTable_AddMenuItemClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgTable_DeleteMenuItemClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgTable_EditMenuItemClicked(object sender, EventArgs e)
+        {
+            this.Update();
+        }
         #endregion
 
         #region Верхнее меню
@@ -671,7 +607,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
+                //this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
             }
             catch (Exception ex)
             {
@@ -682,20 +618,22 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                int rowCount = this.CurrentTableData.GetRowsCount();
-                int pageSize = this.pcProducts.PageSize;
-                this.pcProducts.PagesCount = rowCount / pageSize;
-                if (rowCount % pageSize != 0)
-                {
-                    this.pcProducts.PagesCount++;
-                }
-                this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
+                //int rowCount = this.CurrentTableData.GetRowsCount();
+                //int pageSize = this.pcProducts.PageSize;
+                //this.pcProducts.PagesCount = rowCount / pageSize;
+                //if (rowCount % pageSize != 0)
+                //{
+                //    this.pcProducts.PagesCount++;
+                //}
+                //this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
             }
             catch (Exception ex)
             {
                 this.ShowError(ex);
             }
         }
+
+
         #endregion
 
 
