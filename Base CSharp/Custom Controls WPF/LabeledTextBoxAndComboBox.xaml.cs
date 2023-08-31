@@ -309,11 +309,7 @@ namespace CustomControlsWPF
         {
             //TODO: падает при выделении другой таблицы, проверить!
             var field = obj.GetType().GetProperty(fieldName);
-            if (field == null)
-            {
-                throw new Exception("Поле не найдено");
-            }
-            return field.GetValue(obj, null);
+            return field == null ? throw new Exception("Поле не найдено") : field.GetValue(obj, null);
         }
         /// <summary>
         /// Добавляет указанный элемент в выпадающий список

@@ -62,16 +62,6 @@ namespace CustomControlsWPF
         {
             this.RaiseEvent(new RoutedEventArgs(ClickEvent));
         }
-
-        /// <summary>
-        /// Создает кисть указаного цвета из 16-разрядной строки
-        /// </summary>
-        /// <param name="hexStr">Строка с 16-разрядным числом, например '#ffaacc'</param>
-        /// <returns></returns>
-        private SolidColorBrush GetColorBrush(String hexStr)
-        {
-            return new SolidColorBrush((Color)ColorConverter.ConvertFromString(hexStr.ToLower()));
-        }
         #endregion
 
         #region Конструкторы/Деструкторы

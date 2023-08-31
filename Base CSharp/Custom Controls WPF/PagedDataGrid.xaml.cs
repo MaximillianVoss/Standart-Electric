@@ -130,7 +130,6 @@ namespace CustomControlsWPF
 
             #region Определение диапазона элементов для отображения
             int startIndex = (pageNumber - 1) * itemsPerPage;
-            int endIndex = startIndex + itemsPerPage;
             var itemsToShow = tableData.ItemsAll.Skip(startIndex).Take(itemsPerPage).ToList();
             #endregion
 

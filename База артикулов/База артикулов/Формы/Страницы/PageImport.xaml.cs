@@ -112,7 +112,7 @@ namespace База_артикулов.Формы.Страницы
         /// Обновляет лог
         /// </summary>
         /// <returns></returns>
-        private async Task UpdateLog()
+        private void UpdateLog()
         {
             this.Dispatcher.Invoke(() =>
             {
@@ -124,10 +124,7 @@ namespace База_артикулов.Формы.Страницы
                     if (border != null)
                     {
                         var scroll = border.Child as ScrollViewer;
-                        if (scroll != null)
-                        {
-                            scroll.ScrollToEnd();
-                        }
+                        scroll?.ScrollToEnd();
                     }
                 }
 

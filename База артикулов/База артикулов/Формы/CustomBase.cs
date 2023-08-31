@@ -82,11 +82,9 @@ namespace База_артикулов.Формы
             }
 
             var field = obj.GetType().GetProperty(fieldName);
-            if (field == null)
-            {
-                throw new Exception(База_артикулов.Классы.Common.Strings.Errors.fieldIsNotFoundInObject);
-            }
-            return field.GetValue(obj, null);
+            return field == null
+                ? throw new Exception(База_артикулов.Классы.Common.Strings.Errors.fieldIsNotFoundInObject)
+                : field.GetValue(obj, null);
         }
         #endregion
 

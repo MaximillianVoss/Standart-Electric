@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Globalization;
 using System.IO;
@@ -103,10 +102,7 @@ namespace База_артикулов.Формы.Страницы
         private TableData GetTable(string tableName)
         {
             // Предполагаем, что ViewsTablesView имеет индекс по Отображаемое_название_таблицы для ускорения поиска
-            var view = this.DB.ViewsTablesView.FirstOrDefault(x => x.Отображаемое_название_таблицы == tableName);
-
-            if (view == null)
-                throw new Exception($"Не найдена таблица с именем {tableName}");
+            var view = this.DB.ViewsTablesView.FirstOrDefault(x => x.Отображаемое_название_таблицы == tableName) ?? throw new Exception($"Не найдена таблица с именем {tableName}");
 
             // Кэшируем свойства
             var dbProperties = this.DB.GetType().GetProperties().Where(p => p.PropertyType.Name.StartsWith("DbSet")).ToDictionary(p => p.Name, p => p);
@@ -114,10 +110,7 @@ namespace База_артикулов.Формы.Страницы
             if (!dbProperties.TryGetValue(view.Наименование_представления, out var tableProperty))
                 throw new Exception($"Не найдено свойство DbSet для таблицы {tableName}");
 
-            var dbSet = tableProperty.GetValue(this.DB) as IEnumerable;
-
-            if (dbSet == null)
-                throw new Exception($"Не удалось получить значение DbSet для таблицы {tableName}");
+            var dbSet = tableProperty.GetValue(this.DB) as IEnumerable ?? throw new Exception($"Не удалось получить значение DbSet для таблицы {tableName}");
 
             // Допускаем только один вызов GetGenericArguments
             var genericArguments = dbSet.GetType().GetGenericArguments();

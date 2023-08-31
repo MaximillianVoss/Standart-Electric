@@ -257,7 +257,7 @@ namespace ExcelReader.ExcelDocument
         }
 
 
-        public List<string> ToSQLScript(List<string> dbTableColumnNames, int startRowIndex = 0, int limit = 10)
+        public List<string> ToSQLScript(List<string> dbTableColumnNames)
         {
             return this.ToSQLScript(dbTableColumnNames, this.Title);
         }

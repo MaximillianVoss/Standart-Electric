@@ -95,27 +95,13 @@ namespace CustomControlsWPF
         public void ReplaceItemById(object newItem)
         {
             // Проверяем, имеет ли объект свойство id
-            var idProperty = newItem.GetType().GetProperty("id");
-            if (idProperty == null)
-            {
-                throw new ArgumentException("Объект не содержит свойства id.");
-            }
+            var idProperty = newItem.GetType().GetProperty("id") ?? throw new ArgumentException("Объект не содержит свойства id.");
 
             // Получаем значение id для нового элемента
-            var newId = idProperty.GetValue(newItem);
-
-            if (newId == null)
-            {
-                throw new ArgumentException("Значение id не может быть null.");
-            }
+            var newId = idProperty.GetValue(newItem) ?? throw new ArgumentException("Значение id не может быть null.");
 
             var itemToReplace = this.ItemsAll.FirstOrDefault(item =>
-                item.GetType().GetProperty("id")?.GetValue(item) == newId);
-
-            if (itemToReplace == null)
-            {
-                throw new ArgumentException($"Элемент с id = {newId} не найден.");
-            }
+                item.GetType().GetProperty("id")?.GetValue(item) == newId) ?? throw new ArgumentException($"Элемент с id = {newId} не найден.");
 
             int index = this.ItemsAll.IndexOf(itemToReplace);
             this.ItemsAll[index] = newItem;

@@ -113,7 +113,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             bool isExists = await this.WDClient.IsFileExists(cloudImagePath);
             if (isExists)
             {
-                this.WDClient.DownloadFile(localImagePath, cloudImagePath);
+                _ = this.WDClient.DownloadFile(localImagePath, cloudImagePath);
             }
             else
             {
@@ -179,6 +179,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
             {
                 throw new Exception(Common.Strings.Errors.emptyObject);
             }
+            #region Изображение
+
+            #endregion
             #region Каталог
             this.txbPath.Text = this.GetPath(product);
             #endregion
@@ -196,7 +199,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 if (currentProductVendorCodes.VendorCodes != null && currentProductVendorCodes.VendorCodes.Descriptors != null)
                 {
                     this.txbVendorCode.Text = currentProductVendorCodes.VendorCodes.Descriptors.title;
-                    //await this.UpdateImageAsync(currentProductVendorCodes.VendorCodes.Descriptors.title);
+                    _ = this.UpdateImageAsync(currentProductVendorCodes.VendorCodes.Descriptors.title);
                 }
             }
             #endregion
@@ -235,8 +238,13 @@ namespace База_артикулов.Формы.Страницы.Редакти
             this.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
             #endregion
             #region Таблица измерений
-            this.dgDimensions.ItemsSource = null;
-            //this.dgDimensions.ItemsSource = this.ToList(this.DB.AllProductUnitsInfoView.Where(x => x.idProduct == product.id).ToList());
+            //this.dgDimensions.ItemsSource = null;
+            this.dgDimensions.ItemsSource = this.DB.ProductUnitsView.Where(x => x.ID_товара == this.CurrentProduct.ID_продукта).ToList();
+            #endregion
+            #region Таблица файлов
+            //this.dgFiles.ItemsSource = null;
+            //TODO:обновить представление, неправильно показывает
+            this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.ToList();
             #endregion
         }
 
@@ -403,7 +411,6 @@ namespace База_артикулов.Формы.Страницы.Редакти
         private void CustomPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             this.InitClient();
-            this.dgDimensions.ItemsSource =  this.DB.ProductUnitsView.Where(x=>x.ID_товара == this.CurrentProduct.ID_продукта).ToList(); 
         }
         private void txbFieldName_TextChanged(object sender, System.Windows.RoutedEventArgs e)
         {

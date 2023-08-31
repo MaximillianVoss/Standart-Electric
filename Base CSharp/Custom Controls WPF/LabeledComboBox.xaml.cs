@@ -206,10 +206,7 @@ namespace CustomControlsWPF
         /// </summary>
         public void Clear()
         {
-            if (this.Items != null)
-            {
-                this.Items.Clear();
-            }
+            this.Items?.Clear();
             if (this.cbItems != null && this.cbItems.Items != null)
             {
                 this.cbItems.Items.Clear();
@@ -225,11 +222,7 @@ namespace CustomControlsWPF
         private object GetObjectFieldValue(object obj, string fieldName)
         {
             var field = obj.GetType().GetProperty(fieldName);
-            if (field == null)
-            {
-                throw new Exception("Поле не найдено");
-            }
-            return field.GetValue(obj, null);
+            return field == null ? throw new Exception("Поле не найдено") : field.GetValue(obj, null);
         }
         /// <summary>
         /// Добавляет указанный элемент в выпадающий список

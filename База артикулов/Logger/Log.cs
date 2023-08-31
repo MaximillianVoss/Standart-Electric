@@ -18,7 +18,7 @@ namespace Logger
         /// <summary>
         /// Сообщения
         /// </summary>
-        private ObservableCollection<LogMessage> messages;
+        private readonly ObservableCollection<LogMessage> messages;
         /// <summary>
         /// Мьютек для контроля коллекции
         /// </summary>
@@ -169,6 +169,7 @@ namespace Logger
         /// </summary>
         public Log()
         {
+            this.isChanged = false;
             this.messages = new ObservableCollection<LogMessage>();
             this.messages.CollectionChanged += messages_CollectionChanged;
         }

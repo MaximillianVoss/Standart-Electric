@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using База_артикулов.Классы;
 
 namespace База_артикулов.Формы
 {
@@ -18,10 +17,7 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Свойства
-        /// <summary>
-        /// Улучшенный WebDAV-клиент
-        /// </summary>
-        private WDClient WDClient { get; set; }
+
         #endregion
 
         #region Методы
@@ -29,7 +25,7 @@ namespace База_артикулов.Формы
 
         private async Task InitTreeView()
         {
-            this.WDClient.ShowDirectoryInTreeViewAsync(this.tvFiles);
+            await this.WDClient.ShowDirectoryInTreeViewAsync(this.tvFiles);
         }
 
         private void TestDownload(string filePath)
@@ -42,7 +38,7 @@ namespace База_артикулов.Формы
             };
             if (saveFileDialog.ShowDialog() == true)
             {
-                this.WDClient.DownloadFile(saveFileDialog.FileName, filePath);
+                _ = this.WDClient.DownloadFile(saveFileDialog.FileName, filePath);
             }
         }
 
@@ -56,7 +52,7 @@ namespace База_артикулов.Формы
             if (openFileDialog.ShowDialog() == true)
             {
                 var fileName = openFileDialog.FileName;
-                this.WDClient.UploadFile(fileName, folderPath);
+                _ = this.WDClient.UploadFile(fileName, folderPath);
             }
         }
 
@@ -87,7 +83,7 @@ namespace База_артикулов.Формы
             try
             {
                 this.InitClient();
-                this.InitTreeView();
+                _ = this.InitTreeView();
             }
             catch (Exception ex)
             {
@@ -99,7 +95,7 @@ namespace База_артикулов.Формы
             try
             {
                 this.TestUpload(this.txbFilePath.Text);
-                this.InitTreeView();
+                _ = this.InitTreeView();
             }
             catch (Exception ex)
             {
@@ -112,7 +108,7 @@ namespace База_артикулов.Формы
             try
             {
                 this.TestDownload(this.txbFilePath.Text);
-                this.InitTreeView();
+                _ = this.InitTreeView();
             }
             catch (Exception ex)
             {
@@ -125,7 +121,7 @@ namespace База_артикулов.Формы
             try
             {
                 this.TestDelete(this.txbFilePath.Text);
-                this.InitTreeView();
+                _ = this.InitTreeView();
             }
             catch (Exception ex)
             {

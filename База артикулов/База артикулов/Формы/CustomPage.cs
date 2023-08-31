@@ -82,9 +82,7 @@ namespace База_артикулов.Формы
         /// <exception cref="Exception"></exception>
         public Descriptors Save(int id, string code, string title, string titleShort, string titleDisplay, string description)
         {
-            var descriptor = this.Load(id);
-            if (descriptor == null)
-                throw new Exception($"Дескриптор с id:{id} не найден!");
+            var descriptor = this.Load(id) ?? throw new Exception($"Дескриптор с id:{id} не найден!");
             descriptor.code = code;
             descriptor.title = title;
             descriptor.titleShort = titleShort;
@@ -207,10 +205,7 @@ namespace База_артикулов.Формы
         public void CloseWindow()
         {
             var window = Window.GetWindow(this);
-            if (window != null)
-            {
-                window.Close();
-            }
+            window?.Close();
         }
 
         /// <summary>

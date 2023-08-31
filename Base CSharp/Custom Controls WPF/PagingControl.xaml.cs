@@ -173,14 +173,14 @@ namespace CustomControlsWPF
         private void btnBack_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (this.CurrentPage > 1)
-                this.CurrentPage = this.CurrentPage - 1;
+                this.CurrentPage--;
             this.UpdateButtons();
         }
 
         private void btnNext_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (this.CurrentPage < this.PagesCount)
-                this.CurrentPage = this.CurrentPage + 1;
+                this.CurrentPage++;
             this.UpdateButtons();
         }
 
