@@ -569,8 +569,8 @@ namespace База_артикулов.Формы.Страницы
         }
         private void btnShowTables_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            TablesWindow tablesWindow = new TablesWindow();
-            tablesWindow.ShowDialog();
+            //TablesWindow tablesWindow = new TablesWindow();
+            //tablesWindow.ShowDialog();
         }
         private void btnImport_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {

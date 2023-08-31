@@ -332,10 +332,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Формы\ImportWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Формы\WindowEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -351,18 +347,6 @@
     <Page Include="Формы\ProductUnitsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Формы\ProductWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Формы\ProductWindow_OLD.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Формы\TablesWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -396,21 +380,8 @@
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Формы\CustomWindow.cs" />
-    <Compile Include="Формы\ImportWindow.xaml.cs">
-      <DependentUpon>ImportWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Формы\ProductUnitsWindow.xaml.cs">
       <DependentUpon>ProductUnitsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Формы\ProductWindow.xaml.cs">
-      <DependentUpon>ProductWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Формы\ProductWindow_OLD.xaml.cs">
-      <DependentUpon>ProductWindow_OLD.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Формы\TablesWindow.xaml.cs">
-      <DependentUpon>TablesWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Page Include="Формы\TestWindow.xaml">
       <SubType>Designer</SubType>

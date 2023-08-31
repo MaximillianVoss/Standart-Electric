@@ -22,13 +22,12 @@
         </Grid.ColumnDefinitions>
         <!--d:ItemsSource="{d:SampleData ItemCount=5}"-->
         <CustomControlsWPF:LabeledComboBox x:Name="cmbTables" Title="Таблицы" SelectionChanged="cmbTables_SelectionChanged" Grid.ColumnSpan="2" Grid.Row="1"/>
-        <TreeView x:Name="tvGroups" Margin="5,5,5,5" SelectedItemChanged="tvGroups_SelectedItemChanged" Grid.Row="2" MinWidth="200" PreviewMouseLeftButtonDown="tvGroups_PreviewMouseLeftButtonDown" PreviewMouseRightButtonDown="tvGroups_PreviewMouseRightButtonDown" IsTextSearchEnabled="True">
+        <TreeView x:Name="tvGroups" Margin="5,0,5,5" SelectedItemChanged="tvGroups_SelectedItemChanged" Grid.Row="2" MinWidth="200" PreviewMouseLeftButtonDown="tvGroups_PreviewMouseLeftButtonDown" PreviewMouseRightButtonDown="tvGroups_PreviewMouseRightButtonDown" IsTextSearchEnabled="True">
             <TreeView.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="miTreeAdd" Header="Добавить" Click="miTreeAdd_Click"/>
                     <MenuItem x:Name="miTreeEdit" Header="Редактировать" Click="miTreeEdit_Click"/>
-                    <!--Функция удаления отключена-->
-                    <!--<MenuItem x:Name="miDelete" Header="Удалить" Click="miDelete_Click"/>-->
+                    <MenuItem x:Name="miDelete" Header="Удалить" Click="miTreeDelete_Click" IsEnabled="False"/>
                 </ContextMenu>
             </TreeView.ContextMenu>
         </TreeView>
@@ -39,8 +38,7 @@
             <MenuItem Header="Правка">
                 <MenuItem x:Name="btnAdd" Header="Добавить" Click="btnAdd_Click" />
                 <MenuItem x:Name="btnEdit" Header="Редактировать" Click="btnEdit_Click" />
-                <!--Функция удаления отключена-->
-                <!--<MenuItem x:Name="btnDelete" Header="Удалить" Click="btnDelete_Click" />-->
+                <MenuItem x:Name="btnDelete" Header="Удалить" Click="btnDelete_Click" IsEnabled="False" />
             </MenuItem>
         </Menu>
         <CustomControlsWPF:PagedDataGrid x:Name="dgTable" Grid.Row="2" Grid.Column="1" 

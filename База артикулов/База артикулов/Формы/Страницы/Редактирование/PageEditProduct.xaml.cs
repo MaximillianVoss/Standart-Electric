@@ -196,7 +196,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 if (currentProductVendorCodes.VendorCodes != null && currentProductVendorCodes.VendorCodes.Descriptors != null)
                 {
                     this.txbVendorCode.Text = currentProductVendorCodes.VendorCodes.Descriptors.title;
-                    await this.UpdateImageAsync(currentProductVendorCodes.VendorCodes.Descriptors.title);
+                    //await this.UpdateImageAsync(currentProductVendorCodes.VendorCodes.Descriptors.title);
                 }
             }
             #endregion
@@ -399,11 +399,11 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Обработчики событий
-        private void ProductWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
+
+        private void CustomPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            //ProductUnitsWindow productUnitsWindow = new ProductUnitsWindow(1, 7);
-            //productUnitsWindow.ShowDialog();
             this.InitClient();
+            this.dgDimensions.ItemsSource =  this.DB.ProductUnitsView.Where(x=>x.ID_товара == this.CurrentProduct.ID_продукта).ToList(); 
         }
         private void txbFieldName_TextChanged(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -460,6 +460,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             this.UpdateForm(this.idProduct);
         }
         #endregion
+
 
     }
 }

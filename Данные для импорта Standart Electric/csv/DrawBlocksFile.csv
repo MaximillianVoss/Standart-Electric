@@ -1,0 +1,8 @@
+﻿id;DrawBlocksFileName;DrawBlocksFileDescription;DrawBlocksFileURL;DrawBlocksFileAvatarPictureURL
+;Имя файла dwg с блоками;Описание файла с блоками;Ссылка на файл для скачивания;Картинка аватарка
+1;estakady_modulnye_blocks.dwg;DWG-блоки модульных эстакад;./webfiles/estakady_modulnye_album.dwg;./webfiles/estakady_modulnye_album.png
+2;estakady_sharnirno_povorotnye_blocks.dwg;DWG-блоки шарнирно-поворотных эстакад;./webfiles/estakady_sharnirno_povorotnye_album.dwg;./webfiles/estakady_sharnirno_povorotnye_album.png
+3;kabelnye_konstruktsii_blocks.dwg;DWG-блоки кабельных конструкций;./webfiles/kabelnye_konstruktsii_album.dwg;./webfiles/kabelnye_konstruktsii_album.png
+4;falshpol_blocks.dwg;DWG-блоки фальшполов;./webfiles/falshpol_album.dwg;./webfiles/falshpol_album.png
+5;protivopozharnye_materialy_blocks.dwg;DWG-блоки противопожарных решений;./webfiles/protivopozharnye_materialy_album.dwg;./webfiles/protivopozharnye_materialy_album.png
+6;kabelnye_lotki_dlya_sudov_blocks.dwg;DWG-блоки по кораблестроению;./webfiles/kabelnye_lotki_dlya_sudov_album.dwg;./webfiles/kabelnye_lotki_dlya_sudov_album.png

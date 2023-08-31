@@ -1,26 +1,38 @@
 <?xml version="1.0"?>
 <SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Standart-Electric">
   <Items>
-    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+    <LogicalFolder Name="Соединения" Type="2" Sorted="true">
       <Items>
-        <ConnectionNode Name="LAPTOP-BBFM8MMD\SQLEXPRESS:LAPTOP-BBFM8MMD\FossW">
+        <ConnectionNode Name="LAPTOP-BBFM8MMD\SQLEXPRESS:">
           <Created>2023-05-24T06:23:09.9359957+03:00</Created>
           <Type>SQL</Type>
           <Server>LAPTOP-BBFM8MMD\SQLEXPRESS</Server>
           <UserName />
-          <Authentication>Windows Authentication</Authentication>
+          <Authentication>SQL</Authentication>
           <InitialDB />
           <LoginTimeout>30</LoginTimeout>
           <ExecutionTimeout>0</ExecutionTimeout>
           <ConnectionProtocol>NotSpecified</ConnectionProtocol>
           <ApplicationName />
         </ConnectionNode>
-        <ConnectionNode Name="SPB-NB004\SQLEXPRESS:LAPTOP-BBFM8MMD\FossW">
+        <ConnectionNode Name="LAPTOP-BBFM8MMD\SQLEXPRESS:LAPTOP-BBFM8MMD\FossW">
+          <Created>2023-08-30T23:04:15.1909685+03:00</Created>
+          <Type>SQL</Type>
+          <Server>LAPTOP-BBFM8MMD\SQLEXPRESS</Server>
+          <UserName />
+          <Authentication>Проверка подлинности Windows</Authentication>
+          <InitialDB />
+          <LoginTimeout>30</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Среда Microsoft SQL Server Management Studio - запрос</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="SPB-NB004\SQLEXPRESS:">
           <Created>2022-11-03T18:27:34.3407805+03:00</Created>
           <Type>SQL</Type>
           <Server>SPB-NB004\SQLEXPRESS</Server>
           <UserName />
-          <Authentication>Windows Authentication</Authentication>
+          <Authentication>SQL</Authentication>
           <InitialDB>DBSE</InitialDB>
           <LoginTimeout>30</LoginTimeout>
           <ExecutionTimeout>0</ExecutionTimeout>
@@ -29,7 +41,7 @@
         </ConnectionNode>
       </Items>
     </LogicalFolder>
-    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+    <LogicalFolder Name="Запросы" Type="0" Sorted="true">
       <Items>
         <FileNode Name="БД.Заполнение.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-BBFM8MMD\SQLEXPRESS:True</AssociatedConnectionMoniker>
@@ -99,7 +111,7 @@
         </FileNode>
       </Items>
     </LogicalFolder>
-    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+    <LogicalFolder Name="Разное" Type="3" Sorted="true">
       <Items>
         <FileNode Name="DB_Standart-Electric.xml">
           <AssociatedConnectionMoniker />

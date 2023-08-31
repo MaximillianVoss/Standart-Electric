@@ -14,6 +14,7 @@ namespace BaseWindow_WPF.Classes
         #endregion
 
         #region Свойства
+        public int Id { set; get; }
         /// <summary>
         /// Тип хранимого значения
         /// </summary>
@@ -32,8 +33,9 @@ namespace BaseWindow_WPF.Classes
         #endregion
 
         #region Конструкторы/Деструкторы
-        public TreeViewItemCustom(string header, object value = null, TreeViewItem child = null)
+        public TreeViewItemCustom(int id, string header, object value = null, TreeViewItem child = null)
         {
+            this.Id = id;
             this.Header = header;
             this.Value = value;
             this.ValueType = value.GetType();

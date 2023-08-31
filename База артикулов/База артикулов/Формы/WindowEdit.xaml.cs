@@ -109,12 +109,9 @@ namespace База_артикулов.Формы
                     {
                         object objValue = this.CurrentItem;
                         Type objBaseType = objValue.GetType().BaseType;
-                        if (objBaseType == typeof(Products) ||
-                            objBaseType == typeof(ProductsView) ||
-                            objValue.GetType() == typeof(ProductsView))
+                        if (objBaseType.BaseType == typeof(ProductsView) || objValue.GetType() == typeof(ProductsView))
                         {
-                            var windowsEdit = new ProductWindow(objValue);
-                            //this.fMain.Content = new PageEditProduct(objValue);
+                            this.fMain.Content = new PageEditProduct(objValue);
                         }
                     }
                 }

@@ -68,9 +68,22 @@ namespace CustomControlsWPF
                 }
             }
         }
-
         public int? SelectedItemId => this.selectedItemId;
-
+        public string Title
+        {
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
+                    this.lblTitle.Content = string.Empty;
+                    this.lblTitle.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    this.lblTitle.Content = value;
+                }
+            }
+        }
 
 
         public int CurrentPage
@@ -156,7 +169,9 @@ namespace CustomControlsWPF
         {
             this.TableData.ReplaceItemById(newItem);
         }
-
+        /// <summary>
+        /// Обновляет таблицу в соотвествии с текущим внутренним набором данных
+        /// </summary>
         public void Update()
         {
             this.UpdateDataGrid(this.TableData, this.pcPages.CurrentPage, this.pcPages.PageSize);

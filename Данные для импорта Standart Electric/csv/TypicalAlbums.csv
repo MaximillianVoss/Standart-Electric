@@ -1,0 +1,8 @@
+﻿id;TypicalAlbumTitle;TypicalAlbumAvatar;TypicalAlbumURL;TypicalAlbumDescription
+;Название альбома типовых узлов;Ссылка на картинку аватарку альбома;Ссылка на файл для скачивания альбома;Описание альбома типовых узлов
+1;Альбом типовых узлов модульных эстакад;./webfiles/estakady_modulnye_album.png;./webfiles/estakady_modulnye_album.pdf;Описание альбома типовых узлов модульных эстакад
+2;Альбом типовых узлов шарнирно-поворотных эстакад;./webfiles/estakady_sharnirno_povorotnye_album.png;./webfiles/estakady_sharnirno_povorotnye_album.pdf;Описание альбома типовых узлов шарнирно-поворотных эстакад
+3;Альбом типовых узлов кабельных конструкций;./webfiles/kabelnye_konstruktsii_album.png;./webfiles/kabelnye_konstruktsii_album.pdf;Описание альбома типовых узлов кабельных конструкций
+4;Альбом типовых узлов фальшполов;./webfiles/falshpol_album.png;./webfiles/falshpol_album.pdf;Описание альбома типовых узлов фальшполов
+5;Альбом типовых узлов противопожарных решений;./webfiles/protivopozharnye_materialy_album.png;./webfiles/protivopozharnye_materialy_album.pdf;Описание альбома типовых узлов противопожарных решений
+6;Альбом типовых узлов по кораблестроению;./webfiles/kabelnye_lotki_dlya_sudov_album.png;./webfiles/kabelnye_lotki_dlya_sudov_album.pdf;Описание альбома типовых узлов по кораблестроению

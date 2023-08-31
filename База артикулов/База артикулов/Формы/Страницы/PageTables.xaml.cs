@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Globalization;
 using System.IO;
@@ -32,6 +33,10 @@ namespace База_артикулов.Формы.Страницы
 
         #region Свойства
         /// <summary>
+        /// Текущий объект, выбранный в таблице
+        /// </summary>
+        private object SelectedItemTable { set; get; }
+        /// <summary>
         /// Текущий объект, выбранный в иерархическом списке
         /// Само значение лежит в  поле Value
         /// </summary>
@@ -40,6 +45,8 @@ namespace База_артикулов.Формы.Страницы
         /// Данные из текущей выбранной таблицы
         /// </summary>
         private TableData CurrentTableData { set; get; }
+
+
         #endregion
 
         #region Методы
@@ -61,13 +68,12 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var windowEdit = new ProductWindow(this.dgTable.SelectedItem);
+                var windowEdit = new WindowEdit(this.SelectedItemTable);
                 windowEdit.ShowDialog();
+                this.InitDB();
+                this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
                 this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
-                this.dgTable.Update();
-                //this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
-                //this.UpdateDataGrid(this.CurrentTableData);
-
+                this.UpdateDataGrid(this.CurrentTableData);
             }
             catch (Exception ex)
             {
@@ -253,13 +259,13 @@ namespace База_артикулов.Формы.Страницы
         /// <param name="class"></param>
         private TreeViewItemCustom AddToTreeView(Classes @class)
         {
-            TreeViewItemCustom classItem = new TreeViewItemCustom(@class.Descriptors.title, @class);
+            TreeViewItemCustom classItem = new TreeViewItemCustom(@class.id, @class.Descriptors.title, @class);
             foreach (var group in @class.Groups)
             {
-                TreeViewItemCustom groupItem = new TreeViewItemCustom(group.Descriptors.title, group);
+                TreeViewItemCustom groupItem = new TreeViewItemCustom(group.id, group.Descriptors.title, group);
                 foreach (var subGroup in group.SubGroups)
                 {
-                    groupItem.Add(new TreeViewItemCustom(subGroup.Descriptors.title, subGroup));
+                    groupItem.Add(new TreeViewItemCustom(subGroup.id, subGroup.Descriptors.title, subGroup));
                 }
                 classItem.Add(groupItem);
             }
@@ -375,24 +381,14 @@ namespace База_артикулов.Формы.Страницы
             try
             {
                 this.UpdateTablesComboBox();
+                this.dgTable.Title = string.Empty;
             }
             catch (Exception ex)
             {
                 this.ShowError(ex);
             }
         }
-        private void dgTable_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            this.DB.SaveChanges();
-        }
-        private void dgTable_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DB.SaveChanges();
-        }
-        private void dgTable_AddingNewItem(object sender, AddingNewItemEventArgs e)
-        {
-            this.DB.SaveChanges();
-        }
+
         private void cmbTables_SelectionChanged(object sender, RoutedEventArgs e)
         {
             try
@@ -407,27 +403,6 @@ namespace База_артикулов.Формы.Страницы
             catch (Exception ex)
             {
                 this.ShowError(ex);
-            }
-        }
-        private void dgTable_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
-        {
-            try
-            {
-                //if (this.CurrentTableData.ItemsType != null && this.cmbTables.SelectedIndex != -1)
-                //{
-                //    if (this.dgTable.SelectedCells.Count > 0)
-                //    {
-                //        int columnIndex = this.dgTable.SelectedCells[0].Column.DisplayIndex;
-                //        if (this.CurrentTableData.ColumnNames.Count == 0)
-                //            throw new Exception("В таблице нет столбцов!");
-                //        this.SelectedItemTable = this.dgTable.SelectedItem;
-                //        this.SelectedItemTableId = (int)this.GetObjectFieldValue(this.SelectedItemTable, this.CurrentTableData.ColumnNames[columnIndex]);
-                //    }
-                //}
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex.Message);
             }
         }
 
@@ -470,15 +445,40 @@ namespace База_артикулов.Формы.Страницы
         #region Кнопки контекстного меню иерархического списка
         private void miTreeAdd_Click(object sender, RoutedEventArgs e)
         {
-            var windowEdit = new WindowEdit("Создание", new Classes(), WindowEditModes.Create);
-            windowEdit.ShowDialog();
-            this.UpdateTreeView();
+            try
+            {
+                var windowEdit = new WindowEdit("Создание", new Classes(), WindowEditModes.Create);
+                windowEdit.ShowDialog();
+                this.UpdateTreeView();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
         private void miTreeEdit_Click(object sender, RoutedEventArgs e)
         {
-            var windowEdit = new WindowEdit("Редактирование", this.SelectedItemTreeView);
-            windowEdit.ShowDialog();
-            this.UpdateTreeView();
+            try
+            {
+                var windowEdit = new WindowEdit("Редактирование", this.SelectedItemTreeView);
+                windowEdit.ShowDialog();
+                this.UpdateTreeView();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+        private void miTreeDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
         #endregion
 
@@ -490,10 +490,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var windowEdit = new WindowEdit();
-                windowEdit.ShowDialog();
-                //this.SelectTable(this.cmbTables.SelectedItem);
-                //this.UpdateTreeView();
+                this.Create();
             }
             catch (Exception ex)
             {
@@ -504,38 +501,47 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                //var windowEdit = new ProductWindow(this.SelectedItemTable);
-                //windowEdit.ShowDialog();
-                //this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
-                //this.UpdateDataGrid(this.CurrentTableData, this.pcProducts.CurrentPage, this.pcProducts.PageSize);
+                this.Update();
             }
             catch (Exception ex)
             {
                 this.ShowError(ex);
             }
         }
-
-
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Delete();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
         private void dgTable_RightClickSelectedCellChanged(object sender, EventArgs e)
         {
 
         }
-
         private void dgTable_LeftClickSelectedCellChanged(object sender, EventArgs e)
         {
-
+            try
+            {
+                this.SelectedItemTable = this.dgTable.SelectedItem;
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
-
         private void dgTable_AddMenuItemClicked(object sender, EventArgs e)
         {
 
         }
-
         private void dgTable_DeleteMenuItemClicked(object sender, EventArgs e)
         {
 
         }
-
         private void dgTable_EditMenuItemClicked(object sender, EventArgs e)
         {
             this.Update();
@@ -632,6 +638,9 @@ namespace База_артикулов.Формы.Страницы
                 this.ShowError(ex);
             }
         }
+
+
+
 
 
         #endregion
