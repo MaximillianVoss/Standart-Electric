@@ -15,6 +15,7 @@ namespace База_артикулов.Модели
     public partial class DescriptorsResources
     {
         public int id { get; set; }
+        public string title { get; set; }
         public int idDescriptor { get; set; }
         public int idResource { get; set; }
         public Nullable<int> idResourceType { get; set; }

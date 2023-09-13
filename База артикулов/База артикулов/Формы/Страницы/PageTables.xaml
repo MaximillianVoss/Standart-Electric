@@ -43,7 +43,10 @@
         </Menu>
         <CustomControlsWPF:PagedDataGrid x:Name="dgTable" Grid.Row="2" Grid.Column="1" 
                                          RightClickSelectedCellChanged="dgTable_RightClickSelectedCellChanged" 
-                                         LeftClickSelectedCellChanged="dgTable_LeftClickSelectedCellChanged" AddMenuItemClicked="dgTable_AddMenuItemClicked" DeleteMenuItemClicked="dgTable_DeleteMenuItemClicked" EditMenuItemClicked="dgTable_EditMenuItemClicked"/>
+                                         LeftClickSelectedCellChanged="dgTable_LeftClickSelectedCellChanged" 
+                                         AddMenuItemClicked="dgTable_AddMenuItemClicked" 
+                                         DeleteMenuItemClicked="dgTable_DeleteMenuItemClicked" 
+                                         EditMenuItemClicked="dgTable_EditMenuItemClicked"/>
 
     </Grid>
 </local1:CustomPage>

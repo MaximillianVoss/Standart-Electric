@@ -125,6 +125,7 @@
           <ScalarProperty Name="idResourceType" ColumnName="idResourceType" />
           <ScalarProperty Name="idResource" ColumnName="idResource" />
           <ScalarProperty Name="idDescriptor" ColumnName="idDescriptor" />
+          <ScalarProperty Name="title" ColumnName="title" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -442,6 +443,7 @@
           <ScalarProperty Name="Отображаемое_название_ресурса" ColumnName="Отображаемое название ресурса" />
           <ScalarProperty Name="Сокращенное_наименование_ресурса" ColumnName="Сокращенное наименование ресурса" />
           <ScalarProperty Name="Наименование_ресурса" ColumnName="Наименование ресурса" />
+          <ScalarProperty Name="Наименование_объекта" ColumnName="Наименование объекта" />
           <ScalarProperty Name="ID_дескриптора_ресурса" ColumnName="ID дескриптора ресурса" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -673,6 +675,7 @@
           <ScalarProperty Name="ID_единицы_измерения" ColumnName="ID единицы измерения" />
           <ScalarProperty Name="ID_дескриптора_товара" ColumnName="ID дескриптора товара" />
           <ScalarProperty Name="ID_товара" ColumnName="ID товара" />
+          <ScalarProperty Name="ID_связи_продукт_измерение" ColumnName="ID связи продукт-измерение" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -683,7 +686,8 @@
           <ScalarProperty Name="Наименование_типа_ресурса" ColumnName="Наименование типа ресурса" />
           <ScalarProperty Name="ID_типа_ресурса" ColumnName="ID типа ресурса" />
           <ScalarProperty Name="ID_дескриптора_ресурса" ColumnName="ID дескриптора ресурса" />
-          <ScalarProperty Name="Наименование_ресурса" ColumnName="Наименование ресурса" />
+          <ScalarProperty Name="ID_дескриптора_объекта" ColumnName="ID дескриптора объекта" />
+          <ScalarProperty Name="Наименование_объекта" ColumnName="Наименование объекта" />
           <ScalarProperty Name="URL_ресурса" ColumnName="URL ресурса" />
           <ScalarProperty Name="ID_ресурса" ColumnName="ID ресурса" />
         </MappingFragment>
@@ -692,10 +696,21 @@
     <EntitySetMapping Name="ResourcesViewProducts">
       <EntityTypeMapping TypeName="DBSEModel.ResourcesViewProducts">
         <MappingFragment StoreEntitySet="ResourcesViewProducts">
-          <ScalarProperty Name="Альбом_типовых_узлов__Наименование" ColumnName="Альбом типовых узлов, Наименование" />
-          <ScalarProperty Name="Библиотека_BIM_для_Revit__Наименование" ColumnName="Библиотека BIM для Revit, Наименование" />
-          <ScalarProperty Name="Динамические_блоки_Autocad__Наименование" ColumnName="Динамические блоки Autocad, Наименование" />
-          <ScalarProperty Name="Наименование_ресурса" ColumnName="Наименование ресурса" />
+          <ScalarProperty Name="На_складе_продукт" ColumnName="На складе продукт" />
+          <ScalarProperty Name="ID_упаковки_продукта" ColumnName="ID упаковки продукта" />
+          <ScalarProperty Name="ID_перфорации_продукта" ColumnName="ID перфорации продукта" />
+          <ScalarProperty Name="ID_материала_продукта" ColumnName="ID материала продукта" />
+          <ScalarProperty Name="ID_покрытия_продукта" ColumnName="ID покрытия продукта" />
+          <ScalarProperty Name="ID_подгруппы_продукта" ColumnName="ID подгруппы продукта" />
+          <ScalarProperty Name="ID_стандарта_продукта" ColumnName="ID стандарта продукта" />
+          <ScalarProperty Name="ID_дескриптора_продукта" ColumnName="ID дескриптора продукта" />
+          <ScalarProperty Name="ID_продукта" ColumnName="ID продукта" />
+          <ScalarProperty Name="Расширение_ресурса" ColumnName="Расширение ресурса" />
+          <ScalarProperty Name="Наименование_типа_ресурса" ColumnName="Наименование типа ресурса" />
+          <ScalarProperty Name="ID_типа_ресурса" ColumnName="ID типа ресурса" />
+          <ScalarProperty Name="ID_дескриптора_ресурса" ColumnName="ID дескриптора ресурса" />
+          <ScalarProperty Name="ID_дескриптора_объекта" ColumnName="ID дескриптора объекта" />
+          <ScalarProperty Name="Наименование_объекта" ColumnName="Наименование объекта" />
           <ScalarProperty Name="URL_ресурса" ColumnName="URL ресурса" />
           <ScalarProperty Name="ID_ресурса" ColumnName="ID ресурса" />
         </MappingFragment>

@@ -16,9 +16,20 @@ namespace База_артикулов.Модели
     {
         public int ID_ресурса { get; set; }
         public string URL_ресурса { get; set; }
-        public string Наименование_ресурса { get; set; }
-        public string Динамические_блоки_Autocad__Наименование { get; set; }
-        public string Библиотека_BIM_для_Revit__Наименование { get; set; }
-        public string Альбом_типовых_узлов__Наименование { get; set; }
+        public string Наименование_объекта { get; set; }
+        public Nullable<int> ID_дескриптора_объекта { get; set; }
+        public Nullable<int> ID_дескриптора_ресурса { get; set; }
+        public Nullable<int> ID_типа_ресурса { get; set; }
+        public string Наименование_типа_ресурса { get; set; }
+        public string Расширение_ресурса { get; set; }
+        public int ID_продукта { get; set; }
+        public int ID_дескриптора_продукта { get; set; }
+        public Nullable<int> ID_стандарта_продукта { get; set; }
+        public Nullable<int> ID_подгруппы_продукта { get; set; }
+        public Nullable<int> ID_покрытия_продукта { get; set; }
+        public Nullable<int> ID_материала_продукта { get; set; }
+        public Nullable<int> ID_перфорации_продукта { get; set; }
+        public Nullable<int> ID_упаковки_продукта { get; set; }
+        public bool На_складе_продукт { get; set; }
     }
 }

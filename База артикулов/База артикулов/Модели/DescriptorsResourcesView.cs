@@ -15,6 +15,7 @@ namespace База_артикулов.Модели
     public partial class DescriptorsResourcesView
     {
         public int ID_дескриптора_ресурса { get; set; }
+        public string Наименование_объекта { get; set; }
         public string Наименование_ресурса { get; set; }
         public string Сокращенное_наименование_ресурса { get; set; }
         public string Отображаемое_название_ресурса { get; set; }

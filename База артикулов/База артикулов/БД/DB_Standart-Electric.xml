@@ -681,6 +681,10 @@
                   <datatype>int</datatype>
                   <default>NULL</default>
             </row>
+            <row name="title" null="1" autoincrement="0">
+                  <datatype>varchar(255)</datatype>
+                  <default>NULL</default>
+            </row>
             <row name="idDescriptor" null="0" autoincrement="0">
                   <datatype>int</datatype>
                   <default>NULL</default>

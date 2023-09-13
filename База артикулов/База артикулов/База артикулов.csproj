@@ -325,8 +325,14 @@
       <DependentUpon>PageEditProduct.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Формы\Страницы\Редактирование\PageEditResource.xaml.cs">
+      <DependentUpon>PageEditResource.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Формы\Страницы\Редактирование\PageEditSubGroup.xaml.cs">
       <DependentUpon>PageEditSubGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Формы\Страницы\Редактирование\PageEditUnit.xaml.cs">
+      <DependentUpon>PageEditUnit.xaml</DependentUpon>
     </Compile>
     <Page Include="Формы\FilesWindow.xaml">
       <SubType>Designer</SubType>
@@ -407,7 +413,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Формы\Страницы\Редактирование\PageEditResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Формы\Страницы\Редактирование\PageEditSubGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Формы\Страницы\Редактирование\PageEditUnit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -511,7 +525,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Формы\1257.png" />
     <Resource Include="Изображения\1257.png" />
     <Resource Include="Иконки\logo.ico" />
     <Resource Include="logo.ico" />
@@ -541,6 +554,7 @@
     <Content Include="БД\Хлам\Проверка триггеров.sql" />
     <Content Include="БД\Хлам\Тестовый вызов файла.sql" />
     <Content Include="БД\Шаблоны\Шаблон представления.sql" />
+    <Resource Include="Изображения\Document.Refresh.png" />
     <Content Include="Модели\ProductsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ProductsModel.Context.cs</LastGenOutput>

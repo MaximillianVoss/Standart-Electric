@@ -1,5 +1,10 @@
 ﻿using CustomControlsWPF;
 using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +23,18 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #region Поля
         private Type dbSetType;
         private int idProduct;
+        /// <summary>
+        /// Продукт, который создается или редактируется
+        /// </summary>
         private ProductsView currentProduct;
+        /// <summary>
+        /// Измерение, выбранное в таблице на форме
+        /// </summary>
+        private UnitsProducts currentUnit;
+        /// <summary>
+        /// Файл, выбранные в таблице файлов
+        /// </summary>
+        private ResourcesViewProducts currentResource;
         #endregion
 
         #region Свойства
@@ -34,7 +50,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         /// <param name="product"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        private string GetPath(Products product)
+        private string GetPath(ProductsView product)
         {
             if (product == null)
             {
@@ -42,9 +58,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
             String result = String.Empty;
             result = String.Format("{0}\u2192{1}\u2192{2}",
-                product.SubGroups.Groups.Classes == null ? String.Empty : product.SubGroups.Groups.Classes.Descriptors.title,
-                product.SubGroups.Groups == null ? String.Empty : product.SubGroups.Groups.Descriptors.title,
-                product.SubGroups == null ? String.Empty : product.SubGroups.Descriptors.title
+                product.Наименование_подгруппы == null ? String.Empty : product.Наименование_подгруппы,
+                product.Наименование_группы == null ? String.Empty : product.Наименование_группы,
+                product.Наименование_класса == null ? String.Empty : product.Наименование_класса
                 );
             return result;
         }
@@ -87,165 +103,200 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
         }
 
-        private async Task<string> DownloadImageAsync(string vendorCode)
+        private async Task<string> DownloadImageAsync(string code)
         {
-            #region Создание подпапок с кэшированными изображениями
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string imagesDirectory = Path.Combine(baseDirectory, Common.Strings.Path.Local.imagesFolderName);
-            string cachedDirectory = Path.Combine(imagesDirectory, Common.Strings.Path.Local.imagesCachedFolderName);
+            try
+            {
+                #region Создание подпапок с кэшированными изображениями
+                string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string imagesDirectory = Path.Combine(baseDirectory, Common.Strings.Path.Local.imagesFolderName);
+                string cachedDirectory = Path.Combine(imagesDirectory, Common.Strings.Path.Local.imagesCachedFolderName);
 
-            if (!Directory.Exists(imagesDirectory))
-            {
-                Directory.CreateDirectory(imagesDirectory);
-            }
-            if (!Directory.Exists(cachedDirectory))
-            {
-                Directory.CreateDirectory(cachedDirectory);
-            }
-            #endregion
+                if (!Directory.Exists(imagesDirectory))
+                {
+                    Directory.CreateDirectory(imagesDirectory);
+                }
+                if (!Directory.Exists(cachedDirectory))
+                {
+                    Directory.CreateDirectory(cachedDirectory);
+                }
+                #endregion
 
-            #region Пути к файлам
-            string localImagePath = String.Format("{0}\\{1}.png", cachedDirectory, vendorCode);
-            string cloudImagePath = String.Format("{0}/{1}.png", Common.Strings.Path.Cloud.images, vendorCode);
-            #endregion
+                #region Пути к файлам
+                string localImagePath = String.Format("{0}\\{1}.png", cachedDirectory, code);
+                string cloudImagePath = String.Format("{0}/{1}.png", Common.Strings.Path.Cloud.images, code);
+                #endregion
 
-            #region Загружаем изображение
-            bool isExists = await this.WDClient.IsFileExists(cloudImagePath);
-            if (isExists)
-            {
-                _ = this.WDClient.DownloadFile(localImagePath, cloudImagePath);
+                // Проверяем наличие файла на локальном диске
+                if (File.Exists(localImagePath))
+                {
+                    return localImagePath;
+                }
+
+                #region Загружаем изображение
+                bool isExists = await this.WDClient.IsFileExists(cloudImagePath);
+                if (isExists)
+                {
+                    _ = this.WDClient.DownloadFile(localImagePath, cloudImagePath);
+                    return localImagePath;
+                }
+                else
+                {
+                    return null;
+                }
+                #endregion
             }
-            else
+            catch (Exception ex)
             {
+                this.ShowError(ex);
                 return null;
             }
-            #endregion
-            return localImagePath;
+
         }
 
-        private async Task UpdateImageAsync(string vendorCode)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productsView"></param>
+        /// <returns></returns>
+        private async Task UpdateImageAsync(ProductsView productsView)
         {
-            if (vendorCode != null)
+            try
             {
-                string localImagePath = null;
-                string cloudImagePath = String.Format("{0}/{1}.png", Common.Strings.Path.Cloud.images, vendorCode);
-                bool isExists = await this.WDClient.IsFileExists(cloudImagePath);
-                #region Загрузка файла
-                if (isExists)
-                #region Загружаем собственное изображение
+                if (productsView == null)
+                    return;
+
+                List<String> cloudPaths = new List<string>()
+            {
+                productsView.Артикул,
+                productsView.Код_подгруппы,
+                productsView.Код_группы,
+                productsView.Код_класса,
+                //Изобржаение заглушка 0000.png
+                "0000"
+            };
+                string localImagePath = String.Empty;
+                for (int i = 0; i < cloudPaths.Count; i++)
                 {
-                    localImagePath = await this.DownloadImageAsync(vendorCode);
-                }
-                #endregion
-                else
-                #region Загружаем изображение подгруппы
-                {
-                    var product = this.DB.Products.FirstOrDefault(x => x.id == this.idProduct);
-                    if (product != null)
+                    localImagePath = await this.DownloadImageAsync(cloudPaths[i]);
+                    if (localImagePath != null)
                     {
-                        cloudImagePath = String.Format("{0}/{1}.png", Common.Strings.Path.Cloud.images, product.SubGroups.Descriptors.code);
-                        isExists = await this.WDClient.IsFileExists(cloudImagePath);
-                        if (isExists)
-                        {
-                            localImagePath = this.DownloadImageAsync(vendorCode).Result;
-                        }
+                        break;
                     }
                 }
-                #endregion
-                #endregion
 
-                if (localImagePath != null)
-                #region Установка изображения в качестве превью
+                this.Dispatcher.Invoke(() =>
                 {
-                    var image = new Image();
-                    var bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(localImagePath);
-                    bitmap.EndInit();
-                    this.imgPreview.Source = bitmap;
-                }
-                #endregion
+                    if (!String.IsNullOrEmpty(localImagePath) && File.Exists(localImagePath))
+                    {
+                        var bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(localImagePath);
+                        bitmap.EndInit();
+                        this.imgPreview.Source = bitmap;
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
             }
         }
+
 
         /// <summary>
         /// Заполняет форму свойствами указанного продукта
         /// </summary>
-        /// <param name="product">продукт</param>
+        /// <param name="productView">продукт</param>
         /// <exception cref="Exception"></exception>
-        private async void UpdateForm(Products product)
+        private void UpdateForm(ProductsView productView)
         {
-            if (product == null)
+            try
             {
-                throw new Exception(Common.Strings.Errors.emptyObject);
-            }
-            #region Изображение
+                if (productView == null)
+                {
+                    throw new Exception(Common.Strings.Errors.emptyObject);
+                }
+                var product = this.DB.Products.FirstOrDefault(x => x.id == productView.ID_продукта);
+                if (product == null)
+                {
+                    throw new Exception("Не удалось найти продукт!");
+                }
+                #region Изображение
+                _ = this.UpdateImageAsync(productView);
+                #endregion
+                #region Каталог
+                this.txbPath.Text = this.GetPath(productView);
+                #endregion
+                #region Название
+                this.txbTitle.Text = productView.Наименование_продукта;
+                #endregion
+                #region Описание
+                this.txbDescription.Text = productView.Описание_продукта;
+                #endregion
+                #region Артикул
+                this.txbVendorCode.IsEnabled = false;
+                this.txbVendorCode.Text = productView.Артикул;
+                #endregion
+                #region Бухгалтерский код
+                this.txbCodeAccountant.IsEnabled = false;
+                this.txbCodeAccountant.Text = productView.Бухгалтерский_код;
+                #endregion
+                #region Короткое название
+                this.txbTitleShort.Text = product.Descriptors.titleShort;
+                #endregion
+                #region Нормы
+                this.cmbNorm.Update(this.ToList<Norms>(this.DB.Norms), product.idNorm);
+                #endregion
+                #region Подгруппа
+                this.cmbSubGroup.Update(this.ToList<SubGroups>(this.DB.SubGroups), product.idSubGroup);
+                #endregion
+                #region Покрытия
+                this.cmbCover.Update(this.ToList<Covers>(this.DB.Covers), product.idCover);
+                #endregion
+                #region Материалы
+                this.cmbMaterial.Update(this.ToList<Materials>(this.DB.Materials), product.idMaterial);
+                #endregion
+                #region Упаковки
+                this.cmbPackage.Update(this.ToList<Packages>(this.DB.Packages), product.idPackage);
+                #endregion
+                #region Перфорации
+                this.cmbPerforation.Update(this.ToList<Perforations>(this.DB.Perforations), product.idPerforation);
+                #endregion
+                #region Отметка "На складе"
+                this.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
+                #endregion
+                #region Таблица измерений
+                //TODO:обновить представление, неправильно показывает
+                //this.dgDimensions.ItemsSource = this.DB.ProductUnitsView.Where(x => x.ID_товара == this.CurrentProduct.ID_продукта).Distinct().ToList();
+                var entityConnStr = ConfigurationManager.ConnectionStrings[Settings.Connections.CurrentConnectionString].ConnectionString;
+                var entityBuilder = new EntityConnectionStringBuilder(entityConnStr);
+                string connectionString = entityBuilder.ProviderConnectionString;
+                string query = String.Format("SELECT * FROM ProductUnitsView where [ID товара] = {0}", this.CurrentProduct.ID_продукта);
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
 
-            #endregion
-            #region Каталог
-            this.txbPath.Text = this.GetPath(product);
-            #endregion
-            #region Название
-            this.txbTitle.Text = product.Descriptors.title;
-            #endregion
-            #region Описание
-            this.txbDescription.Text = product.Descriptors.description;
-            #endregion
-            #region Артикул
-            var currentProductVendorCodes = this.DB.ProductsVendorCodes.FirstOrDefault(x => x.idProduct == product.id);
-            this.txbVendorCode.IsEnabled = false;
-            if (currentProductVendorCodes != null)
-            {
-                if (currentProductVendorCodes.VendorCodes != null && currentProductVendorCodes.VendorCodes.Descriptors != null)
-                {
-                    this.txbVendorCode.Text = currentProductVendorCodes.VendorCodes.Descriptors.title;
-                    _ = this.UpdateImageAsync(currentProductVendorCodes.VendorCodes.Descriptors.title);
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        this.dgDimensions.ItemsSource = dataTable.DefaultView;
+                    }
                 }
+
+                #endregion
+                #region Таблица файлов
+                //TODO:обновить представление, неправильно показывает
+                this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.ToList();
+                #endregion
             }
-            #endregion
-            #region Бухгалтерский код
-            this.txbCodeAccountant.IsEnabled = false;
-            if (currentProductVendorCodes != null)
+            catch (Exception ex)
             {
-                if (currentProductVendorCodes.VendorCodes != null && currentProductVendorCodes.VendorCodes.Descriptors != null)
-                {
-                    this.txbCodeAccountant.Text = currentProductVendorCodes.VendorCodes.codeAccountant;
-                }
+                this.ShowError(ex.Message);
             }
-            #endregion
-            #region Короткое название
-            this.txbTitleShort.Text = product.Descriptors.titleShort;
-            #endregion
-            #region Нормы
-            this.cmbNorm.Update(this.ToList<Norms>(this.DB.Norms), product.idNorm);
-            #endregion
-            #region Подгруппа
-            this.cmbSubGroup.Update(this.ToList<SubGroups>(this.DB.SubGroups), product.idSubGroup);
-            #endregion
-            #region Покрытия
-            this.cmbCover.Update(this.ToList<Covers>(this.DB.Covers), product.idCover);
-            #endregion
-            #region Материалы
-            this.cmbMaterial.Update(this.ToList<Materials>(this.DB.Materials), product.idMaterial);
-            #endregion
-            #region Упаковки
-            this.cmbPackage.Update(this.ToList<Packages>(this.DB.Packages), product.idPackage);
-            #endregion
-            #region Перфорации
-            this.cmbPerforation.Update(this.ToList<Perforations>(this.DB.Perforations), product.idPerforation);
-            #endregion
-            #region Отметка "На складе"
-            this.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
-            #endregion
-            #region Таблица измерений
-            //this.dgDimensions.ItemsSource = null;
-            this.dgDimensions.ItemsSource = this.DB.ProductUnitsView.Where(x => x.ID_товара == this.CurrentProduct.ID_продукта).ToList();
-            #endregion
-            #region Таблица файлов
-            //this.dgFiles.ItemsSource = null;
-            //TODO:обновить представление, неправильно показывает
-            this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.ToList();
-            #endregion
         }
 
         /// <summary>
@@ -254,7 +305,25 @@ namespace База_артикулов.Формы.Страницы.Редакти
         /// <param name="idProduct">ID продукта</param>
         private void UpdateForm(int? idProduct)
         {
-            this.UpdateForm(this.DB.Products.FirstOrDefault(x => x.id == this.IdProduct));
+            this.UpdateForm(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == this.IdProduct));
+        }
+
+        void UpdateUnitSelection()
+        {
+            DataRowView rowView = dgDimensions.SelectedItem as DataRowView;
+            if (rowView != null)
+            {
+                // Для получения значения определенного столбца используйте:
+                var idProduct = Convert.ToInt32(rowView["ID товара"]);
+                var idUnitProduct = Convert.ToInt32(rowView["ID связи продукт-измерение"]);
+                this.currentUnit = this.DB.UnitsProducts.FirstOrDefault(x => x.idProduct == idProduct && x.id == idUnitProduct);
+                this.DB.Entry(this.currentUnit).Reload();
+            }
+        }
+
+        void UpdateFileSelection()
+        {
+            this.currentResource = this.dgFiles.SelectedItem as ResourcesViewProducts;
         }
 
         /// <summary>
@@ -449,7 +518,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             try
             {
                 this.Save(this.IdProduct);
-                this.CloseWindow();
+                this.CloseWindow(true);
             }
             catch (Exception ex)
             {
@@ -458,7 +527,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         }
         private void btnCancel_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            this.CloseWindow();
+            this.CloseWindow(false);
         }
         private void btnAddDimension_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -466,8 +535,178 @@ namespace База_артикулов.Формы.Страницы.Редакти
             productUnitsWindow.ShowDialog();
             this.UpdateForm(this.idProduct);
         }
+        private void imgPreview_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            _ = UpdateImageAsync(this.CurrentProduct);
+        }
+
+
+        #region Контекстное меню таблиц
+
+        #region Измерения
+        private void dgDimensions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.UpdateUnitSelection();
+            //this.ShowError(dgDimensions.SelectedItem.ToString());
+        }
+        private void dgDimensions_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+
+        }
+        private void btnDimensionsAdd_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                var unitProduct = new UnitsProducts();
+                unitProduct.idProduct = this.currentProduct.ID_продукта;
+                WindowEdit windowEdit = new WindowEdit(Common.Strings.Titles.Windows.add, unitProduct, WindowEditModes.Create);
+                windowEdit.ShowDialog();
+                if ((bool)windowEdit.DialogResult)
+                {
+                    this.InitDB();
+                    this.UpdateForm(this.currentProduct);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+        private void btnDimensionsEdit_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                this.InitDB();
+                this.UpdateUnitSelection();
+                WindowEdit windowEdit = new WindowEdit(Common.Strings.Titles.Windows.edit, this.currentUnit);
+                windowEdit.ShowDialog();
+                if ((bool)windowEdit.DialogResult)
+                {
+                    this.InitDB();
+                    this.UpdateForm(this.currentProduct);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+        private void btnDimensionsDelete_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                if (this.currentUnit != null)
+                {
+                    this.DB.UnitsProducts.Remove(
+                        this.DB.UnitsProducts.FirstOrDefault(x => x.id == this.currentUnit.id));
+                    this.DB.SaveChanges();
+                    this.UpdateForm(this.currentProduct);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
         #endregion
 
+        #region Файлы
+        private void dgFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.UpdateFileSelection();
+        }
+        private void dgFiles_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+
+        }
+        private void btnFilesDownload_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (this.currentResource != null)
+            {
+                var resource = this.DB.Resources.FirstOrDefault(x => x.id == this.currentResource.ID_ресурса);
+                if (resource != null)
+                {
+                    _ = this.WDClient.DownloadFile(this.GetSaveFilePath(), resource.URL);
+                    this.ShowMessage("Загрузка завершена");
+                }
+            }
+        }
+        private void btnFilesAdd_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                ResourcesViewProducts resourcesViewProducts = new ResourcesViewProducts();
+                resourcesViewProducts.ID_продукта = this.currentProduct.ID_продукта;
+                if (this.IsDescriptorProductExists(this.currentProduct.ID_продукта))
+                {
+                    resourcesViewProducts.ID_дескриптора_объекта = this.GetDescriptorProduct(this.currentProduct.ID_продукта).id;
+                    //this.ShowMessage(resourcesViewProducts.ID_дескриптора_объекта.ToString());
+                }
+                WindowEdit windowEdit = new WindowEdit(
+                    Common.Strings.Titles.Windows.add,
+                    resourcesViewProducts,
+                    WindowEditModes.Create);
+                windowEdit.ShowDialog();
+                if ((bool)windowEdit.DialogResult)
+                {
+                    this.InitDB();
+                    this.UpdateForm(this.currentProduct);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+        private void btnFilesEdit_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+        private void btnFilesDelete_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                if (this.currentResource != null)
+                {
+                    // Получите все записи, которые удовлетворяют вашему условию
+                    var itemsToDelete = this.DB.DescriptorsResources
+                                                .Where(dr => dr.idResource == this.currentResource.ID_ресурса)
+                                                .ToList();
+
+                    // Удалите эти записи
+                    foreach (var item in itemsToDelete)
+                    {
+                        this.DB.DescriptorsResources.Remove(item);
+                    }
+
+                    // Сохраните изменения
+                    this.DB.SaveChanges();
+                    this.InitDB();
+                    this.UpdateForm(this.currentProduct);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+        private void btnRefreshFilesTable_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                this.InitDB();
+                this.UpdateForm(this.currentProduct);
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+        #endregion
+
+        #endregion
+
+        #endregion
 
     }
 }

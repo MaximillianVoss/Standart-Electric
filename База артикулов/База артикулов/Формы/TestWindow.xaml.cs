@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 
 namespace База_артикулов.Формы
 {
@@ -44,6 +45,9 @@ namespace База_артикулов.Формы
             //ProductWindow productWindow = new ProductWindow(typeof(Products), this.DB.Products.First().id);
             //productWindow.ShowDialog();
 
+            WindowEdit windowEdit = new WindowEdit(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == 1));
+            //WindowEdit windowEdit = new WindowEdit(this.DB.UnitsProducts.FirstOrDefault(x => x.id == 1));
+            windowEdit.ShowDialog();
         }
         #endregion
 

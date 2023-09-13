@@ -53,6 +53,7 @@
             {
                 public static class Cloud
                 {
+                    public static string Resources = "Resources";
                     public static string bim = "Resources/bim";
                     public static string dwg = "Resources/dwg";
                     public static string images = "Resources/images";

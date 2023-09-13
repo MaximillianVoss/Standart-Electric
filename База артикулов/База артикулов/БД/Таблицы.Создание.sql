@@ -304,9 +304,10 @@ GO
 
 CREATE TABLE [DescriptorsResources]
 (
-    [id]             INT IDENTITY (1, 1) ,
-    [idDescriptor]   INT NOT NULL ,
-    [idResource]     INT NOT NULL ,
+    [id]             INT            IDENTITY (1, 1) ,
+    [title]          NVARCHAR (255) ,
+    [idDescriptor]   INT            NOT NULL ,
+    [idResource]     INT            NOT NULL ,
     [idResourceType] INT ,
     PRIMARY KEY ([id])
 ) ON [PRIMARY]

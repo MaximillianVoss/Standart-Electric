@@ -8,6 +8,7 @@ using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
+using System.Windows.Forms;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
@@ -49,6 +50,81 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Методы
+
+
+        #region Работа с товарами
+        /// <summary>
+        /// Получает товар с указанным id
+        /// </summary>
+        /// <param name="idProduct"></param>
+        /// <returns></returns>
+        public Products GetProduct(int idProduct)
+        {
+            return this.DB.Products.FirstOrDefault(x => x.id == idProduct);
+        }
+        /// <summary>
+        /// Получает представление продукта с указаным id
+        /// </summary>
+        /// <param name="idProduct"></param>
+        /// <returns></returns>
+        public ProductsView GetProductView(int idProduct)
+        {
+            return this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == idProduct);
+        }
+        /// <summary>
+        /// Поверяет наличие товара в базе
+        /// </summary>
+        /// <param name="idProduct"></param>
+        /// <returns></returns>
+        public bool IsProductExists(int idProduct)
+        {
+            return this.GetProduct(idProduct) != null;
+        }
+        /// <summary>
+        /// Получает дескриптор товара с указанным id
+        /// </summary>
+        /// <param name="idProduct">id товара</param>
+        /// <returns></returns>
+        public Descriptors GetDescriptorProduct(int idProduct)
+        {
+            var product = this.GetProduct(idProduct);
+            if (product == null)
+                return null;
+            else
+                return this.DB.Descriptors.FirstOrDefault(x => x.id == product.idDescriptor);
+        }
+        /// <summary>
+        /// Проверяет наличие дескриптора (любого) в базе
+        /// </summary>
+        /// <param name="idDescriptor">id дексриптора</param>
+        /// <returns></returns>
+        public bool IsDescriptorExists(int idDescriptor)
+        {
+            return this.DB.Descriptors.FirstOrDefault(x => x.id == idDescriptor) != null;
+        }
+        /// <summary>
+        /// Проверяет наличие дескриптора товара в базе
+        /// </summary>
+        /// <param name="idProduct">id товара</param>
+        /// <returns></returns>
+        public bool IsDescriptorProductExists(int idProduct)
+        {
+            if (this.IsProductExists(idProduct))
+            {
+                return this.GetDescriptorProduct(idProduct) != null;
+            }
+            return false;
+        }
+        public DescriptorsResources GetDescriptorsResources(int idDescriptor)
+        {
+            return this.DB.DescriptorsResources.FirstOrDefault(x => x.idDescriptor == idDescriptor);
+        }
+
+        public bool IsDescriptorResourcesExists(int idDescriptor)
+        {
+            return this.GetDescriptorsResources(idDescriptor) != null;
+        }
+        #endregion
 
         #region Работа с дескриптором
         /// <summary>
@@ -202,9 +278,11 @@ namespace База_артикулов.Формы
         /// <summary>
         /// Закрывает родительское окно
         /// </summary>
-        public void CloseWindow()
+        /// <param name="dialogResult">Были внесены изменения в окне или нет</param>
+        public void CloseWindow(bool? dialogResult = false)
         {
             var window = Window.GetWindow(this);
+            window.DialogResult = dialogResult;
             window?.Close();
         }
 

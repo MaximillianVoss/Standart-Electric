@@ -50,9 +50,11 @@ namespace База_артикулов.Формы
 
         }
 
-        public WindowEdit(string title, object item, WindowEditModes mode = WindowEditModes.Edit)
+        public WindowEdit(string title, object item, WindowEditModes mode = WindowEditModes.Edit, int Width = 600, int Height = 800)
         {
             this.InitializeComponent();
+            this.Width = Width;
+            this.Height = Height;
             this.SetCenter();
             this.Title = title;
             this.CurrentItem = item;
@@ -71,6 +73,7 @@ namespace База_артикулов.Формы
         {
             try
             {
+                this.InitDB();
                 if (this.Mode == WindowEditModes.Create)
                 {
                     if (this.CurrentItem == null)
@@ -78,6 +81,14 @@ namespace База_артикулов.Формы
                     if (this.CurrentItem.GetType() == typeof(Classes) || this.CurrentItem.GetType().BaseType == typeof(Classes))
                     {
                         this.fMain.Content = new PageEditClass();
+                    }
+                    if (this.CurrentItem.GetType() == typeof(UnitsProducts))
+                    {
+                        this.fMain.Content = new PageEditUnit(this.CurrentItem);
+                    }
+                    if(this.CurrentItem.GetType() == typeof(ResourcesViewProducts))
+                    {
+                        this.fMain.Content = new PageEditResource(this.CurrentItem);
                     }
                 }
                 if (this.Mode == WindowEditModes.Edit)
@@ -103,6 +114,7 @@ namespace База_артикулов.Формы
                                 this.fMain.Content = new PageEditSubGroup(objValue);
                             }
 
+
                         }
                     }
                     else
@@ -112,6 +124,10 @@ namespace База_артикулов.Формы
                         if (objBaseType.BaseType == typeof(ProductsView) || objValue.GetType() == typeof(ProductsView))
                         {
                             this.fMain.Content = new PageEditProduct(objValue);
+                        }
+                        if (objBaseType == typeof(UnitsProducts))
+                        {
+                            this.fMain.Content = new PageEditUnit(objValue);
                         }
                     }
                 }

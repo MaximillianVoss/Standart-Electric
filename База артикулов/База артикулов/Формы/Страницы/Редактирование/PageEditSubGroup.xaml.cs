@@ -161,7 +161,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             try
             {
                 this.Save();
-                this.CloseWindow();
+                this.CloseWindow(true);
             }
             catch (Exception ex)
             {

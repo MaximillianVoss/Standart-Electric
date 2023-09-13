@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using WebDAVClient;
 using WebDAVClient.Model;
@@ -62,15 +63,6 @@ namespace База_артикулов.Классы
         }
         public async Task<bool> IsFileExists(string cloudFilePath)
         {
-            //try
-            //{
-            //    var file = await this.Client.GetFile(cloudFilePath);
-            //    return true;
-            //}
-            //catch
-            //{
-            //    return false;
-            //}
             var folderPath = Path.GetDirectoryName(cloudFilePath);
             var fileName = Path.GetFileName(cloudFilePath);
             var items = await this.Client.List(folderPath);
@@ -132,6 +124,25 @@ namespace База_артикулов.Классы
         {
             // Удаление файла
             await this.Client.DeleteFile(file.Href);
+        }
+
+        public string GetFileUrl(string cloudFolder, string fileName)
+        {
+            return $"{Server}{BasePath}{cloudFolder}/{fileName}";
+        }
+        public async Task CreateDirectoryIfNotExistsAsync(string cloudPath, string folderName)
+        {
+            string fullPath = $"{BasePath}{cloudPath}/{folderName}";
+            try
+            {
+                // Пытаемся получить папку
+                var folder = await Client.GetFolder(fullPath);
+            }
+            catch
+            {
+                // Если возникает исключение (предполагаем, что из-за отсутствия папки), создаем ее
+                await Client.CreateDir($"{BasePath}{cloudPath}", folderName);
+            }
         }
         #endregion
 

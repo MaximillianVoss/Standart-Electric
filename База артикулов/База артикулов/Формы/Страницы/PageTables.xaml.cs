@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Globalization;
 using System.IO;
@@ -63,16 +64,20 @@ namespace База_артикулов.Формы.Страницы
             }
         }
 
+
         private void Update()
         {
             try
             {
                 var windowEdit = new WindowEdit(this.SelectedItemTable);
                 windowEdit.ShowDialog();
-                this.InitDB();
-                this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
-                this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
-                this.UpdateDataGrid(this.CurrentTableData);
+                if ((bool)windowEdit.DialogResult)
+                {
+                    this.InitDB();
+                    this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
+                    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
+                    this.UpdateDataGrid(this.CurrentTableData);
+                }
             }
             catch (Exception ex)
             {
@@ -307,7 +312,7 @@ namespace База_артикулов.Формы.Страницы
         /// <summary>
         /// 
         /// </summary>
-        private void UpdateTreeView()
+        private async Task UpdateTreeView()
         {
             if (this.CurrentTableData.ItemsType == typeof(Products) ||
                 this.CurrentTableData.ItemsType == typeof(ProductsView))
@@ -318,9 +323,12 @@ namespace База_артикулов.Формы.Страницы
 
                 this.tvGroups.Items.Clear();
                 this.tvGroups.UpdateLayout();
-                //this.InitDB(this.IsCollectionUpdated);
+                //this.InitDB(this.IsCollectionUpdated); // Если этот метод может быть асинхронным, добавьте await
 
-                foreach (var @class in this.DB.Classes)
+                // Если доступ к базе данных является блокирующей операцией, используйте асинхронные методы.
+                var classes = await Task.Run(() => this.DB.Classes.ToList());
+
+                foreach (var @class in classes)
                 {
                     var classItem = this.AddToTreeView(@class);
                     // Восстанавливаем состояние для каждого элемента
@@ -329,6 +337,7 @@ namespace База_артикулов.Формы.Страницы
                         classItem.IsExpanded = isExpanded;
                     }
                 }
+
                 //Выбор первого элемента, если есть
                 if (this.tvGroups.Items.Count > 0)
                 {
@@ -346,6 +355,7 @@ namespace База_артикулов.Формы.Страницы
                 this.HideTreeView();
             }
         }
+
         #endregion
 
         #endregion
@@ -382,15 +392,15 @@ namespace База_артикулов.Формы.Страницы
             }
         }
 
-        private void cmbTables_SelectionChanged(object sender, RoutedEventArgs e)
+        private async void cmbTables_SelectionChanged(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (this.cmbTables.SelectedItem != null)
                 {
                     this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
-                    this.UpdateTreeView();
-                    this.UpdateDataGrid(this.CurrentTableData);
+                    _ = this.UpdateTreeView();
+                    _ = this.UpdateDataGrid(this.CurrentTableData);
                 }
             }
             catch (Exception ex)
