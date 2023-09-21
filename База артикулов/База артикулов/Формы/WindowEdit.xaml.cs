@@ -53,9 +53,9 @@ namespace База_артикулов.Формы
         public WindowEdit(string title, object item, WindowEditModes mode = WindowEditModes.Edit, int Width = 600, int Height = 800)
         {
             this.InitializeComponent();
+            this.SetCenter();
             this.Width = Width;
             this.Height = Height;
-            this.SetCenter();
             this.Title = title;
             this.CurrentItem = item;
             if (item != null)
@@ -69,6 +69,10 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Обработчики событий
+        bool IsTypeEqual(Type type, object @object)
+        {
+            return @object.GetType() == type || @object.GetType().BaseType == type;
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -86,9 +90,9 @@ namespace База_артикулов.Формы
                     {
                         this.fMain.Content = new PageEditUnit(this.CurrentItem);
                     }
-                    if(this.CurrentItem.GetType() == typeof(ResourcesViewProducts))
+                    if (this.CurrentItem.GetType() == typeof(ResourcesViewProducts))
                     {
-                        this.fMain.Content = new PageEditResource(this.CurrentItem);
+                        this.fMain.Content = new PageEditResource(this.CurrentItem, this.Mode);
                     }
                 }
                 if (this.Mode == WindowEditModes.Edit)
@@ -128,6 +132,10 @@ namespace База_артикулов.Формы
                         if (objBaseType == typeof(UnitsProducts))
                         {
                             this.fMain.Content = new PageEditUnit(objValue);
+                        }
+                        if (IsTypeEqual(typeof(ResourcesViewProducts), this.CurrentItem))
+                        {
+                            this.fMain.Content = new PageEditResource(objValue, this.Mode);
                         }
                     }
                 }

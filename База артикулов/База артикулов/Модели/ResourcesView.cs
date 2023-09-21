@@ -16,6 +16,7 @@ namespace База_артикулов.Модели
     {
         public int ID_ресурса { get; set; }
         public string URL_ресурса { get; set; }
+        public string Наименование_ресурса { get; set; }
         public string Наименование_объекта { get; set; }
         public Nullable<int> ID_дескриптора_объекта { get; set; }
         public Nullable<int> ID_дескриптора_ресурса { get; set; }

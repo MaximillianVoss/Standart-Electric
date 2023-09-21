@@ -688,6 +688,7 @@
           <ScalarProperty Name="ID_дескриптора_ресурса" ColumnName="ID дескриптора ресурса" />
           <ScalarProperty Name="ID_дескриптора_объекта" ColumnName="ID дескриптора объекта" />
           <ScalarProperty Name="Наименование_объекта" ColumnName="Наименование объекта" />
+          <ScalarProperty Name="Наименование_ресурса" ColumnName="Наименование ресурса" />
           <ScalarProperty Name="URL_ресурса" ColumnName="URL ресурса" />
           <ScalarProperty Name="ID_ресурса" ColumnName="ID ресурса" />
         </MappingFragment>
@@ -711,6 +712,7 @@
           <ScalarProperty Name="ID_дескриптора_ресурса" ColumnName="ID дескриптора ресурса" />
           <ScalarProperty Name="ID_дескриптора_объекта" ColumnName="ID дескриптора объекта" />
           <ScalarProperty Name="Наименование_объекта" ColumnName="Наименование объекта" />
+          <ScalarProperty Name="Наименование_ресурса" ColumnName="Наименование ресурса" />
           <ScalarProperty Name="URL_ресурса" ColumnName="URL ресурса" />
           <ScalarProperty Name="ID_ресурса" ColumnName="ID ресурса" />
         </MappingFragment>

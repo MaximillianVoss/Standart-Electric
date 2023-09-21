@@ -29,6 +29,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         #region Поля
         ResourcesViewProducts currentItem;
+        WindowEditModes mode;
         #endregion
 
         #region Свойства
@@ -53,76 +54,102 @@ namespace База_артикулов.Формы.Страницы.Редакти
             // Загружаем файл в созданную папку
             var cloudFolderPath = $"{this.WDClient.BasePath}/Resources/{extension}";
             var cloudFolder = new Item { Href = cloudFolderPath, IsCollection = true };  // Предположим, что у вас есть подходящий конструктор или метод для создания объекта папки
+            //this.ShowMessage("Загрузка по пути " + cloudFolderPath);
             await this.WDClient.UploadFile(filePath, cloudFolder);
-            return this.WDClient.GetFileUrl(extension, System.IO.Path.GetFileName(filePath));
+            return this.WDClient.GetFileUrl("Resources/" + extension, System.IO.Path.GetFileName(filePath));
         }
 
         private async Task Save()
         {
-            #region Загрузка файла
-            if (String.IsNullOrEmpty(this.lbltxbFilePath.Text))
-                throw new Exception("Не указан путь до загружаемого файла!");
-            var url = await this.UploadFile(this.lbltxbFilePath.Text);
-            #endregion
-
-            #region Создание/обновление данных
-            if (this.IsDescriptorProductExists(this.currentItem.ID_продукта))
+            if (this.mode == WindowEditModes.Create)
             {
-                this.ShowMessage("Дескриптор продукта обнаружен!");
-                var extension = System.IO.Path.GetExtension(this.lbltxbFilePath.Text);
-                var typeView = this.DB.ResourceTypesView.FirstOrDefault(x => x.Расширение_ресурса == extension);
-                #region Если типа файла нет, добавляем
-                if (typeView == null)
-                {
-                    ResourceTypes resourceTypes = new ResourceTypes();
-                    resourceTypes.title = $"Файл с расширением {extension}";
-                    this.lbltxbResourceTitle.Text = resourceTypes.title;
-                    resourceTypes.extension_ = extension;
-                    this.DB.ResourceTypes.Add(resourceTypes);
-                }
-                else
-                {
-                    this.lbltxbResourceTitle.Text = typeView.Наименование_типа_ресурса;
-                }
+                //this.ShowMessage("CREATE STARTED");
+                #region Загрузка файла
+                if (String.IsNullOrEmpty(this.lbltxbFilePath.Text))
+                    throw new Exception("Не указан путь до загружаемого файла!");
+                var url = await this.UploadFile(this.lbltxbFilePath.Text);
                 #endregion
-                #region Если тип найден, продолжаем работу с ним
-
-                if (!this.IsDescriptorProductExists(this.currentItem.ID_продукта))
-                    throw new Exception("Не удалось найти дескриптор продукта!");
-                var productDescriptor = this.GetDescriptorProduct(this.currentItem.ID_продукта);
-                this.ShowMessage(productDescriptor.id.ToString());
-
-                var productDescriptorResource = this.GetDescriptorsResources(productDescriptor.id);
-                if (!this.IsDescriptorResourcesExists(productDescriptor.id))
+                //this.ShowMessage("Загрузка выполнена! ID_продукта:" + this.currentItem.ID_продукта.ToString());
+                #region Создание/обновление данных
+                if (this.IsDescriptorProductExists(this.currentItem.ID_продукта))
                 {
-                    this.ShowMessage("Создание и привязка к ресурсам");
+                    //this.ShowMessage("Дескриптор продукта обнаружен!");
+                    var extension = System.IO.Path.GetExtension(this.lbltxbFilePath.Text);
+                    var typeView = this.DB.ResourceTypesView.FirstOrDefault(x => x.Расширение_ресурса == extension);
+                    #region Если типа файла нет, добавляем
+                    if (typeView == null)
+                    {
+                        ResourceTypes resourceTypes = new ResourceTypes();
+                        resourceTypes.title = $"Файл с расширением {extension}";
+                        this.lbltxbResourceTitle.Text = resourceTypes.title;
+                        resourceTypes.extension_ = extension;
+                        this.DB.ResourceTypes.Add(resourceTypes);
+                    }
+                    else
+                    {
+                        this.lbltxbResourceTitle.Text = typeView.Наименование_типа_ресурса;
+                    }
+                    #endregion
+                    #region Если тип найден, продолжаем работу с ним
+
+                    if (!this.IsDescriptorProductExists(this.currentItem.ID_продукта))
+                        throw new Exception("Не удалось найти дескриптор продукта!");
+                    var productDescriptor = this.GetDescriptorProduct(this.currentItem.ID_продукта);
+                    //this.ShowMessage(productDescriptor.id.ToString());
+
+                    var productDescriptorResource = new DescriptorsResources();
+                    productDescriptorResource.idDescriptor = productDescriptor.id;
                     var desriptorResource = new DescriptorsResources();
                     desriptorResource.idDescriptor = productDescriptor.id;
                     productDescriptorResource = this.DB.DescriptorsResources.Add(desriptorResource);
+                    Resources resource = new Resources();
+                    resource.URL = url;
+                    resource = this.DB.Resources.Add(resource);
+                    productDescriptorResource.title = this.lbltxbResourceTitle.Text;
+                    productDescriptorResource.ResourceTypes = this.DB.ResourceTypes.FirstOrDefault(x => x.extension_ == typeView.Расширение_ресурса);
+                    productDescriptorResource.idResource = resource.id;
+                    productDescriptorResource.Resources = resource;
+                    #endregion
+
                 }
-                Resources resource = new Resources();
-                resource.URL = url;
-                resource = this.DB.Resources.Add(resource);
-                productDescriptorResource.title = this.lbltxbResourceTitle.Text;
-                productDescriptorResource.idResource = resource.id;
-                productDescriptorResource.Resources = resource;
+                else
+                {
+
+                }
                 #endregion
-
             }
-            else
+            if (this.mode == WindowEditModes.Edit)
             {
+                #region Обновление данных
+                if (this.IsDescriptorProductExists(this.currentItem.ID_продукта))
+                {
+                    if (!this.IsDescriptorProductExists(this.currentItem.ID_продукта))
+                        throw new Exception("Не удалось найти дескриптор продукта!");
+                    var productDescriptor = this.GetDescriptorProduct(this.currentItem.ID_продукта);
 
+                    var productDescriptorResource = this.GetDescriptorsResources(productDescriptor.id);
+                    if (productDescriptorResource != null)
+                    {
+                        productDescriptorResource.title = this.lbltxbResourceTitle.Text;
+                    }
+                }
+                else
+                {
+
+                }
+                #endregion
             }
-            #endregion
+
             this.DB.SaveChanges();
         }
 
         void Update(ResourcesViewProducts item)
         {
-            var descriptor = this.DB.ResourcesView.FirstOrDefault(x => x.ID_дескриптора_объекта == this.currentItem.ID_продукта);
-            if (descriptor != null)
+            var productDescriptor = this.GetDescriptorProduct(item.ID_продукта);
+            if (this.IsDescriptorResourcesExists(productDescriptor.id))
             {
-
+                var productDescriptorResource = this.GetDescriptorsResources(productDescriptor.id);
+                this.lbltxbResourceTitle.Text = productDescriptorResource.title;
             }
             else
             {
@@ -132,9 +159,15 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageEditResource(object item = null)
+        public PageEditResource(object item = null, WindowEditModes mode = WindowEditModes.Create)
         {
             InitializeComponent();
+            this.mode = mode;
+            if (this.mode == WindowEditModes.Edit)
+            {
+                this.btnSelectFile.Visibility = Visibility.Collapsed;
+                this.lbltxbFilePath.Visibility = Visibility.Collapsed;
+            }
             this.currentItem = (ResourcesViewProducts)item;
             this.btnOk.Text =
                 this.currentItem != null ||

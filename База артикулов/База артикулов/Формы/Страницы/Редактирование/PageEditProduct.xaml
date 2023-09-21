@@ -86,23 +86,21 @@
                         </DataGrid.ContextMenu>
                     </DataGrid>
                     <DataGrid x:Name="dgFiles" Margin="10" Height="200" Grid.Row="14" 
-                              AutoGenerateColumns="True" IsReadOnly="False" 
+                              AutoGenerateColumns="False" IsReadOnly="False" 
                               SelectionChanged="dgFiles_SelectionChanged" SelectedCellsChanged="dgFiles_SelectedCellsChanged">
-                        <!--<DataGrid.Columns>
-                            <DataGridTextColumn Header="Наименование типа единицы измерения" 
-                         Binding="{Binding 'Наименование типа единицы измерения'}" />
-                            <DataGridTextColumn Header="Значение" 
-                         Binding="{Binding 'Значение'}" />
-                            <DataGridTextColumn Header="Сокращенное наименование единицы измерения" 
-                         Binding="{Binding 'Сокращенное наименование единицы измерения'}" />
-                            <DataGridTextColumn Header="Наименование единицы измерения" 
-                         Binding="{Binding 'Наименование единицы измерения'}" />
-                        </DataGrid.Columns>-->
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Наименование ресурса" 
+                         Binding="{Binding 'Наименование_ресурса'}" />
+                            <DataGridTextColumn Header="Расширение ресурса" 
+                         Binding="{Binding 'Расширение_ресурса'}" />
+                            <DataGridTextColumn Header="URL ресурса" 
+                         Binding="{Binding 'URL_ресурса'}" />
+                        </DataGrid.Columns>
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem x:Name="btnFilesDownload" Header="Скачать" Click="btnFilesDownload_Click"/>
                                 <MenuItem x:Name="btnRefreshFilesTable" Header="Обновить таблицу" Click="btnRefreshFilesTable_Click"/>
-                                <MenuItem x:Name="btnFilesAdd" Header="Добавить" Click="btnFilesAdd_Click"/>
+                                <MenuItem x:Name="btnFilesDownload" Header="Скачать на компьютер" Click="btnFilesDownload_Click"/>
+                                <MenuItem x:Name="btnFilesAdd" Header="Загрузить на сервер" Click="btnFilesAdd_Click"/>
                                 <MenuItem x:Name="btnFilesEdit" Header="Редактировать" Click="btnFilesEdit_Click"/>
                                 <MenuItem x:Name="btnFilesDelete" Header="Удалить" Click="btnFilesDelete_Click"/>
                             </ContextMenu>

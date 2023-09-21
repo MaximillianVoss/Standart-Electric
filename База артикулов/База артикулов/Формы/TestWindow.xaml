@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:База_артикулов.Формы"
         mc:Ignorable="d"
-        Title="TestWindow" Height="110" Width="235" Loaded="Window_Loaded">
+        Title="TestWindow" Height="400" Width="400" Loaded="Window_Loaded" VerticalAlignment="Center" HorizontalAlignment="Center">
     <Grid>
 
     </Grid>

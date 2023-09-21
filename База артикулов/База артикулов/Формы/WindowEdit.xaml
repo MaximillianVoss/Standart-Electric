@@ -8,7 +8,7 @@
         Title="WindowEdit" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" Height="300" Width="300">
     <Grid ClipToBounds="True">
         <Frame x:Name="fMain" Content="Frame" HorizontalAlignment="Stretch"
-               VerticalAlignment="Stretch"
+               VerticalAlignment="Stretch"             
                NavigationUIVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                HorizontalContentAlignment="Stretch" 
                VerticalContentAlignment="Stretch"/>

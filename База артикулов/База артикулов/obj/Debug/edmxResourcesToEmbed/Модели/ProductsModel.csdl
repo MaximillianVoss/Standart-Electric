@@ -1047,6 +1047,7 @@
     </Key>
     <Property Name="ID_ресурса" Type="Int32" Nullable="false" />
     <Property Name="URL_ресурса" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_ресурса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Наименование_объекта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ID_дескриптора_объекта" Type="Int32" />
     <Property Name="ID_дескриптора_ресурса" Type="Int32" />
@@ -1063,6 +1064,7 @@
     </Key>
     <Property Name="ID_ресурса" Type="Int32" Nullable="false" />
     <Property Name="URL_ресурса" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование_ресурса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Наименование_объекта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ID_дескриптора_объекта" Type="Int32" />
     <Property Name="ID_дескриптора_ресурса" Type="Int32" />

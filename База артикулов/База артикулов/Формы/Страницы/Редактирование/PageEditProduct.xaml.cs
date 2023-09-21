@@ -1,4 +1,5 @@
 ﻿using CustomControlsWPF;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,6 +9,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using База_артикулов.Классы;
@@ -273,6 +275,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 var entityBuilder = new EntityConnectionStringBuilder(entityConnStr);
                 string connectionString = entityBuilder.ProviderConnectionString;
                 string query = String.Format("SELECT * FROM ProductUnitsView where [ID товара] = {0}", this.CurrentProduct.ID_продукта);
+
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -290,7 +293,25 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 #endregion
                 #region Таблица файлов
                 //TODO:обновить представление, неправильно показывает
-                this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.ToList();
+                this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.Where(x => x.ID_покрытия_продукта == this.CurrentProduct.ID_продукта).ToList();
+                //entityConnStr = ConfigurationManager.ConnectionStrings[Settings.Connections.CurrentConnectionString].ConnectionString;
+                //entityBuilder = new EntityConnectionStringBuilder(entityConnStr);
+                //connectionString = entityBuilder.ProviderConnectionString;
+                //query = String.Format("SELECT * FROM ResourcesViewProducts where [ID продукта] = {0}", this.CurrentProduct.ID_продукта);
+                //this.ShowMessage(query);
+                //using (SqlConnection connection = new SqlConnection(connectionString))
+                //{
+                //    connection.Open();
+
+                //    using (SqlCommand command = new SqlCommand(query, connection))
+                //    {
+                //        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                //        DataTable dataTable = new DataTable();
+                //        adapter.Fill(dataTable);
+
+                //        this.dgFiles.ItemsSource = dataTable.DefaultView;
+                //    }
+                //}
                 #endregion
             }
             catch (Exception ex)
@@ -479,6 +500,8 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         private void CustomPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
+            //var window = Window.GetWindow(this);
+            //window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.InitClient();
         }
         private void txbFieldName_TextChanged(object sender, System.Windows.RoutedEventArgs e)
@@ -619,18 +642,40 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
 
         }
-        private void btnFilesDownload_Click(object sender, System.Windows.RoutedEventArgs e)
+        private async void btnFilesDownload_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (this.currentResource != null)
+            try
             {
-                var resource = this.DB.Resources.FirstOrDefault(x => x.id == this.currentResource.ID_ресурса);
-                if (resource != null)
+                if (this.currentResource != null)
                 {
-                    _ = this.WDClient.DownloadFile(this.GetSaveFilePath(), resource.URL);
-                    this.ShowMessage("Загрузка завершена");
+                    var resource = this.DB.Resources.FirstOrDefault(x => x.id == this.currentResource.ID_ресурса);
+                    if (resource != null)
+                    {
+                        var fileName = Path.GetFileName(resource.URL);
+                        var fileExtension = Path.GetExtension(resource.URL);
+                        var saveFileDialog = new SaveFileDialog
+                        {
+                            FileName = fileName,
+                            DefaultExt = fileExtension,
+                            Filter = "Все файлы (*.*)|*.*"
+                            //"All files (*.*)|*.*" + $"{fileExtension.ToUpper()} файлы (*.{fileExtension})|*.{fileExtension}"
+                        };
+                        if (saveFileDialog.ShowDialog() == true)
+                        {
+                            // Ожидание завершения загрузки
+                            await this.WDClient.DownloadFile(saveFileDialog.FileName, resource.URL);
+                            // Показ сообщения после завершения загрузки
+                            this.ShowMessage("Загрузка завершена");
+                        }
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
+
         private void btnFilesAdd_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             try
@@ -651,6 +696,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 {
                     this.InitDB();
                     this.UpdateForm(this.currentProduct);
+                    this.ShowMessage("Добавление файла завершено!");
                 }
             }
             catch (Exception ex)
@@ -660,7 +706,27 @@ namespace База_артикулов.Формы.Страницы.Редакти
         }
         private void btnFilesEdit_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            try
+            {
+                ResourcesViewProducts resourcesViewProducts = new ResourcesViewProducts();
+                resourcesViewProducts.ID_продукта = this.currentProduct.ID_продукта;
+                if (this.IsDescriptorProductExists(this.currentProduct.ID_продукта))
+                {
+                    resourcesViewProducts.ID_дескриптора_объекта = this.GetDescriptorProduct(this.currentProduct.ID_продукта).id;
+                    //this.ShowMessage(resourcesViewProducts.ID_дескриптора_объекта.ToString());
+                }
+                WindowEdit windowEdit = new WindowEdit(
+                    Common.Strings.Titles.Windows.add,
+                    resourcesViewProducts,
+                    WindowEditModes.Edit);
+                windowEdit.ShowDialog();
+                this.InitDB();
+                this.UpdateForm(this.currentProduct);
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
         private void btnFilesDelete_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -676,7 +742,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     // Удалите эти записи
                     foreach (var item in itemsToDelete)
                     {
+                        this.WDClient.DeleteFile(item.Resources.URL);
                         this.DB.DescriptorsResources.Remove(item);
+
                     }
 
                     // Сохраните изменения
@@ -694,7 +762,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             try
             {
-                this.InitDB();
+                this.InitDB(true);
                 this.UpdateForm(this.currentProduct);
             }
             catch (Exception ex)

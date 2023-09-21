@@ -82,7 +82,6 @@ namespace База_артикулов.Классы
             Item file = await this.Client.GetFile(cloudFilePath).ConfigureAwait(false);
             await this.DownloadFile(saveFilePath, file).ConfigureAwait(false);
         }
-
         public async Task DownloadFile(string saveFilePath, Item file)
         {
             if (File.Exists(saveFilePath))
@@ -96,15 +95,15 @@ namespace База_артикулов.Классы
                 await stream.CopyToAsync(tempFile).ConfigureAwait(false);
             }
         }
-
         public async Task UploadFile(string openFilePath, string cloudFolderPath)
         {
             Item folder = await this.Client.GetFolder(cloudFolderPath).ConfigureAwait(false);
             await this.UploadFile(openFilePath, folder).ConfigureAwait(false);
         }
-
         public async Task UploadFile(string openFilePath, Item folder)
         {
+            //if (await IsFileExists(folder.Href + Path.GetFileName(openFilePath)))
+            //    return;
             if (!folder.IsCollection)
             {
                 throw new Exception(Common.Strings.Errors.notFolder);
@@ -128,7 +127,7 @@ namespace База_артикулов.Классы
 
         public string GetFileUrl(string cloudFolder, string fileName)
         {
-            return $"{Server}{BasePath}{cloudFolder}/{fileName}";
+            return $"{Server}{BasePath}/{cloudFolder}/{fileName}";
         }
         public async Task CreateDirectoryIfNotExistsAsync(string cloudPath, string folderName)
         {

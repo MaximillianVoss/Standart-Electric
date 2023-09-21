@@ -615,6 +615,7 @@
           </Key>
           <Property Name="ID ресурса" Type="int" Nullable="false" />
           <Property Name="URL ресурса" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Наименование ресурса" Type="nvarchar" MaxLength="255" />
           <Property Name="Наименование объекта" Type="nvarchar" MaxLength="255" />
           <Property Name="ID дескриптора объекта" Type="int" />
           <Property Name="ID дескриптора ресурса" Type="int" />
@@ -633,6 +634,7 @@
           </Key>
           <Property Name="ID ресурса" Type="int" Nullable="false" />
           <Property Name="URL ресурса" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Наименование ресурса" Type="nvarchar" MaxLength="255" />
           <Property Name="Наименование объекта" Type="nvarchar" MaxLength="255" />
           <Property Name="ID дескриптора объекта" Type="int" />
           <Property Name="ID дескриптора ресурса" Type="int" />
@@ -1785,6 +1787,7 @@
             <DefiningQuery>SELECT 
     [ResourcesView].[ID ресурса] AS [ID ресурса], 
     [ResourcesView].[URL ресурса] AS [URL ресурса], 
+    [ResourcesView].[Наименование ресурса] AS [Наименование ресурса], 
     [ResourcesView].[Наименование объекта] AS [Наименование объекта], 
     [ResourcesView].[ID дескриптора объекта] AS [ID дескриптора объекта], 
     [ResourcesView].[ID дескриптора ресурса] AS [ID дескриптора ресурса], 
@@ -1797,6 +1800,7 @@
             <DefiningQuery>SELECT 
     [ResourcesViewProducts].[ID ресурса] AS [ID ресурса], 
     [ResourcesViewProducts].[URL ресурса] AS [URL ресурса], 
+    [ResourcesViewProducts].[Наименование ресурса] AS [Наименование ресурса], 
     [ResourcesViewProducts].[Наименование объекта] AS [Наименование объекта], 
     [ResourcesViewProducts].[ID дескриптора объекта] AS [ID дескриптора объекта], 
     [ResourcesViewProducts].[ID дескриптора ресурса] AS [ID дескриптора ресурса], 
@@ -3188,6 +3192,7 @@
           </Key>
           <Property Name="ID_ресурса" Type="Int32" Nullable="false" />
           <Property Name="URL_ресурса" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_ресурса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Наименование_объекта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ID_дескриптора_объекта" Type="Int32" />
           <Property Name="ID_дескриптора_ресурса" Type="Int32" />
@@ -3204,6 +3209,7 @@
           </Key>
           <Property Name="ID_ресурса" Type="Int32" Nullable="false" />
           <Property Name="URL_ресурса" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="Наименование_ресурса" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Наименование_объекта" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ID_дескриптора_объекта" Type="Int32" />
           <Property Name="ID_дескриптора_ресурса" Type="Int32" />
@@ -4709,6 +4715,7 @@
                 <ScalarProperty Name="ID_дескриптора_ресурса" ColumnName="ID дескриптора ресурса" />
                 <ScalarProperty Name="ID_дескриптора_объекта" ColumnName="ID дескриптора объекта" />
                 <ScalarProperty Name="Наименование_объекта" ColumnName="Наименование объекта" />
+                <ScalarProperty Name="Наименование_ресурса" ColumnName="Наименование ресурса" />
                 <ScalarProperty Name="URL_ресурса" ColumnName="URL ресурса" />
                 <ScalarProperty Name="ID_ресурса" ColumnName="ID ресурса" />
               </MappingFragment>
@@ -4732,6 +4739,7 @@
                 <ScalarProperty Name="ID_дескриптора_ресурса" ColumnName="ID дескриптора ресурса" />
                 <ScalarProperty Name="ID_дескриптора_объекта" ColumnName="ID дескриптора объекта" />
                 <ScalarProperty Name="Наименование_объекта" ColumnName="Наименование объекта" />
+                <ScalarProperty Name="Наименование_ресурса" ColumnName="Наименование ресурса" />
                 <ScalarProperty Name="URL_ресурса" ColumnName="URL ресурса" />
                 <ScalarProperty Name="ID_ресурса" ColumnName="ID ресурса" />
               </MappingFragment>

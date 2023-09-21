@@ -10,12 +10,16 @@
       Title="PageEditResource" Height="249">
 
     <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <CustomControlsWPF:LabeledTextBox x:Name="lbltxbResourceTitle" Margin="10,85,10,0" VerticalAlignment="Top" Text="" Title="Наименование ресурса"/>
-        <CustomControlsWPF:ButtonPrimary x:Name="btnSelectFile" Margin="0,32,10,0" VerticalAlignment="Top" Height="30" Text="Выбрать файл" HorizontalAlignment="Right" Width="196" Click="btnSelectFile_Click"/>
-        <CustomControlsWPF:LabeledTextBox x:Name="lbltxbFilePath" Margin="10,10,211,0" VerticalAlignment="Top" RenderTransformOrigin="-2.094,-2.989" Text="" Title="Путь до файла" IsEnabled="False"/>
-        <CustomControlsWPF:ButtonPrimary x:Name="btnOk" Margin="10,0,10,45" Text="ТЕКСТ ДЕЙСТВИЯ" Click="btnOk_Click" Height="30" VerticalAlignment="Bottom"/>
-        <CustomControlsWPF:ButtonPrimary x:Name="btnCancel" Margin="10,0,10,10" Color="danger" Text="Отмена" Height="30" Click="btnCancel_Click" VerticalAlignment="Bottom"/>
+        <CustomControlsWPF:LabeledTextBox x:Name="lbltxbResourceTitle" Margin="10,21,10,0" VerticalAlignment="Top" Text="" Title="Наименование ресурса" Height="75" Grid.Row="1"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnSelectFile" Margin="594,0,0,0" VerticalAlignment="Center" Height="30" Text="Выбрать файл" HorizontalAlignment="Left" Width="196" Click="btnSelectFile_Click"/>
+        <CustomControlsWPF:LabeledTextBox x:Name="lbltxbFilePath" Margin="10,0,211,0" VerticalAlignment="Center" RenderTransformOrigin="-2.094,-2.989" Text="" Title="Путь до файла" IsEnabled="False" Height="75"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnOk" Margin="10,101,10,0" Text="ТЕКСТ ДЕЙСТВИЯ" Click="btnOk_Click" Height="30" VerticalAlignment="Top" Grid.Row="1"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnCancel" Margin="10,136,10,0" Color="danger" Text="Отмена" Height="30" Click="btnCancel_Click" VerticalAlignment="Top" Grid.Row="1"/>
 
     </Grid>
 </формы:CustomPage>
