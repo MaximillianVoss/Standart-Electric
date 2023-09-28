@@ -23,7 +23,13 @@ namespace База_артикулов.Формы.Страницы.Редакти
     public partial class PageEditProduct : CustomPage
     {
         #region Поля
+        /// <summary>
+        /// Тип коллекции объектов
+        /// </summary>
         private Type dbSetType;
+        /// <summary>
+        /// ID продукта
+        /// </summary>
         private int idProduct;
         /// <summary>
         /// Продукт, который создается или редактируется
@@ -40,35 +46,46 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Свойства
+        /// <summary>
+        /// Получает или устанавливает идентификатор продукта.
+        /// </summary>
         public int? IdProduct { get => this.idProduct; set => this.idProduct = (int)value; }
+
+        /// <summary>
+        /// Получает или устанавливает тип DbSet.
+        /// </summary>
         public Type DbSetType { get => this.dbSetType; set => this.dbSetType = value; }
+
+        /// <summary>
+        /// Получает или устанавливает текущий продукт.
+        /// </summary>
         public ProductsView CurrentProduct { get => this.currentProduct; set => this.currentProduct = value; }
         #endregion
 
         #region Методы
         /// <summary>
-        /// Получает путь до текущего каталога с продуктом
+        /// Получает путь до текущего каталога с продуктом.
         /// </summary>
-        /// <param name="product"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
+        /// <param name="product">Продукт</param>
+        /// <returns>Путь к каталогу</returns>
+        /// <exception cref="Exception">Выбрасывает исключение, если продукт равен null.</exception>
         private string GetPath(ProductsView product)
         {
-            if (product == null)
-            {
-                throw new Exception(Common.Strings.Errors.emptyObject);
-            }
             String result = String.Empty;
-            result = String.Format("{0}\u2192{1}\u2192{2}",
-                product.Наименование_подгруппы == null ? String.Empty : product.Наименование_подгруппы,
-                product.Наименование_группы == null ? String.Empty : product.Наименование_группы,
-                product.Наименование_класса == null ? String.Empty : product.Наименование_класса
-                );
+            if (product != null)
+            {
+
+                result = String.Format("{0}\u2192{1}\u2192{2}",
+                    product.Наименование_подгруппы == null ? String.Empty : product.Наименование_подгруппы,
+                    product.Наименование_группы == null ? String.Empty : product.Наименование_группы,
+                    product.Наименование_класса == null ? String.Empty : product.Наименование_класса
+                    );
+            }
             return result;
         }
 
         /// <summary>
-        /// Обновляет названия полей
+        /// Обновляет названия полей.
         /// </summary>
         private void UpdateFieldsTitles()
         {
@@ -101,10 +118,14 @@ namespace База_артикулов.Формы.Страницы.Редакти
                         control.Title = field.titleRus;
                     }
                 }
-
             }
         }
 
+        /// <summary>
+        /// Асинхронно загружает изображение.
+        /// </summary>
+        /// <param name="code">Код изображения</param>
+        /// <returns>Путь к загруженному изображению</returns>
         private async Task<string> DownloadImageAsync(string code)
         {
             try
@@ -153,14 +174,12 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 this.ShowError(ex);
                 return null;
             }
-
         }
 
         /// <summary>
-        /// 
+        /// Обновляет изображение продукта.
         /// </summary>
-        /// <param name="productsView"></param>
-        /// <returns></returns>
+        /// <param name="productsView">Представление продукта</param>
         private async Task UpdateImageAsync(ProductsView productsView)
         {
             try
@@ -169,14 +188,14 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     return;
 
                 List<String> cloudPaths = new List<string>()
-            {
-                productsView.Артикул,
-                productsView.Код_подгруппы,
-                productsView.Код_группы,
-                productsView.Код_класса,
-                //Изобржаение заглушка 0000.png
-                "0000"
-            };
+    {
+        productsView.Артикул,
+        productsView.Код_подгруппы,
+        productsView.Код_группы,
+        productsView.Код_класса,
+        //Изображение заглушка 0000.png
+        "0000"
+    };
                 string localImagePath = String.Empty;
                 for (int i = 0; i < cloudPaths.Count; i++)
                 {
@@ -205,114 +224,90 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
         }
 
-
         /// <summary>
-        /// Заполняет форму свойствами указанного продукта
+        /// Заполняет форму свойствами указанного продукта.
         /// </summary>
-        /// <param name="productView">продукт</param>
-        /// <exception cref="Exception"></exception>
+        /// <param name="productView">Представление продукта</param>
+        /// <exception cref="Exception">Выбрасывает исключение, если продукт равен null или не удалось найти продукт.</exception>
         private void UpdateForm(ProductsView productView)
         {
             try
             {
-                if (productView == null)
+                if (productView != null)
                 {
-                    throw new Exception(Common.Strings.Errors.emptyObject);
-                }
-                var product = this.DB.Products.FirstOrDefault(x => x.id == productView.ID_продукта);
-                if (product == null)
-                {
-                    throw new Exception("Не удалось найти продукт!");
-                }
-                #region Изображение
-                _ = this.UpdateImageAsync(productView);
-                #endregion
-                #region Каталог
-                this.txbPath.Text = this.GetPath(productView);
-                #endregion
-                #region Название
-                this.txbTitle.Text = productView.Наименование_продукта;
-                #endregion
-                #region Описание
-                this.txbDescription.Text = productView.Описание_продукта;
-                #endregion
-                #region Артикул
-                this.txbVendorCode.IsEnabled = false;
-                this.txbVendorCode.Text = productView.Артикул;
-                #endregion
-                #region Бухгалтерский код
-                this.txbCodeAccountant.IsEnabled = false;
-                this.txbCodeAccountant.Text = productView.Бухгалтерский_код;
-                #endregion
-                #region Короткое название
-                this.txbTitleShort.Text = product.Descriptors.titleShort;
-                #endregion
-                #region Нормы
-                this.cmbNorm.Update(this.ToList<Norms>(this.DB.Norms), product.idNorm);
-                #endregion
-                #region Подгруппа
-                this.cmbSubGroup.Update(this.ToList<SubGroups>(this.DB.SubGroups), product.idSubGroup);
-                #endregion
-                #region Покрытия
-                this.cmbCover.Update(this.ToList<Covers>(this.DB.Covers), product.idCover);
-                #endregion
-                #region Материалы
-                this.cmbMaterial.Update(this.ToList<Materials>(this.DB.Materials), product.idMaterial);
-                #endregion
-                #region Упаковки
-                this.cmbPackage.Update(this.ToList<Packages>(this.DB.Packages), product.idPackage);
-                #endregion
-                #region Перфорации
-                this.cmbPerforation.Update(this.ToList<Perforations>(this.DB.Perforations), product.idPerforation);
-                #endregion
-                #region Отметка "На складе"
-                this.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
-                #endregion
-                #region Таблица измерений
-                //TODO:обновить представление, неправильно показывает
-                //this.dgDimensions.ItemsSource = this.DB.ProductUnitsView.Where(x => x.ID_товара == this.CurrentProduct.ID_продукта).Distinct().ToList();
-                var entityConnStr = ConfigurationManager.ConnectionStrings[Settings.Connections.CurrentConnectionString].ConnectionString;
-                var entityBuilder = new EntityConnectionStringBuilder(entityConnStr);
-                string connectionString = entityBuilder.ProviderConnectionString;
-                string query = String.Format("SELECT * FROM ProductUnitsView where [ID товара] = {0}", this.CurrentProduct.ID_продукта);
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    var product = this.DB.Products.FirstOrDefault(x => x.id == productView.ID_продукта);
+                    if (product == null)
                     {
-                        SqlDataAdapter adapter = new SqlDataAdapter(command);
-                        DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable);
-
-                        this.dgDimensions.ItemsSource = dataTable.DefaultView;
+                        throw new Exception("Не удалось найти продукт!");
                     }
+                    #region Изображение
+                    _ = this.UpdateImageAsync(productView);
+                    #endregion
+                    #region Каталог
+                    this.txbPath.Text = this.GetPath(productView);
+                    #endregion
+                    #region Название
+                    this.txbTitle.Text = productView.Наименование_продукта;
+                    #endregion
+                    #region Описание
+                    this.txbDescription.Text = productView.Описание_продукта;
+                    #endregion
+                    #region Артикул
+                    this.txbVendorCode.IsEnabled = false;
+                    this.txbVendorCode.Text = productView.Артикул;
+                    #endregion
+                    #region Бухгалтерский код
+                    this.txbCodeAccountant.IsEnabled = false;
+                    this.txbCodeAccountant.Text = productView.Бухгалтерский_код;
+                    #endregion
+                    #region Короткое название
+                    this.txbTitleShort.Text = product.Descriptors.titleShort;
+                    #endregion
+                    #region Нормы
+                    this.cmbNorm.Update(this.ToList<Norms>(this.DB.Norms), product.idNorm);
+                    #endregion
+                    #region Подгруппа
+                    this.cmbSubGroup.Update(this.ToList<SubGroups>(this.DB.SubGroups), product.idSubGroup);
+                    #endregion
+                    #region Покрытия
+                    this.cmbCover.Update(this.ToList<Covers>(this.DB.Covers), product.idCover);
+                    #endregion
+                    #region Материалы
+                    this.cmbMaterial.Update(this.ToList<Materials>(this.DB.Materials), product.idMaterial);
+                    #endregion
+                    #region Упаковки
+                    this.cmbPackage.Update(this.ToList<Packages>(this.DB.Packages), product.idPackage);
+                    #endregion
+                    #region Перфорации
+                    this.cmbPerforation.Update(this.ToList<Perforations>(this.DB.Perforations), product.idPerforation);
+                    #endregion
+                    #region Отметка "На складе"
+                    this.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
+                    #endregion
+                    #region Таблица измерений
+                    var entityConnStr = ConfigurationManager.ConnectionStrings[Settings.Connections.CurrentConnectionString].ConnectionString;
+                    var entityBuilder = new EntityConnectionStringBuilder(entityConnStr);
+                    string connectionString = entityBuilder.ProviderConnectionString;
+                    string query = String.Format("SELECT * FROM ProductUnitsView where [ID товара] = {0}", this.CurrentProduct.ID_продукта);
+
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            SqlDataAdapter adapter = new SqlDataAdapter(command);
+                            DataTable dataTable = new DataTable();
+                            adapter.Fill(dataTable);
+
+                            this.dgDimensions.ItemsSource = dataTable.DefaultView;
+                        }
+                    }
+                    #endregion
+                    #region Таблица файлов
+                    this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.Where(x => x.ID_продукта == this.CurrentProduct.ID_продукта).ToList();
+                    #endregion
                 }
-
-                #endregion
-                #region Таблица файлов
-                //TODO:обновить представление, неправильно показывает
-                this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.Where(x => x.ID_покрытия_продукта == this.CurrentProduct.ID_продукта).ToList();
-                //entityConnStr = ConfigurationManager.ConnectionStrings[Settings.Connections.CurrentConnectionString].ConnectionString;
-                //entityBuilder = new EntityConnectionStringBuilder(entityConnStr);
-                //connectionString = entityBuilder.ProviderConnectionString;
-                //query = String.Format("SELECT * FROM ResourcesViewProducts where [ID продукта] = {0}", this.CurrentProduct.ID_продукта);
-                //this.ShowMessage(query);
-                //using (SqlConnection connection = new SqlConnection(connectionString))
-                //{
-                //    connection.Open();
-
-                //    using (SqlCommand command = new SqlCommand(query, connection))
-                //    {
-                //        SqlDataAdapter adapter = new SqlDataAdapter(command);
-                //        DataTable dataTable = new DataTable();
-                //        adapter.Fill(dataTable);
-
-                //        this.dgFiles.ItemsSource = dataTable.DefaultView;
-                //    }
-                //}
-                #endregion
             }
             catch (Exception ex)
             {
@@ -321,7 +316,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         }
 
         /// <summary>
-        /// Заполняет форму свойствами указанного продукта
+        /// Заполняет форму свойствами указанного продукта.
         /// </summary>
         /// <param name="idProduct">ID продукта</param>
         private void UpdateForm(int? idProduct)
@@ -329,7 +324,10 @@ namespace База_артикулов.Формы.Страницы.Редакти
             this.UpdateForm(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == this.IdProduct));
         }
 
-        void UpdateUnitSelection()
+        /// <summary>
+        /// Обновляет выбор единицы продукции.
+        /// </summary>
+        private void UpdateUnitSelection()
         {
             DataRowView rowView = dgDimensions.SelectedItem as DataRowView;
             if (rowView != null)
@@ -342,15 +340,18 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
         }
 
-        void UpdateFileSelection()
+        /// <summary>
+        /// Обновляет выбор файла.
+        /// </summary>
+        private void UpdateFileSelection()
         {
             this.currentResource = this.dgFiles.SelectedItem as ResourcesViewProducts;
         }
 
         /// <summary>
-        /// 
+        /// Фильтрует поля в зависимости от имени поля.
         /// </summary>
-        /// <param name="fieldName"></param>
+        /// <param name="fieldName">Имя поля</param>
         private void FilterFields(string fieldName)
         {
             if (this.gridFields != null)
@@ -410,12 +411,20 @@ namespace База_артикулов.Формы.Страницы.Редакти
         }
 
         /// <summary>
-        /// Сохраняет изменения, внесенные в продукт
+        /// Сохраняет изменения, внесенные в продукт.
         /// </summary>
-        /// <param name="idProduct"></param>
+        /// <param name="idProduct">ID продукта</param>
         private void Save(int? idProduct)
         {
-            var product = this.DB.Products.FirstOrDefault(x => x.id == idProduct);
+            Products product = null;
+            if (idProduct != null)
+            {
+                product = this.DB.Products.FirstOrDefault(x => x.id == idProduct);
+            }
+            else
+            {
+                product = this.DB.Products.Add(new Products());
+            }
             if (product != null)
             {
                 #region Дескриптор
@@ -472,7 +481,6 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Конструкторы/Деструкторы
-
         public PageEditProduct(object product)
         {
             this.InitializeComponent();
@@ -481,9 +489,12 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 if (product.GetType() != typeof(ProductsView))
                     throw new Exception("Ожидался объект типа ProductsView");
                 this.CurrentProduct = (ProductsView)product;
-                this.IdProduct = this.CurrentProduct.ID_продукта;
-                this.UpdateFieldsTitles();
-                this.UpdateForm(this.IdProduct);
+                if (product != null)
+                {
+                    this.IdProduct = this.CurrentProduct.ID_продукта;
+                    this.UpdateFieldsTitles();
+                    this.UpdateForm(this.IdProduct);
+                }
             }
             catch (Exception ex)
             {

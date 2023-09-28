@@ -28,6 +28,7 @@
             {
                 public static string importNotStarted = "Импорт файлов еще не запущен!";
                 public static string importStarted = "Импорт файлов запущен!";
+                public static string functionalityDisabled = "Эта функциональность отключена";
             }
             public static class Controls
             {

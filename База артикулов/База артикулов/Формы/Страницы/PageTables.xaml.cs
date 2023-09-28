@@ -16,6 +16,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using База_артикулов.Классы;
 using База_артикулов.Модели;
 
 namespace База_артикулов.Формы.Страницы
@@ -56,7 +57,15 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-
+                var windowEdit = new WindowEdit("Создать продукт", new ProductsView(), WindowEditModes.Edit, 600, 800);
+                windowEdit.ShowDialog();
+                if ((bool)windowEdit.DialogResult)
+                {
+                    this.InitDB();
+                    this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
+                    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
+                    this.UpdateDataGrid(this.CurrentTableData);
+                }
             }
             catch (Exception ex)
             {
@@ -69,7 +78,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var windowEdit = new WindowEdit(this.SelectedItemTable);
+                var windowEdit = new WindowEdit("Редактировать продукт", this.SelectedItemTable, WindowEditModes.Edit, 600, 800);
                 windowEdit.ShowDialog();
                 if ((bool)windowEdit.DialogResult)
                 {
@@ -89,7 +98,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-
+                throw new Exception(Common.Strings.Messages.functionalityDisabled);
             }
             catch (Exception ex)
             {
@@ -452,7 +461,7 @@ namespace База_артикулов.Формы.Страницы
             {
                 var windowEdit = new WindowEdit("Создание", new Classes(), WindowEditModes.Create);
                 windowEdit.ShowDialog();
-                this.UpdateTreeView();
+                _ = this.UpdateTreeView();
             }
             catch (Exception ex)
             {
@@ -465,7 +474,7 @@ namespace База_артикулов.Формы.Страницы
             {
                 var windowEdit = new WindowEdit("Редактирование", this.SelectedItemTreeView);
                 windowEdit.ShowDialog();
-                this.UpdateTreeView();
+                _ = this.UpdateTreeView();
             }
             catch (Exception ex)
             {
@@ -476,7 +485,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-
+                throw new Exception(Common.Strings.Messages.functionalityDisabled);
             }
             catch (Exception ex)
             {
@@ -491,36 +500,15 @@ namespace База_артикулов.Формы.Страницы
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                this.Create();
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex);
-            }
+           
         }
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                this.Update();
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex);
-            }
+           
         }
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                this.Delete();
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex);
-            }
+           
         }
         private void dgTable_RightClickSelectedCellChanged(object sender, EventArgs e)
         {
@@ -539,15 +527,36 @@ namespace База_артикулов.Формы.Страницы
         }
         private void dgTable_AddMenuItemClicked(object sender, EventArgs e)
         {
-
+            try
+            {
+                this.Create();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
         private void dgTable_DeleteMenuItemClicked(object sender, EventArgs e)
         {
-
+            try
+            {
+                this.Delete();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
         private void dgTable_EditMenuItemClicked(object sender, EventArgs e)
         {
-            this.Update();
+            try
+            {
+                this.Update();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
         #endregion
 

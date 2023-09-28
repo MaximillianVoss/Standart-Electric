@@ -1,12 +1,12 @@
 --#region Создание БД 'DBSE'
-IF DB_ID('DBSE') IS NULL
-BEGIN
-    -- Recreate the database
-    CREATE DATABASE [DBSE]
-END
+--IF DB_ID('DBSE') IS NULL
+--BEGIN
+--    -- Recreate the database
+--    CREATE DATABASE [DBSE]
+--END
 --#endregion
 GO
-USE [DBSE]
+USE [articles]
 GO
 --#region Очистка БД
 :r "C:\Users\ivan.ivanov\source\repos\Standart-Electric\База артикулов\База артикулов\БД\БД.Очистка.sql"

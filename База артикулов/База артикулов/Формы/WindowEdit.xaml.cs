@@ -53,10 +53,10 @@ namespace База_артикулов.Формы
         public WindowEdit(string title, object item, WindowEditModes mode = WindowEditModes.Edit, int Width = 600, int Height = 800)
         {
             this.InitializeComponent();
-            this.SetCenter();
             this.Width = Width;
             this.Height = Height;
             this.Title = title;
+            this.SetCenter();
             this.CurrentItem = item;
             if (item != null)
                 this.ItemType = item.GetType();
@@ -93,6 +93,10 @@ namespace База_артикулов.Формы
                     if (this.CurrentItem.GetType() == typeof(ResourcesViewProducts))
                     {
                         this.fMain.Content = new PageEditResource(this.CurrentItem, this.Mode);
+                    }
+                    if (IsTypeEqual(typeof(ProductsView), this.CurrentItem))
+                    {
+                        this.fMain.Content = new PageEditProduct(null);
                     }
                 }
                 if (this.Mode == WindowEditModes.Edit)
