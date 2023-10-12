@@ -1,0 +1,24 @@
+﻿<формы:CustomPage
+                  xmlns:формы="clr-namespace:База_артикулов.Формы"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:База_артикулов.Формы.Страницы.Редактирование"
+      xmlns:CustomControlsWPF="clr-namespace:CustomControlsWPF;assembly=CustomControlsWPF" x:Class="База_артикулов.Формы.Страницы.Редактирование.PageEditVendorCode"
+      mc:Ignorable="d"
+      Title="PageEditVendorCode" Height="588" Width="459">
+
+    <Grid Background="White">
+
+        <CustomControlsWPF:ButtonPrimary x:Name="btnOk" Margin="10,0,10,55" Text="Сохранить" Click="btnOk_Click" Height="40" VerticalAlignment="Bottom"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnCancel" Margin="10,0,10,10" Text="Отмена" Color="danger" Click="btnCancel_Click" Height="40" VerticalAlignment="Bottom"/>
+        <CustomControlsWPF:LabeledTextBox x:Name="txbCode" Margin="10,10,10,0" VerticalAlignment="Top" Text="" Title="Код"/>
+        <CustomControlsWPF:LabeledTextBox x:Name="txbAccountantCode" Margin="10,90,10,0" VerticalAlignment="Top" Text="" Title="Бухгалтерский код"/>
+        <CustomControlsWPF:LabeledComboBox x:Name="cmbManufacturer" Margin="10,165,10,0" VerticalAlignment="Top" Title="Производитель"/>
+        <CustomControlsWPF:LabeledCheckBox x:Name="chbIsActual" Margin="10,240,10,0" VerticalAlignment="Top" Title="Актуальность" IsCheckedFalse="Не актуален" IsCheckedTrue="Актуален"/>
+        <CustomControlsWPF:LabeledCheckBox x:Name="chbIsSale" VerticalAlignment="Top" Margin="10,316,10,0" Title="Внешний" IsCheckedFalse="Не является внешним" IsCheckedTrue="Является внешним"/>
+        <CustomControlsWPF:LabeledCheckBox x:Name="chbIsPublic" Margin="10,392,10,0" VerticalAlignment="Top" Title="Пуличный" IsCheckedFalse="Можно экспортировать" IsCheckedTrue="Нельзя экспортировать"/>
+
+    </Grid>
+</формы:CustomPage>

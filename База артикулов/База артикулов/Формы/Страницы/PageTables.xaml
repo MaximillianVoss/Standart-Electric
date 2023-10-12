@@ -25,9 +25,9 @@
         <TreeView x:Name="tvGroups" Margin="5,0,5,5" SelectedItemChanged="tvGroups_SelectedItemChanged" Grid.Row="2" MinWidth="200" PreviewMouseLeftButtonDown="tvGroups_PreviewMouseLeftButtonDown" PreviewMouseRightButtonDown="tvGroups_PreviewMouseRightButtonDown" IsTextSearchEnabled="True">
             <TreeView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem x:Name="miTreeAdd" Header="Добавить" Click="miTreeAdd_Click"/>
+                    <MenuItem x:Name="miTreeAdd" Header="Добавить" IsEnabled="False" Click="miTreeAdd_Click"/>
                     <MenuItem x:Name="miTreeEdit" Header="Редактировать" Click="miTreeEdit_Click"/>
-                    <MenuItem x:Name="miDelete" Header="Удалить" Click="miTreeDelete_Click" IsEnabled="False"/>
+                    <MenuItem x:Name="miDelete" Header="Удалить"  IsEnabled="False" Click="miTreeDelete_Click" />
                 </ContextMenu>
             </TreeView.ContextMenu>
         </TreeView>

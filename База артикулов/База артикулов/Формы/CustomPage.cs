@@ -9,15 +9,24 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Input;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
 namespace База_артикулов.Формы
 {
+    public class MyEventArgs : EventArgs
+    {
+        public object Data { get; set; }
+    }
+
     public class CustomPage : BaseWindow_WPF.BasePage
     {
 
         #region Поля
+        public delegate void DataChangedEventHandler(object sender, MyEventArgs e);
+        public event DataChangedEventHandler DataChanged;
+
         /// <summary>
         /// Здесь хранится имя, не сама строка подключения!
         /// </summary>
@@ -51,7 +60,45 @@ namespace База_артикулов.Формы
 
         #region Методы
 
+        public bool IsTypeEqual(Type type, object @object)
+        {
+            return @object.GetType() == type || @object.GetType().BaseType == type;
+        }
+        /// <summary>
+        /// Вызываем при изменении данных внутри страницы
+        /// </summary>
+        /// <param name="data"></param>
+        public void OnDataChanged(object data)
+        {
+            DataChanged?.Invoke(this, new MyEventArgs { Data = data });
+        }
 
+        public Products CreateEmptyProduct(string title = "Новый продукт", SubGroups subGroups = null)
+        {
+            // Создание нового дескриптора
+            var descriptor = new Descriptors
+            {
+                title = title
+            };
+
+            // Сохранение дескриптора в БД
+            this.DB.Descriptors.Add(descriptor);
+            this.DB.SaveChanges();
+
+            // Создание нового продукта со значениями по умолчанию
+            var product = new Products
+            {
+                Descriptors = descriptor,
+                Covers = this.DB.Covers.FirstOrDefault(x => x.id > 0),
+                SubGroups = subGroups
+                // Добавьте здесь другие значения по умолчанию, если они есть
+            };
+
+            // Сохранение продукта в БД
+            product = this.DB.Products.Add(product);
+            this.DB.SaveChanges();
+            return product;
+        }
         #region Работа с товарами
         /// <summary>
         /// Получает товар с указанным id

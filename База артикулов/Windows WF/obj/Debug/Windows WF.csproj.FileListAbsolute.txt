@@ -30,3 +30,13 @@ C:\Users\FossW\OneDrive\Репетиторство\Программирован�
 C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\obj\Debug\Windows WF.csproj.CoreCompileInputs.cache
 C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\obj\Debug\BaseWindow.exe
 C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\obj\Debug\BaseWindow.pdb
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\Windows WF\bin\Debug\BaseWindow.exe.config
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\Windows WF\bin\Debug\BaseWindow.exe
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\Windows WF\bin\Debug\BaseWindow.pdb
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\Windows WF\obj\Debug\Windows WF.csproj.AssemblyReference.cache
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\Windows WF\obj\Debug\BaseWindow.LoginWindow.resources
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\Windows WF\obj\Debug\BaseWindow.Properties.Resources.resources
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\Windows WF\obj\Debug\Windows WF.csproj.GenerateResource.cache
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\Windows WF\obj\Debug\Windows WF.csproj.CoreCompileInputs.cache
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\Windows WF\obj\Debug\BaseWindow.exe
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\Windows WF\obj\Debug\BaseWindow.pdb

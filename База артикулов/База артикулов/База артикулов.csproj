@@ -18,6 +18,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -30,7 +31,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -40,9 +40,11 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -62,10 +64,6 @@
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Logger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Base-CSharp\Logger\bin\Debug\Logger.dll</HintPath>
     </Reference>
     <Reference Include="Office, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Excel.14.0.4760.1000\lib\net20\Office.dll</HintPath>
@@ -111,6 +109,7 @@
     <Compile Include="Классы\Дополнения\GroupsApplications.cs" />
     <Compile Include="Классы\Дополнения\IToObject.cs" />
     <Compile Include="Классы\Дополнения\LoadDiagrams.cs" />
+    <Compile Include="Классы\Дополнения\Manufacturers.cs" />
     <Compile Include="Классы\Дополнения\Materials.cs" />
     <Compile Include="Классы\Дополнения\Norms.cs" />
     <Compile Include="Классы\Дополнения\Packages.cs" />
@@ -323,7 +322,7 @@
     </Compile>
     <Compile Include="Формы\Страницы\Редактирование\PageEditProduct.xaml.cs">
       <DependentUpon>PageEditProduct.xaml</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Формы\Страницы\Редактирование\PageEditResource.xaml.cs">
       <DependentUpon>PageEditResource.xaml</DependentUpon>
@@ -333,6 +332,9 @@
     </Compile>
     <Compile Include="Формы\Страницы\Редактирование\PageEditUnit.xaml.cs">
       <DependentUpon>PageEditUnit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Формы\Страницы\Редактирование\PageEditVendorCode.xaml.cs">
+      <DependentUpon>PageEditVendorCode.xaml</DependentUpon>
     </Compile>
     <Page Include="Формы\FilesWindow.xaml">
       <SubType>Designer</SubType>
@@ -412,6 +414,7 @@
     <Page Include="Формы\Страницы\Редактирование\PageEditProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Формы\Страницы\Редактирование\PageEditResource.xaml">
       <SubType>Designer</SubType>
@@ -422,6 +425,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Формы\Страницы\Редактирование\PageEditUnit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Формы\Страницы\Редактирование\PageEditVendorCode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -614,6 +621,10 @@
     <ProjectReference Include="..\..\Base CSharp\Windows WPF\Windows WPF.csproj">
       <Project>{318ba0c4-4d3c-45dc-b2be-2ee68c8c9ceb}</Project>
       <Name>Windows WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{b31ebf35-5627-4e1e-8424-128f41b6c574}</Project>
+      <Name>Logger</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

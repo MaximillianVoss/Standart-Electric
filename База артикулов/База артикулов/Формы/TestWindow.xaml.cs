@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using База_артикулов.Модели;
 
 namespace База_артикулов.Формы
 {
@@ -36,6 +37,8 @@ namespace База_артикулов.Формы
 
         #endregion
 
+
+
         #region Обработчики событий
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -48,16 +51,25 @@ namespace База_артикулов.Формы
                 //ProductWindow productWindow = new ProductWindow(typeof(Products), this.DB.Products.First().id);
                 //productWindow.ShowDialog();
 
-                WindowEdit windowEdit = new WindowEdit(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == 1));
+                //WindowEdit windowEdit = new WindowEdit(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == 1));
                 //WindowEdit windowEdit = new WindowEdit(this.DB.UnitsProducts.FirstOrDefault(x => x.id == 1));
+
+                var product = CreateEmptyProduct("TEST PRODUCT", this.DB.SubGroups.FirstOrDefault(x => x.id > 0));
+                WindowEdit windowEdit = new WindowEdit(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == product.id));
                 windowEdit.ShowDialog();
+                //this.DB.Products.Remove(product);
+                //this.DB.SaveChanges();
+
+                //var vendorCode = new VendorCodes();
+                //WindowEdit windowEdit = new WindowEdit("Create vendorCode", vendorCode, WindowEditModes.Create);
+                //windowEdit.ShowDialog();
 
             }
             catch (Exception ex)
             {
                 this.ShowError(ex);
             }
-          
+
         }
         #endregion
 

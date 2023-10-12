@@ -273,6 +273,8 @@ namespace CustomControlsWPF
         {
             this.Items = items;
             this.Select(currentItemId);
+            if (this.SelectedIndex == -1)
+                this.SelectedIndex = 0;
         }
         #endregion
 

@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
+using System.Linq;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
@@ -44,6 +45,38 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Методы
+
+        public bool IsTypeEqual(Type type, object @object)
+        {
+            return @object.GetType() == type || @object.GetType().BaseType == type;
+        }
+
+        public Products CreateEmptyProduct(string title = "Новый продукт", SubGroups subGroups = null)
+        {
+            // Создание нового дескриптора
+            var descriptor = new Descriptors
+            {
+                title = title
+            };
+
+            // Сохранение дескриптора в БД
+            this.DB.Descriptors.Add(descriptor);
+            this.DB.SaveChanges();
+
+            // Создание нового продукта со значениями по умолчанию
+            var product = new Products
+            {
+                Descriptors = descriptor,
+                Covers = this.DB.Covers.FirstOrDefault(x => x.id > 0),
+                SubGroups = subGroups
+                // Добавьте здесь другие значения по умолчанию, если они есть
+            };
+
+            // Сохранение продукта в БД
+            product = this.DB.Products.Add(product);
+            this.DB.SaveChanges();
+            return product;
+        }
 
         #region Работа с облачным WebDav-клиентом
         /// <summary>

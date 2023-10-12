@@ -57,8 +57,14 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var windowEdit = new WindowEdit("Создать продукт", new ProductsView(), WindowEditModes.Edit, 600, 800);
+                //this.SelectedItemTreeView.Value
+                var product = CreateEmptyProduct("Новый продукт", this.DB.SubGroups.FirstOrDefault(x => x.id > 0));
+                WindowEdit windowEdit = new WindowEdit(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == product.id));
                 windowEdit.ShowDialog();
+                this.DB.SaveChanges();
+
+                //var windowEdit = new WindowEdit("Создать продукт", new ProductsView(), WindowEditModes.Edit, 600, 800);
+                //windowEdit.ShowDialog();
                 if ((bool)windowEdit.DialogResult)
                 {
                     this.InitDB();

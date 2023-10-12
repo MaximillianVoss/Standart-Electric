@@ -1,0 +1,10 @@
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\bin\Release\BaseWindow.exe.config
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\bin\Release\BaseWindow.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\bin\Release\BaseWindow.pdb
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\obj\Release\Windows WF.csproj.AssemblyReference.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\obj\Release\BaseWindow.LoginWindow.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\obj\Release\BaseWindow.Properties.Resources.resources
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\obj\Release\Windows WF.csproj.GenerateResource.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\obj\Release\Windows WF.csproj.CoreCompileInputs.cache
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\obj\Release\BaseWindow.exe
+C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\Windows WF\obj\Release\BaseWindow.pdb
