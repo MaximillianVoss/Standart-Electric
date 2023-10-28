@@ -6,87 +6,96 @@
         {
             public static class RegularExpressions
             {
-                public static string regInt = @"[0-9]{1,}$";
-                public static string regFloat = @"[+-]?([0-9]*[,])?[0-9]+$";
+                public static readonly string regInt = @"[0-9]{1,}$";
+                public static readonly string regFloat = @"[+-]?([0-9]*[,])?[0-9]+$";
             }
             public static class Errors
             {
-                public static string fieldIsNotFoundInObject = "Поле не найдено в объекте";
-                public static string incorrectPath = "Указан некорректный путь!";
-                public static string incorrectList = "Передан некорректный список";
-                public static string incorrectIntStr = "Ожидается целое число";
-                public static string incorrectFloatStr = "Ожидается вещественное число";
-                public static string incorrectDescriptorsCount = "Количество дескрипторов не соответствует числу записей!";
-                public static string emptyObject = "Передана пустая ссылка на объект!";
-                public static string notFolder = "Элемент не является папкой!";
+                public static readonly string fieldIsNotFoundInObject = "Поле не найдено в объекте";
+                public static readonly string incorrectPath = "Указан некорректный путь!";
+                public static readonly string incorrectList = "Передан некорректный список";
+                public static readonly string incorrectIntStr = "Ожидается целое число";
+                public static readonly string incorrectFloatStr = "Ожидается вещественное число";
+                public static readonly string incorrectDescriptorsCount = "Количество дескрипторов не соответствует числу записей!";
+                public static readonly string emptyObject = "Передана пустая ссылка на объект!";
+                public static readonly string notFolder = "Элемент не является папкой!";
             }
             public static class Warnings
             {
-
+                // Определения предупреждений
             }
             public static class Messages
             {
-                public static string importNotStarted = "Импорт файлов еще не запущен!";
-                public static string importStarted = "Импорт файлов запущен!";
-                public static string functionalityDisabled = "Эта функциональность отключена";
+                public static readonly string importNotStarted = "Импорт файлов еще не запущен!";
+                public static readonly string importStarted = "Импорт файлов запущен!";
+                public static readonly string functionalityDisabled = "Эта функциональность отключена";
             }
             public static class Controls
             {
-                public static string btnEdit = "Изменить";
-                public static string btnDelete = "Удалить";
-                public static string btnAdd = "Добавить";
-                public static string isContainsHeaders = "Таблица содержит заголовки";
-                public static string isNotContainsHeaders = "Таблица не содержит заголовки";
-                public static string isContainsDescription = "Таблица содержит описание для заголовков (2 строка)";
-                public static string isNotContainsDescription = "Таблица не содержит описание для заголовков (2 строка)";
+                public static readonly string btnEdit = "Изменить";
+                public static readonly string btnDelete = "Удалить";
+                public static readonly string btnAdd = "Добавить";
+                public static readonly string isContainsHeaders = "Таблица содержит заголовки";
+                public static readonly string isNotContainsHeaders = "Таблица не содержит заголовки";
+                public static readonly string isContainsDescription = "Таблица содержит описание для заголовков (2 строка)";
+                public static readonly string isNotContainsDescription = "Таблица не содержит описание для заголовков (2 строка)";
             }
             public static class Extensions
             {
-                public static string xlsx = ".xlsx";
-                public static string csv = ".csv";
+                public static readonly string xlsx = ".xlsx";
+                public static readonly string csv = ".csv";
+                public static readonly string txt = ".txt";
+                public static readonly string pdf = ".pdf";
+                public static readonly string docx = ".docx";
+                public static readonly string jpg = ".jpg";
+                public static readonly string png = ".png";
+                public static readonly string html = ".html";
+                public static readonly string xml = ".xml";
+                public static readonly string json = ".json";
+                // Дополнительные расширения
             }
+
             public static class Columns
             {
-                public static string id = "id";
-                public static string idDescriptor = "idDescriptor";
+                public static readonly string id = "id";
+                public static readonly string idDescriptor = "idDescriptor";
             }
             public static class Path
             {
                 public static class Cloud
                 {
-                    public static string Resources = "Resources";
-                    public static string bim = "Resources/bim";
-                    public static string dwg = "Resources/dwg";
-                    public static string images = "Resources/images";
-                    public static string pdf = "Resources/pdf";
+                    public static readonly string Resources = "Resources";
+                    public static readonly string bim = "Resources/bim";
+                    public static readonly string dwg = "Resources/dwg";
+                    public static readonly string images = "Resources/images";
+                    public static readonly string pdf = "Resources/pdf";
                 }
                 public static class Local
                 {
-                    public static string imagesFolderName = "Изображения";
-                    public static string imagesCachedFolderName = "Кешированные";
-                    public static string cache = "Изображения/Кешированные/";
+                    public static readonly string imagesFolderName = "Изображения";
+                    public static readonly string imagesCachedFolderName = "Кешированные";
+                    public static readonly string cache = "Изображения/Кешированные/";
                 }
             }
             public static class Titles
             {
                 public static class Windows
                 {
-                    public static string noAction = "Действие для окна не указано";
-                    public static string add = "Добавление элемента";
-                    public static string edit = "Редактирование элемента";
-                    public static string delete = "Удаление элемента";
+                    public static readonly string noAction = "Действие для окна не указано";
+                    public static readonly string add = "Добавление элемента";
+                    public static readonly string edit = "Редактирование элемента";
+                    public static readonly string delete = "Удаление элемента";
                 }
                 public static class Controls
                 {
                     public static class Buttons
                     {
-                        public static string createItem = "Создать";
-                        public static string addItem = "Добавить";
-                        public static string saveChanges = "Сохранить изменения";
-                        public static string cancel = "Отменить";
+                        public static readonly string createItem = "Создать";
+                        public static readonly string addItem = "Добавить";
+                        public static readonly string saveChanges = "Сохранить изменения";
+                        public static readonly string cancel = "Отменить";
                     }
                 }
-
             }
         }
     }

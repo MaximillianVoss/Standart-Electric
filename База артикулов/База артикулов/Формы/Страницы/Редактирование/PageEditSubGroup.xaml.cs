@@ -30,7 +30,6 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             this.cmbLoadDiagram.Items = this.ToList(this.DB.LoadDiagrams.ToList());
         }
-
         private void UpdateComboBoxApplication()
         {
             this.cmbApplication.Items = this.ToList(this.DB.Applications.ToList());

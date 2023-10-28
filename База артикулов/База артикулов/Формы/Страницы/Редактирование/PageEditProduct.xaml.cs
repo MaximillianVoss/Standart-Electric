@@ -448,11 +448,11 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 else
                 {
                     //var descriptor = new Descriptors(this.txbVendorCode.Text, this.txbVendorCode.Text, null, null);
-                    //this.DB.Descriptors.Add(descriptor);
+                    //this.DB.Descriptors.CreateClass(descriptor);
                     //var vendorCode = new VendorCodes(descriptor);
-                    //this.DB.VendorCodes.Add(vendorCode);
+                    //this.DB.VendorCodes.CreateClass(vendorCode);
                     //productVendorCode = new ProductsVendorCodes(product, vendorCode);
-                    //this.DB.ProductsVendorCodes.Add(productVendorCode);
+                    //this.DB.ProductsVendorCodes.CreateClass(productVendorCode);
                     //productVendorCode = new ProductsVendorCodes(product, this.CurrentVendorCode);
                     productVendorCode = new ProductsVendorCodes();
                     productVendorCode.idProduct = product.id;

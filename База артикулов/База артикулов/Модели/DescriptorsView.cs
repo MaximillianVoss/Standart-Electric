@@ -20,5 +20,6 @@ namespace База_артикулов.Модели
         public string Отображаемое_название { get; set; }
         public string Код { get; set; }
         public string Описание { get; set; }
+        public Nullable<System.DateTime> Дата_создания { get; set; }
     }
 }

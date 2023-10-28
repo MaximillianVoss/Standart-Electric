@@ -64,6 +64,35 @@ C:\Users\FossW\OneDrive\Репетиторство\Программирован�
 C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.exe
 C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.pdb
 C:\Users\FossW\OneDrive\Репетиторство\Программирование\Заказы\Иван Иванов\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Формы\Страницы\Редактирование\PageEditProduct.xaml.cs
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Формы\Страницы\Редактирование\PageEditProduct.xaml.cs
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Формы\Страницы\Редактирование\PageEditClass.xaml.cs
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\База артикулов.exe.config
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\База артикулов.exe
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\База артикулов.pdb
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.exe
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CSV Reader.exe
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Logger.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\nunit.framework.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\WebDAVClient.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\xunit.abstractions.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\xunit.core.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow.exe
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.pdb
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.dll.config
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CSV Reader.pdb
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CSV Reader.exe.config
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.pdb
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.exe.config
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Logger.pdb
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\nunit.framework.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\xunit.core.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow.pdb
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow.exe.config
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.AssemblyReference.cache
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.ResolveComReference.cache
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\FilesWindow.g.cs
@@ -86,30 +115,6 @@ C:\Users\FossW\source\repos\Стандарт электрик\База арти�
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов_MarkupCompile.cache
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов_MarkupCompile.lref
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Формы\Страницы\Редактирование\PageEditProduct.xaml.cs
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Формы\Страницы\Редактирование\PageEditClass.xaml.cs
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\База артикулов.exe.config
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\База артикулов.exe
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\База артикулов.pdb
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.exe
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CSV Reader.exe
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.dll
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.dll
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Logger.dll
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\WebDAVClient.dll
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow.exe
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.pdb
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CustomControlsWPF.dll.config
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CSV Reader.pdb
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\CSV Reader.exe.config
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.pdb
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow WPF.exe.config
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Logger.pdb
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.xml
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow.pdb
-C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\BaseWindow.exe.config
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\FilesWindow.baml
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\WindowEdit.baml
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\Формы\WindowMain.baml
@@ -132,3 +137,58 @@ C:\Users\FossW\source\repos\Стандарт электрик\База арти�
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.csproj.CopyComplete
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.exe
 C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\obj\Debug\База артикулов.pdb
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\xunit.runner.visualstudio.testadapter.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\xunit.runner.reporters.net452.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\xunit.runner.utility.net452.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Microsoft.TestPlatform.CoreUtilities.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Microsoft.TestPlatform.PlatformAbstractions.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\NuGet.Frameworks.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Buffers.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Collections.Immutable.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Memory.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Reflection.Metadata.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\xunit.assert.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\xunit.execution.desktop.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Buffers.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Collections.Immutable.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Memory.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Reflection.Metadata.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\xunit.assert.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\xunit.execution.desktop.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\cs\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\de\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\es\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\fr\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\it\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\ja\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\ko\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\pl\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\pt-BR\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\ru\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\tr\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\zh-Hans\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\zh-Hant\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\cs\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\de\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\it\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\ja\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\ko\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\pl\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\pt-BR\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\ru\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\tr\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\zh-Hans\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\zh-Hant\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Castle.Core.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Moq.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Castle.Core.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\Moq.xml
+C:\Users\FossW\source\repos\Стандарт электрик\База артикулов\База артикулов\bin\Debug\System.Threading.Tasks.Extensions.xml

@@ -48,6 +48,7 @@ namespace База_артикулов.Модели
         public string titleShort { get; set; }
         public string titleDisplay { get; set; }
         public string description { get; set; }
+        public Nullable<System.DateTime> creationDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Applications> Applications { get; set; }

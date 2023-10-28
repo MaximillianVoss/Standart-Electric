@@ -8,6 +8,7 @@ namespace База_артикулов.Классы
         {
 
             //private static string _currentConnectionString = "Подключение к SPB-NB004";
+            //private static string _currentConnectionString = "Подключение к корпоративному SQL серверу";
             private static string _currentConnectionString = "Подключение к LAPTOP-BBFM8MMD";
 
             public static string CurrentConnectionString

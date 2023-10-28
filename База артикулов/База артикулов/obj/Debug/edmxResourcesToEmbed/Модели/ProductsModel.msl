@@ -69,6 +69,22 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetFilteredProductsLite" FunctionName="Хранилище DBSEModel.GetFilteredProductsLite">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBSEModel.GetFilteredProductsLite_Result">
+          <ScalarProperty Name="ID_продукта" ColumnName="ID продукта" />
+          <ScalarProperty Name="Артикул" ColumnName="Артикул" />
+          <ScalarProperty Name="Наименование_продукта" ColumnName="Наименование продукта" />
+          <ScalarProperty Name="ID_подгруппы" ColumnName="ID подгруппы" />
+          <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
+          <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
+          <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
+          <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
+          <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
+          <ScalarProperty Name="Вес" ColumnName="Вес" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <EntitySetMapping Name="Applications">
       <EntityTypeMapping TypeName="DBSEModel.Applications">
         <MappingFragment StoreEntitySet="Applications">
@@ -110,6 +126,7 @@
     <EntitySetMapping Name="Descriptors">
       <EntityTypeMapping TypeName="DBSEModel.Descriptors">
         <MappingFragment StoreEntitySet="Descriptors">
+          <ScalarProperty Name="creationDate" ColumnName="creationDate" />
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="titleDisplay" ColumnName="titleDisplay" />
           <ScalarProperty Name="titleShort" ColumnName="titleShort" />
@@ -451,6 +468,7 @@
     <EntitySetMapping Name="DescriptorsView">
       <EntityTypeMapping TypeName="DBSEModel.DescriptorsView">
         <MappingFragment StoreEntitySet="DescriptorsView">
+          <ScalarProperty Name="Дата_создания" ColumnName="Дата создания" />
           <ScalarProperty Name="Описание" ColumnName="Описание" />
           <ScalarProperty Name="Код" ColumnName="Код" />
           <ScalarProperty Name="Отображаемое_название" ColumnName="Отображаемое название" />
@@ -664,6 +682,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductsViewLite">
+      <EntityTypeMapping TypeName="DBSEModel.ProductsViewLite">
+        <MappingFragment StoreEntitySet="ProductsViewLite">
+          <ScalarProperty Name="Вес" ColumnName="Вес" />
+          <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
+          <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
+          <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
+          <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
+          <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
+          <ScalarProperty Name="ID_подгруппы" ColumnName="ID подгруппы" />
+          <ScalarProperty Name="Наименование_продукта" ColumnName="Наименование продукта" />
+          <ScalarProperty Name="Артикул" ColumnName="Артикул" />
+          <ScalarProperty Name="ID_продукта" ColumnName="ID продукта" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ProductUnitsView">
       <EntityTypeMapping TypeName="DBSEModel.ProductUnitsView">
         <MappingFragment StoreEntitySet="ProductUnitsView">
@@ -750,6 +784,7 @@
     <EntitySetMapping Name="TablesView">
       <EntityTypeMapping TypeName="DBSEModel.TablesView">
         <MappingFragment StoreEntitySet="TablesView">
+          <ScalarProperty Name="Дата_создания" ColumnName="Дата создания" />
           <ScalarProperty Name="Описание" ColumnName="Описание" />
           <ScalarProperty Name="Код" ColumnName="Код" />
           <ScalarProperty Name="Отображаемое_название" ColumnName="Отображаемое название" />

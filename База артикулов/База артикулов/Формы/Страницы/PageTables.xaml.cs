@@ -232,7 +232,7 @@ namespace База_артикулов.Формы.Страницы
         {
             if (this.cmbTables.SelectedIndex == -1)
                 return Task.CompletedTask;
-            if (this.CurrentTableData.ItemsType != typeof(ProductsView))
+            if (this.CurrentTableData.ItemsType != typeof(ProductsViewLite))
                 return Task.CompletedTask;
 
 
@@ -255,13 +255,13 @@ namespace База_артикулов.Формы.Страницы
                     break;
             }
 
-            List<GetFilteredProducts_Result> results = this.DB.GetFilteredProducts(
+            List<GetFilteredProductsLite_Result> results = this.DB.GetFilteredProductsLite(
                 groupName,
                 className,
                 subGroupName
             ).ToList();
 
-            List<ProductsView> filteredProducts = results.Select(result => new ProductsView(result)).ToList();
+            List<ProductsViewLite> filteredProducts = results.Select(result => new ProductsViewLite(result)).ToList();
             this.CurrentTableData.ItemsAll = new ObservableCollection<object>(filteredProducts);
             return Task.CompletedTask;
         }
@@ -330,7 +330,7 @@ namespace База_артикулов.Формы.Страницы
         private async Task UpdateTreeView()
         {
             if (this.CurrentTableData.ItemsType == typeof(Products) ||
-                this.CurrentTableData.ItemsType == typeof(ProductsView))
+                this.CurrentTableData.ItemsType == typeof(ProductsViewLite))
             {
                 // Сохраняем текущее состояние дерева перед его очисткой
                 this.treeState = new Dictionary<int, bool>();
@@ -506,15 +506,15 @@ namespace База_артикулов.Формы.Страницы
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-           
+
         }
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-           
+
         }
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-           
+
         }
         private void dgTable_RightClickSelectedCellChanged(object sender, EventArgs e)
         {
@@ -609,7 +609,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                if (this.CurrentTableData.ItemsType != typeof(ProductsView))
+                if (this.CurrentTableData.ItemsType != typeof(ProductsViewLite))
                     throw new Exception("Редактирование других таблиц недоступно");
 
             }
