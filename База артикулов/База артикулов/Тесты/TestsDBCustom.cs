@@ -5,7 +5,7 @@ using База_артикулов.Классы;
 using System.Configuration;
 using База_артикулов.Модели;
 
-namespace База_артикулов.Тесты
+namespace База_артикулов.База_Данных.Тесты
 {
     public class TestsDBCustom
     {

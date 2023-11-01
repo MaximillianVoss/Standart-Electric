@@ -1,1 +1,5 @@
 Test Connection String
+TestUser
+TestPassword
+TestServer
+TestBasePath

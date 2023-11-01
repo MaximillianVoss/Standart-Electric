@@ -9,7 +9,7 @@ using Xunit;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
-namespace База_артикулов.Тесты
+namespace База_артикулов.Облачный_Клиент.Тесты
 {
 
     public class TestsWDClient

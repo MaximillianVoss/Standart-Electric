@@ -24,12 +24,7 @@ namespace База_артикулов.Формы
         /// <summary>
         /// webDAV-клиент
         /// </summary>
-        private WDClient wdClient = new WDClient(
-                "devstor",
-                "TE6db?lZE~8Ixc?KAtQW",
-                "https://rcloud.rsk-gr.ru",
-                "/remote.php/dav/files/devstor"
-                );
+        private WDClient wdClient = new WDClient("devstor", "TE6db?lZE~8Ixc?KAtQW", "https://rcloud.rsk-gr.ru", "/remote.php/dav/files/devstor");
         #endregion
 
         #region Свойства
@@ -41,6 +36,13 @@ namespace База_артикулов.Формы
         /// База данных
         /// </summary>
         public DBSEEntities DB { get => this.db; set => this.db = value; }
+        #endregion
+
+        #region Конструкторы/Деструкторы
+        public CustomBase()
+        {
+
+        }
         #endregion
 
         #region Методы
@@ -181,10 +183,6 @@ namespace База_артикулов.Формы
             return list;
         }
         #endregion
-
-        #endregion
-
-        #region Конструкторы/Деструкторы
 
         #endregion
 

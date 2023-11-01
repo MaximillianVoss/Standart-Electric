@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace База_артикулов.Классы
 {
@@ -9,6 +10,10 @@ namespace База_артикулов.Классы
 
         #region Поля
         private string _currentConnectionString = "Подключение к LAPTOP-BBFM8MMD";
+        private string _userNameWDClient;
+        private string _passwordWDClient;
+        private string _serverWDClient;
+        private string _basePathWDClient;
         #endregion
 
         #region Свойства
@@ -20,12 +25,15 @@ namespace База_артикулов.Классы
                 if (_currentConnectionString != value)
                 {
                     _currentConnectionString = value;
-
-                    // Invoke the event
                     OnCurrentConnectionStringChanged(_currentConnectionString);
                 }
             }
         }
+
+        public string UserNameWDClient { get => _userNameWDClient; set => _userNameWDClient = value; }
+        public string PasswordWDClient { get => _passwordWDClient; set => _passwordWDClient = value; }
+        public string ServerWDClient { get => _serverWDClient; set => _serverWDClient = value; }
+        public string BasePathWDClient { get => _basePathWDClient; set => _basePathWDClient = value; }
 
         public event Action<string> CurrentConnectionStringChanged;
         #endregion
@@ -36,11 +44,17 @@ namespace База_артикулов.Классы
         {
             try
             {
-                File.WriteAllText(filePath, _currentConnectionString);
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(_currentConnectionString);
+                sb.AppendLine(_userNameWDClient);
+                sb.AppendLine(_passwordWDClient);
+                sb.AppendLine(_serverWDClient);
+                sb.AppendLine(_basePathWDClient);
+
+                File.WriteAllText(filePath, sb.ToString());
             }
             catch (Exception ex)
             {
-                // обработайте ошибки при записи файла, если это необходимо
                 Console.WriteLine($"Error saving to file: {ex.Message}");
             }
         }
@@ -51,15 +65,21 @@ namespace База_артикулов.Классы
             {
                 if (File.Exists(filePath))
                 {
-                    _currentConnectionString = File.ReadAllText(filePath);
+                    var lines = File.ReadAllLines(filePath);
+                    if (lines.Length >= 5)
+                    {
+                        _currentConnectionString = lines[0];
+                        _userNameWDClient = lines[1];
+                        _passwordWDClient = lines[2];
+                        _serverWDClient = lines[3];
+                        _basePathWDClient = lines[4];
 
-                    // Если вы хотите оповестить об изменении после загрузки из файла:
-                    OnCurrentConnectionStringChanged(_currentConnectionString);
+                        OnCurrentConnectionStringChanged(_currentConnectionString);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                // обработайте ошибки при чтении файла, если это необходимо
                 Console.WriteLine($"Error loading from file: {ex.Message}");
             }
         }
@@ -71,6 +91,7 @@ namespace База_артикулов.Классы
         {
 
         }
+
         public SettingsNew(string filePath)
         {
             if (!File.Exists(filePath))
