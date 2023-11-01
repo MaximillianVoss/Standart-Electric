@@ -11,7 +11,6 @@ using База_артикулов.Модели;
 
 namespace База_артикулов.Облачный_Клиент.Тесты
 {
-
     public class TestsWDClient
     {
         /// <summary>
@@ -123,13 +122,13 @@ namespace База_артикулов.Облачный_Клиент.Тесты
         }
 
         [Fact, Trait("Category", "Integration")]
-        public async Task TestUpdateImage()
+        public void TestUpdateImage()
         {
             //ProductsView productView = this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == 1);
             //if (productView != null)
             //   await this.UpdateImageAsync(productView);
         }
-        [Test]
+        [Fact]
         public void TestDownloadImage()
         {
             this.Init();
@@ -138,8 +137,3 @@ namespace База_артикулов.Облачный_Клиент.Тесты
 
     }
 }
-
-
-
-
-

@@ -35,6 +35,7 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Свойства
+        public CustomBase CustomBase { set; get; }
         /// <summary>
         /// Была ли коллекция обновлена.
         /// Например, бул удален или добавлен, изменен элемент любой из таблиц.

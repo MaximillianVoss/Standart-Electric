@@ -15,52 +15,34 @@ namespace База_артикулов.Формы
     public class CustomBase
     {
 
-
         #region Поля
-        /// <summary>
-        /// База данных
-        /// </summary>
-        private DBSEEntities db = new DBSEEntities();
-        /// <summary>
-        /// webDAV-клиент
-        /// </summary>
-        private WDClient wdClient = new WDClient("devstor", "TE6db?lZE~8Ixc?KAtQW", "https://rcloud.rsk-gr.ru", "/remote.php/dav/files/devstor");
+
         #endregion
 
         #region Свойства
         /// <summary>
         /// webDAV-клиент
         /// </summary>
-        public WDClient WDClient { get => this.wdClient; set => this.wdClient = value; }
+        public WDClient WDClient { set; get; }
         /// <summary>
         /// База данных
         /// </summary>
-        public DBSEEntities DB { get => this.db; set => this.db = value; }
+        public CustomDB DB { set; get; }
         #endregion
 
         #region Конструкторы/Деструкторы
-        public CustomBase()
+        public CustomBase(string settingsFilePath) : this(new SettingsNew(settingsFilePath))
         {
 
+        }
+        public CustomBase(SettingsNew settings)
+        {
+            this.DB = new CustomDB(settings);
+            this.WDClient = new WDClient(settings);
         }
         #endregion
 
         #region Методы
-
-        #region Работа с облачным WebDav-клиентом
-        /// <summary>
-        /// Инициализирует WebDAV-клиент
-        /// </summary>
-        public void InitClient()
-        {
-            this.WDClient = new WDClient(
-                "devstor",
-                "TE6db?lZE~8Ixc?KAtQW",
-                "https://rcloud.rsk-gr.ru",
-                "/remote.php/dav/files/devstor"
-                );
-        }
-        #endregion
 
         #region Работа с объектами
         /// <summary>

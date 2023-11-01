@@ -162,6 +162,28 @@ namespace База_артикулов.Классы
                 BasePath = basePath
             };
         }
+        public WDClient(SettingsNew settings)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+
+            this.UserName = settings.UserNameWDClient ?? throw new ArgumentNullException(nameof(settings.UserNameWDClient));
+            this.Password = settings.PasswordWDClient ?? throw new ArgumentNullException(nameof(settings.PasswordWDClient));
+            this.Server = settings.ServerWDClient ?? throw new ArgumentNullException(nameof(settings.ServerWDClient));
+            this.BasePath = settings.BasePathWDClient ?? throw new ArgumentNullException(nameof(settings.BasePathWDClient));
+
+            this.Client = new Client(new NetworkCredential
+            {
+                UserName = this.UserName,
+                Password = this.Password
+            })
+            {
+                Server = this.Server,
+                BasePath = this.BasePath
+            };
+        }
 
         #endregion
 
