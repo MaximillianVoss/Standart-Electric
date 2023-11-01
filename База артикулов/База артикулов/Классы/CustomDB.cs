@@ -218,6 +218,7 @@ namespace База_артикулов.Классы
             return true;
         }
 
+        #region Проверки дексрипторов
 
         /// <summary>
         /// Поверяет наличие товара в базе
@@ -281,6 +282,7 @@ namespace База_артикулов.Классы
         {
             return this.GetDescriptorsResources(idDescriptor) != null;
         }
+        #endregion
 
         #endregion
 
@@ -661,7 +663,7 @@ namespace База_артикулов.Классы
         #endregion
 
         #region Ресурсы
-        public async Task CreateResource(int productId, string url, string filePath, string resourceTitle)
+        public DescriptorsResources CreateResource(int productId, string url, string filePath, string resourceTitle)
         {
             if (String.IsNullOrEmpty(filePath))
                 throw new Exception("Не указан путь до загружаемого файла!");
@@ -690,9 +692,11 @@ namespace База_артикулов.Классы
                 };
 
                 this.DB.DescriptorsResources.Add(productDescriptorResource);
+                return productDescriptorResource;
             }
 
             this.DB.SaveChanges();
+            return null;
         }
         public void UpdateResource(int productId, string resourceTitle)
         {
@@ -761,6 +765,25 @@ namespace База_артикулов.Классы
             //    return db.ProductsViewLite.Where(x => x.Наименование_подгруппы == subGroup).ToList();
             //return db.ProductsViewLite.ToList();
         }
+
+        public Products CreateProduct(
+            string title, string titleShort,
+            string description, string vendorCode,
+            int idNorm, int idSubGroup,
+            int idCover, int idMaterial,
+            int idPerforation,
+            int idPackage, bool isInStock
+            )
+        {
+            var descriptor = this.CreateDescriptor(vendorCode, title, titleShort, title, description);
+            if (descriptor != null)
+            {
+                var product = new Products(descriptor.id, idNorm, idSubGroup, idCover, idMaterial, idPerforation, idPackage, isInStock);
+                return this.DB.Products.Add(product);
+            }
+            return null;
+        }
+
         #endregion
 
         #endregion

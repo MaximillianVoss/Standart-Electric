@@ -176,6 +176,7 @@
     <Compile Include="Классы\Дополнения\Norms.cs" />
     <Compile Include="Классы\Дополнения\Packages.cs" />
     <Compile Include="Классы\Дополнения\Perforations.cs" />
+    <Compile Include="Классы\Дополнения\Products.cs" />
     <Compile Include="Классы\Дополнения\ProductsVendorCodes.cs" />
     <Compile Include="Классы\Дополнения\ProductsView.cs" />
     <Compile Include="Классы\Дополнения\ProductsViewLite.cs" />
