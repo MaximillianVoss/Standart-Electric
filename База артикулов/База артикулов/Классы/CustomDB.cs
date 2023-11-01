@@ -124,7 +124,6 @@ namespace База_артикулов.Классы
         #region Объекты БД
 
         #region Дескрипторы
-
         /// <summary>
         /// Создаёт и сохраняет новый дескриптор с предоставленными значениями или значениями по умолчанию.
         /// </summary>
@@ -140,6 +139,16 @@ namespace База_артикулов.Классы
             this.DB.Descriptors.Add(descriptor);
             this.DB.SaveChanges();
             return descriptor;
+        }
+
+        /// <summary>
+        /// Загружает дескриптор с указанным ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Descriptors GetDescriptor(int id)
+        {
+            return this.DB.Descriptors.FirstOrDefault(x => x.id == id);
         }
 
         /// <summary>
@@ -219,15 +228,14 @@ namespace База_артикулов.Классы
         }
 
         #region Проверки дексрипторов
-
         /// <summary>
-        /// Поверяет наличие товара в базе
+        /// 
         /// </summary>
-        /// <param name="idProduct"></param>
+        /// <param name="idDescriptor"></param>
         /// <returns></returns>
-        public bool IsProductExists(int idProduct)
+        public DescriptorsResources GetDescriptorsResources(int idDescriptor)
         {
-            return this.GetProduct(idProduct) != null;
+            return this.DB.DescriptorsResources.FirstOrDefault(x => x.idDescriptor == idDescriptor);
         }
         /// <summary>
         /// Получает дескриптор товара с указанным id
@@ -263,15 +271,6 @@ namespace База_артикулов.Классы
                 return this.GetDescriptorProduct(idProduct) != null;
             }
             return false;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="idDescriptor"></param>
-        /// <returns></returns>
-        public DescriptorsResources GetDescriptorsResources(int idDescriptor)
-        {
-            return this.DB.DescriptorsResources.FirstOrDefault(x => x.idDescriptor == idDescriptor);
         }
         /// <summary>
         /// 
@@ -731,6 +730,43 @@ namespace База_артикулов.Классы
         #endregion
 
         #region Товары
+        //TODO: добавить обновление и удаление товара
+        public Products CreateEmptyProduct(string title = "Новый продукт", SubGroups subGroups = null)
+        {
+            throw new Exception("Проверить метод! нужен ли он вообще!");
+            // Создание нового дескриптора
+            var descriptor = new Descriptors
+            {
+                title = title
+            };
+
+            // Сохранение дескриптора в БД
+            this.DB.Descriptors.Add(descriptor);
+            this.DB.SaveChanges();
+
+            // Создание нового продукта со значениями по умолчанию
+            var product = new Products
+            {
+                Descriptors = descriptor,
+                Covers = this.DB.Covers.FirstOrDefault(x => x.id > 0),
+                SubGroups = subGroups
+                // Добавьте здесь другие значения по умолчанию, если они есть
+            };
+
+            // Сохранение продукта в БД
+            product = this.DB.Products.Add(product);
+            this.DB.SaveChanges();
+            return product;
+        }
+        /// <summary>
+        /// Поверяет наличие товара в базе
+        /// </summary>
+        /// <param name="idProduct"></param>
+        /// <returns></returns>
+        public bool IsProductExists(int idProduct)
+        {
+            return this.GetProduct(idProduct) != null;
+        }
         /// <summary>
         /// Получает товар с указанным id
         /// </summary>
@@ -799,6 +835,10 @@ namespace База_артикулов.Классы
 
         public CustomDB(SettingsNew settings)
         {
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
             this.settings = settings;
             this.settings.CurrentConnectionStringChanged += HandleConnectionStringChange;
             this.Update();

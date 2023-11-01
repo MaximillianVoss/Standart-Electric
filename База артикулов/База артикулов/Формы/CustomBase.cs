@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
@@ -69,6 +70,16 @@ namespace База_артикулов.Формы
             return field == null
                 ? throw new Exception(База_артикулов.Классы.Common.Strings.Errors.fieldIsNotFoundInObject)
                 : field.GetValue(obj, null);
+        }
+        /// <summary>
+        /// Сравнивает два типа на равенство, в том числе извлекает и базовый тип для проверки
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="object"></param>
+        /// <returns></returns>
+        public bool IsTypeEqual(Type type, object @object)
+        {
+            return @object.GetType() == type || @object.GetType().BaseType == type;
         }
         #endregion
 
@@ -163,6 +174,15 @@ namespace База_артикулов.Формы
                 list.Add(methodInfo.Invoke(item, null));
             }
             return list;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public List<object> ToList(List<IToObject> items)
+        {
+            return items.Select(item => item.ToObject()).ToList();
         }
         #endregion
 
