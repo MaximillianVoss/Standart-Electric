@@ -5,6 +5,8 @@ using System.Configuration;
 using System.Data.Entity.Core.EntityClient;
 using System.Linq;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace База_артикулов.Классы
 {
@@ -214,6 +216,70 @@ namespace База_артикулов.Классы
             this.DB.SaveChanges();
 
             return true;
+        }
+
+
+        /// <summary>
+        /// Поверяет наличие товара в базе
+        /// </summary>
+        /// <param name="idProduct"></param>
+        /// <returns></returns>
+        public bool IsProductExists(int idProduct)
+        {
+            return this.GetProduct(idProduct) != null;
+        }
+        /// <summary>
+        /// Получает дескриптор товара с указанным id
+        /// </summary>
+        /// <param name="idProduct">id товара</param>
+        /// <returns></returns>
+        public Descriptors GetDescriptorProduct(int idProduct)
+        {
+            var product = this.GetProduct(idProduct);
+            if (product == null)
+                return null;
+            else
+                return this.DB.Descriptors.FirstOrDefault(x => x.id == product.idDescriptor);
+        }
+        /// <summary>
+        /// Проверяет наличие дескриптора (любого) в базе
+        /// </summary>
+        /// <param name="idDescriptor">id дексриптора</param>
+        /// <returns></returns>
+        public bool IsDescriptorExists(int idDescriptor)
+        {
+            return this.DB.Descriptors.FirstOrDefault(x => x.id == idDescriptor) != null;
+        }
+        /// <summary>
+        /// Проверяет наличие дескриптора товара в базе
+        /// </summary>
+        /// <param name="idProduct">id товара</param>
+        /// <returns></returns>
+        public bool IsDescriptorProductExists(int idProduct)
+        {
+            if (this.IsProductExists(idProduct))
+            {
+                return this.GetDescriptorProduct(idProduct) != null;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idDescriptor"></param>
+        /// <returns></returns>
+        public DescriptorsResources GetDescriptorsResources(int idDescriptor)
+        {
+            return this.DB.DescriptorsResources.FirstOrDefault(x => x.idDescriptor == idDescriptor);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idDescriptor"></param>
+        /// <returns></returns>
+        public bool IsDescriptorResourcesExists(int idDescriptor)
+        {
+            return this.GetDescriptorsResources(idDescriptor) != null;
         }
 
         #endregion
@@ -502,10 +568,11 @@ namespace База_артикулов.Классы
         /// <param name="idType">ID типа измерения.</param>
         /// <param name="value">Значение измерения.</param>
         /// <returns>Возвращает созданный объект UnitsProducts.</returns>
-        public UnitsProducts CreateUnitProduct(int idUnit, int idType, double value)
+        public UnitsProducts CreateUnitProduct(int idProduct, int idUnit, int idType, double value)
         {
             var newUnitProduct = new UnitsProducts
             {
+                idProduct = idProduct,
                 idUnit = idUnit,
                 idType = idType,
                 value = value
@@ -553,8 +620,147 @@ namespace База_артикулов.Классы
 
         #endregion
 
-        #region Товары
+        #region Артикул
+        public void CreateVendorCode(string code, string accountantCode, int manufacturerId, bool isActual, bool isPublic, bool isSale)
+        {
+            VendorCodes item = new VendorCodes(code, accountantCode, manufacturerId, isActual, isPublic, isSale);
+            this.DB.VendorCodes.Add(item);
+            this.DB.SaveChanges();
+        }
 
+        public void UpdateVendorCode(int itemId, string code, string accountantCode, int manufacturerId, bool isActual, bool isPublic, bool isSale)
+        {
+            VendorCodes item = this.DB.VendorCodes.Find(itemId);
+            if (item != null)
+            {
+                // Обновление данных элемента
+                item.isActual = isActual;
+                item.isPublic = isPublic;
+                item.isSale = isSale;
+                item.codeAccountant = accountantCode;
+                item.idManufacturer = manufacturerId;
+
+                if (item.Descriptors != null)
+                {
+                    item.Descriptors.title = code;
+                }
+
+                this.DB.SaveChanges();
+            }
+        }
+
+        public void DeleteVendorCode(int itemId)
+        {
+            VendorCodes item = this.DB.VendorCodes.Find(itemId);
+            if (item != null)
+            {
+                this.DB.VendorCodes.Remove(item);
+                this.DB.SaveChanges();
+            }
+        }
+        #endregion
+
+        #region Ресурсы
+        public async Task CreateResource(int productId, string url, string filePath, string resourceTitle)
+        {
+            if (String.IsNullOrEmpty(filePath))
+                throw new Exception("Не указан путь до загружаемого файла!");
+
+
+            if (IsDescriptorProductExists(productId))
+            {
+                var extension = System.IO.Path.GetExtension(filePath);
+                var typeView = this.DB.ResourceTypesView.FirstOrDefault(x => x.Расширение_ресурса == extension);
+
+                if (typeView == null)
+                {
+                    ResourceTypes resourceTypes = new ResourceTypes();
+                    resourceTypes.title = $"Файл с расширением {extension}";
+                    resourceTypes.extension_ = extension;
+                    this.DB.ResourceTypes.Add(resourceTypes);
+                }
+
+                var productDescriptor = GetDescriptorProduct(productId);
+                var productDescriptorResource = new DescriptorsResources
+                {
+                    idDescriptor = productDescriptor.id,
+                    title = resourceTitle,
+                    ResourceTypes = this.DB.ResourceTypes.FirstOrDefault(x => x.extension_ == typeView.Расширение_ресурса),
+                    Resources = new Resources { URL = url }
+                };
+
+                this.DB.DescriptorsResources.Add(productDescriptorResource);
+            }
+
+            this.DB.SaveChanges();
+        }
+        public void UpdateResource(int productId, string resourceTitle)
+        {
+            if (IsDescriptorProductExists(productId))
+            {
+                var productDescriptor = GetDescriptorProduct(productId);
+                var productDescriptorResource = GetDescriptorsResources(productDescriptor.id);
+
+                if (productDescriptorResource != null)
+                {
+                    productDescriptorResource.title = resourceTitle;
+                }
+
+                this.DB.SaveChanges();
+            }
+        }
+        public void DeleteResource(int productId)
+        {
+            if (IsDescriptorProductExists(productId))
+            {
+                var productDescriptor = GetDescriptorProduct(productId);
+                var productDescriptorResource = GetDescriptorsResources(productDescriptor.id);
+
+                if (productDescriptorResource != null)
+                {
+                    this.DB.DescriptorsResources.Remove(productDescriptorResource);
+                }
+
+                this.DB.SaveChanges();
+            }
+        }
+        #endregion
+
+        #region Товары
+        /// <summary>
+        /// Получает товар с указанным id
+        /// </summary>
+        /// <param name="idProduct"></param>
+        /// <returns></returns>
+        public Products GetProduct(int idProduct)
+        {
+            return this.DB.Products.FirstOrDefault(x => x.id == idProduct);
+        }
+        public List<ProductsViewLite> GetFilteredProducts(string group = null, string classValue = null, string subGroup = null)
+        {
+            var products = this.db.ProductsViewLite.AsQueryable(); // предположим, что у вас есть DbSet ProductsViewLite
+            if (!string.IsNullOrEmpty(group))
+            {
+                products = products.Where(p => p.Наименование_группы == group);
+            }
+            if (!string.IsNullOrEmpty(classValue))
+            {
+                products = products.Where(p => p.Наименование_класса == classValue);
+            }
+            if (!string.IsNullOrEmpty(subGroup))
+            {
+                products = products.Where(p => p.Наименование_подгруппы == subGroup);
+            }
+            return products.OrderBy(p => p.ID_продукта).ToList();
+
+            //if (!string.IsNullOrEmpty(group))
+            //    return db.ProductsViewLite.Where(x => x.Наименование_группы == group).ToList();
+            //if (!string.IsNullOrEmpty(classValue))
+            //    return db.ProductsViewLite.Where(x => x.Наименование_класса == classValue).ToList();
+            //if (!string.IsNullOrEmpty(subGroup))
+            //    return db.ProductsViewLite.Where(x => x.Наименование_подгруппы == subGroup).ToList();
+            //return db.ProductsViewLite.ToList();
+        }
         #endregion
 
         #endregion

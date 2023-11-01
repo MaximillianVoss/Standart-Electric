@@ -7,7 +7,7 @@ using System.Linq;
 namespace CustomControlsWPF
 {
     /// <summary>
-    /// Хранит данные из таблиц типа DbSet
+    /// Хранит данные из таблиц типа DbSet.
     /// </summary>
     public class TableData
     {
@@ -16,23 +16,42 @@ namespace CustomControlsWPF
         #endregion
 
         #region Свойства
-        public String title { set; get; }
-        public String titleDisplay { set; get; }
+        /// <summary>
+        /// Получает или задает заголовок таблицы.
+        /// </summary>
+        public String Title { set; get; }
+        /// <summary>
+        /// Получает или задает отображаемый заголовок таблицы.
+        /// </summary>
+        public String TitleDisplay { set; get; }
 
         /// <summary>
-        /// Тип элементов, которые хранятся в коллекции
+        /// Получает или задает тип элементов, которые хранятся в коллекции.
         /// </summary>
         public Type ItemsType { set; get; }
-
+        /// <summary>
+        /// Получает или задает имена колонок таблицы.
+        /// </summary>
         public List<string> ColumnNames { get; set; }
-
-        // Коллекция всех элементов
+        /// <summary>
+        /// Получает или задает отображаемые колонки таблицы.
+        /// </summary>
+        public List<string> DisplayColumnNames { get; set; }
+        /// <summary>
+        /// Получает или задает коллекцию всех элементов.
+        /// </summary>
         public ObservableCollection<object> ItemsAll { get; set; } = new ObservableCollection<object>();
         #endregion
 
         #region Методы
         // Получение элементов указанной страницы из коллекции ItemsAll.
         // Нумерация страниц начинается с 1.
+        /// <summary>
+        /// Получает элементы указанной страницы из коллекции ItemsAll.
+        /// </summary>
+        /// <param name="pageNumber">Номер страницы (начиная с 1).</param>
+        /// <param name="itemsPerPage">Количество элементов на странице.</param>
+        /// <returns>Коллекция элементов страницы.</returns>
         public IEnumerable GetPage(int pageNumber, int itemsPerPage)
         {
             return this.ItemsAll
@@ -41,18 +60,31 @@ namespace CustomControlsWPF
                 .ToList();
         }
 
+        /// <summary>
+        /// Получает количество строк в коллекции ItemsAll.
+        /// </summary>
+        /// <returns>Количество строк.</returns>
         public int GetRowsCount()
         {
             return this.ItemsAll.Count;
         }
 
-        // Проверяет, существует ли указанная страница
+        /// <summary>
+        /// Проверяет, существует ли указанная страница.
+        /// </summary>
+        /// <param name="pageNumber">Номер страницы (начиная с 1).</param>
+        /// <param name="itemsPerPage">Количество элементов на странице.</param>
+        /// <returns>True, если страница существует, иначе False.</returns>
         public bool HasPage(int pageNumber, int itemsPerPage)
         {
             return this.ItemsAll.Skip((pageNumber - 1) * itemsPerPage).Any();
         }
 
         // Метод фильтрации элементов по определенному условию. Вы можете его изменить под ваши нужды.
+        /// <summary>
+        /// Применяет фильтр к элементам коллекции на основе заданного условия.
+        /// </summary>
+        /// <param name="filterCriteria">Условие фильтрации.</param>
         public void ApplyFilter(Predicate<object> filterCriteria)
         {
             var filtered = new ObservableCollection<object>();
@@ -68,13 +100,19 @@ namespace CustomControlsWPF
             this.ItemsAll = filtered;
         }
 
-        // Если вы хотите вернуть все элементы, например, при сбросе фильтра
+        /// <summary>
+        /// Сбрасывает фильтр и возвращает все элементы в коллекцию.
+        /// </summary>
         public void ResetFilter()
         {
             // В данной реализации фильтрация напрямую меняет ItemsAll.
             // Если вам нужно восстановить первоначальное состояние, вам придется хранить копию исходной коллекции.
         }
 
+        /// <summary>
+        /// Добавляет коллекцию элементов к существующей коллекции ItemsAll.
+        /// </summary>
+        /// <param name="items">Коллекция элементов для добавления.</param>
         public void AddRange(IEnumerable items)
         {
             if (this.ItemsAll == null)
@@ -88,7 +126,7 @@ namespace CustomControlsWPF
         }
 
         /// <summary>
-        /// Заменяет элемент в коллекции <see cref="ItemsAll"/> на основе идентификатора id.
+        /// Заменяет элемент в коллекции ItemsAll на основе идентификатора id.
         /// </summary>
         /// <param name="newItem">Новый элемент, который следует вставить вместо существующего.</param>
         /// <exception cref="ArgumentException">Вызывается, если <paramref name="newItem"/> не содержит свойства id или если элемент с таким id не найден в коллекции.</exception>
@@ -106,39 +144,109 @@ namespace CustomControlsWPF
             int index = this.ItemsAll.IndexOf(itemToReplace);
             this.ItemsAll[index] = newItem;
         }
+
         /// <summary>
-        /// Очищает коллекцию
+        /// Очищает коллекцию ItemsAll.
         /// </summary>
         public void Clear()
         {
             this.ItemsAll.Clear();
         }
+
+        /// <summary>
+        /// Добавляет отображаемую колонку к коллекции DisplayColumnNames.
+        /// </summary>
+        /// <param name="columnName">Имя колонки для добавления.</param>
+        public void AddDisplayColumn(string columnName)
+        {
+            if (!ColumnNames.Contains(columnName))
+            {
+                throw new ArgumentException($"Столбец с именем {columnName} отсутствует в данных.");
+            }
+            if (ColumnNames.Contains(columnName) && !DisplayColumnNames.Contains(columnName))
+            {
+                DisplayColumnNames.Add(columnName);
+            }
+        }
+
+        /// <summary>
+        /// Добавляет список отображаемых колонок к коллекции DisplayColumnNames.
+        /// </summary>
+        /// <param name="displayColumnNames">Список имен колонок для добавления.</param>
+        public void AddDisplayColumns(List<string> displayColumnNames)
+        {
+            foreach (var item in displayColumnNames)
+                this.AddDisplayColumn(item);
+            //this.DisplayColumnNames = displayColumnNames.Where(c => ColumnNames.Contains(c)).ToList();
+        }
+
+        /// <summary>
+        /// Устанавливает список отображаемых колонок в коллекцию DisplayColumnNames.
+        /// </summary>
+        /// <param name="displayColumnNames">Список имен колонок для установки.</param>
+        public void SetDisplayColumns(List<string> displayColumnNames)
+        {
+            this.DisplayColumnNames.Clear();
+            this.AddDisplayColumns(displayColumnNames);
+        }
+
+        /// <summary>
+        /// Удаляет отображаемую колонку из коллекции DisplayColumnNames.
+        /// </summary>
+        /// <param name="columnName">Имя колонки для удаления.</param>
+        public void RemoveDisplayColumn(string columnName)
+        {
+            if (DisplayColumnNames.Contains(columnName))
+            {
+                DisplayColumnNames.Remove(columnName);
+            }
+        }
         #endregion
 
         #region Конструкторы/Деструкторы
         // Конструктор
+        /// <summary>
+        /// Инициализирует новый экземпляр класса TableData с заданными параметрами.
+        /// </summary>
+        /// <param name="title">Заголовок таблицы.</param>
+        /// <param name="titleDisplay">Отображаемый заголовок таблицы.</param>
+        /// <param name="itemsType">Тип элементов, которые хранятся в коллекции.</param>
+        /// <param name="columnNames">Имена колонок таблицы.</param>
+        /// <param name="items">Коллекция элементов для инициализации. Может быть null.</param>
         public TableData(String title, String titleDisplay, Type itemsType, List<string> columnNames, ObservableCollection<object> items)
         {
-            this.title = title;
-            this.titleDisplay = titleDisplay;
+            this.Title = title;
+            this.TitleDisplay = titleDisplay;
             this.ItemsType = itemsType;
-            this.ColumnNames = columnNames;
+            this.ColumnNames = columnNames ?? throw new ArgumentNullException(nameof(columnNames));
+            this.DisplayColumnNames = columnNames.Where(c => ColumnNames.Contains(c)).ToList();
             this.ItemsAll = items;
         }
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса TableData с заданными параметрами.
+        /// </summary>
+        /// <param name="title">Заголовок таблицы.</param>
+        /// <param name="titleDisplay">Отображаемый заголовок таблицы.</param>
+        /// <param name="itemsType">Тип элементов, которые хранятся в коллекции.</param>
+        /// <param name="columnNames">Имена колонок таблицы.</param>
         public TableData(String title, String titleDisplay, Type itemsType, List<string> columnNames) :
             this(title, titleDisplay, itemsType, columnNames, null)
         {
 
         }
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса TableData на основе существующего экземпляра.
+        /// </summary>
+        /// <param name="other">Существующий экземпляр класса TableData для копирования.</param>
         public TableData(TableData other)
         {
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
 
-            this.title = other.title;
-            this.titleDisplay = other.titleDisplay;
+            this.Title = other.Title;
+            this.TitleDisplay = other.TitleDisplay;
             this.ItemsType = other.ItemsType;
 
             // Копирование списка имен колонок

@@ -4,6 +4,8 @@ using Xunit;
 using База_артикулов.Классы;
 using System.Configuration;
 using База_артикулов.Модели;
+using System.Runtime.Remoting.Contexts;
+using System.Threading.Tasks;
 
 namespace База_артикулов.Тесты
 {
@@ -367,12 +369,13 @@ namespace База_артикулов.Тесты
         public void CreateUnitProduct_ShouldAddUnitProductToDB()
         {
             // Arrange
+            var product = this.db.DB.Products.FirstOrDefault();
             var unit = this.db.DB.Units.FirstOrDefault();
             var unitType = this.db.DB.UnitsTypes.FirstOrDefault();
             double value = 10.0;
 
             // Act
-            UnitsProducts addedUnitProduct = db.CreateUnitProduct(unit.id, unitType.id, value);
+            UnitsProducts addedUnitProduct = db.CreateUnitProduct(product.id, unit.id, unitType.id, value);
 
             // Assert
             UnitsProducts retrievedUnitProduct = this.db.DB.UnitsProducts.FirstOrDefault(up => up.id == addedUnitProduct.id);
@@ -384,9 +387,10 @@ namespace База_артикулов.Тесты
         public void UpdateUnitProduct_ShouldUpdateExistingUnitProductInDB()
         {
             // Arrange
+            var product = this.db.DB.Products.FirstOrDefault();
             var unit = this.db.DB.Units.FirstOrDefault();
             var unitType = this.db.DB.UnitsTypes.FirstOrDefault();
-            UnitsProducts newUnitProduct = db.CreateUnitProduct(unit.id, unitType.id, 10.0);
+            UnitsProducts newUnitProduct = db.CreateUnitProduct(product.id, unit.id, unitType.id, 10.0);
             double newValue = 20.0;
 
             // Act
@@ -402,9 +406,10 @@ namespace База_артикулов.Тесты
         public void DeleteUnitProduct_ShouldRemoveUnitProductFromDB()
         {
             // Arrange
+            var product = this.db.DB.Products.FirstOrDefault();
             var unit = this.db.DB.Units.FirstOrDefault();
             var unitType = this.db.DB.UnitsTypes.FirstOrDefault();
-            UnitsProducts newUnitProduct = db.CreateUnitProduct(unit.id, unitType.id, 10.0);
+            UnitsProducts newUnitProduct = db.CreateUnitProduct(product.id, unit.id, unitType.id, 10.0);
 
             // Act
             db.DeleteUnitProduct(newUnitProduct.id);
@@ -415,7 +420,149 @@ namespace База_артикулов.Тесты
         }
         #endregion
 
+        #region Артикулы
+        [Fact]
+        public void CreateVendorCodeTest()
+        {
+            // Arrange
+            var context = this.db.DB;
+            var service = this.db;
+
+            // Act
+            service.CreateVendorCode("test_code", "test_accountantCode", 1, true, true, true);
+            var addedItem = context.VendorCodes.FirstOrDefault(vc => vc.Descriptors.title == "test_code");
+
+            // Assert
+            Assert.NotNull(addedItem);
+            context.VendorCodes.Remove(addedItem); // Удаляем для очистки
+            context.SaveChanges();
+        }
+
+        [Fact]
+        public void UpdateVendorCodeTest()
+        {
+            // Arrange
+            var context = this.db.DB;
+            var service = this.db;
+            var item = new VendorCodes("initial_code", "initial_accountantCode", 1, true, true, true);
+            context.VendorCodes.Add(item);
+            context.SaveChanges();
+
+            // Act
+            service.UpdateVendorCode(item.id, "updated_code", "updated_accountantCode", 2, false, false, false);
+            var updatedItem = context.VendorCodes.Find(item.id);
+
+            // Assert
+            Assert.Equal("updated_code", updatedItem.Descriptors.title);
+            context.VendorCodes.Remove(updatedItem); // Удаляем для очистки
+            context.SaveChanges();
+        }
+
+        [Fact]
+        public void DeleteVendorCodeTest()
+        {
+            // Arrange
+            var context = this.db.DB;
+            var service = this.db;
+            var item = new VendorCodes("test_code_for_delete", "test_accountantCode_for_delete", 1, true, true, true);
+            context.VendorCodes.Add(item);
+            context.SaveChanges();
+
+            // Act
+            service.DeleteVendorCode(item.id);
+            var deletedItem = context.VendorCodes.Find(item.id);
+
+            // Assert
+            Assert.Null(deletedItem);
+        }
+        #endregion
+
+        #region Ресурсы
+        [Fact]
+        public async Task TestCreateResource()
+        {
+            // Arrange
+            var context = this.db.DB;
+            var service = this.db;
+            int productId = 1;
+            string url = "https://example.com/resource";
+            string filePath = "/path/to/your/file.txt";
+            string resourceTitle = "TestResource";
+
+            await service.CreateResource(productId, url, filePath, resourceTitle);
+
+            var createdResource = context.DescriptorsResources.FirstOrDefault(dr => dr.title == resourceTitle);
+
+            Assert.NotNull(createdResource); // Ресурс должен быть создан
+        }
+
+        [Fact]
+        public void TestUpdateResource()
+        {
+            // Arrange
+            var context = this.db.DB;
+            var service = this.db;
+            int productId = context.Products.FirstOrDefault().id;
+            string updatedTitle = "UpdatedTitle";
+            service.UpdateResource(productId, updatedTitle);
+
+            var updatedResource = context.DescriptorsResources.FirstOrDefault(dr => dr.Descriptors.title == updatedTitle);
+
+            Assert.NotNull(updatedResource); // Название ресурса должно быть обновлено
+        }
+
+        [Fact]
+        public void TestDeleteResource()
+        {
+            // Arrange
+            var context = this.db.DB;
+            var service = this.db;
+            int productId = 1;
+            service.DeleteResource(productId);
+
+            var deletedResource = context.DescriptorsResources.Find(productId);
+
+            Assert.Null(deletedResource); // Ресурс должен быть удален
+        }
+        #endregion
+
         #region Товары
+
+        #region Фильтрация товаров по классу,группе,подгруппе
+        [Fact]
+        public void FilterByClass_ReturnsCorrectResults()
+        {
+            var result = this.db.GetFilteredProducts(classValue: "Стальные конструкции КМ");
+            Assert.All(result, product => Assert.Equal("Стальные конструкции КМ", product.Наименование_класса));
+        }
+
+        [Fact]
+        public void FilterByGroup_ReturnsCorrectResults()
+        {
+            var result = this.db.GetFilteredProducts(group: "Эстакады модульные");
+            Assert.All(result, product => Assert.Equal("Эстакады модульные", product.Наименование_группы));
+        }
+
+        [Fact]
+        public void FilterBySubGroup_ReturnsCorrectResults()
+        {
+            var result = this.db.GetFilteredProducts(subGroup: "Фермы СМЭ.Ф");
+            Assert.All(result, product => Assert.Equal("Фермы СМЭ.Ф", product.Наименование_подгруппы));
+        }
+
+        [Fact]
+        public void FilterByAll_ReturnsCorrectResults()
+        {
+            var result = this.db.GetFilteredProducts("Эстакады модульные", "Стальные конструкции КМ", "Фермы СМЭ.Ф");
+
+            Assert.All(result, product =>
+            {
+                Assert.Equal("Эстакады модульные", product.Наименование_группы);
+                Assert.Equal("Стальные конструкции КМ", product.Наименование_класса);
+                Assert.Equal("Фермы СМЭ.Ф", product.Наименование_подгруппы);
+            });
+        }
+        #endregion 
 
         #endregion
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -84,8 +85,6 @@ namespace CustomControlsWPF
                 }
             }
         }
-
-
         public int CurrentPage
         {
             set => this.pcPages.CurrentPage = value;
@@ -116,13 +115,45 @@ namespace CustomControlsWPF
         #endregion
 
         #region Методы
+
+        #region Методы для управления столбцами
+
+        public void AddDisplayColumn(string columnName)
+        {
+            if (!TableData.ColumnNames.Contains(columnName))
+            {
+                throw new ArgumentException($"Столбец с именем {columnName} отсутствует в данных.");
+            }
+
+            if (!dgData.Columns.Any(c => (c.Header as string).Replace(" ", "_").Equals(columnName)))
+            {
+                TableData.ColumnNames.Add(columnName);
+                Update();
+            }
+        }
+
+        public void RemoveDisplayColumn(string columnName)
+        {
+            if (dgData.Columns.Any(c => (c.Header as string).Replace(" ", "_").Equals(columnName)))
+            {
+                TableData.ColumnNames.Remove(columnName);
+                Update();
+            }
+        }
+
+        public void SetDisplayColumns(List<string> columnNames)
+        {
+            foreach (var item in columnNames)
+                this.AddDisplayColumn(item);
+        }
+        #endregion
+
         /// <summary>
         /// Заполняет элемент управления DataGrid записями из указанной таблицы
         /// </summary>
         /// <param name="tableData">имя таблицы</param>
         private void UpdateDataGrid(TableData tableData, int pageNumber, int itemsPerPage)
         {
-
             #region Удаление предыдущих колонок
             this.dgData.AutoGenerateColumns = false;
             this.dgData.Columns.Clear();
@@ -146,18 +177,62 @@ namespace CustomControlsWPF
             #endregion
 
             #region Добавляем колонки
-            foreach (var columnName in tableData.ColumnNames)
+            if (tableData.DisplayColumnNames == null || !tableData.DisplayColumnNames.Any())
             {
-                var column = new DataGridTextColumn
+                // Если DisplayColumnNames не заданы, добавляем все колонки из ColumnNames
+                if (tableData.ColumnNames != null && tableData.ItemsAll.Any()) // Добавил проверку на наличие элементов в ItemsAll
                 {
-                    Header = columnName.Replace('_', ' '),
-                    Binding = new System.Windows.Data.Binding(columnName)
-                };
-
-                this.dgData.Columns.Add(column);
+                    var firstItem = tableData.ItemsAll.FirstOrDefault();
+                    if (firstItem != null)
+                    {
+                        foreach (var columnName in tableData.ColumnNames)
+                        {
+                            if (firstItem.GetType().GetProperty(columnName) != null)
+                            {
+                                var column = new DataGridTextColumn
+                                {
+                                    Header = columnName.Replace('_', ' '),
+                                    Binding = new System.Windows.Data.Binding(columnName)
+                                };
+                                this.dgData.Columns.Add(column);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // В противном случае добавляем только указанные в DisplayColumnNames
+                if (tableData.ItemsAll.Any()) // Добавил проверку на наличие элементов в ItemsAll
+                {
+                    var firstItem = tableData.ItemsAll.FirstOrDefault();
+                    if (firstItem != null)
+                    {
+                        foreach (var columnName in tableData.DisplayColumnNames)
+                        {
+                            if (firstItem.GetType().GetProperty(columnName) != null)
+                            {
+                                var column = new DataGridTextColumn
+                                {
+                                    Header = columnName.Replace('_', ' '),
+                                    Binding = new System.Windows.Data.Binding(columnName)
+                                };
+                                this.dgData.Columns.Add(column);
+                            }
+                            else
+                            {
+                                throw new ArgumentException($"Столбец {columnName} отсутствует в источнике данных.");
+                            }
+                        }
+                    }
+                }
             }
             #endregion
+
+
+
         }
+
 
         /// <summary>
         /// Заменяет элемент в коллекции <see cref="ItemsAll"/> на основе идентификатора id.

@@ -559,7 +559,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             //        if (currentUnitProduct != null)
             //        {
             //            this.txbCmbCurrentUnit.Items = ToList(this.db.Units.ToList());
-            //            this.txbCmbCurrentUnit.Title = currentUnitProduct.UnitsTypes.title;
+            //            this.txbCmbCurrentUnit.Title = currentUnitProduct.UnitsTypes.Title;
             //            this.txbCmbCurrentUnit.Select(currentUnitProduct.idUnit);
             //            this.txbCmbCurrentUnit.Text = currentUnitProduct.value.ToString();
             //        }

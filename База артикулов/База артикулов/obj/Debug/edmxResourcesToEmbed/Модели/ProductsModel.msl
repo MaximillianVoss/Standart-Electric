@@ -685,13 +685,17 @@
     <EntitySetMapping Name="ProductsViewLite">
       <EntityTypeMapping TypeName="DBSEModel.ProductsViewLite">
         <MappingFragment StoreEntitySet="ProductsViewLite">
-          <ScalarProperty Name="Вес" ColumnName="Вес" />
           <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
           <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
           <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
           <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
           <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
           <ScalarProperty Name="ID_подгруппы" ColumnName="ID подгруппы" />
+          <ScalarProperty Name="Наименование_единицы_измерения" ColumnName="Наименование единицы измерения" />
+          <ScalarProperty Name="ID_единицы_измерения" ColumnName="ID единицы измерения" />
+          <ScalarProperty Name="Наименование_типа_единицы_измерения" ColumnName="Наименование типа единицы измерения" />
+          <ScalarProperty Name="ID_типа_измерения" ColumnName="ID типа измерения" />
+          <ScalarProperty Name="Вес" ColumnName="Вес" />
           <ScalarProperty Name="Наименование_продукта" ColumnName="Наименование продукта" />
           <ScalarProperty Name="Артикул" ColumnName="Артикул" />
           <ScalarProperty Name="ID_продукта" ColumnName="ID продукта" />

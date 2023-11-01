@@ -93,7 +93,7 @@ namespace База_артикулов.Формы
         /// Заполняет LabeledComboBox элементами из указанной коллекции
         /// </summary>
         /// <param name="labeledComboBox">элемент управления</param>
-        /// <param name="items">коллекция объектов (поля:id,title)</param>
+        /// <param name="items">коллекция объектов (поля:id,Title)</param>
         public void UpdateComboBox(LabeledComboBox labeledComboBox, List<object> items)
         {
             labeledComboBox.Items = items;
@@ -102,7 +102,7 @@ namespace База_артикулов.Формы
         /// Заполняет LabeledTextBoxAndComboBox элементами из указанной коллекции
         /// </summary>
         /// <param name="labeledComboBox">элемент управления</param>
-        /// <param name="items">коллекция объектов (поля:id,title)</param>
+        /// <param name="items">коллекция объектов (поля:id,Title)</param>
         public void UpdateComboBox(LabeledTextBoxAndComboBox labeledComboBox, List<object> items)
         {
             labeledComboBox.Items = items;

@@ -10,6 +10,7 @@ using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -205,6 +206,17 @@ namespace База_артикулов.Формы.Страницы
         private Task UpdateDataGrid(TableData tableData)
         {
             this.dgTable.TableData = tableData;
+            if (this.CurrentTableData.ItemsType == typeof(ProductsViewLite))
+            {
+                // Создание списка с одним элементом
+                var displayColumns = new List<string> {
+                    "Артикул",
+                    "Наименование_продукта",
+                    "Вес",
+                    "Наименование_единицы_измерения"
+                };
+                this.dgTable.TableData.SetDisplayColumns(displayColumns);
+            }
             return Task.CompletedTask;
         }
         #endregion
@@ -255,13 +267,13 @@ namespace База_артикулов.Формы.Страницы
                     break;
             }
 
-            List<GetFilteredProductsLite_Result> results = this.DB.GetFilteredProductsLite(
-                groupName,
-                className,
-                subGroupName
-            ).ToList();
-
-            List<ProductsViewLite> filteredProducts = results.Select(result => new ProductsViewLite(result)).ToList();
+            //List<GetFilteredProductsLite_Result> results = this.DB.GetFilteredProductsLite(
+            //    groupName,
+            //    className,
+            //    subGroupName
+            //).ToList();
+            //List<ProductsViewLite> filteredProducts = results.Select(result => new ProductsViewLite(result)).ToList();
+            var filteredProducts = this.DB.GetFilteredProducts(groupName, className, subGroupName);
             this.CurrentTableData.ItemsAll = new ObservableCollection<object>(filteredProducts);
             return Task.CompletedTask;
         }
