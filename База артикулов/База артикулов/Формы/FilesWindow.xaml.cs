@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using База_артикулов.Классы;
 
 namespace База_артикулов.Формы
 {
@@ -67,7 +68,6 @@ namespace База_артикулов.Формы
         public FilesWindow()
         {
             this.InitializeComponent();
-
         }
 
 
@@ -82,7 +82,6 @@ namespace База_артикулов.Формы
         {
             try
             {
-                this.InitClient();
                 _ = this.InitTreeView();
             }
             catch (Exception ex)

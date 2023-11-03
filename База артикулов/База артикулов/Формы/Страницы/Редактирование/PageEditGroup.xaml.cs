@@ -14,7 +14,6 @@ namespace База_артикулов.Формы.Страницы.Редакти
     public partial class PageEditGroup : CustomPage
     {
 
-
         #region Поля
 
         #endregion
@@ -145,10 +144,6 @@ namespace База_артикулов.Формы.Страницы.Редакти
             this.CloseWindow();
         }
         #endregion
-
-
-
-
 
     }
 }

@@ -48,20 +48,21 @@ namespace База_артикулов.Формы
                 //productUnitsWindow.Show();
                 //FilesWindow filesWindow = new FilesWindow();
                 //filesWindow.Show();
-                //ProductWindow productWindow = new ProductWindow(typeof(Products), this.DB.Products.First().id);
+                //ProductWindow productWindow = new ProductWindow(typeof(Products), this.CustomDb.Products.First().id);
                 //productWindow.ShowDialog();
 
-                //WindowEdit windowEdit = new WindowEdit(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == 1));
-                //WindowEdit windowEdit = new WindowEdit(this.DB.UnitsProducts.FirstOrDefault(x => x.id == 1));
+                //WindowEdit windowEdit = new WindowEdit(this.CustomDb.ProductsView.FirstOrDefault(x => x.ID_продукта == 1));
+                //WindowEdit windowEdit = new WindowEdit(this.CustomDb.UnitsProducts.FirstOrDefault(x => x.id == 1));
 
-                var product = CreateEmptyProduct("TEST PRODUCT", this.DB.SubGroups.FirstOrDefault(x => x.id > 0));
-                WindowEdit windowEdit = new WindowEdit(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == product.id));
-                windowEdit.ShowDialog();
-                //this.DB.Products.Remove(product);
-                //this.DB.SaveChanges();
+                //var product = CreateEmptyProduct("TEST PRODUCT", this.DB.SubGroups.FirstOrDefault(x => x.id > 0));
+                //WindowEdit windowEdit = new WindowEdit(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == product.id));
+                //windowEdit.ShowDialog();
+
+                //this.CustomDb.Products.Remove(product);
+                //this.CustomDb.SaveChanges();
 
                 //var vendorCode = new VendorCodes();
-                //WindowEdit windowEdit = new WindowEdit("Create vendorCode", vendorCode, WindowEditModes.Create);
+                //WindowEdit windowEdit = new WindowEdit("Create vendorCode", vendorCode, EditModes.Create);
                 //windowEdit.ShowDialog();
 
             }

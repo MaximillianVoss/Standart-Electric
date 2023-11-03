@@ -124,7 +124,7 @@ namespace База_артикулов.Облачный_Клиент.Тесты
         [Fact, Trait("Category", "Integration")]
         public void TestUpdateImage()
         {
-            //ProductsView productView = this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == 1);
+            //ProductsView productView = this.CustomDb.ProductsView.FirstOrDefault(x => x.ID_продукта == 1);
             //if (productView != null)
             //   await this.UpdateImageAsync(productView);
         }

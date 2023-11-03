@@ -58,21 +58,20 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                //this.SelectedItemTreeView.Value
-                var product = CreateEmptyProduct("Новый продукт", this.DB.SubGroups.FirstOrDefault(x => x.id > 0));
-                WindowEdit windowEdit = new WindowEdit(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == product.id));
-                windowEdit.ShowDialog();
-                this.DB.SaveChanges();
-
-                //var windowEdit = new WindowEdit("Создать продукт", new ProductsView(), WindowEditModes.Edit, 600, 800);
+                ////this.SelectedItemTreeView.Value
+                //var product = CreateEmptyProduct("Новый продукт", this.DB.SubGroups.FirstOrDefault(x => x.id > 0));
+                //WindowEdit windowEdit = new WindowEdit(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == product.id));
                 //windowEdit.ShowDialog();
-                if ((bool)windowEdit.DialogResult)
-                {
-                    this.InitDB();
-                    this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
-                    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
-                    this.UpdateDataGrid(this.CurrentTableData);
-                }
+                //this.DB.SaveChanges();
+
+                ////var windowEdit = new WindowEdit("Создать продукт", new ProductsView(), EditModes.Edit, 600, 800);
+                ////windowEdit.ShowDialog();
+                //if ((bool)windowEdit.DialogResult)
+                //{
+                //    this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
+                //    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
+                //    this.UpdateDataGrid(this.CurrentTableData);
+                //}
             }
             catch (Exception ex)
             {
@@ -85,11 +84,10 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var windowEdit = new WindowEdit("Редактировать продукт", this.SelectedItemTable, WindowEditModes.Edit, 600, 800);
+                var windowEdit = new WindowEdit("Редактировать продукт", this.SelectedItemTable, EditModes.Edit, 600, 800);
                 windowEdit.ShowDialog();
                 if ((bool)windowEdit.DialogResult)
                 {
-                    this.InitDB();
                     this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
                     this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
                     this.UpdateDataGrid(this.CurrentTableData);
@@ -267,7 +265,7 @@ namespace База_артикулов.Формы.Страницы
                     break;
             }
 
-            //List<GetFilteredProductsLite_Result> results = this.DB.GetFilteredProductsLite(
+            //List<GetFilteredProductsLite_Result> results = this.CustomDb.GetFilteredProductsLite(
             //    groupName,
             //    className,
             //    subGroupName
@@ -477,7 +475,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var windowEdit = new WindowEdit("Создание", new Classes(), WindowEditModes.Create);
+                var windowEdit = new WindowEdit("Создание", new Classes(), EditModes.Create);
                 windowEdit.ShowDialog();
                 _ = this.UpdateTreeView();
             }

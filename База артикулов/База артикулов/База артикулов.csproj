@@ -158,6 +158,7 @@
     </ApplicationDefinition>
     <Compile Include="Классы\Common.cs" />
     <Compile Include="Классы\CustomDB.cs" />
+    <Compile Include="Классы\CustomEventArgs.cs" />
     <Compile Include="Классы\Settings.cs" />
     <Compile Include="Классы\SettingsNew.cs" />
     <Compile Include="Классы\WDClient.cs" />

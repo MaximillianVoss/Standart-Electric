@@ -267,25 +267,25 @@ namespace База_артикулов.Формы.Страницы.Редакти
                         this.txbTitleShort.Text = productView.Сокращенное_наименование_продукта;
                         #endregion
                         #region Нормы
-                        this.cmbNorm.Update(this.ToList<Norms>(this.DB.Norms), product.idNorm);
+                        this.cmbNorm.Update(this.CustomBase.ToList<Norms>(this.DB.Norms), product.idNorm);
                         #endregion
                         #region Подгруппа
-                        this.cmbSubGroup.Update(this.ToList<SubGroups>(this.DB.SubGroups), product.idSubGroup);
+                        this.cmbSubGroup.Update(this.CustomBase.ToList<SubGroups>(this.DB.SubGroups), product.idSubGroup);
                         #endregion
                         #region Покрытия
-                        this.cmbCover.Update(this.ToList<Covers>(this.DB.Covers), product.idCover);
+                        this.cmbCover.Update(this.CustomBase.ToList<Covers>(this.DB.Covers), product.idCover);
                         #endregion
                         #region Материалы
-                        this.cmbMaterial.Update(this.ToList<Materials>(this.DB.Materials), product.idMaterial);
+                        this.cmbMaterial.Update(this.CustomBase.ToList<Materials>(this.DB.Materials), product.idMaterial);
                         #endregion
                         #region Упаковки
-                        this.cmbPackage.Update(this.ToList<Packages>(this.DB.Packages), product.idPackage);
+                        this.cmbPackage.Update(this.CustomBase.ToList<Packages>(this.DB.Packages), product.idPackage);
                         #endregion
                         #region Перфорации
-                        this.cmbPerforation.Update(this.ToList<Perforations>(this.DB.Perforations), product.idPerforation);
+                        this.cmbPerforation.Update(this.CustomBase.ToList<Perforations>(this.DB.Perforations), product.idPerforation);
                         #endregion
                         #region Отметка "На складе"
-                        this.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
+                        this.CustomBase.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
                         #endregion
                         #region Таблица измерений
                         var entityConnStr = ConfigurationManager.ConnectionStrings[Settings.Connections.CurrentConnectionString].ConnectionString;
@@ -448,11 +448,11 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 else
                 {
                     //var descriptor = new Descriptors(this.txbVendorCode.Text, this.txbVendorCode.Text, null, null);
-                    //this.DB.Descriptors.CreateClass(descriptor);
+                    //this.CustomDb.Descriptors.CreateClass(descriptor);
                     //var vendorCode = new VendorCodes(descriptor);
-                    //this.DB.VendorCodes.CreateClass(vendorCode);
+                    //this.CustomDb.VendorCodes.CreateClass(vendorCode);
                     //productVendorCode = new ProductsVendorCodes(product, vendorCode);
-                    //this.DB.ProductsVendorCodes.CreateClass(productVendorCode);
+                    //this.CustomDb.ProductsVendorCodes.CreateClass(productVendorCode);
                     //productVendorCode = new ProductsVendorCodes(product, this.CurrentVendorCode);
                     productVendorCode = new ProductsVendorCodes();
                     productVendorCode.idProduct = product.id;
@@ -530,9 +530,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         private void CustomPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            //var window = Window.GetWindow(this);
-            //window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            this.InitClient();
+
         }
         private void txbFieldName_TextChanged(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -612,7 +610,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             {
                 var unitProduct = new UnitsProducts();
                 unitProduct.idProduct = this.currentProduct.ID_продукта;
-                WindowEdit windowEdit = new WindowEdit(Common.Strings.Titles.Windows.add, unitProduct, WindowEditModes.Create);
+                WindowEdit windowEdit = new WindowEdit(Common.Strings.Titles.Windows.add, unitProduct, EditModes.Create);
                 windowEdit.ShowDialog();
                 if ((bool)windowEdit.DialogResult)
                 {
@@ -720,7 +718,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 WindowEdit windowEdit = new WindowEdit(
                     Common.Strings.Titles.Windows.add,
                     resourcesViewProducts,
-                    WindowEditModes.Create);
+                    EditModes.Create);
                 windowEdit.ShowDialog();
                 if ((bool)windowEdit.DialogResult)
                 {
@@ -748,7 +746,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 WindowEdit windowEdit = new WindowEdit(
                     Common.Strings.Titles.Windows.add,
                     resourcesViewProducts,
-                    WindowEditModes.Edit);
+                    EditModes.Edit);
                 windowEdit.ShowDialog();
                 this.InitDB();
                 this.UpdateForm(this.currentProduct);
@@ -811,11 +809,11 @@ namespace База_артикулов.Формы.Страницы.Редакти
             try
             {
                 var vendorCode = new VendorCodes();
-                WindowEdit windowEdit = new WindowEdit("Создание артикула", vendorCode, WindowEditModes.Create);
+                WindowEdit windowEdit = new WindowEdit("Создание артикула", vendorCode, EditModes.Create);
                 windowEdit.ShowDialog();
                 //if (windowEdit.DialogResult != false)
                 //{
-                if (windowEdit.CurrentItem != null && IsTypeEqual(typeof(VendorCodes), windowEdit.CurrentItem))
+                if (windowEdit.CurrentItem != null && this.CustomBase.IsTypeEqual(typeof(VendorCodes), windowEdit.CurrentItem))
                 {
                     this.txbVendorCode.Text = ((VendorCodes)windowEdit.CurrentItem).Descriptors.title;
                     this.txbCodeAccountant.Text = ((VendorCodes)windowEdit.CurrentItem).codeAccountant;

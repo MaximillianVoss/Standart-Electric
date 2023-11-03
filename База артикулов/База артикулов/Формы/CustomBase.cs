@@ -10,52 +10,25 @@ using База_артикулов.Модели;
 namespace База_артикулов.Формы
 {
     /// <summary>
-    /// Обеспечивает взаимодействие с БД и облачным хранилищем, 
-    /// также позволяет вносить информацию в элементы управления должным образом
+    /// Возможные режимы окна или формы
     /// </summary>
-    public class CustomBase
+    public enum EditModes
     {
+        Create,
+        Edit,
+        Delete
+    }
 
-        #region Поля
-
-        #endregion
-
-        #region Свойства
-        /// <summary>
-        /// webDAV-клиент
-        /// </summary>
-        public WDClient WDClient { set; get; }
-        /// <summary>
-        /// База данных
-        /// </summary>
-        public CustomDB DB { set; get; }
-        #endregion
-
-        #region Конструкторы/Деструкторы
-        public CustomBase(string settingsFilePath) : this(new SettingsNew(settingsFilePath))
-        {
-
-        }
-        public CustomBase(SettingsNew settings)
-        {
-            this.DB = new CustomDB(settings);
-            this.WDClient = new WDClient(settings);
-        }
-        #endregion
-
-        #region Методы
-
-        #region Работа с объектами
+    public static class ObjectExtensions
+    {
         /// <summary>
         /// Получает указанное поле из объекта
         /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="fieldName"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public object GetObjectFieldValue(object obj, string fieldName)
+        /// <param name="obj">Целевой объект.</param>
+        /// <param name="fieldName">Имя поля.</param>
+        /// <returns>Значение поля.</returns>
+        public static object GetFieldValue(this object obj, string fieldName)
         {
-            //TODO: падает при выделении другой таблицы, проверить!
             if (obj == null)
             {
                 throw new Exception("Не передан объект для получения поля!");
@@ -72,15 +45,69 @@ namespace База_артикулов.Формы
                 : field.GetValue(obj, null);
         }
         /// <summary>
-        /// Сравнивает два типа на равенство, в том числе извлекает и базовый тип для проверки
+        /// Проверяет, является ли тип объекта или его базовый тип указанным типом.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="object"></param>
-        /// <returns></returns>
-        public bool IsTypeEqual(Type type, object @object)
+        /// <param name="obj">Объект для проверки.</param>
+        /// <param name="type">Тип для сравнения.</param>
+        /// <returns>True, если тип объекта или его базовый тип совпадает с указанным типом, иначе false.</returns>
+        public static bool IsTypeOrBaseEqual(this object obj, Type type)
         {
-            return @object.GetType() == type || @object.GetType().BaseType == type;
+            return obj.GetType() == type || obj.GetType().BaseType == type;
         }
+    }
+
+    /// <summary>
+    /// Обеспечивает взаимодействие с БД и облачным хранилищем, 
+    /// также позволяет вносить информацию в элементы управления должным образом
+    /// </summary>
+    public class CustomBase
+    {
+
+        #region Поля
+
+        #endregion
+
+        #region Свойства
+        /// <summary>
+        /// Текущий режим: создание/редактирование/удаление
+        /// </summary>
+        public EditModes Mode { set; get; }
+        /// <summary>
+        /// Объекты с которыми в данный момент взаимодействует окно/страница, обычно передаются ему в качестве параметров
+        /// </summary>
+        public List<CustomEventArgs> СurrentObjects { set; get; }
+        /// <summary>
+        /// Объект возвращаемый окном/страницей после закрытия,
+        /// NULL - если ничего не требуется возвращать
+        /// </summary>
+        public CustomEventArgs Result { set; get; }
+        /// <summary>
+        /// webDAV-клиент
+        /// </summary>
+        public WDClient WDClient { set; get; }
+        /// <summary>
+        /// База данных
+        /// </summary>
+        public CustomDB CustomDb { set; get; }
+        #endregion
+
+        #region Конструкторы/Деструкторы
+        public CustomBase(string settingsFilePath) : this(new SettingsNew(settingsFilePath))
+        {
+
+        }
+        public CustomBase(SettingsNew settings)
+        {
+            this.CustomDb = new CustomDB(settings);
+            this.WDClient = new WDClient(settings);
+            this.СurrentObjects = new List<CustomEventArgs>();
+        }
+        #endregion
+
+        #region Методы
+
+        #region Работа с объектами
+
         #endregion
 
         #region Обновление элементов управления

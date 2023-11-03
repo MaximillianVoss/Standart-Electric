@@ -212,7 +212,7 @@ namespace База_артикулов.Классы
         /// <exception cref="Exception">Вызывается, если дескриптор с указанным идентификатором не найден.</exception>
         public bool DeleteDescriptor(int id)
         {
-            var descriptor = this.DB.Descriptors.Find(id); // Предположим, что у вашего контекста DB есть свойство Descriptors, представляющее таблицу дескрипторов.
+            var descriptor = this.DB.Descriptors.Find(id); // Предположим, что у вашего контекста CustomDb есть свойство Descriptors, представляющее таблицу дескрипторов.
 
             if (descriptor == null)
             {

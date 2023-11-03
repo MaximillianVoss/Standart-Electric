@@ -1,8 +1,10 @@
 ﻿
 using BaseWindow_WPF.Classes;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
@@ -56,6 +58,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 // Проверяем, является ли CurrentItem объектом Classes
                 if (!(this.CurrentItem is Classes currentClass))
                     throw new Exception("Редактируемый элемент не является классом");
+                this.CustomBase.CustomDb.UpdateClass(
+
+                    );
 
                 // Сохраняем descriptor
                 descriptor = this.Save(
@@ -93,7 +98,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageEditClass(object item = null)
+        public PageEditClass(List<CustomEventArgs> currentObjects, EditModes mode) : base()
         {
             this.InitializeComponent();
             this.CurrentItem = item;

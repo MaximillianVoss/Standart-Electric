@@ -15,16 +15,13 @@ using База_артикулов.Модели;
 
 namespace База_артикулов.Формы
 {
-    public class MyEventArgs : EventArgs
-    {
-        public object Data { get; set; }
-    }
+
 
     public class CustomPage : BaseWindow_WPF.BasePage
     {
 
         #region Поля
-        public delegate void DataChangedEventHandler(object sender, MyEventArgs e);
+        public delegate void DataChangedEventHandler(object sender, CustomEventArgs e);
         public event DataChangedEventHandler DataChanged;
         #endregion
 
@@ -34,20 +31,40 @@ namespace База_артикулов.Формы
         /// </summary>
         public CustomBase CustomBase { set; get; }
         /// <summary>
-        /// webDAV-клиент, ссылается на одноименное поле CustomBase
+        /// Именованная обертка для WebDAV клиента CustomBase
         /// </summary>
         public WDClient WDClient
         {
-            get => this.CustomBase.WDClient;
-            set => this.CustomBase.WDClient = value;
+            get
+            {
+                return this.CustomBase.WDClient;
+            }
         }
         /// <summary>
-        /// База данных, ссылается на одноименное поле CustomBase
+        /// Именованная обертка для базы данных DBSEEntities CustomBase
         /// </summary>
-        public CustomDB DB
+        public DBSEEntities DB
         {
-            get => this.CustomBase.DB;
-            set => this.CustomBase.DB = value;
+            get
+            {
+                return this.CustomBase.CustomDb.DB;
+            }
+        }
+        /// <summary>
+        /// Объекты с которыми в данный момент взаимодействует окно, 
+        /// обычно передаются ему в качестве параметров. 
+        /// Обертка одноименного свойства вложенного объекта CustomBase
+        /// </summary>
+        public List<CustomEventArgs> СurrentObjects
+        {
+            set
+            {
+                this.CustomBase.СurrentObjects = value;
+            }
+            get
+            {
+                return this.CustomBase.СurrentObjects;
+            }
         }
         #endregion
 
@@ -58,7 +75,7 @@ namespace База_артикулов.Формы
         /// <param name="data"></param>
         public void OnDataChanged(object data)
         {
-            DataChanged?.Invoke(this, new MyEventArgs { Data = data });
+            DataChanged?.Invoke(this, new CustomEventArgs(data));
         }
 
         /// <summary>
@@ -75,9 +92,11 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public CustomPage(SettingsNew settings)
+        public CustomPage(SettingsNew settings, List<CustomEventArgs> currentObjects = null, EditModes mode = EditModes.Create)
         {
             this.CustomBase = new CustomBase(settings);
+            this.CustomBase.Mode = mode;
+            this.СurrentObjects = currentObjects;
         }
         public CustomPage() : this(null)
         {

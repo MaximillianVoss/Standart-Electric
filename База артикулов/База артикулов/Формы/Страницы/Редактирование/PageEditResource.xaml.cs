@@ -29,7 +29,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         #region Поля
         ResourcesViewProducts currentItem;
-        WindowEditModes mode;
+        EditModes mode;
         #endregion
 
         #region Свойства
@@ -61,7 +61,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         private async Task Save()
         {
-            if (this.mode == WindowEditModes.Create)
+            if (this.mode == EditModes.Create)
             {
                 //this.ShowMessage("CREATE STARTED");
                 #region Загрузка файла
@@ -118,7 +118,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 }
                 #endregion
             }
-            if (this.mode == WindowEditModes.Edit)
+            if (this.mode == EditModes.Edit)
             {
                 #region Обновление данных
                 if (this.IsDescriptorProductExists(this.currentItem.ID_продукта))
@@ -159,11 +159,11 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageEditResource(object item = null, WindowEditModes mode = WindowEditModes.Create)
+        public PageEditResource(object item = null, EditModes mode = EditModes.Create)
         {
             InitializeComponent();
             this.mode = mode;
-            if (this.mode == WindowEditModes.Edit)
+            if (this.mode == EditModes.Edit)
             {
                 this.btnSelectFile.Visibility = Visibility.Collapsed;
                 this.lbltxbFilePath.Visibility = Visibility.Collapsed;

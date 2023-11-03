@@ -31,7 +31,7 @@ namespace База_артикулов.Формы
         #region Методы
         private void UpdateForm(int? idProduct)
         {
-            this.cmbUnitType.Update(this.ToList<UnitsTypes>(this.DB.UnitsTypes));
+            this.cmbUnitType.Update(this.CustomBase.ToList<UnitsTypes>(this.DB.UnitsTypes));
             this.UpdateUnits(idProduct, this.IdUnitType);
         }
 
@@ -42,14 +42,14 @@ namespace База_артикулов.Формы
             #region Если в продукт уже добавлено это измерение
             if (productUnits != null)
             {
-                this.txbCmbCurrentUnit.Update(this.ToList<Units>(this.DB.Units), productUnits.value.ToString(), "", "", productUnits.idUnit);
+                this.txbCmbCurrentUnit.Update(this.CustomBase.ToList<Units>(this.DB.Units), productUnits.value.ToString(), "", "", productUnits.idUnit);
                 this.btnOk.Text = Common.Strings.Controls.btnEdit;
             }
             #endregion
             #region Если в продуктe нет этого измерения
             else
             {
-                this.txbCmbCurrentUnit.Update(this.ToList<Units>(this.DB.Units), "0", "", "", this.DB.Units.FirstOrDefault().id);
+                this.txbCmbCurrentUnit.Update(this.CustomBase.ToList<Units>(this.DB.Units), "0", "", "", this.DB.Units.FirstOrDefault().id);
                 this.btnOk.Text = Common.Strings.Controls.btnAdd;
             }
             #endregion
