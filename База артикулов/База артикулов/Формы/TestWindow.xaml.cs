@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using База_артикулов.Классы;
 using База_артикулов.Модели;
 
 namespace База_артикулов.Формы
@@ -25,9 +27,29 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public TestWindow()
+        public TestWindow():base("TestWindow")
         {
             this.InitializeComponent();
+        }
+
+        public override object HandleCancel()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleOk()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateFields(List<CustomEventArgs> args = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateForm(List<CustomEventArgs> args = null)
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -36,8 +58,6 @@ namespace База_артикулов.Формы
         #region Операторы
 
         #endregion
-
-
 
         #region Обработчики событий
         private void Window_Loaded(object sender, RoutedEventArgs e)

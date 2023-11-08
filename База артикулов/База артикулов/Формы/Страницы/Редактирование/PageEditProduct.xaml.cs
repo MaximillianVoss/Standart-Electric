@@ -608,15 +608,15 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             try
             {
-                var unitProduct = new UnitsProducts();
-                unitProduct.idProduct = this.currentProduct.ID_продукта;
-                WindowEdit windowEdit = new WindowEdit(Common.Strings.Titles.Windows.add, unitProduct, EditModes.Create);
-                windowEdit.ShowDialog();
-                if ((bool)windowEdit.DialogResult)
-                {
-                    this.InitDB();
-                    this.UpdateForm(this.currentProduct);
-                }
+                //var unitProduct = new UnitsProducts();
+                //unitProduct.idProduct = this.currentProduct.ID_продукта;
+                //WindowEdit windowEdit = new WindowEdit(Common.Strings.Titles.Windows.add, unitProduct, EditModes.Create);
+                //windowEdit.ShowDialog();
+                //if ((bool)windowEdit.DialogResult)
+                //{
+                //    //this.InitDB();
+                //    this.UpdateForm(this.currentProduct);
+                //}
             }
             catch (Exception ex)
             {
@@ -627,15 +627,15 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             try
             {
-                this.InitDB();
-                this.UpdateUnitSelection();
-                WindowEdit windowEdit = new WindowEdit(Common.Strings.Titles.Windows.edit, this.currentUnit);
-                windowEdit.ShowDialog();
-                if ((bool)windowEdit.DialogResult)
-                {
-                    this.InitDB();
-                    this.UpdateForm(this.currentProduct);
-                }
+                //this.InitDB();
+                //this.UpdateUnitSelection();
+                //WindowEdit windowEdit = new WindowEdit(Common.Strings.Titles.Windows.edit, this.currentUnit);
+                //windowEdit.ShowDialog();
+                //if ((bool)windowEdit.DialogResult)
+                //{
+                //    //this.InitDB();
+                //    this.UpdateForm(this.currentProduct);
+                //}
             }
             catch (Exception ex)
             {
@@ -708,24 +708,24 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             try
             {
-                ResourcesViewProducts resourcesViewProducts = new ResourcesViewProducts();
-                resourcesViewProducts.ID_продукта = this.currentProduct.ID_продукта;
-                if (this.IsDescriptorProductExists(this.currentProduct.ID_продукта))
-                {
-                    resourcesViewProducts.ID_дескриптора_объекта = this.GetDescriptorProduct(this.currentProduct.ID_продукта).id;
-                    //this.ShowMessage(resourcesViewProducts.ID_дескриптора_объекта.ToString());
-                }
-                WindowEdit windowEdit = new WindowEdit(
-                    Common.Strings.Titles.Windows.add,
-                    resourcesViewProducts,
-                    EditModes.Create);
-                windowEdit.ShowDialog();
-                if ((bool)windowEdit.DialogResult)
-                {
-                    this.InitDB();
-                    this.UpdateForm(this.currentProduct);
-                    this.ShowMessage("Добавление файла завершено!");
-                }
+                //ResourcesViewProducts resourcesViewProducts = new ResourcesViewProducts();
+                //resourcesViewProducts.ID_продукта = this.currentProduct.ID_продукта;
+                //if (this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentProduct.ID_продукта))
+                //{
+                //    resourcesViewProducts.ID_дескриптора_объекта = this.CustomBase.CustomDb.GetDescriptorProduct(this.currentProduct.ID_продукта).id;
+                //    //this.ShowMessage(resourcesViewProducts.ID_дескриптора_объекта.ToString());
+                //}
+                //WindowEdit windowEdit = new WindowEdit(
+                //    Common.Strings.Titles.Windows.add,
+                //    resourcesViewProducts,
+                //    EditModes.Create);
+                //windowEdit.ShowDialog();
+                //if ((bool)windowEdit.DialogResult)
+                //{
+                //    //this.InitDB();
+                //    this.UpdateForm(this.currentProduct);
+                //    this.ShowMessage("Добавление файла завершено!");
+                //}
             }
             catch (Exception ex)
             {
@@ -736,20 +736,20 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             try
             {
-                ResourcesViewProducts resourcesViewProducts = new ResourcesViewProducts();
-                resourcesViewProducts.ID_продукта = this.currentProduct.ID_продукта;
-                if (this.IsDescriptorProductExists(this.currentProduct.ID_продукта))
-                {
-                    resourcesViewProducts.ID_дескриптора_объекта = this.GetDescriptorProduct(this.currentProduct.ID_продукта).id;
-                    //this.ShowMessage(resourcesViewProducts.ID_дескриптора_объекта.ToString());
-                }
-                WindowEdit windowEdit = new WindowEdit(
-                    Common.Strings.Titles.Windows.add,
-                    resourcesViewProducts,
-                    EditModes.Edit);
-                windowEdit.ShowDialog();
-                this.InitDB();
-                this.UpdateForm(this.currentProduct);
+                //ResourcesViewProducts resourcesViewProducts = new ResourcesViewProducts();
+                //resourcesViewProducts.ID_продукта = this.currentProduct.ID_продукта;
+                //if (this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentProduct.ID_продукта))
+                //{
+                //    resourcesViewProducts.ID_дескриптора_объекта = this.CustomBase.CustomDb.GetDescriptorProduct(this.currentProduct.ID_продукта).id;
+                //    //this.ShowMessage(resourcesViewProducts.ID_дескриптора_объекта.ToString());
+                //}
+                //WindowEdit windowEdit = new WindowEdit(
+                //    Common.Strings.Titles.Windows.add,
+                //    resourcesViewProducts,
+                //    EditModes.Edit);
+                //windowEdit.ShowDialog();
+                ////this.InitDB();
+                //this.UpdateForm(this.currentProduct);
             }
             catch (Exception ex)
             {
@@ -777,7 +777,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
                     // Сохраните изменения
                     this.DB.SaveChanges();
-                    this.InitDB();
+                    //this.InitDB();
                     this.UpdateForm(this.currentProduct);
                 }
             }
@@ -790,7 +790,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             try
             {
-                this.InitDB(true);
+                //this.InitDB(true);
                 this.UpdateForm(this.currentProduct);
             }
             catch (Exception ex)
@@ -808,23 +808,47 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             try
             {
-                var vendorCode = new VendorCodes();
-                WindowEdit windowEdit = new WindowEdit("Создание артикула", vendorCode, EditModes.Create);
-                windowEdit.ShowDialog();
+                //var vendorCode = new VendorCodes();
+                //WindowEdit windowEdit = new WindowEdit("Создание артикула", vendorCode, EditModes.Create);
+                //windowEdit.ShowDialog();
+
+
                 //if (windowEdit.DialogResult != false)
                 //{
-                if (windowEdit.CurrentItem != null && this.CustomBase.IsTypeEqual(typeof(VendorCodes), windowEdit.CurrentItem))
-                {
-                    this.txbVendorCode.Text = ((VendorCodes)windowEdit.CurrentItem).Descriptors.title;
-                    this.txbCodeAccountant.Text = ((VendorCodes)windowEdit.CurrentItem).codeAccountant;
-                    this.CurrentVendorCode = (VendorCodes)windowEdit.CurrentItem;
-                }
+
+                //if (windowEdit.CurrentObject != null && this.CustomBase.IsTypeEqual(typeof(VendorCodes), windowEdit.CurrentObject))
+                //{
+                //    this.txbVendorCode.Text = ((VendorCodes)windowEdit.CurrentObject).Descriptors.title;
+                //    this.txbCodeAccountant.Text = ((VendorCodes)windowEdit.CurrentObject).codeAccountant;
+                //    this.CurrentVendorCode = (VendorCodes)windowEdit.CurrentObject;
+                //}
+
                 //}
             }
             catch (Exception ex)
             {
                 this.ShowError(ex);
             }
+        }
+
+        public override void UpdateFields(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateForm(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
         }
     }
 }

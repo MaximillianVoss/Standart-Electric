@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
@@ -154,6 +155,26 @@ namespace База_артикулов.Формы
             {
                 this.ShowError(ex);
             }
+        }
+
+        public override void UpdateFields(List<CustomEventArgs> args = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateForm(List<CustomEventArgs> args = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleOk()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleCancel()
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

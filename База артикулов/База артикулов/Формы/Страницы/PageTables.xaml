@@ -27,7 +27,7 @@
                 <ContextMenu>
                     <MenuItem x:Name="miTreeAdd" Header="Добавить" IsEnabled="False" Click="miTreeAdd_Click"/>
                     <MenuItem x:Name="miTreeEdit" Header="Редактировать" Click="miTreeEdit_Click"/>
-                    <MenuItem x:Name="miDelete" Header="Удалить"  IsEnabled="False" Click="miTreeDelete_Click" />
+                    <MenuItem x:Name="miTreeDelete" Header="Удалить"  IsEnabled="False" Click="miTreeDelete_Click" />
                 </ContextMenu>
             </TreeView.ContextMenu>
         </TreeView>

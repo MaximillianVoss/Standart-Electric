@@ -71,7 +71,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 #endregion
                 //this.ShowMessage("Загрузка выполнена! ID_продукта:" + this.currentItem.ID_продукта.ToString());
                 #region Создание/обновление данных
-                if (this.IsDescriptorProductExists(this.currentItem.ID_продукта))
+                if (this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentItem.ID_продукта))
                 {
                     //this.ShowMessage("Дескриптор продукта обнаружен!");
                     var extension = System.IO.Path.GetExtension(this.lbltxbFilePath.Text);
@@ -92,9 +92,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     #endregion
                     #region Если тип найден, продолжаем работу с ним
 
-                    if (!this.IsDescriptorProductExists(this.currentItem.ID_продукта))
+                    if (!this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentItem.ID_продукта))
                         throw new Exception("Не удалось найти дескриптор продукта!");
-                    var productDescriptor = this.GetDescriptorProduct(this.currentItem.ID_продукта);
+                    var productDescriptor = this.CustomBase.CustomDb.GetDescriptorProduct(this.currentItem.ID_продукта);
                     //this.ShowMessage(productDescriptor.id.ToString());
 
                     var productDescriptorResource = new DescriptorsResources();
@@ -121,13 +121,13 @@ namespace База_артикулов.Формы.Страницы.Редакти
             if (this.mode == EditModes.Edit)
             {
                 #region Обновление данных
-                if (this.IsDescriptorProductExists(this.currentItem.ID_продукта))
+                if (this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentItem.ID_продукта))
                 {
-                    if (!this.IsDescriptorProductExists(this.currentItem.ID_продукта))
+                    if (!this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentItem.ID_продукта))
                         throw new Exception("Не удалось найти дескриптор продукта!");
-                    var productDescriptor = this.GetDescriptorProduct(this.currentItem.ID_продукта);
+                    var productDescriptor = this.CustomBase.CustomDb.GetDescriptorProduct(this.currentItem.ID_продукта);
 
-                    var productDescriptorResource = this.GetDescriptorsResources(productDescriptor.id);
+                    var productDescriptorResource = this.CustomBase.CustomDb.GetDescriptorsResources(productDescriptor.id);
                     if (productDescriptorResource != null)
                     {
                         productDescriptorResource.title = this.lbltxbResourceTitle.Text;
@@ -145,10 +145,10 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         void Update(ResourcesViewProducts item)
         {
-            var productDescriptor = this.GetDescriptorProduct(item.ID_продукта);
-            if (this.IsDescriptorResourcesExists(productDescriptor.id))
+            var productDescriptor = this.CustomBase.CustomDb.GetDescriptorProduct(item.ID_продукта);
+            if (this.CustomBase.CustomDb.IsDescriptorResourcesExists(productDescriptor.id))
             {
-                var productDescriptorResource = this.GetDescriptorsResources(productDescriptor.id);
+                var productDescriptorResource = this.CustomBase.CustomDb.GetDescriptorsResources(productDescriptor.id);
                 this.lbltxbResourceTitle.Text = productDescriptorResource.title;
             }
             else
@@ -228,6 +228,26 @@ namespace База_артикулов.Формы.Страницы.Редакти
             {
                 this.ShowError(ex);
             }
+        }
+
+        public override void UpdateFields(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateForm(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using База_артикулов.Классы;
@@ -65,7 +66,7 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public FilesWindow()
+        public FilesWindow() : base("FilesWindow")
         {
             this.InitializeComponent();
         }
@@ -126,6 +127,26 @@ namespace База_артикулов.Формы
             {
                 this.ShowError(ex);
             }
+        }
+
+        public override void UpdateFields(List<CustomEventArgs> args = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateForm(List<CustomEventArgs> args = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleOk()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleCancel()
+        {
+            throw new NotImplementedException();
         }
     }
     #endregion

@@ -1,6 +1,5 @@
-﻿
-using BaseWindow_WPF.Classes;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using База_артикулов.Классы;
@@ -20,88 +19,77 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Свойства
-        public object CurrentItem { get; set; }
+
         #endregion
 
         #region Методы
-        private void UpdateFields(object obj)
+        public override void UpdateFields(List<CustomEventArgs> args)
         {
             Classes currentClass = null;
-            if (obj.GetType().BaseType == typeof(TreeViewItemCustom))
-            {
-                currentClass = ((TreeViewItemCustom)obj).Value as Classes;
-            }
-            if (obj.GetType().BaseType == typeof(Classes))
-                currentClass = obj as Classes;
+            //if (this.CurrentObject.IsTypeOrBaseEqual(typeof(TreeViewItemCustom)))
+            //    currentClass = ((TreeViewItemCustom)this.CurrentObject.Data).Value as Classes;
+            if (this.CurrentItem.IsTypeOrBaseEqual(typeof(Classes)))
+                currentClass = this.CurrentItem.Data as Classes;
             if (currentClass != null)
             {
                 ClassesView classView = this.DB.ClassesView.FirstOrDefault(x => x.ID_класса == currentClass.id);
                 if (classView == null)
-                    throw new System.Exception($"Не удалось найти класс с id:{currentClass.id} ");
+                    throw new Exception($"Не удалось найти класс с id:{currentClass.id} ");
                 this.txbTitle.Text = classView.Наименование_класса;
                 this.txbTitleShort.Text = classView.Сокращенное_наименование_класса;
                 this.txbCode.Text = classView.Код_класса;
                 this.txbDescription.Text = classView.Описание_класса;
+                throw new Exception("Проверить код заполнения изображения! Это тут нужно?");
                 //this.txbUrlPicture.Text = classView.URL_изображения_класса;
             }
         }
 
-        public void Save()
+        public override void UpdateForm(List<CustomEventArgs> args)
         {
-            Descriptors descriptor;
-
-            // Проверяем, задан ли CurrentItem
-            if (this.CurrentItem != null)
-            {
-                // Проверяем, является ли CurrentItem объектом Classes
-                if (!(this.CurrentItem is Classes currentClass))
-                    throw new Exception("Редактируемый элемент не является классом");
-
-                // Сохраняем descriptor
-                descriptor = this.Save(
-                    currentClass.idDescriptor,
-                    this.txbCode.Text,
-                    this.txbTitle.Text,
-                    this.txbTitleShort.Text,
-                    "",
-                    this.txbDescription.Text
-                );
-
-                // Обновляем текущий класс
-                currentClass.Descriptors = descriptor;
-            }
-            else
-            {
-                // Создаем новый объект Descriptors и добавляем его в базу данных
-                descriptor = new Descriptors(
-                    this.txbCode.Text,
-                    this.txbTitle.Text,
-                    this.txbTitleShort.Text,
-                    this.txbDescription.Text
-                );
-
-                descriptor = this.DB.Descriptors.Add(descriptor);
-
-                // Создаем новый объект Classes и добавляем его в базу данных
-                this.DB.Classes.Add(new Classes(descriptor));
-            }
-
-            // Сохраняем изменения в базу данных
-            this.DB.SaveChanges();
-        }
-
-        #endregion
-
-        #region Конструкторы/Деструкторы
-        public PageEditClass(object item = null)
-        {
-            this.InitializeComponent();
-            this.CurrentItem = item;
             this.btnOk.Text = this.CurrentItem != null ?
             Common.Strings.Titles.Controls.Buttons.saveChanges :
             Common.Strings.Titles.Controls.Buttons.createItem;
-            if (this.CurrentItem != null)
-                this.UpdateFields(this.CurrentItem);
+        }
+
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            if (this.CustomBase.Mode == EditModes.Create)
+            {
+                this.CustomBase.CustomDb.CreateClass(
+                        this.txbCode.Text,
+                        this.txbTitle.Text,
+                        this.txbTitleShort.Text,
+                        this.txbDescription.Text
+                    );
+
+            }
+            if (this.CustomBase.Mode == EditModes.Edit)
+            {
+                if (!this.CurrentItem.Data.IsTypeOrBaseEqual(typeof(Classes)))
+                    throw new Exception("Редактируемый элемент не является классом");
+                var @class = (Classes)this.CurrentItem.Data;
+                this.CustomBase.Result.Data = this.CustomBase.CustomDb.UpdateClass(
+                        @class.id,
+                        this.txbCode.Text,
+                        this.txbTitle.Text,
+                        this.txbTitleShort.Text,
+                        this.txbDescription.Text
+                    );
+            }
+            this.CustomBase.Result.Data = true;
+            return true;
+        }
+
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            return false;
+        }
+        #endregion
+
+        #region Конструкторы/Деструкторы
+        public PageEditClass(CustomBase customBase, int expectedArgsCount = 0) : base(customBase, expectedArgsCount)
+        {
+            this.InitializeComponent();
         }
         #endregion
 
@@ -116,28 +104,18 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         }
         private void gMain_Loaded(object sender, RoutedEventArgs e)
-
         {
 
         }
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                this.Save();
-                this.CloseWindow(true);
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex);
-            }
+            this.ProcessOk();
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.CloseWindow();
+            this.ProcessCancel();
         }
         #endregion
-
 
     }
 }

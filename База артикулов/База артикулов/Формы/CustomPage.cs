@@ -17,7 +17,7 @@ namespace База_артикулов.Формы
 {
 
 
-    public class CustomPage : BaseWindow_WPF.BasePage
+    public abstract partial class CustomPage : BaseWindow_WPF.BasePage
     {
 
         #region Поля
@@ -59,13 +59,17 @@ namespace База_артикулов.Формы
         {
             set
             {
-                this.CustomBase.СurrentObjects = value;
+                this.CustomBase.CurrentObjects = value;
             }
             get
             {
-                return this.CustomBase.СurrentObjects;
+                return this.CustomBase.CurrentObjects;
             }
         }
+        /// <summary>
+        /// Первый переданный объект в списке аргументов (если они не <see langword="null"/>)
+        /// </summary>
+        public CustomEventArgs CurrentObject { get { return this.CustomBase.CurrentObject; } set { this.CustomBase.CurrentObject = value; } }
         #endregion
 
         #region Методы
@@ -89,18 +93,61 @@ namespace База_артикулов.Формы
             window?.Close();
         }
 
+        public abstract void UpdateFields(List<CustomEventArgs> args);
+        public abstract void UpdateForm(List<CustomEventArgs> args);
+        public abstract object HandleOk(List<CustomEventArgs> args);
+        public abstract object HandleCancel(List<CustomEventArgs> args);
+        public void ProcessOk()
+        {
+            try
+            {
+                this.CustomBase.Result = new CustomEventArgs(HandleOk(this.CustomBase.CurrentObjects));
+                this.CloseWindow(true);
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+        public void ProcessCancel()
+        {
+            try
+            {
+                this.CustomBase.Result = new CustomEventArgs(HandleCancel(this.CustomBase.CurrentObjects));
+                this.CloseWindow(false);
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
         #endregion
 
         #region Конструкторы/Деструкторы
-        public CustomPage(SettingsNew settings, List<CustomEventArgs> currentObjects = null, EditModes mode = EditModes.Create)
+        public CustomPage(SettingsNew settings, List<CustomEventArgs> currentObjects = null, EditModes mode = EditModes.Create) :
+            this(new CustomBase(settings), 0, currentObjects, mode)
         {
-            this.CustomBase = new CustomBase(settings);
-            this.CustomBase.Mode = mode;
-            this.СurrentObjects = currentObjects;
         }
-        public CustomPage() : this(null)
+        public CustomPage(
+            CustomBase customBase = null,
+            int expectedArgsCount = 0,
+            List<CustomEventArgs> currentObjects = null,
+            EditModes mode = EditModes.None)
         {
-
+            this.CustomBase = customBase ?? new CustomBase();
+            if (this.CustomBase != null)
+            {
+                //this.CustomBase.IsArgsCorrectException(expectedArgsCount);
+                if (mode != EditModes.None)
+                    this.CustomBase.Mode = mode;
+                if (currentObjects != null)
+                    this.CustomBase.CurrentObjects = currentObjects;
+                if (this.CustomBase.CurrentObjects != null)
+                {
+                    this.UpdateForm(this.CustomBase.CurrentObjects);
+                    this.UpdateFields(this.CustomBase.CurrentObjects);
+                }
+            }
         }
         #endregion
 

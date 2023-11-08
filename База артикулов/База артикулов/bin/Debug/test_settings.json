@@ -1,0 +1,7 @@
+{
+  "CurrentConnectionString": "Test Connection String",
+  "UserNameWDClient": "TestUser",
+  "PasswordWDClient": "TestPassword",
+  "ServerWDClient": "TestServer",
+  "BasePathWDClient": "TestBasePath"
+}

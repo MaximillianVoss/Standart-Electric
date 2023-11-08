@@ -19,7 +19,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Свойства
-        public object CurrentItem { get; set; }
+
         #endregion
 
         #region Методы
@@ -33,15 +33,16 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
             this.cmbClass.Items = objClasses;
         }
-        private void UpdateFields(object obj)
+
+        public override void UpdateFields(List<CustomEventArgs> args)
         {
             Groups currentGroup = null;
-            if (obj.GetType().BaseType == typeof(TreeViewItemCustom))
-            {
-                currentGroup = ((TreeViewItemCustom)obj).Value as Groups;
-            }
-            if (obj.GetType().BaseType == typeof(Groups))
-                currentGroup = obj as Groups;
+            //if (obj.GetType().BaseType == typeof(TreeViewItemCustom))
+            //{
+            //    currentGroup = ((TreeViewItemCustom)obj).Value as Groups;
+            //}
+            if (this.CurrentObject.Data.IsTypeOrBaseEqual(typeof(Groups)))
+                currentGroup = this.CurrentObject.Data as Groups;
             if (currentGroup != null)
             {
                 GroupsView groupView = this.DB.GroupsView.FirstOrDefault(x => x.ID_группы == currentGroup.id);
@@ -51,74 +52,62 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 this.txbTitleShort.Text = groupView.Сокращенное_наименование_группы;
                 this.txbCode.Text = groupView.Код_группы;
                 this.txbDescription.Text = groupView.Описание_группы;
-                //this.txbUrlPicture.Text = classView.URL_изображения_класса;
                 ClassesView @class = this.DB.ClassesView.FirstOrDefault(x => x.ID_класса == groupView.ID_класса);
                 if (@class != null)
                     this.cmbClass.Select(@class.ID_класса);
+                throw new Exception("Проверить этот код с URL класса");
+                //this.txbUrlPicture.Text = classView.URL_изображения_класса;
             }
         }
-        private void Save()
+
+        public override void UpdateForm(List<CustomEventArgs> args)
         {
-            // Объявляем объект descriptor здесь, так как он будет использоваться в обоих случаях
-            Descriptors descriptor;
-
-            // Проверяем, задан ли CurrentItem
-            if (this.CurrentItem != null)
-            {
-                // Проверяем, является ли CurrentItem объектом Groups
-                if (!(this.CurrentItem is Groups currentGroup))
-                    throw new Exception("Редактируемый элемент не является классом");
-
-                // Извлекаем соответствующую группу из базы данных
-                currentGroup = this.DB.Groups.FirstOrDefault(x => x.id == currentGroup.id);
-
-                // Сохраняем descriptor
-                descriptor = this.Save(
-                    currentGroup.idDescriptor,
-                    this.txbCode.Text,
-                    this.txbTitle.Text,
-                    this.txbTitleShort.Text,
-                    "",
-                    this.txbDescription.Text
-                    );
-
-                // Обновляем текущую группу
-                currentGroup.Descriptors = descriptor;
-                currentGroup.Classes = this.DB.Classes.FirstOrDefault(x => x.id == this.cmbClass.SelectedId);
-            }
-            else
-            {
-                // Создаем новый объект Descriptors и добавляем его в базу данных
-                descriptor = new Descriptors(
-                    this.txbCode.Text,
-                    this.txbTitle.Text,
-                    this.txbTitleShort.Text,
-                    this.txbDescription.Text
-                    );
-
-                descriptor = this.DB.Descriptors.Add(descriptor);
-
-                // Создаем новый объект Groups и добавляем его в базу данных
-                this.DB.Groups.Add(new Groups(descriptor, this.DB.Classes.FirstOrDefault(x => x.id == this.cmbClass.SelectedId)));
-            }
-
-            // Сохраняем изменения в базе данных
-            this.DB.SaveChanges();
+            this.btnOk.Text = this.CurrentObject != null ?
+          Common.Strings.Titles.Controls.Buttons.saveChanges :
+          Common.Strings.Titles.Controls.Buttons.createItem;
+            this.UpdateComboBox();
         }
 
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            if (this.CustomBase.Mode == EditModes.Create)
+            {
+                this.CustomBase.Result.Data = this.CustomBase.CustomDb.CreateGroup(
+                    this.txbCode.Text,
+                    this.txbTitle.Text,
+                    this.txbTitleShort.Text,
+                    this.txbDescription.Text,
+                    this.cmbClass.SelectedId ?? this.CustomBase.CustomDb.DB.Classes.First().id
+                );
+            }
+            if (this.CustomBase.Mode == EditModes.Edit)
+            {
+                if (!this.CurrentObject.Data.IsTypeOrBaseEqual(typeof(Groups)))
+                    throw new Exception("Редактируемый элемент не является группой");
+                var group = this.CurrentObject.Data as Groups;
+                this.CustomBase.CustomDb.UpdateGroup(
+                    group.id,
+                     this.txbCode.Text,
+                    this.txbTitle.Text,
+                    this.txbTitleShort.Text,
+                    this.txbDescription.Text,
+                    this.cmbClass.SelectedId ?? this.CustomBase.CustomDb.DB.Classes.First().id
+                    );
+            }
+            this.CustomBase.Result.Data = true;
+            return true;
+        }
+
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            return false;
+        }
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageEditGroup(object item = null)
+        public PageEditGroup(CustomBase customBase, int expectedArgsCount = 0) : base(customBase, expectedArgsCount)
         {
             this.InitializeComponent();
-            this.CurrentItem = item;
-            this.btnOk.Text = this.CurrentItem != null ?
-            Common.Strings.Titles.Controls.Buttons.saveChanges :
-            Common.Strings.Titles.Controls.Buttons.createItem;
-            this.UpdateComboBox();
-            if (this.CurrentItem != null)
-                this.UpdateFields(this.CurrentItem);
         }
         #endregion
 
@@ -129,19 +118,11 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #region Обработчики событий
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                this.Save();
-                this.CloseWindow(true);
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex);
-            }
+            this.ProcessOk();
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.CloseWindow();
+            this.ProcessCancel();
         }
         #endregion
 

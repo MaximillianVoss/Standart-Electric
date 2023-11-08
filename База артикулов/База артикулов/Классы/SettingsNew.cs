@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Text;
+using System.Text.Json;
 
 namespace База_артикулов.Классы
 {
@@ -44,14 +44,9 @@ namespace База_артикулов.Классы
         {
             try
             {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine(_currentConnectionString);
-                sb.AppendLine(_userNameWDClient);
-                sb.AppendLine(_passwordWDClient);
-                sb.AppendLine(_serverWDClient);
-                sb.AppendLine(_basePathWDClient);
-
-                File.WriteAllText(filePath, sb.ToString());
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                string jsonString = JsonSerializer.Serialize(this, options);
+                File.WriteAllText(filePath, jsonString);
             }
             catch (Exception ex)
             {
@@ -65,14 +60,15 @@ namespace База_артикулов.Классы
             {
                 if (File.Exists(filePath))
                 {
-                    var lines = File.ReadAllLines(filePath);
-                    if (lines.Length >= 5)
+                    string jsonString = File.ReadAllText(filePath);
+                    var settings = JsonSerializer.Deserialize<SettingsNew>(jsonString);
+                    if (settings != null)
                     {
-                        _currentConnectionString = lines[0];
-                        _userNameWDClient = lines[1];
-                        _passwordWDClient = lines[2];
-                        _serverWDClient = lines[3];
-                        _basePathWDClient = lines[4];
+                        _currentConnectionString = settings.CurrentConnectionString;
+                        _userNameWDClient = settings.UserNameWDClient;
+                        _passwordWDClient = settings.PasswordWDClient;
+                        _serverWDClient = settings.ServerWDClient;
+                        _basePathWDClient = settings.BasePathWDClient;
 
                         OnCurrentConnectionStringChanged(_currentConnectionString);
                     }

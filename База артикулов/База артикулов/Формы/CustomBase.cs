@@ -1,4 +1,5 @@
 ﻿using CustomControlsWPF;
+using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace База_артикулов.Формы
     {
         Create,
         Edit,
-        Delete
+        Delete,
+        None
     }
 
     public static class ObjectExtensions
@@ -64,7 +66,8 @@ namespace База_артикулов.Формы
     {
 
         #region Поля
-
+        private List<CustomEventArgs> currentObjects = new List<CustomEventArgs>();
+        private CustomEventArgs currentObject = null;
         #endregion
 
         #region Свойства
@@ -75,7 +78,17 @@ namespace База_артикулов.Формы
         /// <summary>
         /// Объекты с которыми в данный момент взаимодействует окно/страница, обычно передаются ему в качестве параметров
         /// </summary>
-        public List<CustomEventArgs> СurrentObjects { set; get; }
+        public List<CustomEventArgs> CurrentObjects
+        {
+            get => currentObjects;
+            set
+            {
+                if (value == null)
+                    this.currentObjects = new List<CustomEventArgs>();
+                else
+                    this.currentObjects = value;
+            }
+        }
         /// <summary>
         /// Объект возвращаемый окном/страницей после закрытия,
         /// NULL - если ничего не требуется возвращать
@@ -89,25 +102,108 @@ namespace База_артикулов.Формы
         /// База данных
         /// </summary>
         public CustomDB CustomDb { set; get; }
+        /// <summary>
+        /// Текущий объект, выбранный в списке параметров
+        /// </summary>
+        public CustomEventArgs CurrentObject
+        {
+            set
+            {
+                this.currentObject = value;
+            }
+            get
+            {
+                if (this.CurrentObjects != null && this.CurrentObjects.Count > 0)
+                    this.currentObject = this.CurrentObjects[0];
+                return this.currentObject;
+            }
+        }
+
         #endregion
 
         #region Конструкторы/Деструкторы
+
+        /// <summary>
+        /// Конструктор по умолчанию, создающий CustomBase с настройками по умолчанию.
+        /// </summary>
+        public CustomBase()
+        {
+            // Initialize with default settings or state.
+            // Assuming that CustomDB and WDClient can be initialized with default constructors as well.
+            this.CustomDb = new CustomDB();
+            this.WDClient = new WDClient();
+            this.CurrentObjects = new List<CustomEventArgs>();
+        }
+
+        /// <summary>
+        /// Конструктор, принимающий путь к файлу настроек и создающий CustomBase на основе этих настроек.
+        /// </summary>
+        /// <param name="settingsFilePath">Путь к файлу настроек.</param>
         public CustomBase(string settingsFilePath) : this(new SettingsNew(settingsFilePath))
         {
 
         }
+
+        /// <summary>
+        /// Конструктор, принимающий настройки и инициализирующий CustomBase на основе этих настроек.
+        /// </summary>
+        /// <param name="settings">Настройки для инициализации CustomBase.</param>
         public CustomBase(SettingsNew settings)
         {
             this.CustomDb = new CustomDB(settings);
             this.WDClient = new WDClient(settings);
-            this.СurrentObjects = new List<CustomEventArgs>();
+            this.CurrentObjects = new List<CustomEventArgs>();
         }
+
         #endregion
 
+
         #region Методы
+        public bool IsArgsCorrect(int expectedArgsCount)
+        {
+            return this.CurrentObjects == null ? expectedArgsCount == 0 : this.CurrentObjects.Count == expectedArgsCount;
+        }
+
+        public bool IsArgsCorrectException(int expectedArgsCount)
+        {
+            if (!IsArgsCorrect(expectedArgsCount))
+                throw new Exception(String.Format("Ожидалось: {0} параметров, получено: {1} параметров", expectedArgsCount, this.CurrentObjects.Count));
+            return true;
+        }
 
         #region Работа с объектами
+        /// <summary>
+        /// Добавляет элемент в список текущих объектов.
+        /// </summary>
+        /// <param name="item">Элемент для добавления.</param>
+        public void AddCurrentObject(CustomEventArgs item)
+        {
+            if (item != null)
+            {
+                this.CurrentObjects.Add(item);
+            }
+        }
 
+        /// <summary>
+        /// Очищает список текущих объектов.
+        /// </summary>
+        public void ClearCurrentObjects()
+        {
+            this.CurrentObjects.Clear();
+        }
+
+        /// <summary>
+        /// Очищает список текущих объектов и добавляет новый элемент.
+        /// </summary>
+        /// <param name="item">Элемент для добавления после очистки списка.</param>
+        public void AddWithClearCurrentObjects(CustomEventArgs item)
+        {
+            this.CurrentObjects.Clear();
+            if (item != null)
+            {
+                this.CurrentObjects.Add(item);
+            }
+        }
         #endregion
 
         #region Обновление элементов управления

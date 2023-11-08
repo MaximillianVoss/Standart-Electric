@@ -1,20 +1,12 @@
 ﻿using BaseWindow_WPF;
-using CustomControlsWPF;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
-using System.Data.Entity.Core.EntityClient;
-using System.Data.SqlClient;
-using System.Linq;
-using База_артикулов.Properties;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
 namespace База_артикулов.Формы
 {
-    public class CustomWindow : BaseWindow
+    public abstract class CustomWindow : BaseWindow
     {
 
 
@@ -57,16 +49,30 @@ namespace База_артикулов.Формы
         {
             set
             {
-                this.CustomBase.СurrentObjects = value;
+                this.CustomBase.CurrentObjects = value;
             }
             get
             {
-                return this.CustomBase.СurrentObjects;
+                return this.CustomBase.CurrentObjects;
             }
         }
+        /// <summary>
+        /// Первый переданный объект в списке аргументов (если они не <see langword="null"/>)
+        /// </summary>
+        public CustomEventArgs CurrentObject { get { return this.CustomBase.CurrentObject; } set { this.CustomBase.CurrentObject = value; } }
+
         #endregion
 
         #region Методы
+        /// <summary>
+        /// Закрывает окно
+        /// </summary>
+        /// <param name="dialogResult">Были внесены изменения в окне или нет</param>
+        public void CloseWindow(bool? dialogResult = false)
+        {
+            this.DialogResult = dialogResult;
+            this.Close();
+        }
         /// <summary>
         /// Вызываем при изменении данных внутри страницы
         /// </summary>
@@ -75,19 +81,89 @@ namespace База_артикулов.Формы
         {
             DataChanged?.Invoke(this, new CustomEventArgs(data));
         }
+        public abstract void UpdateFields(List<CustomEventArgs> args = null);
+        public abstract void UpdateForm(List<CustomEventArgs> args = null);
+        public abstract object HandleOk();
+        public abstract object HandleCancel();
+        public void ProcessOk()
+        {
+            try
+            {
+                this.CustomBase.Result = new CustomEventArgs(HandleOk());
+                this.CloseWindow(true);
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+        public void ProcessCancel()
+        {
+            try
+            {
+                this.CustomBase.Result = new CustomEventArgs(HandleCancel());
+                this.CloseWindow(false);
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
         #endregion
 
         #region Конструкторы/Деструкторы
-        public CustomWindow(SettingsNew settings, List<Object> currentObjects = null)
+
+        /// <summary>
+        /// Конструктор, принимающий экземпляр CustomBase и дополнительные параметры.
+        /// </summary>
+        /// <param name="title">Заголовок окна.</param>
+        /// <param name="customBase">Экземпляр CustomBase, используемый для инициализации.</param>
+        /// <param name="expectedArgsCount">Ожидаемое количество аргументов.</param>
+        /// <param name="currentObjects">Текущие объекты для обработки.</param>
+        /// <param name="mode">Режим редактирования. По умолчанию Create.</param>
+        public CustomWindow(
+            string title = "No title",
+            CustomBase customBase = null,
+            int expectedArgsCount = 0,
+            List<CustomEventArgs> currentObjects = null,
+            EditModes mode = EditModes.None)
         {
-            this.CustomBase = new CustomBase(settings);
-            this.СurrentObjects = currentObjects;
+            this.Title = title;
+            this.CustomBase = customBase ?? new CustomBase();
+            if (this.CustomBase != null)
+            {
+                //this.CustomBase.IsArgsCorrectException(expectedArgsCount);
+                if (mode != EditModes.None)
+                    this.CustomBase.Mode = mode;
+                if (currentObjects != null)
+                    this.CustomBase.CurrentObjects = currentObjects;
+                if (this.CustomBase.CurrentObjects != null)
+                {
+                    this.UpdateForm(this.CustomBase.CurrentObjects);
+                    this.UpdateFields(this.CustomBase.CurrentObjects);
+                }
+            }
         }
-        public CustomWindow() : this(null)
+
+        /// <summary>
+        /// Конструктор, принимающий настройки и создающий экземпляр CustomBase из этих настроек.
+        /// </summary>
+        /// <param name="title">Заголовок окна.</param>
+        /// <param name="settings">Настройки для создания CustomBase.</param>
+        /// <param name="currentObjects">Текущие объекты для обработки.</param>
+        /// <param name="mode">Режим редактирования. По умолчанию Create.</param>
+        public CustomWindow(
+            string title,
+            SettingsNew settings,
+            List<CustomEventArgs> currentObjects = null,
+            EditModes mode = EditModes.Create) :
+            this(title, new CustomBase(settings), 0, currentObjects, mode)
         {
 
         }
+
         #endregion
+
 
         #region Операторы
 

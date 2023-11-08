@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using База_артикулов.Классы;
 using База_артикулов.Модели;
 
 namespace База_артикулов.Формы.Страницы.Редактирование
@@ -42,7 +43,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 this.chbIsSale.IsChecked = vendorCodes.isSale;
                 this.txbCode.Text = vendorCodes.Descriptors == null ? String.Empty : vendorCodes.Descriptors.title;
                 this.txbAccountantCode.Text = vendorCodes.codeAccountant;
-                this.cmbManufacturer.Update(this.ToList<Manufacturers>(this.DB.Manufacturers), vendorCodes.idManufacturer);
+                this.cmbManufacturer.Update(this.CustomBase.ToList<Manufacturers>(this.DB.Manufacturers), vendorCodes.idManufacturer);
             }
         }
         void Save()
@@ -81,10 +82,10 @@ namespace База_артикулов.Формы.Страницы.Редакти
         public PageEditVendorCode(object vendorCode)
         {
             InitializeComponent();
-            if (!IsTypeEqual(typeof(VendorCodes), vendorCode))
-                throw new Exception("Передан объект неподходящего типа! Ожидался объект типа VendorCodes");
-            this.currentItem = (VendorCodes)vendorCode;
-            this.UpdateForm((VendorCodes)vendorCode);
+            //if (!this.CustomBase.IsTypeOrBaseEqual(typeof(VendorCodes), vendorCode))
+            //    throw new Exception("Передан объект неподходящего типа! Ожидался объект типа VendorCodes");
+            //this.currentItem = (VendorCodes)vendorCode;
+            //this.UpdateForm((VendorCodes)vendorCode);
         }
         #endregion
 
@@ -109,6 +110,26 @@ namespace База_артикулов.Формы.Страницы.Редакти
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.CloseWindow(false);
+        }
+
+        public override void UpdateFields(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateForm(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

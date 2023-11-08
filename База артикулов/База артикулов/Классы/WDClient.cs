@@ -146,12 +146,45 @@ namespace База_артикулов.Классы
         #endregion
 
         #region Конструкторы/Деструкторы
+
+        /// <summary>
+        /// Конструктор по умолчанию, создающий WDClient с настройками по умолчанию.
+        /// </summary>
+        public WDClient()
+        {
+            // Необходимо указать фактические значения по умолчанию для userName, password, server, и basePath.
+            // Эти значения являются лишь местозаполнителями.
+            this.UserName = "defaultUserName"; // Замените на реальное значение по умолчанию.
+            this.Password = "defaultPassword"; // Замените на реальное значение по умолчанию.
+            this.Server = "defaultServer"; // Замените на реальное значение по умолчанию.
+            this.BasePath = "defaultBasePath"; // Замените на реальное значение по умолчанию.
+
+            this.Client = new Client(new NetworkCredential
+            {
+                UserName = this.UserName,
+                Password = this.Password
+            })
+            {
+                Server = this.Server,
+                BasePath = this.BasePath
+            };
+        }
+
+        /// <summary>
+        /// Конструктор, инициализирующий WDClient с использованием предоставленных учетных данных и адреса сервера.
+        /// </summary>
+        /// <param name="userName">Имя пользователя для доступа к серверу.</param>
+        /// <param name="password">Пароль пользователя.</param>
+        /// <param name="server">Адрес сервера.</param>
+        /// <param name="basePath">Базовый путь на сервере.</param>
+        /// <exception cref="ArgumentNullException">Бросается, если любой из параметров null.</exception>
         public WDClient(string userName, string password, string server, string basePath)
         {
             this.UserName = userName ?? throw new ArgumentNullException(nameof(userName));
             this.Password = password ?? throw new ArgumentNullException(nameof(password));
             this.Server = server ?? throw new ArgumentNullException(nameof(server));
             this.BasePath = basePath ?? throw new ArgumentNullException(nameof(basePath));
+
             this.Client = new Client(new NetworkCredential
             {
                 UserName = userName,
@@ -162,6 +195,12 @@ namespace База_артикулов.Классы
                 BasePath = basePath
             };
         }
+
+        /// <summary>
+        /// Конструктор, инициализирующий WDClient с использованием настроек из экземпляра SettingsNew.
+        /// </summary>
+        /// <param name="settings">Настройки для инициализации клиента.</param>
+        /// <exception cref="ArgumentNullException">Бросается, если параметр settings является null.</exception>
         public WDClient(SettingsNew settings)
         {
             if (settings == null)

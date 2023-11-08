@@ -38,15 +38,15 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             if (unit != null)
             {
-                this.cmbUnitType.Update(this.ToList<UnitsTypes>(this.DB.UnitsTypes), unit.idType);
-                this.txbCmbCurrentUnit.Update(this.ToList<Units>(this.DB.Units),
+                this.cmbUnitType.Update(this.CustomBase.ToList<UnitsTypes>(this.DB.UnitsTypes), unit.idType);
+                this.txbCmbCurrentUnit.Update(this.CustomBase.ToList<Units>(this.DB.Units),
                     text: unit.value.ToString(),
                     currentItemId: this.currentUnit.idUnit);
             }
             else
             {
-                this.cmbUnitType.Update(this.ToList<UnitsTypes>(this.DB.UnitsTypes));
-                this.txbCmbCurrentUnit.Update(this.ToList<Units>(this.DB.Units), "Новое измерение");
+                this.cmbUnitType.Update(this.CustomBase.ToList<UnitsTypes>(this.DB.UnitsTypes));
+                this.txbCmbCurrentUnit.Update(this.CustomBase.ToList<Units>(this.DB.Units), "Новое измерение");
             }
             this.DB.SaveChanges();
         }
@@ -112,6 +112,26 @@ namespace База_артикулов.Формы.Страницы.Редакти
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.CloseWindow();
+        }
+
+        public override void UpdateFields(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateForm(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

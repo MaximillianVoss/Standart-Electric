@@ -1,5 +1,6 @@
 ﻿using BaseWindow_WPF.Classes;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
@@ -24,15 +25,15 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #region Методы
         private void UpdateComboBoxGroup()
         {
-            this.cmbGroup.Items = this.ToList(this.DB.Groups.ToList());
+            this.cmbGroup.Items = this.CustomBase.ToList(this.DB.Groups.ToList());
         }
         private void UpdateComboBoxLoadDiagram()
         {
-            this.cmbLoadDiagram.Items = this.ToList(this.DB.LoadDiagrams.ToList());
+            this.cmbLoadDiagram.Items = this.CustomBase.ToList(this.DB.LoadDiagrams.ToList());
         }
         private void UpdateComboBoxApplication()
         {
-            this.cmbApplication.Items = this.ToList(this.DB.Applications.ToList());
+            this.cmbApplication.Items = this.CustomBase.ToList(this.DB.Applications.ToList());
         }
         private void UpdateFields(object obj)
         {
@@ -66,69 +67,69 @@ namespace База_артикулов.Формы.Страницы.Редакти
         }
         private void Save()
         {
-            // Объявляем объект descriptor здесь, так как он будет использоваться в обоих случаях
-            Descriptors descriptor;
+            //// Объявляем объект descriptor здесь, так как он будет использоваться в обоих случаях
+            //Descriptors descriptor;
 
-            // Проверяем, задан ли CurrentItem
-            if (this.CurrentItem != null)
-            {
-                // Проверяем, является ли CurrentItem объектом Groups
-                if (!(this.CurrentItem is SubGroups currentSubGroup))
-                    throw new Exception("Редактируемый элемент не является классом");
+            //// Проверяем, задан ли CurrentObject
+            //if (this.CurrentObject != null)
+            //{
+            //    // Проверяем, является ли CurrentObject объектом Groups
+            //    if (!(this.CurrentObject is SubGroups currentSubGroup))
+            //        throw new Exception("Редактируемый элемент не является классом");
 
-                // Извлекаем соответствующую группу из базы данных
-                currentSubGroup = this.DB.SubGroups.FirstOrDefault(x => x.id == currentSubGroup.id);
+            //    // Извлекаем соответствующую группу из базы данных
+            //    currentSubGroup = this.DB.SubGroups.FirstOrDefault(x => x.id == currentSubGroup.id);
 
-                // Сохраняем descriptor
-                descriptor = this.Save(
-                    currentSubGroup.idDescriptor,
-                    this.txbCode.Text,
-                    this.txbTitle.Text,
-                    this.txbTitleShort.Text,
-                    "",
-                    this.txbDescription.Text
-                    );
+            //    сохраняем descriptor
+            //    descriptor = this.save(
+            //        currentsubgroup.iddescriptor,
+            //        this.txbcode.text,
+            //        this.txbtitle.text,
+            //        this.txbtitleshort.text,
+            //        "",
+            //        this.txbdescription.text
+            //        );
 
-                // Обновляем текущую группу
-                currentSubGroup.Descriptors = descriptor;
-                currentSubGroup.Groups = this.DB.Groups.FirstOrDefault(x => x.id == this.cmbGroup.SelectedId);
-                currentSubGroup.LoadDiagrams = this.DB.LoadDiagrams.FirstOrDefault(x => x.id == this.cmbLoadDiagram.SelectedId);
-                var subGroupApplication = this.DB.GroupsApplications.FirstOrDefault(x => x.idSubGroup == currentSubGroup.id);
-                if (subGroupApplication != null)
-                {
-                    subGroupApplication.Applications = this.DB.Applications.FirstOrDefault(x => x.id == this.cmbApplication.SelectedId);
-                }
-                else
-                {
-                    this.DB.GroupsApplications.Add(new GroupsApplications(
-                        currentSubGroup,
-                        this.DB.Applications.FirstOrDefault(x => x.id == this.cmbApplication.SelectedId)
-                        ));
-                }
-            }
-            else
-            {
-                // Создаем новый объект Descriptors и добавляем его в базу данных
-                descriptor = new Descriptors(
-                    this.txbCode.Text,
-                    this.txbTitle.Text,
-                    this.txbTitleShort.Text,
-                    this.txbDescription.Text
-                    );
+            //    // Обновляем текущую группу
+            //    currentSubGroup.Descriptors = descriptor;
+            //    currentSubGroup.Groups = this.DB.Groups.FirstOrDefault(x => x.id == this.cmbGroup.SelectedId);
+            //    currentSubGroup.LoadDiagrams = this.DB.LoadDiagrams.FirstOrDefault(x => x.id == this.cmbLoadDiagram.SelectedId);
+            //    var subGroupApplication = this.DB.GroupsApplications.FirstOrDefault(x => x.idSubGroup == currentSubGroup.id);
+            //    if (subGroupApplication != null)
+            //    {
+            //        subGroupApplication.Applications = this.DB.Applications.FirstOrDefault(x => x.id == this.cmbApplication.SelectedId);
+            //    }
+            //    else
+            //    {
+            //        this.DB.GroupsApplications.Add(new GroupsApplications(
+            //            currentSubGroup,
+            //            this.DB.Applications.FirstOrDefault(x => x.id == this.cmbApplication.SelectedId)
+            //            ));
+            //    }
+            //}
+            //else
+            //{
+            //    // Создаем новый объект Descriptors и добавляем его в базу данных
+            //    descriptor = new Descriptors(
+            //        this.txbCode.Text,
+            //        this.txbTitle.Text,
+            //        this.txbTitleShort.Text,
+            //        this.txbDescription.Text
+            //        );
 
-                descriptor = this.DB.Descriptors.Add(descriptor);
+            //    descriptor = this.DB.Descriptors.Add(descriptor);
 
-                // Создаем новый объект Groups и добавляем его в базу данных
-                this.DB.SubGroups.Add(new SubGroups(
-                    descriptor,
-                    this.DB.Groups.FirstOrDefault(x => x.id == this.cmbGroup.SelectedId),
-                    this.DB.LoadDiagrams.FirstOrDefault(x => x.id == this.cmbLoadDiagram.SelectedId)
-                    ));
+            //    // Создаем новый объект Groups и добавляем его в базу данных
+            //    this.DB.SubGroups.Add(new SubGroups(
+            //        descriptor,
+            //        this.DB.Groups.FirstOrDefault(x => x.id == this.cmbGroup.SelectedId),
+            //        this.DB.LoadDiagrams.FirstOrDefault(x => x.id == this.cmbLoadDiagram.SelectedId)
+            //        ));
 
-            }
+            //}
 
-            // Сохраняем изменения в базе данных
-            this.DB.SaveChanges();
+            //// Сохраняем изменения в базе данных
+            //this.DB.SaveChanges();
         }
         #endregion
 
@@ -170,6 +171,26 @@ namespace База_артикулов.Формы.Страницы.Редакти
         private void btnCancel_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             this.CloseWindow();
+        }
+
+        public override void UpdateFields(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateForm(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

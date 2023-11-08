@@ -319,7 +319,7 @@ namespace База_артикулов.Классы
             int loadDiagramId,
             int applicationId)
         {
-            // Проверяем, задан ли CurrentItem
+            // Проверяем, задан ли CurrentObject
             if (currentItem == null || !(currentItem is SubGroups currentSubGroup))
                 throw new Exception("Редактируемый элемент не является классом");
 

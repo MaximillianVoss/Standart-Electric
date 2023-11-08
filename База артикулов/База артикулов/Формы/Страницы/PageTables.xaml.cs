@@ -53,6 +53,28 @@ namespace База_артикулов.Формы.Страницы
 
         #region Методы
 
+        public override void UpdateFields(List<CustomEventArgs> args)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public override void UpdateForm(List<CustomEventArgs> args)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            //throw new NotImplementedException();
+            return true;
+        }
+
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            //throw new NotImplementedException();
+            return true;
+        }
+
         #region Работа с элементами таблиц
         private void Create()
         {
@@ -79,19 +101,18 @@ namespace База_артикулов.Формы.Страницы
             }
         }
 
-
         private void Update()
         {
             try
             {
-                var windowEdit = new WindowEdit("Редактировать продукт", this.SelectedItemTable, EditModes.Edit, 600, 800);
-                windowEdit.ShowDialog();
-                if ((bool)windowEdit.DialogResult)
-                {
-                    this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
-                    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
-                    this.UpdateDataGrid(this.CurrentTableData);
-                }
+                //var windowEdit = new WindowEdit("Редактировать продукт", this.SelectedItemTable, EditModes.Edit, 600, 800);
+                //windowEdit.ShowDialog();
+                //if ((bool)windowEdit.DialogResult)
+                //{
+                //    this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
+                //    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
+                //    this.UpdateDataGrid(this.CurrentTableData);
+                //}
             }
             catch (Exception ex)
             {
@@ -210,8 +231,8 @@ namespace База_артикулов.Формы.Страницы
                 var displayColumns = new List<string> {
                     "Артикул",
                     "Наименование_продукта",
-                    "Вес",
-                    "Наименование_единицы_измерения"
+                    "Вес"
+                    //"Наименование_единицы_измерения"
                 };
                 this.dgTable.TableData.SetDisplayColumns(displayColumns);
             }
@@ -380,13 +401,23 @@ namespace База_артикулов.Формы.Страницы
                 this.HideTreeView();
             }
         }
+        /// <summary>
+        /// Обновляет кнопки контекстного меню иерархического списка
+        /// </summary>
+        private void UpdateContextMenu()
+        {
+            bool isEnabled = this.SelectedItemTreeView != null;
+            this.miTreeAdd.IsEnabled = isEnabled;
+            this.miTreeEdit.IsEnabled = isEnabled;
+            this.miTreeDelete.IsEnabled = isEnabled;
+        }
 
         #endregion
 
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageTables() : base()
+        public PageTables(CustomBase customBase) : base(customBase)
         {
             try
             {
@@ -447,6 +478,7 @@ namespace База_артикулов.Формы.Страницы
                     await this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
                     await this.UpdateDataGrid(this.CurrentTableData);
                 }
+                this.UpdateContextMenu();
             }
             catch (Exception ex)
             {
@@ -456,12 +488,7 @@ namespace База_артикулов.Формы.Страницы
 
         private void tvGroups_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //var item = this.tvGroups.SelectedItem as TreeViewItemCustom;
-            //if (item != null)
-            //{
-            //    this.TreeViewSelectedObject = item;
-            //    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, item.Value);
-            //}
+
         }
 
         private void tvGroups_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -475,7 +502,9 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var windowEdit = new WindowEdit("Создание", new Classes(), EditModes.Create);
+                this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView));
+                this.CustomBase.Mode = EditModes.Create;
+                var windowEdit = new WindowEdit(Common.Strings.Titles.Windows.add, this.CustomBase);
                 windowEdit.ShowDialog();
                 _ = this.UpdateTreeView();
             }
@@ -488,7 +517,9 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var windowEdit = new WindowEdit("Редактирование", this.SelectedItemTreeView);
+                this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView));
+                this.CustomBase.Mode = EditModes.Edit;
+                var windowEdit = new WindowEdit(Common.Strings.Titles.Windows.edit, this.CustomBase);
                 windowEdit.ShowDialog();
                 _ = this.UpdateTreeView();
             }
@@ -666,6 +697,8 @@ namespace База_артикулов.Формы.Страницы
                 this.ShowError(ex);
             }
         }
+
+
 
 
 
