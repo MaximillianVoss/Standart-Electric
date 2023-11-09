@@ -74,6 +74,27 @@ namespace База_артикулов.Формы
 
         #region Методы
         /// <summary>
+        /// Устанавливает размер окна.
+        /// </summary>
+        /// <param name="width">Ширина окна. Должна быть больше или равна 0.</param>
+        /// <param name="height">Высота окна. Должна быть больше или равна 0.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Генерируется, если ширина или высота меньше 0.</exception>
+        public void SetSize(int width, int height)
+        {
+            if (width < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(width), "Ширина окна не может быть меньше 0.");
+            }
+            if (height < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(height), "Высота окна не может быть меньше 0.");
+            }
+
+            this.MinWidth = width;
+            this.MinHeight = height;
+        }
+
+        /// <summary>
         /// Вызываем при изменении данных внутри страницы
         /// </summary>
         /// <param name="data"></param>
@@ -81,7 +102,6 @@ namespace База_артикулов.Формы
         {
             DataChanged?.Invoke(this, new CustomEventArgs(data));
         }
-
         /// <summary>
         /// Закрывает родительское окно
         /// </summary>
@@ -92,7 +112,6 @@ namespace База_артикулов.Формы
             window.DialogResult = dialogResult;
             window?.Close();
         }
-
         public abstract void UpdateFields(List<CustomEventArgs> args);
         public abstract void UpdateForm(List<CustomEventArgs> args);
         public abstract object HandleOk(List<CustomEventArgs> args);
@@ -125,19 +144,18 @@ namespace База_артикулов.Формы
 
         #region Конструкторы/Деструкторы
         public CustomPage(SettingsNew settings, List<CustomEventArgs> currentObjects = null, EditModes mode = EditModes.Create) :
-            this(new CustomBase(settings), 0, currentObjects, mode)
+            this(new CustomBase(settings), currentObjects, mode)
         {
+
         }
         public CustomPage(
             CustomBase customBase = null,
-            int expectedArgsCount = 0,
             List<CustomEventArgs> currentObjects = null,
             EditModes mode = EditModes.None)
         {
             this.CustomBase = customBase ?? new CustomBase();
             if (this.CustomBase != null)
             {
-                //this.CustomBase.IsArgsCorrectException(expectedArgsCount);
                 if (mode != EditModes.None)
                     this.CustomBase.Mode = mode;
                 if (currentObjects != null)

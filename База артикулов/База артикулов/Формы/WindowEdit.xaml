@@ -5,12 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:База_артикулов.Формы" xmlns:редактирование="clr-namespace:База_артикулов.Формы.Страницы.Редактирование"
                     mc:Ignorable="d"
-        Title="WindowEdit" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" Height="300" Width="300">
-    <Grid ClipToBounds="True">
-        <Frame x:Name="fMain" Content="Frame" HorizontalAlignment="Stretch"
-               VerticalAlignment="Stretch"             
-               NavigationUIVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
-               HorizontalContentAlignment="Stretch" 
-               VerticalContentAlignment="Stretch"/>
+                    d:DesignWidth="400"
+                    d:DesignHeight="400"
+        Title="WindowEdit" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" ContentRendered="CustomWindow_ContentRendered" SizeChanged="CustomWindow_SizeChanged">
+    <Grid>
+        <Frame x:Name="fMain" Content="Frame" 
+               NavigationUIVisibility="Hidden" 
+               ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+               Background="#FFFF4B4B" 
+               HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch"
+               />
     </Grid>
 </local:CustomWindow>

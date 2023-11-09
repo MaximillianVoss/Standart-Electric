@@ -46,6 +46,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         public override void UpdateForm(List<CustomEventArgs> args)
         {
+            this.InitializeComponent();
             this.btnOk.Text = this.CurrentObject != null ?
             Common.Strings.Titles.Controls.Buttons.saveChanges :
             Common.Strings.Titles.Controls.Buttons.createItem;
@@ -87,9 +88,10 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageEditClass(CustomBase customBase, int expectedArgsCount = 0) : base(customBase, expectedArgsCount)
+        public PageEditClass(CustomBase customBase, int width = 600, int height = 800) : base(customBase)
         {
             this.InitializeComponent();
+            this.SetSize(width, height);
         }
         #endregion
 

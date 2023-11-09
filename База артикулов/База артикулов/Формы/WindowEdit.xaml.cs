@@ -22,10 +22,19 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Свойства
-
+        public int ContentWidth { set; get; }
+        public int ContentHeight { set; get; }
         #endregion
 
         #region Методы
+        private void SetContentSize(int width, int height)
+        {
+            this.Topmost = true; // Установка окна поверх всех окон
+            this.ContentWidth = width;
+            this.ContentHeight = height;
+            this.MinHeight = height;
+            this.MinWidth = width;
+        }
         private void SetContent(string title, object content)
         {
             if (this.fMain != null)
@@ -72,11 +81,11 @@ namespace База_артикулов.Формы
                     var treeViewSelectedObject = ((TreeViewItemCustom)this.CurrentObject.Data).Value;
                     if (treeViewSelectedObject.IsTypeOrBaseEqual(typeof(Classes)))
                     {
-                        this.SetContent("Создание класса", new PageEditClass(this.CustomBase));
+                        this.SetContent("Создание класса", new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
                     }
                     if (treeViewSelectedObject.IsTypeOrBaseEqual(typeof(Groups)))
                     {
-                        this.SetContent("Создание группы", new PageEditGroup(this.CustomBase));
+                        this.SetContent("Создание группы", new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
                     }
 
                 }
@@ -187,8 +196,9 @@ namespace База_артикулов.Формы
         /// </summary>
         /// <param name="title">Заголовок окна.</param>
         /// <param name="customBase">Экземпляр CustomBase, используемый для инициализации.</param>
-        public WindowEdit(string title, CustomBase customBase) : base(title: title, customBase)
+        public WindowEdit(string title, CustomBase customBase, int width = 600, int height = 800) : base(title: title, customBase)
         {
+            this.SetContentSize(width, height);
             InitializeWindow(title);
         }
 
@@ -201,7 +211,7 @@ namespace База_артикулов.Формы
         public WindowEdit(string title, string settingsPath, EditModes mode = EditModes.Create) :
             base(title: title, new CustomBase(new SettingsNew(settingsPath)), mode: mode)
         {
-            InitializeWindow(title);
+
         }
 
         /// <summary>
@@ -211,7 +221,7 @@ namespace База_артикулов.Формы
         private void InitializeWindow(string title)
         {
             this.InitializeComponent();
-            this.SetCenter(); // Предполагается, что SetCenter - это метод, который центрирует окно.
+            //this.SetCenter(); // Предполагается, что SetCenter - это метод, который центрирует окно.
             this.Title = title; // Устанавливаем заголовок окна.
                                 // Здесь может быть выполнена остальная инициализация, например, установка размеров и т.д.
         }
@@ -242,5 +252,14 @@ namespace База_артикулов.Формы
 
         #endregion
 
+        private void CustomWindow_ContentRendered(object sender, EventArgs e)
+        {
+            this.SetCenter(sender);
+        }
+
+        private void CustomWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+        }
     }
 }

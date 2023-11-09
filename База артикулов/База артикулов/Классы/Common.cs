@@ -98,5 +98,43 @@
                 }
             }
         }
+
+        public static class WindowSizes
+        {
+            public static class SmallH240W300
+            {
+                public const int Width = 300;
+                public const int Height = 240;
+            }
+
+            public static class SmallH320W400
+            {
+                public const int Width = 400;
+                public const int Height = 320;
+            }
+
+            public static class MediumH600W800
+            {
+                public const int Width = 800;
+                public const int Height = 600;
+            }
+
+            public static class LargeH900W1200
+            {
+                public const int Width = 1200;
+                public const int Height = 900;
+            }
+
+            // Используйте этот подход для определения дополнительных размеров окон
+            // ...
+
+            // Пример класса для окна полноэкранного режима на обычном HD дисплее
+            public static class FullscreenHD
+            {
+                public const int Width = 1920;
+                public const int Height = 1080;
+            }
+        }
+
     }
 }

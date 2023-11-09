@@ -105,8 +105,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageEditGroup(CustomBase customBase, int expectedArgsCount = 0) : base(customBase, expectedArgsCount)
+        public PageEditGroup(CustomBase customBase, int width = 600, int height = 800) : base(customBase)
         {
+            this.SetSize(width, height);
             this.InitializeComponent();
         }
         #endregion

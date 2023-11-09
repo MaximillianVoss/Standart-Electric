@@ -6,7 +6,7 @@ namespace База_артикулов.Классы
 {
     public class SettingsNew
     {
-        private const string DEFAULT_FILE_PATH = "settings.txt";
+        private const string DEFAULT_FILE_PATH = "settings.json";
 
         #region Поля
         private string _currentConnectionString = "Подключение к LAPTOP-BBFM8MMD";
@@ -83,7 +83,7 @@ namespace База_артикулов.Классы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public SettingsNew() : this(DEFAULT_FILE_PATH)
+        public SettingsNew() //: this(DEFAULT_FILE_PATH)
         {
 
         }

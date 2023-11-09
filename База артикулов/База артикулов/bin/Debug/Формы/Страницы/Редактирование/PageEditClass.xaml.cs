@@ -28,8 +28,8 @@ namespace База_артикулов.Формы.Страницы.Редакти
             Classes currentClass = null;
             //if (this.CurrentObject.IsTypeOrBaseEqual(typeof(TreeViewItemCustom)))
             //    currentClass = ((TreeViewItemCustom)this.CurrentObject.Data).Value as Classes;
-            if (this.CurrentItem.IsTypeOrBaseEqual(typeof(Classes)))
-                currentClass = this.CurrentItem.Data as Classes;
+            if (this.CurrentObject.IsTypeOrBaseEqual(typeof(Classes)))
+                currentClass = this.CurrentObject.Data as Classes;
             if (currentClass != null)
             {
                 ClassesView classView = this.DB.ClassesView.FirstOrDefault(x => x.ID_класса == currentClass.id);
@@ -46,7 +46,8 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         public override void UpdateForm(List<CustomEventArgs> args)
         {
-            this.btnOk.Text = this.CurrentItem != null ?
+            this.InitializeComponent();
+            this.btnOk.Text = this.CurrentObject != null ?
             Common.Strings.Titles.Controls.Buttons.saveChanges :
             Common.Strings.Titles.Controls.Buttons.createItem;
         }
@@ -65,9 +66,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
             if (this.CustomBase.Mode == EditModes.Edit)
             {
-                if (!this.CurrentItem.Data.IsTypeOrBaseEqual(typeof(Classes)))
+                if (!this.CurrentObject.Data.IsTypeOrBaseEqual(typeof(Classes)))
                     throw new Exception("Редактируемый элемент не является классом");
-                var @class = (Classes)this.CurrentItem.Data;
+                var @class = (Classes)this.CurrentObject.Data;
                 this.CustomBase.Result.Data = this.CustomBase.CustomDb.UpdateClass(
                         @class.id,
                         this.txbCode.Text,
@@ -87,9 +88,10 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageEditClass(CustomBase customBase, int expectedArgsCount = 0) : base(customBase, expectedArgsCount)
+        public PageEditClass(CustomBase customBase, int width = 600, int height = 800) : base(customBase)
         {
             this.InitializeComponent();
+            this.SetSize(width, height);
         }
         #endregion
 

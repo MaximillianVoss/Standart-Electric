@@ -1,10 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace BaseWindow_WPF
 {
-    public class BaseWindow : Window
+    public partial class BasePage : Page
     {
 
         #region Поля
@@ -70,35 +81,11 @@ namespace BaseWindow_WPF
         }
         #endregion
 
-        /// <summary>
-        /// Задает стартовую локацию окна по центру
-        /// </summary>
-        public void SetCenter(object sender)
-        {
-            var window = sender as Window;
-            if (window.Owner != null)
-            {
-                // Центрирование относительно родительского окна
-                window.Left = window.Owner.Left + (window.Owner.Width - window.ActualWidth) / 2;
-                window.Top = window.Owner.Top + (window.Owner.Height - window.ActualHeight) / 2;
-            }
-            else
-            {
-                // Центрирование на экране, если нет родительского окна
-                var screenWidth = SystemParameters.PrimaryScreenWidth;
-                var screenHeight = SystemParameters.PrimaryScreenHeight;
-                var windowWidth = window.ActualWidth;
-                var windowHeight = window.ActualHeight;
-                window.Left = (screenWidth / 2) - (windowWidth / 2);
-                window.Top = (screenHeight / 2) - (windowHeight / 2);
-            }
-        }
         #endregion
 
         #region Конструкторы/Деструкторы
-        public BaseWindow()
+        public BasePage()
         {
-            //this.SetCenter();
         }
         #endregion
 

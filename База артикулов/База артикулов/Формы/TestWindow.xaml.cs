@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseWindow_WPF.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -19,7 +20,7 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Свойства
-
+        CustomBase CustomBase { set; get; }
         #endregion
 
         #region Методы
@@ -27,8 +28,9 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public TestWindow():base("TestWindow")
+        public TestWindow() : base("TestWindow")
         {
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.InitializeComponent();
         }
 
@@ -44,12 +46,12 @@ namespace База_артикулов.Формы
 
         public override void UpdateFields(List<CustomEventArgs> args = null)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override void UpdateForm(List<CustomEventArgs> args = null)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
 
@@ -62,8 +64,24 @@ namespace База_артикулов.Формы
         #region Обработчики событий
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+
             try
             {
+                this.CustomBase = new CustomBase(new SettingsNew("settings.json"));
+                this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(new TreeViewItemCustom(1, "Test", new Classes())));
+                this.CustomBase.Mode = EditModes.Create;
+                var windowEdit = new WindowEdit(
+                    Common.Strings.Titles.Windows.add,
+                    this.CustomBase,
+                    Common.WindowSizes.SmallH320W400.Width,
+                    Common.WindowSizes.SmallH320W400.Height
+                    );
+                // windowEdit.Owner = this;
+                //windowEdit.SetCenter();
+                windowEdit.ShowDialog();
+
+
                 //ProductUnitsWindow productUnitsWindow = new ProductUnitsWindow(1);
                 //productUnitsWindow.Show();
                 //FilesWindow filesWindow = new FilesWindow();
