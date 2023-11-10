@@ -1,4 +1,5 @@
-﻿using CustomControlsWPF;
+﻿using BaseWindow_WPF.Classes;
+using CustomControlsWPF;
 using NUnit.Framework;
 using System;
 using System.Collections;
@@ -16,7 +17,7 @@ namespace База_артикулов.Формы
     public enum EditModes
     {
         Create,
-        Edit,
+        Update,
         Delete,
         None
     }
@@ -55,6 +56,48 @@ namespace База_артикулов.Формы
         public static bool IsTypeOrBaseEqual(this object obj, Type type)
         {
             return obj.GetType() == type || obj.GetType().BaseType == type;
+        }
+        /// <summary>
+        /// Проверяет, является ли тип объекта или его базовый тип указанным типом, и бросает исключение, если нет.
+        /// </summary>
+        /// <param name="obj">Объект для проверки.</param>
+        /// <param name="expectedType">Тип для сравнения.</param>
+        /// <exception cref="ArgumentException">Генерируется, если тип объекта не совпадает с ожидаемым.</exception>
+        public static bool ValidateTypeOrBaseType(this object obj, Type expectedType)
+        {
+            Type actualType = obj.GetType();
+            if (actualType != expectedType && actualType.BaseType != expectedType)
+            {
+                throw new ArgumentException($"Тип объекта '{actualType.FullName}' не соответствует ожидаемому типу '{expectedType.FullName}'.");
+            }
+            return true;
+        }
+        /// <summary>
+        /// Проверяет, является ли тип объекта или его базовый тип указанным типом
+        /// </summary>
+        /// <typeparam name="T">Ожидаемый тип для сравнения.</typeparam>
+        /// <param name="obj">Объект для проверки.</param>
+        public static bool ValidateTypeOrBaseType<T>(this object obj)
+        {
+            Type expectedType = typeof(T);
+            Type actualType = obj.GetType();
+            return !(actualType != expectedType && actualType.BaseType != expectedType);
+        }
+        /// <summary>
+        /// Проверяет, является ли тип объекта или его базовый тип указанным типом, и бросает исключение, если нет.
+        /// </summary>
+        /// <typeparam name="T">Ожидаемый тип для сравнения.</typeparam>
+        /// <param name="obj">Объект для проверки.</param>
+        /// <exception cref="ArgumentException">Генерируется, если тип объекта не совпадает с ожидаемым.</exception>
+        public static bool ValidateTypeOrBaseTypeEx<T>(this object obj)
+        {
+            Type expectedType = typeof(T);
+            Type actualType = obj.GetType();
+            if (actualType != expectedType && actualType.BaseType != expectedType)
+            {
+                throw new ArgumentException($"Тип объекта '{actualType.FullName}' не соответствует ожидаемому типу '{expectedType.FullName}'.");
+            }
+            return true;
         }
     }
 
@@ -159,16 +202,50 @@ namespace База_артикулов.Формы
 
 
         #region Методы
+        public T UnpackCurrentObject<T>(object obj) where T : class
+        {
+            T currentObject = null;
+
+            if (obj is TreeViewItemCustom treeViewItem && treeViewItem.Value is T)
+                currentObject = treeViewItem.Value as T;
+            else if (obj is CustomEventArgs customArgs && customArgs.Data is T)
+                currentObject = customArgs.Data as T;
+            else if (obj is CustomEventArgs customArgstreeViewItem && customArgstreeViewItem.Data is TreeViewItemCustom)
+            {
+                if (customArgstreeViewItem.Data is TreeViewItemCustom treeViewData && treeViewData.Value is T)
+                    currentObject = treeViewData.Value as T;
+            }
+            else if (obj is T)
+                currentObject = obj as T;
+
+            return currentObject;
+        }
         public bool IsArgsCorrect(int expectedArgsCount)
         {
             return this.CurrentObjects == null ? expectedArgsCount == 0 : this.CurrentObjects.Count == expectedArgsCount;
         }
-
         public bool IsArgsCorrectException(int expectedArgsCount)
         {
             if (!IsArgsCorrect(expectedArgsCount))
                 throw new Exception(String.Format("Ожидалось: {0} параметров, получено: {1} параметров", expectedArgsCount, this.CurrentObjects.Count));
             return true;
+        }
+        public string GetTitle(EditModes mode, Type type)
+        {
+            string typeStr = "Объекта";
+            if (Common.EntityRussianNames.Names.ContainsKey(type))
+                typeStr = Common.EntityRussianNames.Names[type];
+            return String.Format("{0} {1}", Common.EditModesDescriptions.Descriptions[mode], typeStr.ToLower());
+        }
+        public string GetTitle(EditModes mode, object obj)
+        {
+            if (Common.EntityRussianNames.Names.ContainsKey(obj.GetType()))
+                return this.GetTitle(mode, obj.GetType());
+            return this.GetTitle(mode, obj.GetType().BaseType);
+        }
+        public string GetTitle(CustomBase commonBase)
+        {
+            return this.GetTitle(commonBase.Mode, commonBase.CurrentObject);
         }
 
         #region Работа с объектами

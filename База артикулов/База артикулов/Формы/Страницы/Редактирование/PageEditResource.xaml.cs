@@ -118,7 +118,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 }
                 #endregion
             }
-            if (this.mode == EditModes.Edit)
+            if (this.mode == EditModes.Update)
             {
                 #region Обновление данных
                 if (this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentItem.ID_продукта))
@@ -163,7 +163,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             InitializeComponent();
             this.mode = mode;
-            if (this.mode == EditModes.Edit)
+            if (this.mode == EditModes.Update)
             {
                 this.btnSelectFile.Visibility = Visibility.Collapsed;
                 this.lbltxbFilePath.Visibility = Visibility.Collapsed;

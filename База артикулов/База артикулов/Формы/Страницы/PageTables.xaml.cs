@@ -86,7 +86,7 @@ namespace База_артикулов.Формы.Страницы
                 //windowEdit.ShowDialog();
                 //this.DB.SaveChanges();
 
-                ////var windowEdit = new WindowEdit("Создать продукт", new ProductsView(), EditModes.Edit, 600, 800);
+                ////var windowEdit = new WindowEdit("Создать продукт", new ProductsView(), EditModes.Update, 600, 800);
                 ////windowEdit.ShowDialog();
                 //if ((bool)windowEdit.DialogResult)
                 //{
@@ -105,7 +105,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                //var windowEdit = new WindowEdit("Редактировать продукт", this.SelectedItemTable, EditModes.Edit, 600, 800);
+                //var windowEdit = new WindowEdit("Редактировать продукт", this.SelectedItemTable, EditModes.Update, 600, 800);
                 //windowEdit.ShowDialog();
                 //if ((bool)windowEdit.DialogResult)
                 //{
@@ -504,9 +504,14 @@ namespace База_артикулов.Формы.Страницы
             {
                 this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView));
                 this.CustomBase.Mode = EditModes.Create;
-                var windowEdit = new WindowEdit(Common.Strings.Titles.Windows.add, this.CustomBase);
+                var windowEdit = new WindowEdit(
+                    Common.Strings.Titles.Windows.add, this.CustomBase,
+                    Common.WindowSizes.SmallH320W400.Width,
+                    Common.WindowSizes.SmallH320W400.Height
+                    );
                 windowEdit.ShowDialog();
-                _ = this.UpdateTreeView();
+                if ((bool)windowEdit.DialogResult)
+                    _ = this.UpdateTreeView();
             }
             catch (Exception ex)
             {
@@ -518,10 +523,14 @@ namespace База_артикулов.Формы.Страницы
             try
             {
                 this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView));
-                this.CustomBase.Mode = EditModes.Edit;
-                var windowEdit = new WindowEdit(Common.Strings.Titles.Windows.edit, this.CustomBase);
+                this.CustomBase.Mode = EditModes.Update;
+                var windowEdit = new WindowEdit(Common.Strings.Titles.Windows.edit, this.CustomBase,
+                    Common.WindowSizes.SmallH320W400.Width,
+                    Common.WindowSizes.SmallH320W400.Height
+                    );
                 windowEdit.ShowDialog();
-                _ = this.UpdateTreeView();
+                if ((bool)windowEdit.DialogResult)
+                    _ = this.UpdateTreeView();
             }
             catch (Exception ex)
             {
@@ -532,7 +541,22 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                throw new Exception(Common.Strings.Messages.functionalityDisabled);
+                if (this.SelectedItemTreeView == null || this.SelectedItemTreeView.Value == null)
+                    throw new Exception("Не выбран элемент для удаления!");
+                var obj = this.SelectedItemTreeView.Value;
+                if (obj.ValidateTypeOrBaseType<Classes>())
+                {
+                    this.CustomBase.CustomDb.DeleteClass(((Classes)obj).id);
+                }
+                if (obj.ValidateTypeOrBaseType<Groups>())
+                {
+                    this.CustomBase.CustomDb.DeleteGroup(((Groups)obj).id);
+                }
+                if (obj.ValidateTypeOrBaseType<SubGroups>())
+                {
+                    this.CustomBase.CustomDb.DeleteSubGroup(((SubGroups)obj).id);
+                }
+                _ = this.UpdateTreeView();
             }
             catch (Exception ex)
             {

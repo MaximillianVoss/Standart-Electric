@@ -36,32 +36,37 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         public override void UpdateFields(List<CustomEventArgs> args)
         {
-            Groups currentGroup = null;
-            //if (obj.GetType().BaseType == typeof(TreeViewItemCustom))
-            //{
-            //    currentGroup = ((TreeViewItemCustom)obj).Value as Groups;
-            //}
-            if (this.CurrentObject.Data.IsTypeOrBaseEqual(typeof(Groups)))
-                currentGroup = this.CurrentObject.Data as Groups;
-            if (currentGroup != null)
+            if (this.CustomBase.Mode == EditModes.Update)
             {
-                GroupsView groupView = this.DB.GroupsView.FirstOrDefault(x => x.ID_группы == currentGroup.id);
-                if (groupView == null)
-                    throw new System.Exception($"Не удалось найти группу с id:{currentGroup.id} ");
-                this.txbTitle.Text = groupView.Наименование_группы;
-                this.txbTitleShort.Text = groupView.Сокращенное_наименование_группы;
-                this.txbCode.Text = groupView.Код_группы;
-                this.txbDescription.Text = groupView.Описание_группы;
-                ClassesView @class = this.DB.ClassesView.FirstOrDefault(x => x.ID_класса == groupView.ID_класса);
-                if (@class != null)
-                    this.cmbClass.Select(@class.ID_класса);
-                throw new Exception("Проверить этот код с URL класса");
-                //this.txbUrlPicture.Text = classView.URL_изображения_класса;
+                Groups currentGroup = null;
+                var obj = this.CurrentObject.Data;
+                if (obj.ValidateTypeOrBaseType<TreeViewItemCustom>())
+                    currentGroup = ((TreeViewItemCustom)obj).Value as Groups;
+                if (obj.ValidateTypeOrBaseType<CustomEventArgs>())
+                    currentGroup = ((CustomEventArgs)obj).Data as Groups;
+                if (obj.ValidateTypeOrBaseType<Groups>())
+                    currentGroup = obj as Groups;
+                if (currentGroup != null)
+                {
+                    GroupsView groupView = this.DB.GroupsView.FirstOrDefault(x => x.ID_группы == currentGroup.id);
+                    if (groupView == null)
+                        throw new System.Exception($"Не удалось найти группу с id:{currentGroup.id} ");
+                    this.txbTitle.Text = groupView.Наименование_группы;
+                    this.txbTitleShort.Text = groupView.Сокращенное_наименование_группы;
+                    this.txbCode.Text = groupView.Код_группы;
+                    this.txbDescription.Text = groupView.Описание_группы;
+                    ClassesView @class = this.DB.ClassesView.FirstOrDefault(x => x.ID_класса == groupView.ID_класса);
+                    if (@class != null)
+                        this.cmbClass.Select(@class.ID_класса);
+                    //throw new Exception("Проверить этот код с URL класса");
+                    //this.txbUrlPicture.Text = classView.URL_изображения_класса;
+                }
             }
         }
 
         public override void UpdateForm(List<CustomEventArgs> args)
         {
+            this.InitializeComponent();
             this.btnOk.Text = this.CurrentObject != null ?
           Common.Strings.Titles.Controls.Buttons.saveChanges :
           Common.Strings.Titles.Controls.Buttons.createItem;
@@ -80,9 +85,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     this.cmbClass.SelectedId ?? this.CustomBase.CustomDb.DB.Classes.First().id
                 );
             }
-            if (this.CustomBase.Mode == EditModes.Edit)
+            if (this.CustomBase.Mode == EditModes.Update)
             {
-                if (!this.CurrentObject.Data.IsTypeOrBaseEqual(typeof(Groups)))
+                if (!this.CurrentObject.Data.ValidateTypeOrBaseTypeEx<Groups>())
                     throw new Exception("Редактируемый элемент не является группой");
                 var group = this.CurrentObject.Data as Groups;
                 this.CustomBase.CustomDb.UpdateGroup(
@@ -93,8 +98,8 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     this.txbDescription.Text,
                     this.cmbClass.SelectedId ?? this.CustomBase.CustomDb.DB.Classes.First().id
                     );
+                this.CustomBase.Result.Data = true;
             }
-            this.CustomBase.Result.Data = true;
             return true;
         }
 

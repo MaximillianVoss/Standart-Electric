@@ -746,7 +746,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 //WindowEdit windowEdit = new WindowEdit(
                 //    Common.Strings.Titles.Windows.add,
                 //    resourcesViewProducts,
-                //    EditModes.Edit);
+                //    EditModes.Update);
                 //windowEdit.ShowDialog();
                 ////this.InitDB();
                 //this.UpdateForm(this.currentProduct);

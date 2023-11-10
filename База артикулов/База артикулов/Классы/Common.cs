@@ -1,4 +1,9 @@
-﻿namespace База_артикулов.Классы
+﻿using System.Collections.Generic;
+using System;
+using База_артикулов.Модели;
+using База_артикулов.Формы;
+
+namespace База_артикулов.Классы
 {
     public static class Common
     {
@@ -8,6 +13,12 @@
             {
                 public static readonly string regInt = @"[0-9]{1,}$";
                 public static readonly string regFloat = @"[+-]?([0-9]*[,])?[0-9]+$";
+            }
+            public static class WindowsTitles
+            {
+                public static readonly string create = "Создание";
+                public static readonly string update = "Редактирование";
+                public static readonly string delete = "Удаление";
             }
             public static class Errors
             {
@@ -19,6 +30,10 @@
                 public static readonly string incorrectDescriptorsCount = "Количество дескрипторов не соответствует числу записей!";
                 public static readonly string emptyObject = "Передана пустая ссылка на объект!";
                 public static readonly string notFolder = "Элемент не является папкой!";
+                public static readonly string failedToGetParam = "Не получилось извлечь параметр!";
+                public static readonly string incorrectCreateElement = "Не выбран элемент для создания!";
+                public static readonly string incorrectUpdateElement = "Не выбран элемент для редактирования!";
+                public static readonly string incorrectDeleteElement = "Не выбран элемент для удаления!";
             }
             public static class Warnings
             {
@@ -135,6 +150,56 @@
                 public const int Height = 1080;
             }
         }
+
+        public static class EntityRussianNames
+        {
+            public static readonly Dictionary<Type, string> Names = new Dictionary<Type, string>
+            {
+                { typeof(Applications), "Приложения" },
+                { typeof(BuisnessUnits), "Бизнес-юнита" },
+                { typeof(Classes), "Класса" },
+                { typeof(Covers), "Крышки" },
+                { typeof(Descriptors), "Дескриптора" },
+                { typeof(DescriptorsResources), "Ресурса дескриптора" },
+                { typeof(Fields), "Поля" },
+                { typeof(Groups), "Группы" },
+                { typeof(GroupsApplications), "Приложения группы" },
+                { typeof(LoadDiagrams), "Схемы загрузки" },
+                { typeof(Manufacturers), "Производителя" },
+                { typeof(Materials), "Материала" },
+                { typeof(Norms), "Нормы" },
+                { typeof(Packages), "Упаковки" },
+                { typeof(Perforations), "Перфорации" },
+                { typeof(Products), "Продукта" },
+                { typeof(ProductsAnalogs), "Аналога продукта" },
+                { typeof(ProductsVendorCodes), "Кода продавца продукта" },
+                { typeof(Resources), "Ресурса" },
+                { typeof(ResourceTypes), "Типа ресурса" },
+                { typeof(SubGroups), "Подгруппы" },
+                { typeof(Tables), "Таблицы" },
+                { typeof(Units), "Единицы" },
+                { typeof(UnitsPackages), "Упаковки единиц" },
+                { typeof(UnitsPerforations), "Перфорации единиц" },
+                { typeof(UnitsProducts), "Продукты единиц" },
+                { typeof(UnitsTypes), "Типы единиц" },
+                { typeof(VendorCodes), "Кода продавца" },
+                { typeof(Views), "Вида" },
+                // ... и так далее для всех DbSet объявленных в контексте.
+            };
+        }
+
+        public static class EditModesDescriptions
+        {
+            public static readonly Dictionary<EditModes, string> Descriptions = new Dictionary<EditModes, string>
+            {
+                { EditModes.Create, "Создание" },
+                { EditModes.Update, "Обновление" },
+                { EditModes.Delete, "Удаление" },
+                { EditModes.None, "Нет действия" }
+            };
+        }
+
+
 
     }
 }

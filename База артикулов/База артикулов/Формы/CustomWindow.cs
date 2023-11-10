@@ -132,6 +132,7 @@ namespace База_артикулов.Формы
             this.CustomBase = customBase ?? new CustomBase();
             if (this.CustomBase != null)
             {
+                this.CustomBase.CustomDb.Update();
                 //this.CustomBase.IsArgsCorrectException(expectedArgsCount);
                 if (mode != EditModes.None)
                     this.CustomBase.Mode = mode;

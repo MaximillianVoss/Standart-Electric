@@ -69,7 +69,7 @@ namespace База_артикулов.Формы
             try
             {
                 this.CustomBase = new CustomBase(new SettingsNew("settings.json"));
-                this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(new TreeViewItemCustom(1, "Test", new Classes())));
+                this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(new TreeViewItemCustom(1, "Test", new Groups())));
                 this.CustomBase.Mode = EditModes.Create;
                 var windowEdit = new WindowEdit(
                     Common.Strings.Titles.Windows.add,

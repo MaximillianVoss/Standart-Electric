@@ -359,9 +359,10 @@ namespace База_артикулов.База_Данных.Тесты
             string description = "TestDescription";
             int groupId = 1; // Убедитесь, что такой ID существует в вашей тестовой БД
             int loadDiagramId = 1; // Убедитесь, что такой ID существует в вашей тестовой БД
+            int applicationId = 1; // Добавлен новый параметр
 
             // Act
-            db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId);
+            db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId, applicationId);
 
             // Assert
             var createdSubGroup = this.db.DB.SubGroups.FirstOrDefault(x => x.Descriptors.code == code);
@@ -380,27 +381,27 @@ namespace База_артикулов.База_Данных.Тесты
             string description = "TestDescription";
             int groupId = 1; // Убедитесь, что такой ID существует в вашей тестовой БД
             int loadDiagramId = 1; // Убедитесь, что такой ID существует в вашей тестовой БД
+            int applicationId = 1; // Убедитесь, что такой ID существует в вашей тестовой БД
 
             // Act
-            var subGroup = db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId);
-            // Arrange
-            int subGroupId = subGroup.id; // Убедитесь, что такой ID существует в вашей тестовой БД и что этот ID подходит для удаления
-            int subGroupDescriptorId = subGroup.Descriptors.id;
+            var subGroup = db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId, applicationId);
+            int subGroupId = subGroup.id; // ID созданной подгруппы
+            int subGroupDescriptorId = subGroup.Descriptors.id; // ID связанного с подгруппой дескриптора
+
             // Act
             db.DeleteSubGroup(subGroupId);
 
             // Assert
             var deletedSubGroup = this.db.DB.SubGroups.FirstOrDefault(x => x.id == subGroupId);
-            Assert.Null(deletedSubGroup);
+            Assert.Null(deletedSubGroup); // Подгруппа должна быть удалена
 
             var relatedDescriptor = this.db.DB.Descriptors.FirstOrDefault(x => x.id == subGroupDescriptorId);
-            Assert.Null(relatedDescriptor);
+            Assert.Null(relatedDescriptor); // Дескриптор подгруппы также должен быть удалён
         }
 
         [Fact]
         public void UpdateSubGroup_ValidInput_SubGroupAndDescriptorUpdated()
         {
-
             // Arrange
             string code = "TestCode";
             string title = "TestTitle";
@@ -408,7 +409,9 @@ namespace База_артикулов.База_Данных.Тесты
             string description = "TestDescription";
             int groupId = 1; // Убедитесь, что такой ID существует в вашей тестовой БД
             int loadDiagramId = 1; // Убедитесь, что такой ID существует в вашей тестовой БД
-            var createdSubGroup = db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId);
+            int applicationId = 1; // Добавленный параметр applicationId
+
+            var createdSubGroup = db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId, applicationId);
             int subGroupId = createdSubGroup.id;
             var originalSubGroup = this.db.DB.SubGroups.FirstOrDefault(x => x.id == subGroupId);
             Assert.NotNull(originalSubGroup);
@@ -419,10 +422,10 @@ namespace База_артикулов.База_Данных.Тесты
             string updatedDescription = "UpdatedDescription";
             int updatedGroupId = 2; // Убедитесь, что такой ID существует в вашей тестовой БД
             int updatedLoadDiagramId = 2; // Убедитесь, что такой ID существует в вашей тестовой БД
-            int applicationId = 1; // Убедитесь, что такой ID существует в вашей тестовой БД
+            int updatedApplicationId = 2; // Обновленный параметр applicationId
 
             // Act
-            db.UpdateSubGroup(originalSubGroup, updatedCode, updatedTitle, updatedTitleShort, updatedDescription, updatedGroupId, updatedLoadDiagramId, applicationId);
+            db.UpdateSubGroup(originalSubGroup, updatedCode, updatedTitle, updatedTitleShort, updatedDescription, updatedGroupId, updatedLoadDiagramId, updatedApplicationId);
 
             // Assert
             var updatedSubGroup = this.db.DB.SubGroups.FirstOrDefault(x => x.id == subGroupId);
@@ -430,6 +433,7 @@ namespace База_артикулов.База_Данных.Тесты
             Assert.Equal(updatedTitle, updatedSubGroup.Descriptors.title);
             this.context.SubGroups.Remove(createdSubGroup);
         }
+
 
         #endregion
     }

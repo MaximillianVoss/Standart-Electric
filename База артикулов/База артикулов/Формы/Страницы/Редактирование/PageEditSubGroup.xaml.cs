@@ -13,13 +13,12 @@ namespace База_артикулов.Формы.Страницы.Редакти
     public partial class PageEditSubGroup : CustomPage
     {
 
-
         #region Поля
 
         #endregion
 
         #region Свойства
-        public object CurrentItem { get; set; }
+
         #endregion
 
         #region Методы
@@ -27,46 +26,94 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             this.cmbGroup.Items = this.CustomBase.ToList(this.DB.Groups.ToList());
         }
+
         private void UpdateComboBoxLoadDiagram()
         {
             this.cmbLoadDiagram.Items = this.CustomBase.ToList(this.DB.LoadDiagrams.ToList());
         }
+
         private void UpdateComboBoxApplication()
         {
             this.cmbApplication.Items = this.CustomBase.ToList(this.DB.Applications.ToList());
         }
-        private void UpdateFields(object obj)
+
+        public override void UpdateFields(List<CustomEventArgs> args)
         {
-            SubGroups currentSubGroup = null;
-            if (obj.GetType().BaseType == typeof(TreeViewItemCustom))
+            if (this.CustomBase.Mode == EditModes.Update)
             {
-                currentSubGroup = ((TreeViewItemCustom)obj).Value as SubGroups;
-            }
-            if (obj.GetType().BaseType == typeof(SubGroups))
-                currentSubGroup = obj as SubGroups;
-            if (currentSubGroup != null)
-            {
-                SubGroupsView subGroupView = this.DB.SubGroupsView.FirstOrDefault(x => x.ID_подгруппы == currentSubGroup.id);
-                if (subGroupView == null)
-                    throw new System.Exception($"Не удалось найти группу с id:{currentSubGroup.id} ");
-                this.txbTitle.Text = subGroupView.Наименование_подгруппы;
-                this.txbTitleShort.Text = subGroupView.Сокращенное_наименование_подгруппы;
-                this.txbCode.Text = subGroupView.Код_подгруппы;
-                this.txbDescription.Text = subGroupView.Описание_подгруппы;
-                //this.txbUrlPicture.Text = classView.URL_изображения_класса;
-                GroupsView group = this.DB.GroupsView.FirstOrDefault(x => x.ID_группы == subGroupView.ID_группы);
-                if (group != null)
-                    this.cmbGroup.Select(group.ID_группы);
-                LoadDiagramsView loadDiagram = this.DB.LoadDiagramsView.FirstOrDefault(x => x.ID_схемы_нагрузок == subGroupView.ID_схемы_нагрузок);
-                if (loadDiagram != null)
-                    this.cmbLoadDiagram.Select(loadDiagram.ID_схемы_нагрузок);
-                GroupsApplications groupsApplications = this.DB.GroupsApplications.FirstOrDefault(x => x.SubGroups.id == subGroupView.ID_подгруппы);
-                if (groupsApplications != null)
-                    this.cmbApplication.Select(groupsApplications.Applications.id);
+                var obj = this.CurrentObject.Data;
+                SubGroups currentSubGroup = null;
+                if (obj.ValidateTypeOrBaseType<TreeViewItemCustom>())
+                    currentSubGroup = ((TreeViewItemCustom)obj).Value as SubGroups;
+                if (obj.ValidateTypeOrBaseType<CustomEventArgs>())
+                    currentSubGroup = ((CustomEventArgs)obj).Data as SubGroups;
+                if (obj.ValidateTypeOrBaseType<SubGroups>())
+                    currentSubGroup = obj as SubGroups;
+                if (currentSubGroup != null)
+                {
+                    SubGroupsView subGroupView = this.DB.SubGroupsView.FirstOrDefault(x => x.ID_подгруппы == currentSubGroup.id);
+                    if (subGroupView == null)
+                        throw new System.Exception($"Не удалось найти группу с id:{currentSubGroup.id} ");
+                    this.txbTitle.Text = subGroupView.Наименование_подгруппы;
+                    this.txbTitleShort.Text = subGroupView.Сокращенное_наименование_подгруппы;
+                    this.txbCode.Text = subGroupView.Код_подгруппы;
+                    this.txbDescription.Text = subGroupView.Описание_подгруппы;
+                    GroupsView group = this.DB.GroupsView.FirstOrDefault(x => x.ID_группы == subGroupView.ID_группы);
+                    if (group != null)
+                        this.cmbGroup.Select(group.ID_группы);
+                    LoadDiagramsView loadDiagram = this.DB.LoadDiagramsView.FirstOrDefault(x => x.ID_схемы_нагрузок == subGroupView.ID_схемы_нагрузок);
+                    if (loadDiagram != null)
+                        this.cmbLoadDiagram.Select(loadDiagram.ID_схемы_нагрузок);
+                    GroupsApplications groupsApplications = this.DB.GroupsApplications.FirstOrDefault(x => x.SubGroups.id == subGroupView.ID_подгруппы);
+                    if (groupsApplications != null)
+                        this.cmbApplication.Select(groupsApplications.Applications.id);
+                }
             }
         }
-        private void Save()
+
+        public override void UpdateForm(List<CustomEventArgs> args)
         {
+            this.InitializeComponent();
+            this.btnOk.Text = this.CurrentObject != null ?
+         Common.Strings.Titles.Controls.Buttons.saveChanges :
+         Common.Strings.Titles.Controls.Buttons.createItem;
+            this.UpdateComboBoxGroup();
+            this.UpdateComboBoxLoadDiagram();
+            this.UpdateComboBoxApplication();
+        }
+
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            if (this.CustomBase.Mode == EditModes.Create)
+            {
+                this.CustomBase.Result.Data = this.CustomBase.CustomDb.CreateSubGroup(
+                    this.txbCode.Text,
+                    this.txbTitle.Text,
+                    this.txbTitleShort.Text,
+                    this.txbDescription.Text,
+                    this.cmbGroup.SelectedId ?? this.CustomBase.CustomDb.DB.Groups.First().id,
+                    this.cmbLoadDiagram.SelectedId ?? this.CustomBase.CustomDb.DB.LoadDiagrams.First().id,
+                    this.cmbApplication.SelectedId ?? this.CustomBase.CustomDb.DB.Applications.First().id
+                    );
+
+            }
+            if (this.CustomBase.Mode == EditModes.Update)
+            {
+                if (!this.CurrentObject.ValidateTypeOrBaseTypeEx<SubGroups>())
+                    throw new Exception("Переданный объект не принадлежит типу SubGroups");
+                this.CustomBase.CustomDb.UpdateSubGroup(
+                    this.CurrentObject.Data as SubGroups,
+                    this.txbCode.Text,
+                    this.txbTitle.Text,
+                    this.txbTitleShort.Text,
+                    this.txbDescription.Text,
+                    this.cmbGroup.SelectedId ?? this.CustomBase.CustomDb.DB.Groups.First().id,
+                    this.cmbLoadDiagram.SelectedId ?? this.CustomBase.CustomDb.DB.LoadDiagrams.First().id,
+                    this.cmbApplication.SelectedId ?? this.CustomBase.CustomDb.DB.Applications.First().id
+                    );
+                this.CustomBase.Result.Data = true;
+            }
+            return true;
             //// Объявляем объект descriptor здесь, так как он будет использоваться в обоих случаях
             //Descriptors descriptor;
 
@@ -131,21 +178,20 @@ namespace База_артикулов.Формы.Страницы.Редакти
             //// Сохраняем изменения в базе данных
             //this.DB.SaveChanges();
         }
+
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            return false;
+        }
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageEditSubGroup(object item = null)
+        public PageEditSubGroup(CustomBase customBase, int width = 600, int height = 800) : base(customBase)
         {
             this.InitializeComponent();
             this.UpdateComboBoxGroup();
             this.UpdateComboBoxLoadDiagram();
             this.UpdateComboBoxApplication();
-            this.CurrentItem = item;
-            this.btnOk.Text = this.CurrentItem != null ?
-            Common.Strings.Titles.Controls.Buttons.saveChanges :
-            Common.Strings.Titles.Controls.Buttons.createItem;
-            if (this.CurrentItem != null)
-                this.UpdateFields(this.CurrentItem);
         }
 
 
@@ -158,39 +204,11 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #region Обработчики событий
         private void btnOk_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            try
-            {
-                this.Save();
-                this.CloseWindow(true);
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex);
-            }
+            this.ProcessOk();
         }
         private void btnCancel_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            this.CloseWindow();
-        }
-
-        public override void UpdateFields(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void UpdateForm(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override object HandleOk(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override object HandleCancel(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
+            this.ProcessCancel();
         }
         #endregion
 

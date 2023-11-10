@@ -43,9 +43,10 @@ namespace База_артикулов.Формы
                 this.fMain.Content = content;
             }
         }
+
         public override void UpdateFields(List<CustomEventArgs> args = null)
         {
-            //throw new NotImplementedException();
+            this.InitializeComponent();
         }
         public override void UpdateForm(List<CustomEventArgs> args = null)
         {
@@ -54,8 +55,7 @@ namespace База_артикулов.Формы
                 case EditModes.Create:
                     HandleCreateMode(args);
                     break;
-
-                case EditModes.Edit:
+                case EditModes.Update:
                     HandleEditMode(args);
                     break;
             }
@@ -70,6 +70,7 @@ namespace База_артикулов.Формы
         }
         private void HandleCreateMode(List<CustomEventArgs> args)
         {
+            string title = String.Empty;
             if (this.CustomBase == null || this.CustomBase.CurrentObjects == null)
             {
                 throw new Exception("Не указан тип создаваемого объекта! В форму надо передать объект с конструктором по умолчанию!");
@@ -79,13 +80,18 @@ namespace База_артикулов.Формы
                 if (this.CurrentObject.DataType == typeof(TreeViewItemCustom))
                 {
                     var treeViewSelectedObject = ((TreeViewItemCustom)this.CurrentObject.Data).Value;
-                    if (treeViewSelectedObject.IsTypeOrBaseEqual(typeof(Classes)))
+                    title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CurrentObject);
+                    if (treeViewSelectedObject.ValidateTypeOrBaseType<Classes>())
                     {
-                        this.SetContent("Создание класса", new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
+                        this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
                     }
-                    if (treeViewSelectedObject.IsTypeOrBaseEqual(typeof(Groups)))
+                    if (treeViewSelectedObject.ValidateTypeOrBaseType<Groups>())
                     {
-                        this.SetContent("Создание группы", new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                    }
+                    if (treeViewSelectedObject.ValidateTypeOrBaseType<SubGroups>())
+                    {
+                        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
                     }
 
                 }
@@ -123,9 +129,29 @@ namespace База_артикулов.Формы
         }
         private void HandleEditMode(List<CustomEventArgs> args)
         {
+            string title = String.Empty;
             if (this.CustomBase.CurrentObject == null)
                 throw new Exception("Не выбран элемент для редактирования!");
-
+            if (this.CustomBase.CurrentObjects.Count == 1)
+            {
+                if (this.CurrentObject.DataType == typeof(TreeViewItemCustom))
+                {
+                    var treeViewSelectedObject = ((TreeViewItemCustom)this.CurrentObject.Data).Value;
+                    title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CurrentObject);
+                    if (treeViewSelectedObject.ValidateTypeOrBaseType<Classes>())
+                    {
+                        this.SetContent("Редактирование класса", new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
+                    }
+                    if (treeViewSelectedObject.ValidateTypeOrBaseType<Groups>())
+                    {
+                        this.SetContent("Редактирование группы", new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                    }
+                    if (treeViewSelectedObject.ValidateTypeOrBaseType<SubGroups>())
+                    {
+                        this.SetContent("Редактирование подгруппы", new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                    }
+                }
+            }
             //if (this.ItemType == typeof(TreeViewItemCustom))
             //{
             //    object objValue = ((TreeViewItemCustom)this.CurrentObject).Value;
@@ -196,7 +222,12 @@ namespace База_артикулов.Формы
         /// </summary>
         /// <param name="title">Заголовок окна.</param>
         /// <param name="customBase">Экземпляр CustomBase, используемый для инициализации.</param>
-        public WindowEdit(string title, CustomBase customBase, int width = 600, int height = 800) : base(title: title, customBase)
+        public WindowEdit(
+            string title,
+            CustomBase customBase,
+            int width = Common.WindowSizes.MediumH600W800.Width,
+            int height = Common.WindowSizes.MediumH600W800.Height
+            ) : base(title: title, customBase)
         {
             this.SetContentSize(width, height);
             InitializeWindow(title);
@@ -248,18 +279,15 @@ namespace База_артикулов.Формы
         {
             this.CustomBase.Result = e;
         }
-
-
-        #endregion
-
         private void CustomWindow_ContentRendered(object sender, EventArgs e)
         {
             this.SetCenter(sender);
         }
-
         private void CustomWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
 
         }
+        #endregion
+
     }
 }

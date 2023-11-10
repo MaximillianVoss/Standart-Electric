@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseWindow_WPF.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -25,22 +26,20 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #region Методы
         public override void UpdateFields(List<CustomEventArgs> args)
         {
-            Classes currentClass = null;
-            //if (this.CurrentObject.IsTypeOrBaseEqual(typeof(TreeViewItemCustom)))
-            //    currentClass = ((TreeViewItemCustom)this.CurrentObject.Data).Value as Classes;
-            if (this.CurrentObject.IsTypeOrBaseEqual(typeof(Classes)))
-                currentClass = this.CurrentObject.Data as Classes;
-            if (currentClass != null)
+            this.InitializeComponent();
+            if (this.CustomBase.Mode == EditModes.Update)
             {
-                ClassesView classView = this.DB.ClassesView.FirstOrDefault(x => x.ID_класса == currentClass.id);
-                if (classView == null)
-                    throw new Exception($"Не удалось найти класс с id:{currentClass.id} ");
-                this.txbTitle.Text = classView.Наименование_класса;
-                this.txbTitleShort.Text = classView.Сокращенное_наименование_класса;
-                this.txbCode.Text = classView.Код_класса;
-                this.txbDescription.Text = classView.Описание_класса;
-                throw new Exception("Проверить код заполнения изображения! Это тут нужно?");
-                //this.txbUrlPicture.Text = classView.URL_изображения_класса;
+                var currentClass = this.CustomBase.UnpackCurrentObject<Classes>(this.CurrentObject);
+                if (currentClass != null)
+                {
+                    ClassesView classView = this.DB.ClassesView.FirstOrDefault(x => x.ID_класса == currentClass.id);
+                    if (classView == null)
+                        throw new Exception($"Не удалось найти класс с id:{currentClass.id} ");
+                    this.txbTitle.Text = classView.Наименование_класса;
+                    this.txbTitleShort.Text = classView.Сокращенное_наименование_класса;
+                    this.txbCode.Text = classView.Код_класса;
+                    this.txbDescription.Text = classView.Описание_класса;
+                }
             }
         }
 
@@ -64,13 +63,15 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     );
 
             }
-            if (this.CustomBase.Mode == EditModes.Edit)
+            if (this.CustomBase.Mode == EditModes.Update)
             {
-                if (!this.CurrentObject.Data.IsTypeOrBaseEqual(typeof(Classes)))
-                    throw new Exception("Редактируемый элемент не является классом");
-                var @class = (Classes)this.CurrentObject.Data;
+                var currentClass = this.CustomBase.UnpackCurrentObject<Classes>(this.CurrentObject);
+                if (currentClass == null)
+                {
+                    throw new Exception(Common.Strings.Errors.failedToGetParam);
+                }
                 this.CustomBase.Result.Data = this.CustomBase.CustomDb.UpdateClass(
-                        @class.id,
+                        currentClass.id,
                         this.txbCode.Text,
                         this.txbTitle.Text,
                         this.txbTitleShort.Text,

@@ -120,6 +120,8 @@ namespace База_артикулов.Формы
         {
             try
             {
+                if (this.CustomBase.Result == null)
+                    this.CustomBase.Result = new CustomEventArgs();
                 this.CustomBase.Result = new CustomEventArgs(HandleOk(this.CustomBase.CurrentObjects));
                 this.CloseWindow(true);
             }
@@ -132,6 +134,8 @@ namespace База_артикулов.Формы
         {
             try
             {
+                if (this.CustomBase.Result == null)
+                    this.CustomBase.Result = new CustomEventArgs();
                 this.CustomBase.Result = new CustomEventArgs(HandleCancel(this.CustomBase.CurrentObjects));
                 this.CloseWindow(false);
             }

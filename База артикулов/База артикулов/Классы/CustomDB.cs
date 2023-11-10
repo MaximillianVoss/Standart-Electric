@@ -292,7 +292,8 @@ namespace База_артикулов.Классы
             string titleShort,
             string description,
             int groupId,
-        int loadDiagramId)
+        int loadDiagramId,
+        int applicationId)
         {
             // Создаем новый объект Descriptors и добавляем его в базу данных
             Descriptors descriptor = CreateDescriptor(code, title, titleShort, description);
@@ -302,6 +303,11 @@ namespace База_артикулов.Классы
                 descriptor,
                 this.DB.Groups.FirstOrDefault(x => x.id == groupId),
                 this.DB.LoadDiagrams.FirstOrDefault(x => x.id == loadDiagramId)
+            ));
+
+            this.DB.GroupsApplications.Add(new GroupsApplications(
+                subGroup,
+                this.DB.Applications.FirstOrDefault(x => x.id == applicationId)
             ));
 
             // Сохраняем изменения в базе данных
@@ -321,7 +327,7 @@ namespace База_артикулов.Классы
         {
             // Проверяем, задан ли CurrentObject
             if (currentItem == null || !(currentItem is SubGroups currentSubGroup))
-                throw new Exception("Редактируемый элемент не является классом");
+                throw new Exception("Редактируемый элемент не является подгруппой");
 
             // Извлекаем соответствующую подгруппу из базы данных
             currentSubGroup = this.DB.SubGroups.FirstOrDefault(x => x.id == currentSubGroup.id);

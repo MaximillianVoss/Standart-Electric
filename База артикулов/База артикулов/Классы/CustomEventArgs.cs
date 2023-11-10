@@ -30,8 +30,16 @@ namespace База_артикулов.Классы
             set
             {
                 this.data = value;
-                this.dataType = value.GetType();
-                this.isList = data is IList;
+                if (this.data != null)
+                {
+                    this.dataType = value.GetType();
+                    this.isList = data is IList;
+                }
+                else
+                {
+                    this.isList = false;
+                    this.dataType = typeof(void);
+                }
             }
         }
 
