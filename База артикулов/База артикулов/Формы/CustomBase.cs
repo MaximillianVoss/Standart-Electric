@@ -202,24 +202,58 @@ namespace База_артикулов.Формы
 
 
         #region Методы
+        /// <summary>
+        /// Извлекает объект из контейнера или упакованного типа, если возможно.
+        /// </summary>
+        /// <typeparam name="T">Тип объекта, который необходимо извлечь.</typeparam>
+        /// <param name="obj">Объект для извлечения.</param>
+        /// <returns>Объект заданного типа T, если извлечение успешно, иначе null.</returns>
         public T UnpackCurrentObject<T>(object obj) where T : class
         {
-            T currentObject = null;
+            // Попытка прямого приведения, если obj уже является нужным типом T.
+            if (obj is T tObj)
+                return tObj;
 
-            if (obj is TreeViewItemCustom treeViewItem && treeViewItem.Value is T)
-                currentObject = treeViewItem.Value as T;
-            else if (obj is CustomEventArgs customArgs && customArgs.Data is T)
-                currentObject = customArgs.Data as T;
-            else if (obj is CustomEventArgs customArgstreeViewItem && customArgstreeViewItem.Data is TreeViewItemCustom)
-            {
-                if (customArgstreeViewItem.Data is TreeViewItemCustom treeViewData && treeViewData.Value is T)
-                    currentObject = treeViewData.Value as T;
-            }
-            else if (obj is T)
-                currentObject = obj as T;
+            // Попытка извлечения значения из TreeViewItemCustom, если obj - это TreeViewItemCustom и его Value имеет тип T.
+            if (obj is TreeViewItemCustom treeViewItem && treeViewItem.Value is T value)
+                return value;
+
+            // Попытка извлечения значения из CustomEventArgs, если obj - это CustomEventArgs и его Data имеет тип T.
+            if (obj is CustomEventArgs customArgs && customArgs.Data is T data)
+                return data;
+
+            // Попытка извлечения значения из CustomEventArgs, если его Data является TreeViewItemCustom и содержит данные типа T.
+            if (obj is CustomEventArgs customArgsTreeItem && customArgsTreeItem.Data is TreeViewItemCustom treeViewData && treeViewData.Value is T treeValue)
+                return treeValue;
+
+            // Возвращает null, если ни одна из проверок не сработала.
+            return null;
+        }
+        /// <summary>
+        /// Извлекает вложенный объект без попытки приведения к определенному типу.
+        /// </summary>
+        /// <param name="obj">Объект для извлечения.</param>
+        /// <returns>Вложенный объект, если он присутствует, иначе null.</returns>
+        public object UnpackCurrentObject(object obj)
+        {
+            object currentObject = null;
+
+            // Проверяем, содержит ли obj объект TreeViewItemCustom и извлекаем его Value
+            if (obj is TreeViewItemCustom treeViewItem)
+                currentObject = treeViewItem.Value;
+            // Проверяем, содержит ли obj объект CustomEventArgs и извлекаем его Data
+            else if (obj is CustomEventArgs customArgs)
+                currentObject = customArgs.Data;
+            // Проверяем, содержит ли obj объект CustomEventArgs, и внутри него TreeViewItemCustom, и извлекаем его Value
+            else if (obj is CustomEventArgs customArgstreeViewItem && customArgstreeViewItem.Data is TreeViewItemCustom treeViewData)
+                currentObject = treeViewData.Value;
+            // В противном случае возвращаем obj, если он не null
+            else
+                currentObject = obj;
 
             return currentObject;
         }
+
         public bool IsArgsCorrect(int expectedArgsCount)
         {
             return this.CurrentObjects == null ? expectedArgsCount == 0 : this.CurrentObjects.Count == expectedArgsCount;
@@ -280,6 +314,14 @@ namespace База_артикулов.Формы
             {
                 this.CurrentObjects.Add(item);
             }
+        }
+        /// <summary>
+        /// Очищает список текущих объектов и добавляет новый элемент.
+        /// </summary>
+        /// <param name="@object">Элемент для добавления после очистки списка.</param>
+        public void AddWithClearCurrentObjects(object @object)
+        {
+            this.AddWithClearCurrentObjects(new CustomEventArgs(@object));
         }
         #endregion
 

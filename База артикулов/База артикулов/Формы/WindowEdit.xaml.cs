@@ -77,24 +77,37 @@ namespace База_артикулов.Формы
             }
             if (this.CustomBase.CurrentObjects.Count == 1)
             {
-                if (this.CurrentObject.DataType == typeof(TreeViewItemCustom))
+                var argument = this.CustomBase.UnpackCurrentObject(this.CurrentObject);
+                title = this.CustomBase.GetTitle(this.CustomBase.Mode, argument);
+                if (argument != null)
                 {
-                    var treeViewSelectedObject = ((TreeViewItemCustom)this.CurrentObject.Data).Value;
-                    title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CurrentObject);
-                    if (treeViewSelectedObject.ValidateTypeOrBaseType<Classes>())
-                    {
+                    if (argument.ValidateTypeOrBaseType<Classes>())
                         this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
-                    }
-                    if (treeViewSelectedObject.ValidateTypeOrBaseType<Groups>())
-                    {
+                    if (argument.ValidateTypeOrBaseType<Groups>())
                         this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
-                    }
-                    if (treeViewSelectedObject.ValidateTypeOrBaseType<SubGroups>())
-                    {
-                        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
-                    }
-
+                    if (argument.ValidateTypeOrBaseType<SubGroups>())
+                        this.SetContent(title, new PageEditSubGroup(this.CustomBase, this.ContentWidth, ContentHeight));
                 }
+                //if(this.CustomBase.UnpackCurrentObject<Classes>(this.CurrentObject)!=null)
+
+                //if (this.CurrentObject.DataType == typeof(TreeViewItemCustom))
+                //{
+                //    var treeViewSelectedObject = ((TreeViewItemCustom)this.CurrentObject.Data).Value;
+                //    title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CurrentObject);
+                //    if (treeViewSelectedObject.ValidateTypeOrBaseType<Classes>())
+                //    {
+                //        this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
+                //    }
+                //    if (treeViewSelectedObject.ValidateTypeOrBaseType<Groups>())
+                //    {
+                //        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                //    }
+                //    if (treeViewSelectedObject.ValidateTypeOrBaseType<SubGroups>())
+                //    {
+                //        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                //    }
+
+                //}
 
 
                 //if (this.CurrentObject.IsTypeOrBaseEqual(typeof(SubGroups)))
@@ -140,15 +153,15 @@ namespace База_артикулов.Формы
                     title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CurrentObject);
                     if (treeViewSelectedObject.ValidateTypeOrBaseType<Classes>())
                     {
-                        this.SetContent("Редактирование класса", new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
+                        this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
                     }
                     if (treeViewSelectedObject.ValidateTypeOrBaseType<Groups>())
                     {
-                        this.SetContent("Редактирование группы", new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
                     }
                     if (treeViewSelectedObject.ValidateTypeOrBaseType<SubGroups>())
                     {
-                        this.SetContent("Редактирование подгруппы", new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                        this.SetContent(title, new PageEditSubGroup(this.CustomBase, this.ContentWidth, ContentHeight));
                     }
                 }
             }

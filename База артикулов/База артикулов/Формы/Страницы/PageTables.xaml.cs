@@ -39,8 +39,8 @@ namespace База_артикулов.Формы.Страницы
         /// </summary>
         private object SelectedItemTable { set; get; }
         /// <summary>
-        /// Текущий объект, выбранный в иерархическом списке
-        /// Само значение лежит в  поле Value
+        /// Текущий объект, выбранный в иерархическом списке,
+        /// само значение лежит в  поле Value
         /// </summary>
         private TreeViewItemCustom SelectedItemTreeView { set; get; }
         /// <summary>
@@ -298,24 +298,46 @@ namespace База_артикулов.Формы.Страницы
         }
 
         /// <summary>
-        /// 
+        /// Добавляет класс и связанные с ним группы и подгруппы в дерево представления.
         /// </summary>
-        /// <param name="class"></param>
+        /// <param name="class">Экземпляр класса <see cref="Classes"/>, который будет добавлен в дерево представления.</param>
+        /// <returns>Элемент дерева представления <see cref="TreeViewItemCustom"/> для добавленного класса.</returns>
+        /// <exception cref="ArgumentNullException">Бросается, если переданный класс равен null.</exception>
         private TreeViewItemCustom AddToTreeView(Classes @class)
         {
+            // Создание нового элемента для класса
             TreeViewItemCustom classItem = new TreeViewItemCustom(@class.id, @class.Descriptors.title, @class);
-            foreach (var group in @class.Groups)
+
+            // Проверка, что свойство Groups класса не равно null и содержит элементы
+            if (@class.Groups != null)
             {
-                TreeViewItemCustom groupItem = new TreeViewItemCustom(group.id, group.Descriptors.title, group);
-                foreach (var subGroup in group.SubGroups)
+                foreach (var group in @class.Groups)
                 {
-                    groupItem.Add(new TreeViewItemCustom(subGroup.id, subGroup.Descriptors.title, subGroup));
+                    // Создание нового элемента для группы
+                    TreeViewItemCustom groupItem = new TreeViewItemCustom(group.id, group.Descriptors.title, group);
+
+                    // Проверка, что свойство SubGroups группы не равно null и содержит элементы
+                    if (group.SubGroups != null)
+                    {
+                        foreach (var subGroup in group.SubGroups)
+                        {
+                            // Создание и добавление нового элемента для подгруппы
+                            groupItem.Add(new TreeViewItemCustom(subGroup.id, subGroup.Descriptors.title, subGroup));
+                        }
+                    }
+
+                    // Добавление группы к классу
+                    classItem.Add(groupItem);
                 }
-                classItem.Add(groupItem);
             }
+
+            // Добавление класса к дереву представления
             this.tvGroups.Items.Add(classItem);
-            return classItem; // Возвращаем созданный объект TreeViewItemCustom
+
+            // Возвращение созданного элемента TreeViewItemCustom
+            return classItem;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -448,7 +470,7 @@ namespace База_артикулов.Формы.Страницы
             }
         }
 
-        private async void cmbTables_SelectionChanged(object sender, RoutedEventArgs e)
+        private void cmbTables_SelectionChanged(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -475,6 +497,16 @@ namespace База_артикулов.Формы.Страницы
                 if (e.NewValue != null)
                 {
                     this.SelectedItemTreeView = (TreeViewItemCustom)e.NewValue;
+
+                    string header = this.CustomBase.GetTitle(EditModes.Create, new Classes());
+                    if (this.SelectedItemTreeView != null && this.SelectedItemTreeView.Value != null)
+                    {
+                        if (this.SelectedItemTreeView.Value.ValidateTypeOrBaseType<Classes>())
+                            header = this.CustomBase.GetTitle(EditModes.Create, new Groups());
+                        if (this.SelectedItemTreeView.Value.ValidateTypeOrBaseType<Groups>())
+                            header = this.CustomBase.GetTitle(EditModes.Create, new SubGroups());
+                    }
+                    this.miTreeAdd.Header = header;
                     await this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
                     await this.UpdateDataGrid(this.CurrentTableData);
                 }
@@ -502,10 +534,23 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView));
+                var SelectedItemTreeViewObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
+                if (SelectedItemTreeViewObject != null)
+                {
+                    if (SelectedItemTreeViewObject.ValidateTypeOrBaseType<Classes>())
+                        this.CustomBase.AddWithClearCurrentObjects(new Groups());
+                    if (SelectedItemTreeViewObject.ValidateTypeOrBaseType<Groups>())
+                        this.CustomBase.AddWithClearCurrentObjects(new SubGroups());
+                }
+                else
+                {
+                    this.CustomBase.AddWithClearCurrentObjects(new Classes());
+                }
+                //this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView));
                 this.CustomBase.Mode = EditModes.Create;
                 var windowEdit = new WindowEdit(
-                    Common.Strings.Titles.Windows.add, this.CustomBase,
+                    Common.Strings.Titles.Windows.add,
+                    this.CustomBase,
                     Common.WindowSizes.SmallH320W400.Width,
                     Common.WindowSizes.SmallH320W400.Height
                     );
@@ -524,7 +569,9 @@ namespace База_артикулов.Формы.Страницы
             {
                 this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView));
                 this.CustomBase.Mode = EditModes.Update;
-                var windowEdit = new WindowEdit(Common.Strings.Titles.Windows.edit, this.CustomBase,
+                var windowEdit = new WindowEdit(
+                    Common.Strings.Titles.Windows.edit,
+                    this.CustomBase,
                     Common.WindowSizes.SmallH320W400.Width,
                     Common.WindowSizes.SmallH320W400.Height
                     );

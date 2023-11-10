@@ -74,12 +74,12 @@ namespace База_артикулов.Формы.Страницы.Редакти
         public override void UpdateForm(List<CustomEventArgs> args)
         {
             this.InitializeComponent();
-            this.btnOk.Text = this.CurrentObject != null ?
-         Common.Strings.Titles.Controls.Buttons.saveChanges :
-         Common.Strings.Titles.Controls.Buttons.createItem;
             this.UpdateComboBoxGroup();
             this.UpdateComboBoxLoadDiagram();
             this.UpdateComboBoxApplication();
+            this.btnOk.Text = this.CurrentObject != null ?
+         Common.Strings.Titles.Controls.Buttons.saveChanges :
+         Common.Strings.Titles.Controls.Buttons.createItem;
         }
 
         public override object HandleOk(List<CustomEventArgs> args)
@@ -99,10 +99,13 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
             if (this.CustomBase.Mode == EditModes.Update)
             {
-                if (!this.CurrentObject.ValidateTypeOrBaseTypeEx<SubGroups>())
-                    throw new Exception("Переданный объект не принадлежит типу SubGroups");
+                var group = this.CustomBase.UnpackCurrentObject<SubGroups>(this.CurrentObject);
+                if (group == null)
+                {
+                    throw new Exception(Common.Strings.Errors.failedToGetParam);
+                }
                 this.CustomBase.CustomDb.UpdateSubGroup(
-                    this.CurrentObject.Data as SubGroups,
+                    group,
                     this.txbCode.Text,
                     this.txbTitle.Text,
                     this.txbTitleShort.Text,
@@ -188,10 +191,8 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #region Конструкторы/Деструкторы
         public PageEditSubGroup(CustomBase customBase, int width = 600, int height = 800) : base(customBase)
         {
+            this.SetSize(width, height);
             this.InitializeComponent();
-            this.UpdateComboBoxGroup();
-            this.UpdateComboBoxLoadDiagram();
-            this.UpdateComboBoxApplication();
         }
 
 

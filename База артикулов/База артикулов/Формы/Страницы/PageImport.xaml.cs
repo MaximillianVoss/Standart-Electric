@@ -645,12 +645,12 @@ namespace База_артикулов.Формы.Страницы
 
         public override void UpdateFields(List<CustomEventArgs> args)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override void UpdateForm(List<CustomEventArgs> args)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override object HandleOk(List<CustomEventArgs> args)

@@ -87,9 +87,11 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
             if (this.CustomBase.Mode == EditModes.Update)
             {
-                if (!this.CurrentObject.Data.ValidateTypeOrBaseTypeEx<Groups>())
-                    throw new Exception("Редактируемый элемент не является группой");
-                var group = this.CurrentObject.Data as Groups;
+                var group = this.CustomBase.UnpackCurrentObject<Groups>(this.CurrentObject);
+                if (group == null)
+                {
+                    throw new Exception(Common.Strings.Errors.failedToGetParam);
+                }
                 this.CustomBase.CustomDb.UpdateGroup(
                     group.id,
                      this.txbCode.Text,
