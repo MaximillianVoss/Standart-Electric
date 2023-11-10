@@ -159,13 +159,13 @@ namespace CustomControlsWPF
         /// <param name="columnName">Имя колонки для добавления.</param>
         public void AddDisplayColumn(string columnName)
         {
-            if (!ColumnNames.Contains(columnName))
+            if (!this.ColumnNames.Contains(columnName))
             {
                 throw new ArgumentException($"Столбец с именем {columnName} отсутствует в данных.");
             }
-            if (ColumnNames.Contains(columnName) && !DisplayColumnNames.Contains(columnName))
+            if (this.ColumnNames.Contains(columnName) && !this.DisplayColumnNames.Contains(columnName))
             {
-                DisplayColumnNames.Add(columnName);
+                this.DisplayColumnNames.Add(columnName);
             }
         }
 
@@ -196,9 +196,9 @@ namespace CustomControlsWPF
         /// <param name="columnName">Имя колонки для удаления.</param>
         public void RemoveDisplayColumn(string columnName)
         {
-            if (DisplayColumnNames.Contains(columnName))
+            if (this.DisplayColumnNames.Contains(columnName))
             {
-                DisplayColumnNames.Remove(columnName);
+                this.DisplayColumnNames.Remove(columnName);
             }
         }
         #endregion
@@ -219,7 +219,7 @@ namespace CustomControlsWPF
             this.TitleDisplay = titleDisplay;
             this.ItemsType = itemsType;
             this.ColumnNames = columnNames ?? throw new ArgumentNullException(nameof(columnNames));
-            this.DisplayColumnNames = columnNames.Where(c => ColumnNames.Contains(c)).ToList();
+            this.DisplayColumnNames = columnNames.Where(c => this.ColumnNames.Contains(c)).ToList();
             this.ItemsAll = items;
         }
 

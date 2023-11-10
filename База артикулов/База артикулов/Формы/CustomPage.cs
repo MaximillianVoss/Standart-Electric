@@ -1,15 +1,6 @@
-﻿using CustomControlsWPF;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
-using System.Data.Entity.Core.EntityClient;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Input;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
@@ -33,23 +24,11 @@ namespace База_артикулов.Формы
         /// <summary>
         /// Именованная обертка для WebDAV клиента CustomBase
         /// </summary>
-        public WDClient WDClient
-        {
-            get
-            {
-                return this.CustomBase.WDClient;
-            }
-        }
+        public WDClient WDClient => this.CustomBase.WDClient;
         /// <summary>
         /// Именованная обертка для базы данных DBSEEntities CustomBase
         /// </summary>
-        public DBSEEntities DB
-        {
-            get
-            {
-                return this.CustomBase.CustomDb.DB;
-            }
-        }
+        public DBSEEntities DB => this.CustomBase.CustomDb.DB;
         /// <summary>
         /// Объекты с которыми в данный момент взаимодействует окно, 
         /// обычно передаются ему в качестве параметров. 
@@ -57,19 +36,13 @@ namespace База_артикулов.Формы
         /// </summary>
         public List<CustomEventArgs> СurrentObjects
         {
-            set
-            {
-                this.CustomBase.CurrentObjects = value;
-            }
-            get
-            {
-                return this.CustomBase.CurrentObjects;
-            }
+            set => this.CustomBase.CurrentObjects = value;
+            get => this.CustomBase.CurrentObjects;
         }
         /// <summary>
         /// Первый переданный объект в списке аргументов (если они не <see langword="null"/>)
         /// </summary>
-        public CustomEventArgs CurrentObject { get { return this.CustomBase.CurrentObject; } set { this.CustomBase.CurrentObject = value; } }
+        public CustomEventArgs CurrentObject { get => this.CustomBase.CurrentObject; set => this.CustomBase.CurrentObject = value; }
         #endregion
 
         #region Методы
@@ -122,7 +95,7 @@ namespace База_артикулов.Формы
             {
                 if (this.CustomBase.Result == null)
                     this.CustomBase.Result = new CustomEventArgs();
-                this.CustomBase.Result = new CustomEventArgs(HandleOk(this.CustomBase.CurrentObjects));
+                this.CustomBase.Result = new CustomEventArgs(this.HandleOk(this.CustomBase.CurrentObjects));
                 this.CloseWindow(true);
             }
             catch (Exception ex)
@@ -136,7 +109,7 @@ namespace База_артикулов.Формы
             {
                 if (this.CustomBase.Result == null)
                     this.CustomBase.Result = new CustomEventArgs();
-                this.CustomBase.Result = new CustomEventArgs(HandleCancel(this.CustomBase.CurrentObjects));
+                this.CustomBase.Result = new CustomEventArgs(this.HandleCancel(this.CustomBase.CurrentObjects));
                 this.CloseWindow(false);
             }
             catch (Exception ex)

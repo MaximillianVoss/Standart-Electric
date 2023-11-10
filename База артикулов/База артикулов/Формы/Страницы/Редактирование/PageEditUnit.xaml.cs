@@ -1,17 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
@@ -81,7 +71,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #region Конструкторы/Деструкторы
         public PageEditUnit(object unit = null)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.currentUnit = (UnitsProducts)unit;
             this.btnOk.Text =
                 this.currentUnit != null || this.DB.UnitsProducts.FirstOrDefault(x => x.id == this.currentUnit.id) == null ?

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
-
-
-namespace База_артикулов.Модели
+﻿namespace База_артикулов.Модели
 {
     public partial class Products
     {

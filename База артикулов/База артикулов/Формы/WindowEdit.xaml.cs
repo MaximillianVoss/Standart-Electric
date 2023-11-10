@@ -1,7 +1,6 @@
 ﻿using BaseWindow_WPF.Classes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
@@ -53,10 +52,10 @@ namespace База_артикулов.Формы
             switch (this.CustomBase.Mode)
             {
                 case EditModes.Create:
-                    HandleCreateMode(args);
+                    this.HandleCreateMode(args);
                     break;
                 case EditModes.Update:
-                    HandleEditMode(args);
+                    this.HandleEditMode(args);
                     break;
             }
         }
@@ -82,11 +81,11 @@ namespace База_артикулов.Формы
                 if (argument != null)
                 {
                     if (argument.ValidateTypeOrBaseType<Classes>())
-                        this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
+                        this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     if (argument.ValidateTypeOrBaseType<Groups>())
-                        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     if (argument.ValidateTypeOrBaseType<SubGroups>())
-                        this.SetContent(title, new PageEditSubGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                        this.SetContent(title, new PageEditSubGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
                 }
                 //if(this.CustomBase.UnpackCurrentObject<Classes>(this.CurrentObject)!=null)
 
@@ -153,15 +152,15 @@ namespace База_артикулов.Формы
                     title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CurrentObject);
                     if (treeViewSelectedObject.ValidateTypeOrBaseType<Classes>())
                     {
-                        this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
+                        this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     }
                     if (treeViewSelectedObject.ValidateTypeOrBaseType<Groups>())
                     {
-                        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     }
                     if (treeViewSelectedObject.ValidateTypeOrBaseType<SubGroups>())
                     {
-                        this.SetContent(title, new PageEditSubGroup(this.CustomBase, this.ContentWidth, ContentHeight));
+                        this.SetContent(title, new PageEditSubGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     }
                 }
             }
@@ -227,7 +226,7 @@ namespace База_артикулов.Формы
         /// <param name="title">Заголовок окна. По умолчанию "WindowEdit".</param>
         public WindowEdit(string title = "WindowEdit") : base(title: title)
         {
-            InitializeWindow(title);
+            this.InitializeWindow(title);
         }
 
         /// <summary>
@@ -243,7 +242,7 @@ namespace База_артикулов.Формы
             ) : base(title: title, customBase)
         {
             this.SetContentSize(width, height);
-            InitializeWindow(title);
+            this.InitializeWindow(title);
         }
 
         /// <summary>

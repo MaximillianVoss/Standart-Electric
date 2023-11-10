@@ -19,21 +19,21 @@ namespace База_артикулов.Классы
         #region Свойства
         public string CurrentConnectionString
         {
-            get => _currentConnectionString;
+            get => this._currentConnectionString;
             set
             {
-                if (_currentConnectionString != value)
+                if (this._currentConnectionString != value)
                 {
-                    _currentConnectionString = value;
-                    OnCurrentConnectionStringChanged(_currentConnectionString);
+                    this._currentConnectionString = value;
+                    this.OnCurrentConnectionStringChanged(this._currentConnectionString);
                 }
             }
         }
 
-        public string UserNameWDClient { get => _userNameWDClient; set => _userNameWDClient = value; }
-        public string PasswordWDClient { get => _passwordWDClient; set => _passwordWDClient = value; }
-        public string ServerWDClient { get => _serverWDClient; set => _serverWDClient = value; }
-        public string BasePathWDClient { get => _basePathWDClient; set => _basePathWDClient = value; }
+        public string UserNameWDClient { get => this._userNameWDClient; set => this._userNameWDClient = value; }
+        public string PasswordWDClient { get => this._passwordWDClient; set => this._passwordWDClient = value; }
+        public string ServerWDClient { get => this._serverWDClient; set => this._serverWDClient = value; }
+        public string BasePathWDClient { get => this._basePathWDClient; set => this._basePathWDClient = value; }
 
         public event Action<string> CurrentConnectionStringChanged;
         #endregion
@@ -64,13 +64,13 @@ namespace База_артикулов.Классы
                     var settings = JsonSerializer.Deserialize<SettingsNew>(jsonString);
                     if (settings != null)
                     {
-                        _currentConnectionString = settings.CurrentConnectionString;
-                        _userNameWDClient = settings.UserNameWDClient;
-                        _passwordWDClient = settings.PasswordWDClient;
-                        _serverWDClient = settings.ServerWDClient;
-                        _basePathWDClient = settings.BasePathWDClient;
+                        this._currentConnectionString = settings.CurrentConnectionString;
+                        this._userNameWDClient = settings.UserNameWDClient;
+                        this._passwordWDClient = settings.PasswordWDClient;
+                        this._serverWDClient = settings.ServerWDClient;
+                        this._basePathWDClient = settings.BasePathWDClient;
 
-                        OnCurrentConnectionStringChanged(_currentConnectionString);
+                        this.OnCurrentConnectionStringChanged(this._currentConnectionString);
                     }
                 }
             }
@@ -92,11 +92,11 @@ namespace База_артикулов.Классы
         {
             if (!File.Exists(filePath))
             {
-                SaveToFile(filePath);
+                this.SaveToFile(filePath);
             }
             else
             {
-                LoadFromFile(filePath);
+                this.LoadFromFile(filePath);
             }
         }
         #endregion

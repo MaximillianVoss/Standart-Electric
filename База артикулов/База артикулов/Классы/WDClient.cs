@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using WebDAVClient;
 using WebDAVClient.Model;
@@ -127,20 +126,20 @@ namespace База_артикулов.Классы
 
         public string GetFileUrl(string cloudFolder, string fileName)
         {
-            return $"{Server}{BasePath}/{cloudFolder}/{fileName}";
+            return $"{this.Server}{this.BasePath}/{cloudFolder}/{fileName}";
         }
         public async Task CreateDirectoryIfNotExistsAsync(string cloudPath, string folderName)
         {
-            string fullPath = $"{BasePath}{cloudPath}/{folderName}";
+            string fullPath = $"{this.BasePath}{cloudPath}/{folderName}";
             try
             {
                 // Пытаемся получить папку
-                var folder = await Client.GetFolder(fullPath);
+                var folder = await this.Client.GetFolder(fullPath);
             }
             catch
             {
                 // Если возникает исключение (предполагаем, что из-за отсутствия папки), создаем ее
-                await Client.CreateDir($"{BasePath}{cloudPath}", folderName);
+                await this.Client.CreateDir($"{this.BasePath}{cloudPath}", folderName);
             }
         }
         #endregion

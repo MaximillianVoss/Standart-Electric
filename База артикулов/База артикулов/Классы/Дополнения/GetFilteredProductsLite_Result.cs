@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace База_артикулов.Модели
+﻿namespace База_артикулов.Модели
 {
-    using System;
     public partial class GetFilteredProductsLite_Result
     {
         /// <summary>

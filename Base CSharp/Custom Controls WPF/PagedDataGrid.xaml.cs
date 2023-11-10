@@ -120,24 +120,24 @@ namespace CustomControlsWPF
 
         public void AddDisplayColumn(string columnName)
         {
-            if (!TableData.ColumnNames.Contains(columnName))
+            if (!this.TableData.ColumnNames.Contains(columnName))
             {
                 throw new ArgumentException($"Столбец с именем {columnName} отсутствует в данных.");
             }
 
-            if (!dgData.Columns.Any(c => (c.Header as string).Replace(" ", "_").Equals(columnName)))
+            if (!this.dgData.Columns.Any(c => (c.Header as string).Replace(" ", "_").Equals(columnName)))
             {
-                TableData.ColumnNames.Add(columnName);
-                Update();
+                this.TableData.ColumnNames.Add(columnName);
+                this.Update();
             }
         }
 
         public void RemoveDisplayColumn(string columnName)
         {
-            if (dgData.Columns.Any(c => (c.Header as string).Replace(" ", "_").Equals(columnName)))
+            if (this.dgData.Columns.Any(c => (c.Header as string).Replace(" ", "_").Equals(columnName)))
             {
-                TableData.ColumnNames.Remove(columnName);
-                Update();
+                this.TableData.ColumnNames.Remove(columnName);
+                this.Update();
             }
         }
 

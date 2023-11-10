@@ -1,6 +1,5 @@
 ﻿using BaseWindow_WPF.Classes;
 using CustomControlsWPF;
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -123,7 +122,7 @@ namespace База_артикулов.Формы
         /// </summary>
         public List<CustomEventArgs> CurrentObjects
         {
-            get => currentObjects;
+            get => this.currentObjects;
             set
             {
                 if (value == null)
@@ -150,10 +149,7 @@ namespace База_артикулов.Формы
         /// </summary>
         public CustomEventArgs CurrentObject
         {
-            set
-            {
-                this.currentObject = value;
-            }
+            set => this.currentObject = value;
             get
             {
                 if (this.CurrentObjects != null && this.CurrentObjects.Count > 0)
@@ -260,7 +256,7 @@ namespace База_артикулов.Формы
         }
         public bool IsArgsCorrectException(int expectedArgsCount)
         {
-            if (!IsArgsCorrect(expectedArgsCount))
+            if (!this.IsArgsCorrect(expectedArgsCount))
                 throw new Exception(String.Format("Ожидалось: {0} параметров, получено: {1} параметров", expectedArgsCount, this.CurrentObjects.Count));
             return true;
         }

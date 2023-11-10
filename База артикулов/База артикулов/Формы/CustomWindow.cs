@@ -23,23 +23,11 @@ namespace База_артикулов.Формы
         /// <summary>
         /// Именованная обертка для WebDAV клиента CustomBase
         /// </summary>
-        public WDClient WDClient
-        {
-            get
-            {
-                return this.CustomBase.WDClient;
-            }
-        }
+        public WDClient WDClient => this.CustomBase.WDClient;
         /// <summary>
         /// Именованная обертка для базы данных DBSEEntities CustomBase
         /// </summary>
-        public DBSEEntities DB
-        {
-            get
-            {
-                return this.CustomBase.CustomDb.DB;
-            }
-        }
+        public DBSEEntities DB => this.CustomBase.CustomDb.DB;
         /// <summary>
         /// Объекты с которыми в данный момент взаимодействует окно, 
         /// обычно передаются ему в качестве параметров. 
@@ -47,19 +35,13 @@ namespace База_артикулов.Формы
         /// </summary>
         public List<CustomEventArgs> СurrentObjects
         {
-            set
-            {
-                this.CustomBase.CurrentObjects = value;
-            }
-            get
-            {
-                return this.CustomBase.CurrentObjects;
-            }
+            set => this.CustomBase.CurrentObjects = value;
+            get => this.CustomBase.CurrentObjects;
         }
         /// <summary>
         /// Первый переданный объект в списке аргументов (если они не <see langword="null"/>)
         /// </summary>
-        public CustomEventArgs CurrentObject { get { return this.CustomBase.CurrentObject; } set { this.CustomBase.CurrentObject = value; } }
+        public CustomEventArgs CurrentObject { get => this.CustomBase.CurrentObject; set => this.CustomBase.CurrentObject = value; }
 
         #endregion
 
@@ -89,7 +71,7 @@ namespace База_артикулов.Формы
         {
             try
             {
-                this.CustomBase.Result = new CustomEventArgs(HandleOk());
+                this.CustomBase.Result = new CustomEventArgs(this.HandleOk());
                 this.CloseWindow(true);
             }
             catch (Exception ex)
@@ -101,7 +83,7 @@ namespace База_артикулов.Формы
         {
             try
             {
-                this.CustomBase.Result = new CustomEventArgs(HandleCancel());
+                this.CustomBase.Result = new CustomEventArgs(this.HandleCancel());
                 this.CloseWindow(false);
             }
             catch (Exception ex)

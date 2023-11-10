@@ -1,12 +1,10 @@
-﻿using База_артикулов.Модели;
-using System.Data.SqlClient;
-using System.Configuration;
-
-using System.Data.Entity.Core.EntityClient;
-using System.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Configuration;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
+using System.Linq;
+using База_артикулов.Модели;
 
 namespace База_артикулов.Классы
 {
@@ -68,7 +66,7 @@ namespace База_артикулов.Классы
             // Здесь ваш код обработки изменения строки подключения.
             // Например, вы можете вызвать InitDB или любой другой метод, 
             // который обновляет вашу базу данных с новой строкой подключения.
-            InitDB(true);
+            this.InitDB(true);
         }
         #endregion
 
@@ -296,7 +294,7 @@ namespace База_артикулов.Классы
         int applicationId)
         {
             // Создаем новый объект Descriptors и добавляем его в базу данных
-            Descriptors descriptor = CreateDescriptor(code, title, titleShort, description);
+            Descriptors descriptor = this.CreateDescriptor(code, title, titleShort, description);
 
             // Создаем новый объект SubGroups и добавляем его в базу данных
             var subGroup = this.DB.SubGroups.Add(new SubGroups(
@@ -333,7 +331,7 @@ namespace База_артикулов.Классы
             currentSubGroup = this.DB.SubGroups.FirstOrDefault(x => x.id == currentSubGroup.id);
 
             // Обновляем descriptor
-            UpdateDescriptor(
+            this.UpdateDescriptor(
                 currentSubGroup.idDescriptor,
                 code,
                 title,
@@ -443,7 +441,7 @@ namespace База_артикулов.Классы
                 throw new Exception($"Группа с ID {groupId} не найдена.");
             }
 
-            Descriptors descriptor = UpdateDescriptor(currentGroup.idDescriptor, code, title, titleShort, description);
+            Descriptors descriptor = this.UpdateDescriptor(currentGroup.idDescriptor, code, title, titleShort, description);
 
             currentGroup.Descriptors = descriptor;
             currentGroup.Classes = this.DB.Classes.FirstOrDefault(x => x.id == classId);
@@ -674,7 +672,7 @@ namespace База_артикулов.Классы
                 throw new Exception("Не указан путь до загружаемого файла!");
 
 
-            if (IsDescriptorProductExists(productId))
+            if (this.IsDescriptorProductExists(productId))
             {
                 var extension = System.IO.Path.GetExtension(filePath);
                 var typeView = this.DB.ResourceTypesView.FirstOrDefault(x => x.Расширение_ресурса == extension);
@@ -687,7 +685,7 @@ namespace База_артикулов.Классы
                     this.DB.ResourceTypes.Add(resourceTypes);
                 }
 
-                var productDescriptor = GetDescriptorProduct(productId);
+                var productDescriptor = this.GetDescriptorProduct(productId);
                 var productDescriptorResource = new DescriptorsResources
                 {
                     idDescriptor = productDescriptor.id,
@@ -705,10 +703,10 @@ namespace База_артикулов.Классы
         }
         public void UpdateResource(int productId, string resourceTitle)
         {
-            if (IsDescriptorProductExists(productId))
+            if (this.IsDescriptorProductExists(productId))
             {
-                var productDescriptor = GetDescriptorProduct(productId);
-                var productDescriptorResource = GetDescriptorsResources(productDescriptor.id);
+                var productDescriptor = this.GetDescriptorProduct(productId);
+                var productDescriptorResource = this.GetDescriptorsResources(productDescriptor.id);
 
                 if (productDescriptorResource != null)
                 {
@@ -720,10 +718,10 @@ namespace База_артикулов.Классы
         }
         public void DeleteResource(int productId)
         {
-            if (IsDescriptorProductExists(productId))
+            if (this.IsDescriptorProductExists(productId))
             {
-                var productDescriptor = GetDescriptorProduct(productId);
-                var productDescriptorResource = GetDescriptorsResources(productDescriptor.id);
+                var productDescriptor = this.GetDescriptorProduct(productId);
+                var productDescriptorResource = this.GetDescriptorsResources(productDescriptor.id);
 
                 if (productDescriptorResource != null)
                 {
@@ -846,7 +844,7 @@ namespace База_артикулов.Классы
                 throw new ArgumentNullException(nameof(settings));
             }
             this.settings = settings;
-            this.settings.CurrentConnectionStringChanged += HandleConnectionStringChange;
+            this.settings.CurrentConnectionStringChanged += this.HandleConnectionStringChange;
             this.Update();
         }
 

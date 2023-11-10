@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text.Json;
-using База_артикулов.Классы;
 using Xunit;
+using База_артикулов.Классы;
 
 namespace База_артикулов.Настройки.Тесты
 {
@@ -52,7 +52,7 @@ namespace База_артикулов.Настройки.Тесты
                 ServerWDClient = TEST_SERVER,
                 BasePathWDClient = TEST_BASE_PATH
             };
-            WriteSettingsToJsonFile(TEST_FILE_PATH, initialSettings);
+            this.WriteSettingsToJsonFile(TEST_FILE_PATH, initialSettings);
 
             // Действие
             var settings = new SettingsNew(TEST_FILE_PATH);
@@ -103,7 +103,7 @@ namespace База_артикулов.Настройки.Тесты
                 ServerWDClient = TEST_SERVER,
                 BasePathWDClient = TEST_BASE_PATH
             };
-            WriteSettingsToJsonFile(TEST_FILE_PATH, initialSettings);
+            this.WriteSettingsToJsonFile(TEST_FILE_PATH, initialSettings);
             var settings = new SettingsNew();
 
             // Действие

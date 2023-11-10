@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.Entity;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
 using System.IO;
@@ -333,7 +332,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         /// </summary>
         private void UpdateUnitSelection()
         {
-            DataRowView rowView = dgDimensions.SelectedItem as DataRowView;
+            DataRowView rowView = this.dgDimensions.SelectedItem as DataRowView;
             if (rowView != null)
             {
                 // Для получения значения определенного столбца используйте:
@@ -588,7 +587,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         }
         private void imgPreview_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            _ = UpdateImageAsync(this.CurrentProduct);
+            _ = this.UpdateImageAsync(this.CurrentProduct);
         }
 
 

@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace База_артикулов.Классы
 {
@@ -16,24 +12,18 @@ namespace База_артикулов.Классы
         #endregion
 
         #region Свойства
-        public bool IsList
-        {
-            get { return this.isList; }
-        }
-        public Type DataType
-        {
-            get { return this.Data.GetType(); }
-        }
+        public bool IsList => this.isList;
+        public Type DataType => this.Data.GetType();
         public object Data
         {
-            get { return this.data; }
+            get => this.data;
             set
             {
                 this.data = value;
                 if (this.data != null)
                 {
                     this.dataType = value.GetType();
-                    this.isList = data is IList;
+                    this.isList = this.data is IList;
                 }
                 else
                 {
@@ -55,7 +45,7 @@ namespace База_артикулов.Классы
             // Инициализируем значения по умолчанию.
             this.isList = false; // or true, зависит от того, что считается значением по умолчанию
             this.dataType = typeof(void); // или другой тип данных по умолчанию
-            Data = null; // или другое значение по умолчанию
+            this.Data = null; // или другое значение по умолчанию
         }
 
         /// <summary>
@@ -66,7 +56,7 @@ namespace База_артикулов.Классы
         {
             this.isList = data is IList;
             this.dataType = data?.GetType() ?? typeof(void);
-            Data = data;
+            this.Data = data;
         }
 
         #endregion

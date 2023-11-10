@@ -1,18 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
 
@@ -81,7 +70,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #region Конструкторы/Деструкторы
         public PageEditVendorCode(object vendorCode)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             //if (!this.CustomBase.IsTypeOrBaseEqual(typeof(VendorCodes), vendorCode))
             //    throw new Exception("Передан объект неподходящего типа! Ожидался объект типа VendorCodes");
             //this.currentItem = (VendorCodes)vendorCode;

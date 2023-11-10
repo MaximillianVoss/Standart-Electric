@@ -2,7 +2,6 @@
 using System.IO;
 using System.Text.Json;
 using Xunit;
-using База_артикулов.Классы;
 using База_артикулов.Формы;
 
 namespace База_артикулов.ГрафическийИнтерфейс.Тесты

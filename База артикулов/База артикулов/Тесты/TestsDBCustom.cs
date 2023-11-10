@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using Xunit;
 using База_артикулов.Классы;
-using System.Configuration;
 using База_артикулов.Модели;
 
 namespace База_артикулов.База_Данных.Тесты
@@ -27,8 +27,8 @@ namespace База_артикулов.База_Данных.Тесты
         public TestsDBCustom()
         {
             // Этот код будет выполняться перед каждым тестом в этом классе
-            settings = CreateSettingsWithConnectionString("Подключение к LAPTOP-BBFM8MMD-Test");
-            db = new CustomDB(settings);
+            this.settings = this.CreateSettingsWithConnectionString("Подключение к LAPTOP-BBFM8MMD-Test");
+            this.db = new CustomDB(this.settings);
         }
         #endregion
 
@@ -84,8 +84,8 @@ namespace База_артикулов.База_Данных.Тесты
 
         public TestsDBObjects()
         {
-            context = this.db.DB;
-            service = this.db;
+            this.context = this.db.DB;
+            this.service = this.db;
         }
 
         ~TestsDBObjects()
@@ -104,7 +104,7 @@ namespace База_артикулов.База_Данных.Тесты
         {
             int productId = this.context.Products.FirstOrDefault().id;  // Используйте реальный id продукта из вашей базы данных для тестирования.
 
-            var result = service.IsProductExists(productId);
+            var result = this.service.IsProductExists(productId);
 
             Assert.True(result);  // Убедитесь, что продукт с таким id существует в вашей базе данных.
         }
@@ -154,16 +154,16 @@ namespace База_артикулов.База_Данных.Тесты
             var titleShort = "TestShort";
             var description = "TestDescription";
             var vendorCode = "12345";
-            var idNorm = context.Norms.FirstOrDefault()?.id ?? 0; // Предполагая, что у вас есть таблица Norms
-            var idSubGroup = context.SubGroups.FirstOrDefault()?.id ?? 0;
-            var idCover = context.Covers.FirstOrDefault()?.id ?? 0;
-            var idMaterial = context.Materials.FirstOrDefault()?.id ?? 0;
-            var idPerforation = context.Perforations.FirstOrDefault()?.id ?? 0;
-            var idPackage = context.Packages.FirstOrDefault()?.id ?? 0;
+            var idNorm = this.context.Norms.FirstOrDefault()?.id ?? 0; // Предполагая, что у вас есть таблица Norms
+            var idSubGroup = this.context.SubGroups.FirstOrDefault()?.id ?? 0;
+            var idCover = this.context.Covers.FirstOrDefault()?.id ?? 0;
+            var idMaterial = this.context.Materials.FirstOrDefault()?.id ?? 0;
+            var idPerforation = this.context.Perforations.FirstOrDefault()?.id ?? 0;
+            var idPackage = this.context.Packages.FirstOrDefault()?.id ?? 0;
             var isInStock = true;
 
             // Act
-            var createdProduct = service.CreateProduct(title, titleShort, description, vendorCode, idNorm, idSubGroup, idCover, idMaterial, idPerforation, idPackage, isInStock);
+            var createdProduct = this.service.CreateProduct(title, titleShort, description, vendorCode, idNorm, idSubGroup, idCover, idMaterial, idPerforation, idPackage, isInStock);
 
             // Assert
             Assert.NotNull(createdProduct);
@@ -173,8 +173,8 @@ namespace База_артикулов.База_Данных.Тесты
             // Добавьте другие проверки при необходимости
 
             // Cleanup
-            context.Products.Remove(createdProduct); // Удаляем созданный продукт после теста
-            context.SaveChanges();
+            this.context.Products.Remove(createdProduct); // Удаляем созданный продукт после теста
+            this.context.SaveChanges();
         }
 
         #endregion
@@ -188,26 +188,26 @@ namespace База_артикулов.База_Данных.Тесты
         public void CreateAndDeleteDescriptor_ShouldAddAndRemoveDescriptorFromDB()
         {
             // Arrange
-            var descriptor = db.CreateDescriptor("test_code", "test_title", "test_titleShort", "test_titleDisplay", "test_description");
+            var descriptor = this.db.CreateDescriptor("test_code", "test_title", "test_titleShort", "test_titleDisplay", "test_description");
 
             // Проверяем, что дескриптор был добавлен
-            Assert.NotNull(db.DB.Descriptors.Find(descriptor.id));
+            Assert.NotNull(this.db.DB.Descriptors.Find(descriptor.id));
 
             // Act
-            var result = db.DeleteDescriptor(descriptor.id);
+            var result = this.db.DeleteDescriptor(descriptor.id);
 
             // Assert
             Assert.True(result);
-            Assert.Null(db.DB.Descriptors.Find(descriptor.id)); // Убеждаемся, что дескриптор был удален из БД
+            Assert.Null(this.db.DB.Descriptors.Find(descriptor.id)); // Убеждаемся, что дескриптор был удален из БД
         }
 
         [Fact]
         public void UpdateDescriptor_ShouldUpdateAndReturnUpdatedDescriptor()
         {
             // Arrange
-            settings = CreateSettingsWithConnectionString("Подключение к LAPTOP-BBFM8MMD-Test");
-            db = new CustomDB(settings);
-            var initialDescriptor = db.CreateDescriptor("initial_code", "initial_title", "initial_titleShort", "initial_titleDisplay", "initial_description");
+            this.settings = this.CreateSettingsWithConnectionString("Подключение к LAPTOP-BBFM8MMD-Test");
+            this.db = new CustomDB(this.settings);
+            var initialDescriptor = this.db.CreateDescriptor("initial_code", "initial_title", "initial_titleShort", "initial_titleDisplay", "initial_description");
             var initialId = initialDescriptor.id;
 
             try
@@ -219,7 +219,7 @@ namespace База_артикулов.База_Данных.Тесты
                 var newDescription = "updated_description";
 
                 // Act
-                var updatedDescriptor = db.UpdateDescriptor(initialId, newCode, newTitle, newTitleShort, newTitleDisplay, newDescription);
+                var updatedDescriptor = this.db.UpdateDescriptor(initialId, newCode, newTitle, newTitleShort, newTitleDisplay, newDescription);
 
                 // Assert
                 Assert.NotNull(updatedDescriptor);
@@ -232,7 +232,7 @@ namespace База_артикулов.База_Данных.Тесты
             finally
             {
                 // Cleanup
-                db.DeleteDescriptor(initialId);
+                this.db.DeleteDescriptor(initialId);
             }
         }
 
@@ -240,12 +240,12 @@ namespace База_артикулов.База_Данных.Тесты
         public void UpdateDescriptor_ShouldThrowExceptionWhenDescriptorNotFound()
         {
             // Arrange
-            settings = CreateSettingsWithConnectionString("Подключение к LAPTOP-BBFM8MMD-Test");
-            db = new CustomDB(settings);
+            this.settings = this.CreateSettingsWithConnectionString("Подключение к LAPTOP-BBFM8MMD-Test");
+            this.db = new CustomDB(this.settings);
             var nonExistentId = 999999; // предполагая, что такого ID нет в базе данных
 
             // Act & Assert
-            Assert.Throws<Exception>(() => db.UpdateDescriptor(nonExistentId));
+            Assert.Throws<Exception>(() => this.db.UpdateDescriptor(nonExistentId));
         }
 
         [Fact]
@@ -260,13 +260,13 @@ namespace База_артикулов.База_Данных.Тесты
                 titleDisplay = "initial_titleDisplay",
                 description = "initial_description"
             };
-            db.DB.Descriptors.Add(originalDescriptor);
-            db.DB.SaveChanges();
+            this.db.DB.Descriptors.Add(originalDescriptor);
+            this.db.DB.SaveChanges();
 
             try
             {
                 // Assert initial creation
-                var fetchedDescriptor = db.DB.Descriptors.Find(originalDescriptor.id);
+                var fetchedDescriptor = this.db.DB.Descriptors.Find(originalDescriptor.id);
                 Assert.Equal("initial_code", fetchedDescriptor.code);
                 Assert.Equal("initial_title", fetchedDescriptor.title);
                 // Добавьте другие проверки здесь, если это необходимо
@@ -277,10 +277,10 @@ namespace База_артикулов.База_Данных.Тесты
                 fetchedDescriptor.titleShort = "updated_titleShort";
                 fetchedDescriptor.titleDisplay = "updated_titleDisplay";
                 fetchedDescriptor.description = "updated_description";
-                db.UpdateDescriptor(fetchedDescriptor);
+                this.db.UpdateDescriptor(fetchedDescriptor);
 
                 // Assert
-                var updatedDescriptor = db.DB.Descriptors.Find(fetchedDescriptor.id);
+                var updatedDescriptor = this.db.DB.Descriptors.Find(fetchedDescriptor.id);
                 Assert.Equal("updated_code", updatedDescriptor.code);
                 Assert.Equal("updated_title", updatedDescriptor.title);
                 // Добавьте другие проверки здесь, чтобы удостовериться, что все поля были обновлены
@@ -288,7 +288,7 @@ namespace База_артикулов.База_Данных.Тесты
             finally
             {
                 // Cleanup
-                db.DeleteDescriptor(originalDescriptor.id);
+                this.db.DeleteDescriptor(originalDescriptor.id);
             }
         }
 
@@ -298,7 +298,7 @@ namespace База_артикулов.База_Данных.Тесты
         {
             int descriptorId = 1;
 
-            var result = service.IsDescriptorExists(descriptorId);
+            var result = this.service.IsDescriptorExists(descriptorId);
 
             Assert.True(result);
         }
@@ -308,7 +308,7 @@ namespace База_артикулов.База_Данных.Тесты
         {
             int productId = 1;
 
-            var result = service.IsDescriptorProductExists(productId);
+            var result = this.service.IsDescriptorProductExists(productId);
 
             Assert.True(result);
         }
@@ -317,7 +317,7 @@ namespace База_артикулов.База_Данных.Тесты
         public void IsDescriptorResourcesExists()
         {
             int descriptorId = this.context.DescriptorsResources.FirstOrDefault().idDescriptor;
-            var result = service.IsDescriptorResourcesExists(descriptorId);
+            var result = this.service.IsDescriptorResourcesExists(descriptorId);
             Assert.True(result);
         }
 
@@ -326,7 +326,7 @@ namespace База_артикулов.База_Данных.Тесты
         {
             int productId = 1;
 
-            var descriptor = service.GetDescriptorProduct(productId);
+            var descriptor = this.service.GetDescriptorProduct(productId);
 
             Assert.NotNull(descriptor);
         }
@@ -336,7 +336,7 @@ namespace База_артикулов.База_Данных.Тесты
         {
             int descriptorId = this.context.DescriptorsResources.FirstOrDefault().idDescriptor;
 
-            var descriptorResource = service.GetDescriptorsResources(descriptorId);
+            var descriptorResource = this.service.GetDescriptorsResources(descriptorId);
 
             Assert.NotNull(descriptorResource);
         }
@@ -362,7 +362,7 @@ namespace База_артикулов.База_Данных.Тесты
             int applicationId = 1; // Добавлен новый параметр
 
             // Act
-            db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId, applicationId);
+            this.db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId, applicationId);
 
             // Assert
             var createdSubGroup = this.db.DB.SubGroups.FirstOrDefault(x => x.Descriptors.code == code);
@@ -384,12 +384,12 @@ namespace База_артикулов.База_Данных.Тесты
             int applicationId = 1; // Убедитесь, что такой ID существует в вашей тестовой БД
 
             // Act
-            var subGroup = db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId, applicationId);
+            var subGroup = this.db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId, applicationId);
             int subGroupId = subGroup.id; // ID созданной подгруппы
             int subGroupDescriptorId = subGroup.Descriptors.id; // ID связанного с подгруппой дескриптора
 
             // Act
-            db.DeleteSubGroup(subGroupId);
+            this.db.DeleteSubGroup(subGroupId);
 
             // Assert
             var deletedSubGroup = this.db.DB.SubGroups.FirstOrDefault(x => x.id == subGroupId);
@@ -411,7 +411,7 @@ namespace База_артикулов.База_Данных.Тесты
             int loadDiagramId = 1; // Убедитесь, что такой ID существует в вашей тестовой БД
             int applicationId = 1; // Добавленный параметр applicationId
 
-            var createdSubGroup = db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId, applicationId);
+            var createdSubGroup = this.db.CreateSubGroup(code, title, titleShort, description, groupId, loadDiagramId, applicationId);
             int subGroupId = createdSubGroup.id;
             var originalSubGroup = this.db.DB.SubGroups.FirstOrDefault(x => x.id == subGroupId);
             Assert.NotNull(originalSubGroup);
@@ -425,7 +425,7 @@ namespace База_артикулов.База_Данных.Тесты
             int updatedApplicationId = 2; // Обновленный параметр applicationId
 
             // Act
-            db.UpdateSubGroup(originalSubGroup, updatedCode, updatedTitle, updatedTitleShort, updatedDescription, updatedGroupId, updatedLoadDiagramId, updatedApplicationId);
+            this.db.UpdateSubGroup(originalSubGroup, updatedCode, updatedTitle, updatedTitleShort, updatedDescription, updatedGroupId, updatedLoadDiagramId, updatedApplicationId);
 
             // Assert
             var updatedSubGroup = this.db.DB.SubGroups.FirstOrDefault(x => x.id == subGroupId);
@@ -443,43 +443,43 @@ namespace База_артикулов.База_Данных.Тесты
         [Fact]
         public void CreateGroup_ShouldReturnNewGroup()
         {
-            var newGroup = db.CreateGroup("testCode", "testTitle", "testTitleShort", "testDescription", 1);
+            var newGroup = this.db.CreateGroup("testCode", "testTitle", "testTitleShort", "testDescription", 1);
 
             Assert.NotNull(newGroup);
             Assert.Equal("testCode", newGroup.Descriptors.code);
             Assert.Equal("testTitle", newGroup.Descriptors.title);
 
             // Очистка созданного элемента после теста.
-            db.DeleteGroup(newGroup.id);
+            this.db.DeleteGroup(newGroup.id);
         }
 
         [Fact]
         public void UpdateGroup_ShouldUpdateExistingGroup()
         {
             // Создание тестовой группы для обновления.
-            var testGroup = db.CreateGroup("initialCode", "initialTitle", "initialTitleShort", "initialDescription", 1);
+            var testGroup = this.db.CreateGroup("initialCode", "initialTitle", "initialTitleShort", "initialDescription", 1);
 
-            db.UpdateGroup(testGroup.id, "updatedCode", "updatedTitle", "updatedTitleShort", "updatedDescription", 2);
+            this.db.UpdateGroup(testGroup.id, "updatedCode", "updatedTitle", "updatedTitleShort", "updatedDescription", 2);
 
-            var updatedGroup = db.DB.Groups.FirstOrDefault(x => x.id == testGroup.id);
+            var updatedGroup = this.db.DB.Groups.FirstOrDefault(x => x.id == testGroup.id);
 
             Assert.NotNull(updatedGroup);
             Assert.Equal("updatedCode", updatedGroup.Descriptors.code);
             Assert.Equal("updatedTitle", updatedGroup.Descriptors.title);
 
             // Очистка созданного элемента после теста.
-            db.DeleteGroup(testGroup.id);
+            this.db.DeleteGroup(testGroup.id);
         }
 
         [Fact]
         public void DeleteGroup_ShouldRemoveGroupFromDatabase()
         {
             // Создание тестовой группы для удаления.
-            var testGroup = db.CreateGroup("testCode", "testTitle", "testTitleShort", "testDescription", 1);
+            var testGroup = this.db.CreateGroup("testCode", "testTitle", "testTitleShort", "testDescription", 1);
 
-            db.DeleteGroup(testGroup.id);
+            this.db.DeleteGroup(testGroup.id);
 
-            var deletedGroup = db.DB.Groups.FirstOrDefault(x => x.id == testGroup.id);
+            var deletedGroup = this.db.DB.Groups.FirstOrDefault(x => x.id == testGroup.id);
 
             Assert.Null(deletedGroup);
         }
@@ -498,15 +498,15 @@ namespace База_артикулов.База_Данных.Тесты
             string description = "test_description";
 
             // Act
-            Classes addedClass = db.CreateClass(code, title, titleShort, description);
+            Classes addedClass = this.db.CreateClass(code, title, titleShort, description);
 
             // Assert
             // Проверка, что Descriptors добавлен в базу данных
-            Descriptors addedDescriptor = db.DB.Descriptors.FirstOrDefault(d => d.id == addedClass.idDescriptor);
+            Descriptors addedDescriptor = this.db.DB.Descriptors.FirstOrDefault(d => d.id == addedClass.idDescriptor);
             Assert.NotNull(addedDescriptor);
 
             // Проверка, что Classes добавлен в базу данных
-            Classes retrievedClass = db.DB.Classes.FirstOrDefault(c => c.Descriptors.code == code);
+            Classes retrievedClass = this.db.DB.Classes.FirstOrDefault(c => c.Descriptors.code == code);
             Assert.NotNull(retrievedClass);
 
             // Проверка, что добавленный Classes ссылается на правильный Descriptors
@@ -523,11 +523,11 @@ namespace База_артикулов.База_Данных.Тесты
             string newDescription = "updated_test_description";
 
             // Создаем новый Classes для теста
-            Classes testClass = db.CreateClass("initial_code", "initial_title", "initial_titleShort", "initial_description");
+            Classes testClass = this.db.CreateClass("initial_code", "initial_title", "initial_titleShort", "initial_description");
             int classId = testClass.id;
 
             // Act
-            Classes updatedClass = db.UpdateClass(classId, newCode, newTitle, newTitleShort, newDescription);
+            Classes updatedClass = this.db.UpdateClass(classId, newCode, newTitle, newTitleShort, newDescription);
 
             // Assert
             Assert.NotNull(updatedClass);
@@ -545,16 +545,16 @@ namespace База_артикулов.База_Данных.Тесты
         {
             // Arrange
             // Создаем новый Classes для теста
-            Classes testClass = db.CreateClass("test_code", "test_title", "test_titleShort", "test_description");
+            Classes testClass = this.db.CreateClass("test_code", "test_title", "test_titleShort", "test_description");
             int classId = testClass.id;
             int classDescriptorId = testClass.Descriptors.id;
             // Act
-            bool isDeleted = db.DeleteClass(classId);
+            bool isDeleted = this.db.DeleteClass(classId);
 
             // Assert
             Assert.True(isDeleted);
-            Assert.Null(db.DB.Classes.FirstOrDefault(c => c.id == classId));
-            Assert.Null(db.DB.Descriptors.FirstOrDefault(d => d.id == classDescriptorId));
+            Assert.Null(this.db.DB.Classes.FirstOrDefault(c => c.id == classId));
+            Assert.Null(this.db.DB.Descriptors.FirstOrDefault(d => d.id == classDescriptorId));
         }
         #endregion
     }
@@ -571,7 +571,7 @@ namespace База_артикулов.База_Данных.Тесты
             double value = 10.0;
 
             // Act
-            UnitsProducts addedUnitProduct = db.CreateUnitProduct(product.id, unit.id, unitType.id, value);
+            UnitsProducts addedUnitProduct = this.db.CreateUnitProduct(product.id, unit.id, unitType.id, value);
 
             // Assert
             UnitsProducts retrievedUnitProduct = this.db.DB.UnitsProducts.FirstOrDefault(up => up.id == addedUnitProduct.id);
@@ -587,11 +587,11 @@ namespace База_артикулов.База_Данных.Тесты
             var product = this.db.DB.Products.FirstOrDefault();
             var unit = this.db.DB.Units.FirstOrDefault();
             var unitType = this.db.DB.UnitsTypes.FirstOrDefault();
-            UnitsProducts newUnitProduct = db.CreateUnitProduct(product.id, unit.id, unitType.id, 10.0);
+            UnitsProducts newUnitProduct = this.db.CreateUnitProduct(product.id, unit.id, unitType.id, 10.0);
             double newValue = 20.0;
 
             // Act
-            db.UpdateUnitProduct(newUnitProduct.id, unit.id, unitType.id, newValue);
+            this.db.UpdateUnitProduct(newUnitProduct.id, unit.id, unitType.id, newValue);
 
             // Assert
             UnitsProducts updatedUnitProduct = this.db.DB.UnitsProducts.FirstOrDefault(up => up.id == newUnitProduct.id);
@@ -607,10 +607,10 @@ namespace База_артикулов.База_Данных.Тесты
             var product = this.db.DB.Products.FirstOrDefault();
             var unit = this.db.DB.Units.FirstOrDefault();
             var unitType = this.db.DB.UnitsTypes.FirstOrDefault();
-            UnitsProducts newUnitProduct = db.CreateUnitProduct(product.id, unit.id, unitType.id, 10.0);
+            UnitsProducts newUnitProduct = this.db.CreateUnitProduct(product.id, unit.id, unitType.id, 10.0);
 
             // Act
-            db.DeleteUnitProduct(newUnitProduct.id);
+            this.db.DeleteUnitProduct(newUnitProduct.id);
 
             // Assert
             UnitsProducts deletedUnitProduct = this.db.DB.UnitsProducts.FirstOrDefault(up => up.id == newUnitProduct.id);
@@ -684,15 +684,15 @@ namespace База_артикулов.База_Данных.Тесты
         public void CreateResource()
         {
             // Arrange
-            var product = context.Products.FirstOrDefault();
+            var product = this.context.Products.FirstOrDefault();
             int productId = product.id;
             string url = "https://example.com/resource";
             string filePath = "/path/to/your/file.txt";
             string resourceTitle = "TestResource";
 
-            service.CreateResource(productId, url, filePath, resourceTitle);
+            this.service.CreateResource(productId, url, filePath, resourceTitle);
 
-            var createdResource = context.DescriptorsResources.FirstOrDefault(dr => dr.title == resourceTitle);
+            var createdResource = this.context.DescriptorsResources.FirstOrDefault(dr => dr.title == resourceTitle);
 
             Assert.NotNull(createdResource); // Ресурс должен быть создан
         }
@@ -701,13 +701,13 @@ namespace База_артикулов.База_Данных.Тесты
         public void UpdateResource()
         {
             // Arrange
-            var product = context.Products.FirstOrDefault();
+            var product = this.context.Products.FirstOrDefault();
             int productId = product.id;
             //Act
             string updatedTitle = "UpdatedTitle";
-            service.UpdateResource(productId, updatedTitle);
+            this.service.UpdateResource(productId, updatedTitle);
             var descriptorResource = this.db.GetDescriptorsResources(product.Descriptors.id);
-            var updatedResource = context.DescriptorsResources.FirstOrDefault(
+            var updatedResource = this.context.DescriptorsResources.FirstOrDefault(
                 dr => dr.title == updatedTitle && dr.idDescriptor == descriptorResource.idDescriptor);
             Assert.NotNull(updatedResource); // Название ресурса должно быть обновлено
         }
@@ -716,11 +716,11 @@ namespace База_артикулов.База_Данных.Тесты
         public void DeleteResource()
         {
             // Arrange
-            var product = context.Products.FirstOrDefault();
+            var product = this.context.Products.FirstOrDefault();
             int productId = product.id;
-            service.DeleteResource(productId);
+            this.service.DeleteResource(productId);
 
-            var deletedResource = context.DescriptorsResources.Find(productId);
+            var deletedResource = this.context.DescriptorsResources.Find(productId);
 
             Assert.Null(deletedResource); // Ресурс должен быть удален
         }

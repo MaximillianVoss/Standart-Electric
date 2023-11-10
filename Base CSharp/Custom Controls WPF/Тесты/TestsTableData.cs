@@ -1,7 +1,7 @@
-﻿using Xunit;
+﻿using CustomControlsWPF;
 using System;
 using System.Collections.Generic;
-using CustomControlsWPF;
+using Xunit;
 
 public class TestsTableData
 {
