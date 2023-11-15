@@ -137,7 +137,7 @@ namespace База_артикулов.Формы
         /// <param name="mode">Режим редактирования. По умолчанию Create.</param>
         public CustomWindow(
             string title,
-            SettingsNew settings,
+            Settings settings,
             List<CustomEventArgs> currentObjects = null,
             EditModes mode = EditModes.Create) :
             this(title, new CustomBase(settings), 0, currentObjects, mode)

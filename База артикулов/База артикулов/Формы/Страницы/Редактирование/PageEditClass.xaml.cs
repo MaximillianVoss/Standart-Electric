@@ -45,9 +45,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         public override void UpdateForm(List<CustomEventArgs> args)
         {
             this.InitializeComponent();
-            this.btnOk.Text = this.CurrentObject != null ?
-            Common.Strings.Titles.Controls.Buttons.saveChanges :
-            Common.Strings.Titles.Controls.Buttons.createItem;
+            this.CustomBase.UpdateOkButton(this.btnOk);
         }
 
         public override object HandleOk(List<CustomEventArgs> args)

@@ -29,9 +29,9 @@ namespace База_артикулов.Формы.Страницы
             {
                 this.cmbConnectionStrings.Add(connectionString.Name);
             }
-            if (Settings.Connections.CurrentConnectionString != null)
+            if (this.CustomBase.CustomDb.Settgins.CurrentConnectionStringName != null)
             {
-                this.cmbConnectionStrings.Select(Settings.Connections.CurrentConnectionString);
+                this.cmbConnectionStrings.Select(this.CustomBase.CustomDb.Settgins.CurrentConnectionStringName);
             }
             else
             {
@@ -72,7 +72,7 @@ namespace База_артикулов.Формы.Страницы
         {
             if (this.cmbConnectionStrings.SelectedItem != null)
             {
-                Settings.Connections.CurrentConnectionString = this.cmbConnectionStrings.SelectedItem;
+                this.CustomBase.CustomDb.Settgins.CurrentConnectionStringName = this.cmbConnectionStrings.SelectedItem;
             }
         }
 

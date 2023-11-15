@@ -75,6 +75,7 @@ namespace База_артикулов.Модели
         public virtual DbSet<ProductsAnalogsView> ProductsAnalogsView { get; set; }
         public virtual DbSet<ProductsView> ProductsView { get; set; }
         public virtual DbSet<ProductsViewLite> ProductsViewLite { get; set; }
+        public virtual DbSet<ProductsViewLiteWrapped> ProductsViewLiteWrapped { get; set; }
         public virtual DbSet<ProductUnitsView> ProductUnitsView { get; set; }
         public virtual DbSet<ResourcesView> ResourcesView { get; set; }
         public virtual DbSet<ResourcesViewProducts> ResourcesViewProducts { get; set; }
@@ -135,6 +136,40 @@ namespace База_артикулов.Модели
                 new ObjectParameter("SubGroup", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFilteredProductsLite_Result>("GetFilteredProductsLite", groupParameter, classParameter, subGroupParameter);
+        }
+    
+        public virtual ObjectResult<GetFilteredProducts1_Result> GetFilteredProducts1(string group, string @class, string subGroup)
+        {
+            var groupParameter = group != null ?
+                new ObjectParameter("Group", group) :
+                new ObjectParameter("Group", typeof(string));
+    
+            var classParameter = @class != null ?
+                new ObjectParameter("Class", @class) :
+                new ObjectParameter("Class", typeof(string));
+    
+            var subGroupParameter = subGroup != null ?
+                new ObjectParameter("SubGroup", subGroup) :
+                new ObjectParameter("SubGroup", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFilteredProducts1_Result>("GetFilteredProducts1", groupParameter, classParameter, subGroupParameter);
+        }
+    
+        public virtual ObjectResult<GetFilteredProductsLite1_Result> GetFilteredProductsLite1(string group, string @class, string subGroup)
+        {
+            var groupParameter = group != null ?
+                new ObjectParameter("Group", group) :
+                new ObjectParameter("Group", typeof(string));
+    
+            var classParameter = @class != null ?
+                new ObjectParameter("Class", @class) :
+                new ObjectParameter("Class", typeof(string));
+    
+            var subGroupParameter = subGroup != null ?
+                new ObjectParameter("SubGroup", subGroup) :
+                new ObjectParameter("SubGroup", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFilteredProductsLite1_Result>("GetFilteredProductsLite1", groupParameter, classParameter, subGroupParameter);
         }
     }
 }

@@ -5,37 +5,37 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4d2d441134b64fc8858ef14eb1030a32" Name="Diagram1" ZoomLevel="87">
-        <EntityTypeShape EntityType="DBSEModel.Applications" Width="1.5" PointX="5.25" PointY="46.375" />
-        <EntityTypeShape EntityType="DBSEModel.BuisnessUnits" Width="1.5" PointX="3" PointY="58.625" />
-        <EntityTypeShape EntityType="DBSEModel.Classes" Width="1.5" PointX="3" PointY="35.25" />
-        <EntityTypeShape EntityType="DBSEModel.Covers" Width="1.5" PointX="5.25" PointY="42.875" />
+        <EntityTypeShape EntityType="DBSEModel.Applications" Width="1.5" PointX="8.25" PointY="31.625" />
+        <EntityTypeShape EntityType="DBSEModel.BuisnessUnits" Width="1.5" PointX="3" PointY="35.25" />
+        <EntityTypeShape EntityType="DBSEModel.Classes" Width="1.5" PointX="3" PointY="51" />
+        <EntityTypeShape EntityType="DBSEModel.Covers" Width="1.5" PointX="8.25" PointY="43.25" />
         <EntityTypeShape EntityType="DBSEModel.Descriptors" Width="1.5" PointX="0.75" PointY="27.375" />
-        <EntityTypeShape EntityType="DBSEModel.DescriptorsResources" Width="1.5" PointX="3" PointY="28.5" />
-        <EntityTypeShape EntityType="DBSEModel.Fields" Width="1.5" PointX="3" PointY="32.625" />
-        <EntityTypeShape EntityType="DBSEModel.Groups" Width="1.5" PointX="5.25" PointY="31.125" />
-        <EntityTypeShape EntityType="DBSEModel.GroupsApplications" Width="1.5" PointX="10.75" PointY="36.375" />
-        <EntityTypeShape EntityType="DBSEModel.LoadDiagrams" Width="1.5" PointX="3" PointY="21.125" />
-        <EntityTypeShape EntityType="DBSEModel.Manufacturers" Width="1.5" PointX="3" PointY="18.375" />
-        <EntityTypeShape EntityType="DBSEModel.Materials" Width="1.5" PointX="8.25" PointY="41.625" />
-        <EntityTypeShape EntityType="DBSEModel.Norms" Width="1.5" PointX="3" PointY="52.375" />
-        <EntityTypeShape EntityType="DBSEModel.Packages" Width="1.5" PointX="3" PointY="23.75" />
+        <EntityTypeShape EntityType="DBSEModel.DescriptorsResources" Width="1.5" PointX="3" PointY="26.5" />
+        <EntityTypeShape EntityType="DBSEModel.Fields" Width="1.5" PointX="3" PointY="56.625" />
+        <EntityTypeShape EntityType="DBSEModel.Groups" Width="1.5" PointX="5.25" PointY="39" />
+        <EntityTypeShape EntityType="DBSEModel.GroupsApplications" Width="1.5" PointX="10.5" PointY="31.75" />
+        <EntityTypeShape EntityType="DBSEModel.LoadDiagrams" Width="1.5" PointX="3" PointY="18.375" />
+        <EntityTypeShape EntityType="DBSEModel.Manufacturers" Width="1.5" PointX="3" PointY="38.875" />
+        <EntityTypeShape EntityType="DBSEModel.Materials" Width="1.5" PointX="5.25" PointY="43" />
+        <EntityTypeShape EntityType="DBSEModel.Norms" Width="1.5" PointX="3" PointY="59.125" />
+        <EntityTypeShape EntityType="DBSEModel.Packages" Width="1.5" PointX="3" PointY="48.25" />
         <EntityTypeShape EntityType="DBSEModel.Perforations" Width="1.5" PointX="3" PointY="15.75" />
-        <EntityTypeShape EntityType="DBSEModel.Products" Width="1.5" PointX="10.5" PointY="30.75" />
-        <EntityTypeShape EntityType="DBSEModel.ProductsAnalogs" Width="1.5" PointX="12.75" PointY="33" />
-        <EntityTypeShape EntityType="DBSEModel.ProductsVendorCodes" Width="1.5" PointX="12.75" PointY="29.25" />
-        <EntityTypeShape EntityType="DBSEModel.Resources" Width="1.5" PointX="0.75" PointY="35.25" />
+        <EntityTypeShape EntityType="DBSEModel.Products" Width="1.5" PointX="10.5" PointY="36.125" />
+        <EntityTypeShape EntityType="DBSEModel.ProductsAnalogs" Width="1.5" PointX="12.75" PointY="40.375" />
+        <EntityTypeShape EntityType="DBSEModel.ProductsVendorCodes" Width="1.5" PointX="12.75" PointY="36.875" />
+        <EntityTypeShape EntityType="DBSEModel.Resources" Width="1.5" PointX="0.75" PointY="22.25" />
         <EntityTypeShape EntityType="DBSEModel.ResourceTypes" Width="1.5" PointX="0.75" PointY="24.625" />
-        <EntityTypeShape EntityType="DBSEModel.SubGroups" Width="1.5" PointX="7.5" PointY="26.25" />
-        <EntityTypeShape EntityType="DBSEModel.Tables" Width="1.5" PointX="3" PointY="40.875" />
-        <EntityTypeShape EntityType="DBSEModel.Units" Width="1.5" PointX="3" PointY="55.5" />
-        <EntityTypeShape EntityType="DBSEModel.UnitsPackages" Width="1.5" PointX="5.25" PointY="39.5" />
-        <EntityTypeShape EntityType="DBSEModel.UnitsPerforations" Width="1.5" PointX="5.25" PointY="35.5" />
-        <EntityTypeShape EntityType="DBSEModel.UnitsProducts" Width="1.5" PointX="12.75" PointY="43" />
-        <EntityTypeShape EntityType="DBSEModel.UnitsTypes" Width="1.5" PointX="3" PointY="37.75" />
-        <EntityTypeShape EntityType="DBSEModel.VendorCodes" Width="1.5" PointX="5.25" PointY="24.75" />
-        <EntityTypeShape EntityType="DBSEModel.Views" Width="1.5" PointX="8.25" PointY="37.875" />
-        <EntityTypeShape EntityType="DBSEModel.ViewsTables" Width="1.5" PointX="10.5" PointY="39.25" />
-        <EntityTypeShape EntityType="DBSEModel.ViewTypes" Width="1.5" PointX="3" PointY="46.875" />
+        <EntityTypeShape EntityType="DBSEModel.SubGroups" Width="1.5" PointX="7.5" PointY="27.375" />
+        <EntityTypeShape EntityType="DBSEModel.Tables" Width="1.5" PointX="3" PointY="21" />
+        <EntityTypeShape EntityType="DBSEModel.Units" Width="1.5" PointX="3" PointY="53.5" />
+        <EntityTypeShape EntityType="DBSEModel.UnitsPackages" Width="1.5" PointX="5.25" PointY="50.75" />
+        <EntityTypeShape EntityType="DBSEModel.UnitsPerforations" Width="1.5" PointX="5.25" PointY="34.5" />
+        <EntityTypeShape EntityType="DBSEModel.UnitsProducts" Width="1.5" PointX="12.75" PointY="44.75" />
+        <EntityTypeShape EntityType="DBSEModel.UnitsTypes" Width="1.5" PointX="3" PointY="41.75" />
+        <EntityTypeShape EntityType="DBSEModel.VendorCodes" Width="1.5" PointX="8.25" PointY="34.625" />
+        <EntityTypeShape EntityType="DBSEModel.Views" Width="1.5" PointX="5.25" PointY="29.625" />
+        <EntityTypeShape EntityType="DBSEModel.ViewsTables" Width="1.5" PointX="5.25" PointY="20.875" />
+        <EntityTypeShape EntityType="DBSEModel.ViewTypes" Width="1.5" PointX="3" PointY="29.75" />
         <EntityTypeShape EntityType="DBSEModel.ApplicationsView" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBSEModel.BuisnessUnitsView" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBSEModel.ClassesView" Width="1.5" PointX="4.75" PointY="0.75" />
@@ -53,75 +53,76 @@
         <EntityTypeShape EntityType="DBSEModel.ProductsAnalogsView" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="DBSEModel.ProductsView" Width="1.5" PointX="8.75" PointY="11.75" />
         <EntityTypeShape EntityType="DBSEModel.ProductsViewLite" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DBSEModel.ProductsViewLiteWrapped" Width="1.5" PointX="12.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBSEModel.ProductUnitsView" Width="1.5" PointX="2.75" PointY="11.75" />
-        <EntityTypeShape EntityType="DBSEModel.ResourcesView" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DBSEModel.ResourcesViewProducts" Width="1.5" PointX="12.75" PointY="4.75" />
-        <EntityTypeShape EntityType="DBSEModel.ResourceTypesView" Width="1.5" PointX="4.75" PointY="12.75" />
-        <EntityTypeShape EntityType="DBSEModel.SubGroupsView" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="DBSEModel.ResourcesView" Width="1.5" PointX="12.75" PointY="5.75" />
+        <EntityTypeShape EntityType="DBSEModel.ResourcesViewProducts" Width="1.5" PointX="5.75" PointY="12.75" />
+        <EntityTypeShape EntityType="DBSEModel.ResourceTypesView" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="DBSEModel.SubGroupsView" Width="1.5" PointX="12.75" PointY="12.75" />
         <EntityTypeShape EntityType="DBSEModel.TablesView" Width="1.5" PointX="14.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBSEModel.UnitsTypesView" Width="1.5" PointX="14.75" PointY="4.75" />
         <EntityTypeShape EntityType="DBSEModel.UnitsView" Width="1.5" PointX="14.75" PointY="7.75" />
         <EntityTypeShape EntityType="DBSEModel.VendorCodesView" Width="1.5" PointX="14.75" PointY="10.75" />
         <EntityTypeShape EntityType="DBSEModel.ViewsTablesView" Width="1.5" PointX="14.75" PointY="14.75" />
-        <EntityTypeShape EntityType="DBSEModel.ViewsView" Width="1.5" PointX="5.75" PointY="15.75" />
-        <EntityTypeShape EntityType="DBSEModel.ViewTypesView" Width="1.5" PointX="16.75" PointY="0.75" />
-        <AssociationConnector Association="DBSEModel.FK__Applicati__idBui__1E505424" />
-        <AssociationConnector Association="DBSEModel.FK__Applicati__idDes__1D5C2FEB" />
-        <AssociationConnector Association="DBSEModel.FK__GroupsApp__idApp__24FD51B3" />
-        <AssociationConnector Association="DBSEModel.FK__BuisnessU__idBim__198B9F07" />
-        <AssociationConnector Association="DBSEModel.FK__BuisnessU__idDes__18977ACE" />
-        <AssociationConnector Association="DBSEModel.FK__BuisnessU__idDra__1A7FC340" />
-        <AssociationConnector Association="DBSEModel.FK__BuisnessU__idTyp__1B73E779" />
-        <AssociationConnector Association="DBSEModel.FK__Classes__idDescr__1C680BB2" />
-        <AssociationConnector Association="DBSEModel.FK__Groups__idClass__17A35695" />
-        <AssociationConnector Association="DBSEModel.FK__Covers__idDescri__26E59A25" />
-        <AssociationConnector Association="DBSEModel.FK__Covers__idNorm__27D9BE5E" />
-        <AssociationConnector Association="DBSEModel.FK__Products__idCove__2BAA4F42" />
-        <AssociationConnector Association="DBSEModel.FK__Descripto__idDes__428DB49A" />
-        <AssociationConnector Association="DBSEModel.FK__Fields__idDescri__41999061" />
-        <AssociationConnector Association="DBSEModel.FK__Groups__idDescri__16AF325C" />
-        <AssociationConnector Association="DBSEModel.FK__LoadDiagr__idDes__24092D7A" />
-        <AssociationConnector Association="DBSEModel.FK__Manufactu__idDes__3FB147EF" />
-        <AssociationConnector Association="DBSEModel.FK__Materials__idDes__212CC0CF" />
-        <AssociationConnector Association="DBSEModel.FK__Norms__idDescrip__20389C96" />
-        <AssociationConnector Association="DBSEModel.FK__Packages__idDesc__39044A60" />
-        <AssociationConnector Association="DBSEModel.FK__Perforati__idDes__1F44785D" />
-        <AssociationConnector Association="DBSEModel.FK__Products__idDesc__28CDE297" />
-        <AssociationConnector Association="DBSEModel.FK__SubGroups__idDes__13D2C5B1" />
-        <AssociationConnector Association="DBSEModel.FK__Tables__idDescri__40A56C28" />
-        <AssociationConnector Association="DBSEModel.FK__Units__idDescrip__2F7AE026" />
-        <AssociationConnector Association="DBSEModel.FK__VendorCod__idDes__334B710A" />
-        <AssociationConnector Association="DBSEModel.FK__Views__idDescrip__48468DF0" />
-        <AssociationConnector Association="DBSEModel.FK__ViewTypes__idDes__475269B7" />
-        <AssociationConnector Association="DBSEModel.FK__Descripto__idRes__4381D8D3" />
-        <AssociationConnector Association="DBSEModel.FK__Descripto__idRes__4475FD0C" />
-        <AssociationConnector Association="DBSEModel.FK__SubGroups__idGro__14C6E9EA" />
-        <AssociationConnector Association="DBSEModel.FK__GroupsApp__idSub__25F175EC" />
-        <AssociationConnector Association="DBSEModel.FK__SubGroups__idLoa__15BB0E23" />
-        <AssociationConnector Association="DBSEModel.FK__VendorCod__idMan__32574CD1" />
-        <AssociationConnector Association="DBSEModel.FK__Materials__idMat__2220E508" />
-        <AssociationConnector Association="DBSEModel.FK__Materials__idPre__23150941" />
-        <AssociationConnector Association="DBSEModel.FK__Products__idMate__2C9E737B" />
-        <AssociationConnector Association="DBSEModel.FK__Products__idNorm__29C206D0" />
-        <AssociationConnector Association="DBSEModel.FK__Products__idPack__2E86BBED" />
-        <AssociationConnector Association="DBSEModel.FK__UnitsPack__idPac__3CD4DB44" />
-        <AssociationConnector Association="DBSEModel.FK__Products__idPerf__2D9297B4" />
-        <AssociationConnector Association="DBSEModel.FK__UnitsPerf__idPer__39F86E99" />
-        <AssociationConnector Association="DBSEModel.FK__Products__idSubG__2AB62B09" />
-        <AssociationConnector Association="DBSEModel.FK__ProductsA__idAna__3533B97C" />
-        <AssociationConnector Association="DBSEModel.FK__ProductsA__idOri__343F9543" />
-        <AssociationConnector Association="DBSEModel.FK__ProductsV__idPro__306F045F" />
-        <AssociationConnector Association="DBSEModel.FK__UnitsProd__idPro__3627DDB5" />
-        <AssociationConnector Association="DBSEModel.FK__ProductsV__idCod__31632898" />
-        <AssociationConnector Association="DBSEModel.FK__ViewsTabl__idTab__456A2145" />
-        <AssociationConnector Association="DBSEModel.FK__UnitsPack__idUni__3DC8FF7D" />
-        <AssociationConnector Association="DBSEModel.FK__UnitsPerf__idUni__3AEC92D2" />
-        <AssociationConnector Association="DBSEModel.FK__UnitsProd__idUni__371C01EE" />
-        <AssociationConnector Association="DBSEModel.FK__UnitsPack__idTyp__3EBD23B6" />
-        <AssociationConnector Association="DBSEModel.FK__UnitsPerf__idTyp__3BE0B70B" />
-        <AssociationConnector Association="DBSEModel.FK__UnitsProd__idTyp__38102627" />
-        <AssociationConnector Association="DBSEModel.FK__Views__idType__493AB229" />
-        <AssociationConnector Association="DBSEModel.FK__ViewsTabl__idVie__465E457E" />
+        <EntityTypeShape EntityType="DBSEModel.ViewsView" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBSEModel.ViewTypesView" Width="1.5" PointX="16.75" PointY="4.75" />
+        <AssociationConnector Association="DBSEModel.FK__Applicati__idBui__7EF7A45C" />
+        <AssociationConnector Association="DBSEModel.FK__Applicati__idDes__7E038023" />
+        <AssociationConnector Association="DBSEModel.FK__GroupsApp__idApp__05A4A1EB" />
+        <AssociationConnector Association="DBSEModel.FK__BuisnessU__idBim__7A32EF3F" />
+        <AssociationConnector Association="DBSEModel.FK__BuisnessU__idDes__793ECB06" />
+        <AssociationConnector Association="DBSEModel.FK__BuisnessU__idDra__7B271378" />
+        <AssociationConnector Association="DBSEModel.FK__BuisnessU__idTyp__7C1B37B1" />
+        <AssociationConnector Association="DBSEModel.FK__Classes__idDescr__7D0F5BEA" />
+        <AssociationConnector Association="DBSEModel.FK__Groups__idClass__784AA6CD" />
+        <AssociationConnector Association="DBSEModel.FK__Covers__idDescri__078CEA5D" />
+        <AssociationConnector Association="DBSEModel.FK__Covers__idNorm__08810E96" />
+        <AssociationConnector Association="DBSEModel.FK__Products__idCove__0C519F7A" />
+        <AssociationConnector Association="DBSEModel.FK__Descripto__idDes__233504D2" />
+        <AssociationConnector Association="DBSEModel.FK__Fields__idDescri__2240E099" />
+        <AssociationConnector Association="DBSEModel.FK__Groups__idDescri__77568294" />
+        <AssociationConnector Association="DBSEModel.FK__LoadDiagr__idDes__04B07DB2" />
+        <AssociationConnector Association="DBSEModel.FK__Manufactu__idDes__20589827" />
+        <AssociationConnector Association="DBSEModel.FK__Materials__idDes__01D41107" />
+        <AssociationConnector Association="DBSEModel.FK__Norms__idDescrip__00DFECCE" />
+        <AssociationConnector Association="DBSEModel.FK__Packages__idDesc__19AB9A98" />
+        <AssociationConnector Association="DBSEModel.FK__Perforati__idDes__7FEBC895" />
+        <AssociationConnector Association="DBSEModel.FK__Products__idDesc__097532CF" />
+        <AssociationConnector Association="DBSEModel.FK__SubGroups__idDes__747A15E9" />
+        <AssociationConnector Association="DBSEModel.FK__Tables__idDescri__214CBC60" />
+        <AssociationConnector Association="DBSEModel.FK__Units__idDescrip__1022305E" />
+        <AssociationConnector Association="DBSEModel.FK__VendorCod__idDes__13F2C142" />
+        <AssociationConnector Association="DBSEModel.FK__Views__idDescrip__28EDDE28" />
+        <AssociationConnector Association="DBSEModel.FK__ViewTypes__idDes__27F9B9EF" />
+        <AssociationConnector Association="DBSEModel.FK__Descripto__idRes__2429290B" />
+        <AssociationConnector Association="DBSEModel.FK__Descripto__idRes__251D4D44" />
+        <AssociationConnector Association="DBSEModel.FK__SubGroups__idGro__756E3A22" />
+        <AssociationConnector Association="DBSEModel.FK__GroupsApp__idSub__0698C624" />
+        <AssociationConnector Association="DBSEModel.FK__SubGroups__idLoa__76625E5B" />
+        <AssociationConnector Association="DBSEModel.FK__VendorCod__idMan__12FE9D09" />
+        <AssociationConnector Association="DBSEModel.FK__Materials__idMat__02C83540" />
+        <AssociationConnector Association="DBSEModel.FK__Materials__idPre__03BC5979" />
+        <AssociationConnector Association="DBSEModel.FK__Products__idMate__0D45C3B3" />
+        <AssociationConnector Association="DBSEModel.FK__Products__idNorm__0A695708" />
+        <AssociationConnector Association="DBSEModel.FK__Products__idPack__0F2E0C25" />
+        <AssociationConnector Association="DBSEModel.FK__UnitsPack__idPac__1D7C2B7C" />
+        <AssociationConnector Association="DBSEModel.FK__Products__idPerf__0E39E7EC" />
+        <AssociationConnector Association="DBSEModel.FK__UnitsPerf__idPer__1A9FBED1" />
+        <AssociationConnector Association="DBSEModel.FK__Products__idSubG__0B5D7B41" />
+        <AssociationConnector Association="DBSEModel.FK__ProductsA__idAna__15DB09B4" />
+        <AssociationConnector Association="DBSEModel.FK__ProductsA__idOri__14E6E57B" />
+        <AssociationConnector Association="DBSEModel.FK__ProductsV__idPro__11165497" />
+        <AssociationConnector Association="DBSEModel.FK__UnitsProd__idPro__16CF2DED" />
+        <AssociationConnector Association="DBSEModel.FK__ProductsV__idCod__120A78D0" />
+        <AssociationConnector Association="DBSEModel.FK__ViewsTabl__idTab__2611717D" />
+        <AssociationConnector Association="DBSEModel.FK__UnitsPack__idUni__1E704FB5" />
+        <AssociationConnector Association="DBSEModel.FK__UnitsPerf__idUni__1B93E30A" />
+        <AssociationConnector Association="DBSEModel.FK__UnitsProd__idUni__17C35226" />
+        <AssociationConnector Association="DBSEModel.FK__UnitsPack__idTyp__1F6473EE" />
+        <AssociationConnector Association="DBSEModel.FK__UnitsPerf__idTyp__1C880743" />
+        <AssociationConnector Association="DBSEModel.FK__UnitsProd__idTyp__18B7765F" />
+        <AssociationConnector Association="DBSEModel.FK__Views__idType__29E20261" />
+        <AssociationConnector Association="DBSEModel.FK__ViewsTabl__idVie__270595B6" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

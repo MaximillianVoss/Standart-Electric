@@ -22,34 +22,13 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Методы
-        private void UpdateComboBoxGroup()
-        {
-            this.cmbGroup.Items = this.CustomBase.ToList(this.DB.Groups.ToList());
-        }
-
-        private void UpdateComboBoxLoadDiagram()
-        {
-            this.cmbLoadDiagram.Items = this.CustomBase.ToList(this.DB.LoadDiagrams.ToList());
-        }
-
-        private void UpdateComboBoxApplication()
-        {
-            this.cmbApplication.Items = this.CustomBase.ToList(this.DB.Applications.ToList());
-        }
 
         public override void UpdateFields(List<CustomEventArgs> args)
         {
-            if (this.CustomBase.Mode == EditModes.Update)
+            SubGroups currentSubGroup = this.CustomBase.UnpackCurrentObject<SubGroups>(this.CurrentObject);
+            if (currentSubGroup != null)
             {
-                var obj = this.CurrentObject.Data;
-                SubGroups currentSubGroup = null;
-                if (obj.ValidateTypeOrBaseType<TreeViewItemCustom>())
-                    currentSubGroup = ((TreeViewItemCustom)obj).Value as SubGroups;
-                if (obj.ValidateTypeOrBaseType<CustomEventArgs>())
-                    currentSubGroup = ((CustomEventArgs)obj).Data as SubGroups;
-                if (obj.ValidateTypeOrBaseType<SubGroups>())
-                    currentSubGroup = obj as SubGroups;
-                if (currentSubGroup != null)
+                if (this.CustomBase.Mode == EditModes.Update)
                 {
                     SubGroupsView subGroupView = this.DB.SubGroupsView.FirstOrDefault(x => x.ID_подгруппы == currentSubGroup.id);
                     if (subGroupView == null)
@@ -68,18 +47,21 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     if (groupsApplications != null)
                         this.cmbApplication.Select(groupsApplications.Applications.id);
                 }
+                if (this.CustomBase.Mode == EditModes.Create)
+                {
+                    if (currentSubGroup.Groups != null)
+                        this.cmbGroup.Select(currentSubGroup.Groups.id);
+                }
             }
         }
 
         public override void UpdateForm(List<CustomEventArgs> args)
         {
             this.InitializeComponent();
-            this.UpdateComboBoxGroup();
-            this.UpdateComboBoxLoadDiagram();
-            this.UpdateComboBoxApplication();
-            this.btnOk.Text = this.CurrentObject != null ?
-         Common.Strings.Titles.Controls.Buttons.saveChanges :
-         Common.Strings.Titles.Controls.Buttons.createItem;
+            this.CustomBase.UpdateComboBox(this.cmbGroup, this.CustomBase.ToList(this.CustomBase.CustomDb.DB.Groups.Where(x => x.Classes != null).ToList()));
+            this.CustomBase.UpdateComboBox(this.cmbApplication, this.CustomBase.ToList(this.CustomBase.CustomDb.DB.Applications.ToList()));
+            this.CustomBase.UpdateComboBox(this.cmbLoadDiagram, this.CustomBase.ToList(this.CustomBase.CustomDb.DB.LoadDiagrams.ToList()));
+            this.CustomBase.UpdateOkButton(this.btnOk);
         }
 
         public override object HandleOk(List<CustomEventArgs> args)

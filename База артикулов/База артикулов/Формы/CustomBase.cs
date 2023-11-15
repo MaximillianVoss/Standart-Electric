@@ -3,6 +3,7 @@ using CustomControlsWPF;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using База_артикулов.Классы;
@@ -178,7 +179,7 @@ namespace База_артикулов.Формы
         /// Конструктор, принимающий путь к файлу настроек и создающий CustomBase на основе этих настроек.
         /// </summary>
         /// <param name="settingsFilePath">Путь к файлу настроек.</param>
-        public CustomBase(string settingsFilePath) : this(new SettingsNew(settingsFilePath))
+        public CustomBase(string settingsFilePath) : this(new Settings(settingsFilePath))
         {
 
         }
@@ -187,7 +188,7 @@ namespace База_артикулов.Формы
         /// Конструктор, принимающий настройки и инициализирующий CustomBase на основе этих настроек.
         /// </summary>
         /// <param name="settings">Настройки для инициализации CustomBase.</param>
-        public CustomBase(SettingsNew settings)
+        public CustomBase(Settings settings)
         {
             this.CustomDb = new CustomDB(settings);
             this.WDClient = new WDClient(settings);
@@ -322,6 +323,14 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Обновление элементов управления
+        public void UpdateOkButton(ButtonPrimary btnOk)
+        {
+            if (btnOk == null)
+                throw new Exception("Кнопка действия не инициализированна");
+            btnOk.Text = this.CurrentObject != null ?
+                Common.Strings.Titles.Controls.Buttons.saveChanges :
+                Common.Strings.Titles.Controls.Buttons.createItem;
+        }
         /// <summary>
         /// Заполняет LabeledComboBox элементами из указанной коллекции
         /// </summary>

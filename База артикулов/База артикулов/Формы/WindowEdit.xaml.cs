@@ -252,7 +252,7 @@ namespace База_артикулов.Формы
         /// <param name="settingsPath">Путь к файлу настроек.</param>
         /// <param name="mode">Режим редактирования. По умолчанию Create.</param>
         public WindowEdit(string title, string settingsPath, EditModes mode = EditModes.Create) :
-            base(title: title, new CustomBase(new SettingsNew(settingsPath)), mode: mode)
+            base(title: title, new CustomBase(new Settings(settingsPath)), mode: mode)
         {
 
         }

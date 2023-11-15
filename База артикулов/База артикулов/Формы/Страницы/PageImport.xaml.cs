@@ -155,7 +155,8 @@ namespace База_артикулов.Формы.Страницы
                         #region Удаление столбца idDescriptor
                         document.Remove(Common.Strings.Columns.idDescriptor);
                         #endregion
-                        var connectionString = ConfigurationManager.ConnectionStrings[Settings.Connections.CurrentConnectionString].ConnectionString;
+
+                        var connectionString = this.CustomBase.CustomDb.Settgins.CurrentConntectionString;
                         string providerConnectionString = new EntityConnectionStringBuilder(connectionString).ProviderConnectionString;
                         using (SqlConnection connection = new SqlConnection(providerConnectionString))
                         {

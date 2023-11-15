@@ -11,7 +11,7 @@ namespace База_артикулов.Формы
     /// </summary>
     public partial class MainWindow : CustomWindow
     {
-        public MainWindow() : base("MainWindow", new SettingsNew("settings.json"))
+        public MainWindow() : base("MainWindow", new Settings("settings.json"))
         {
             this.InitializeComponent();
             #region Set window size to 3/4 of the screen size

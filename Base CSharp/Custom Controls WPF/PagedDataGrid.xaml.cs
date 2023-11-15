@@ -120,10 +120,10 @@ namespace CustomControlsWPF
 
         public void AddDisplayColumn(string columnName)
         {
-            if (!this.TableData.ColumnNames.Contains(columnName))
-            {
-                throw new ArgumentException($"Столбец с именем {columnName} отсутствует в данных.");
-            }
+            //if (!this.TableData.ColumnNames.Contains(columnName))
+            //{
+            //    throw new ArgumentException($"Столбец с именем {columnName} отсутствует в данных.");
+            //}
 
             if (!this.dgData.Columns.Any(c => (c.Header as string).Replace(" ", "_").Equals(columnName)))
             {

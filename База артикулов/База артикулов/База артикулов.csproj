@@ -172,10 +172,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Классы\Common.cs" />
+    <Compile Include="Классы\ConnectionStringInfo.cs" />
     <Compile Include="Классы\CustomDB.cs" />
     <Compile Include="Классы\CustomEventArgs.cs" />
     <Compile Include="Классы\Settings.cs" />
-    <Compile Include="Классы\SettingsNew.cs" />
     <Compile Include="Классы\WDClient.cs" />
     <Compile Include="Классы\Дополнения\Applications.cs" />
     <Compile Include="Классы\Дополнения\Classes.cs" />
@@ -196,6 +196,7 @@
     <Compile Include="Классы\Дополнения\ProductsVendorCodes.cs" />
     <Compile Include="Классы\Дополнения\ProductsView.cs" />
     <Compile Include="Классы\Дополнения\ProductsViewLite.cs" />
+    <Compile Include="Классы\Дополнения\ProductsViewLiteWrappedCustom.cs" />
     <Compile Include="Классы\Дополнения\SubGroups.cs" />
     <Compile Include="Классы\Дополнения\Units.cs" />
     <Compile Include="Классы\Дополнения\UnitsProducts.cs" />
@@ -239,6 +240,12 @@
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\Fields.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Модели\GetFilteredProducts1_Result.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Модели\GetFilteredProductsLite1_Result.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Модели\GetFilteredProductsLite_Result.cs">
@@ -325,6 +332,9 @@
     <Compile Include="Модели\ProductsViewLite.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Модели\ProductsViewLiteWrapped.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Модели\ProductUnitsView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
@@ -376,6 +386,7 @@
     <Compile Include="Модели\ViewTypesView.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Тесты\TestsConnectionStringInfo.cs" />
     <Compile Include="Тесты\TestsCustomBase.cs" />
     <Compile Include="Тесты\TestsDBCustom.cs" />
     <Compile Include="Тесты\TestsSettings.cs" />

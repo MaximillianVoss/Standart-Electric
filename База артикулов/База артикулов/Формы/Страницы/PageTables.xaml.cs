@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -16,6 +17,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using База_артикулов.Классы;
+using База_артикулов.Классы.Дополнения;
 using База_артикулов.Модели;
 
 namespace База_артикулов.Формы.Страницы
@@ -229,8 +231,9 @@ namespace База_артикулов.Формы.Страницы
                 var displayColumns = new List<string> {
                     "Артикул",
                     "Наименование_продукта",
-                    "Вес"
-                    //"Наименование_единицы_измерения"
+                    "Вес",
+                    "Количество_в_упаковке",
+                    "Вес_упаковки_с_товаром"
                 };
                 this.dgTable.TableData.SetDisplayColumns(displayColumns);
             }
@@ -264,11 +267,9 @@ namespace База_артикулов.Формы.Страницы
             if (this.CurrentTableData.ItemsType != typeof(ProductsViewLite))
                 return Task.CompletedTask;
 
-
             string className = null;
             string groupName = null;
             string subGroupName = null;
-
             switch (@object)
             {
                 case Classes @class:
@@ -284,12 +285,33 @@ namespace База_артикулов.Формы.Страницы
                     break;
             }
 
-            //List<GetFilteredProductsLite_Result> results = this.CustomDb.GetFilteredProductsLite(
+            #region Фильтрация через EF
+            //List<GetFilteredProductsLite_Result> results = this.CustomBase.CustomDb.DB.GetFilteredProductsLite(
             //    groupName,
             //    className,
             //    subGroupName
             //).ToList();
-            //List<ProductsViewLite> filteredProducts = results.Select(result => new ProductsViewLite(result)).ToList();
+            //List<ProductsViewLiteWrapped> filteredProducts = results.Select(result => new ProductsViewLiteWrapped(result)).ToList();
+            #endregion
+
+            #region Получение элементов напрямую через SQL с использованием Entity Framework
+                // Подготовка параметров
+                //var groupNameParam = new SqlParameter("@GroupName", groupName ?? (object)DBNull.Value);
+                //var classNameParam = new SqlParameter("@ClassName", className ?? (object)DBNull.Value);
+                //var subGroupNameParam = new SqlParameter("@SubGroupName", subGroupName ?? (object)DBNull.Value);
+
+                //// Вызов хранимой процедуры
+                //var result = this.DB.Database.SqlQuery<ProductsViewLiteWrappedCustom>("GetFilteredProductsLite @GroupName, @ClassName, @SubGroupName", groupNameParam, classNameParam, subGroupNameParam);
+
+                //// Обработка результатов
+                //foreach (var item in result)
+                //{
+                //    // Обработка каждого элемента
+                //}          
+            #endregion
+
+
+
             var filteredProducts = this.DB.GetFilteredProducts(groupName, className, subGroupName);
             this.CurrentTableData.ItemsAll = new ObservableCollection<object>(filteredProducts);
             return Task.CompletedTask;
@@ -426,10 +448,17 @@ namespace База_артикулов.Формы.Страницы
         /// </summary>
         private void UpdateContextMenu()
         {
+            var selectedItemTreeViewObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
             bool isEnabled = this.SelectedItemTreeView != null;
-            this.miTreeAdd.IsEnabled = isEnabled;
+            this.miTreeAddPrimary.IsEnabled = isEnabled;
             this.miTreeEdit.IsEnabled = isEnabled;
             this.miTreeDelete.IsEnabled = isEnabled;
+            #region Дополнительный пункт меню для класса
+            //если выбран класс, показывать дополнительный пункт "Создать класс"
+            this.miTreeAddSecondary.Header = this.CustomBase.GetTitle(EditModes.Create, new Classes());
+            this.miTreeAddSecondary.IsEnabled = isEnabled && selectedItemTreeViewObject.ValidateTypeOrBaseType<Classes>();
+            this.miTreeAddSecondary.Visibility = this.miTreeAddSecondary.IsEnabled ? Visibility.Visible : Visibility.Collapsed;
+            #endregion
         }
 
         #endregion
@@ -504,7 +533,7 @@ namespace База_артикулов.Формы.Страницы
                         if (this.SelectedItemTreeView.Value.ValidateTypeOrBaseType<Groups>())
                             header = this.CustomBase.GetTitle(EditModes.Create, new SubGroups());
                     }
-                    this.miTreeAdd.Header = header;
+                    this.miTreeAddPrimary.Header = header;
                     await this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
                     await this.UpdateDataGrid(this.CurrentTableData);
                 }
@@ -532,13 +561,21 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var SelectedItemTreeViewObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
-                if (SelectedItemTreeViewObject != null)
+                var selectedItemTreeViewObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
+                if (selectedItemTreeViewObject != null)
                 {
-                    if (SelectedItemTreeViewObject.ValidateTypeOrBaseType<Classes>())
-                        this.CustomBase.AddWithClearCurrentObjects(new Groups());
-                    if (SelectedItemTreeViewObject.ValidateTypeOrBaseType<Groups>())
-                        this.CustomBase.AddWithClearCurrentObjects(new SubGroups());
+                    if (selectedItemTreeViewObject.ValidateTypeOrBaseType<Classes>())
+                    {
+                        var group = new Groups();
+                        group.Classes = selectedItemTreeViewObject as Classes;
+                        this.CustomBase.AddWithClearCurrentObjects(group);
+                    }
+                    if (selectedItemTreeViewObject.ValidateTypeOrBaseType<Groups>())
+                    {
+                        var subGroup = new SubGroups();
+                        subGroup.Groups = selectedItemTreeViewObject as Groups;
+                        this.CustomBase.AddWithClearCurrentObjects(subGroup);
+                    }
                 }
                 else
                 {
@@ -561,6 +598,30 @@ namespace База_артикулов.Формы.Страницы
                 this.ShowError(ex);
             }
         }
+
+        private void miTreeAddSecondary_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Если выбран класс и выбрано втроое действие "Ссоздать класс"
+                this.CustomBase.AddWithClearCurrentObjects(new Classes());
+                this.CustomBase.Mode = EditModes.Create;
+                var windowEdit = new WindowEdit(
+                    Common.Strings.Titles.Windows.add,
+                    this.CustomBase,
+                    Common.WindowSizes.SmallH320W400.Width,
+                    Common.WindowSizes.SmallH320W400.Height
+                    );
+                windowEdit.ShowDialog();
+                if ((bool)windowEdit.DialogResult)
+                    _ = this.UpdateTreeView();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         private void miTreeEdit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -588,26 +649,33 @@ namespace База_артикулов.Формы.Страницы
             {
                 if (this.SelectedItemTreeView == null || this.SelectedItemTreeView.Value == null)
                     throw new Exception("Не выбран элемент для удаления!");
-                var obj = this.SelectedItemTreeView.Value;
-                if (obj.ValidateTypeOrBaseType<Classes>())
+
+                var result = System.Windows.MessageBox.Show("Вы уверены, что хотите удалить этот элемент?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
                 {
-                    this.CustomBase.CustomDb.DeleteClass(((Classes)obj).id);
+                    var obj = this.SelectedItemTreeView.Value;
+                    if (obj.ValidateTypeOrBaseType<Classes>())
+                    {
+                        this.CustomBase.CustomDb.DeleteClass(((Classes)obj).id);
+                    }
+                    if (obj.ValidateTypeOrBaseType<Groups>())
+                    {
+                        this.CustomBase.CustomDb.DeleteGroup(((Groups)obj).id);
+                    }
+                    if (obj.ValidateTypeOrBaseType<SubGroups>())
+                    {
+                        this.CustomBase.CustomDb.DeleteSubGroup(((SubGroups)obj).id);
+                    }
+                    _ = this.UpdateTreeView();
                 }
-                if (obj.ValidateTypeOrBaseType<Groups>())
-                {
-                    this.CustomBase.CustomDb.DeleteGroup(((Groups)obj).id);
-                }
-                if (obj.ValidateTypeOrBaseType<SubGroups>())
-                {
-                    this.CustomBase.CustomDb.DeleteSubGroup(((SubGroups)obj).id);
-                }
-                _ = this.UpdateTreeView();
             }
             catch (Exception ex)
             {
                 this.ShowError(ex);
             }
         }
+
         #endregion
 
         #endregion
@@ -766,6 +834,7 @@ namespace База_артикулов.Формы.Страницы
                 this.ShowError(ex);
             }
         }
+
 
 
 

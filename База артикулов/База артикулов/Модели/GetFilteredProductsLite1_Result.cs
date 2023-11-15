@@ -10,23 +10,20 @@
 namespace База_артикулов.Модели
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ProductsViewLite
+    public partial class GetFilteredProductsLite1_Result
     {
         public int ID_продукта { get; set; }
         public string Артикул { get; set; }
         public string Наименование_продукта { get; set; }
-        public string Сокращенное_наименование_продукта { get; set; }
         public Nullable<int> ID_подгруппы { get; set; }
         public string Наименование_подгруппы { get; set; }
         public Nullable<int> ID_группы { get; set; }
         public string Наименование_группы { get; set; }
         public Nullable<int> ID_класса { get; set; }
         public string Наименование_класса { get; set; }
+        public Nullable<double> Вес__кг_ { get; set; }
         public string Наименование_упаковки { get; set; }
-        public Nullable<double> Вес { get; set; }
-        public Nullable<double> Количество_в_упаковке { get; set; }
-        public Nullable<double> Вес_упаковки_с_товаром { get; set; }
+        public Nullable<double> Вес_упаковки_с_товаром__кг_ { get; set; }
     }
 }

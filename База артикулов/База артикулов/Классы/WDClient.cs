@@ -196,11 +196,11 @@ namespace База_артикулов.Классы
         }
 
         /// <summary>
-        /// Конструктор, инициализирующий WDClient с использованием настроек из экземпляра SettingsNew.
+        /// Конструктор, инициализирующий WDClient с использованием настроек из экземпляра Settings.
         /// </summary>
         /// <param name="settings">Настройки для инициализации клиента.</param>
         /// <exception cref="ArgumentNullException">Бросается, если параметр settings является null.</exception>
-        public WDClient(SettingsNew settings)
+        public WDClient(Settings settings)
         {
             if (settings == null)
             {

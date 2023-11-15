@@ -120,7 +120,7 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public CustomPage(SettingsNew settings, List<CustomEventArgs> currentObjects = null, EditModes mode = EditModes.Create) :
+        public CustomPage(Settings settings, List<CustomEventArgs> currentObjects = null, EditModes mode = EditModes.Create) :
             this(new CustomBase(settings), currentObjects, mode)
         {
 

@@ -23,30 +23,13 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Методы
-        private void UpdateComboBox()
-        {
-            this.cmbClass.Items.Clear();
-            List<object> objClasses = new List<object>();
-            foreach (var item in this.DB.Classes.ToList())
-            {
-                objClasses.Add(item.ToObject());
-            }
-            this.cmbClass.Items = objClasses;
-        }
 
         public override void UpdateFields(List<CustomEventArgs> args)
         {
-            if (this.CustomBase.Mode == EditModes.Update)
+            Groups currentGroup = this.CustomBase.UnpackCurrentObject<Groups>(this.CurrentObject);
+            if (currentGroup != null)
             {
-                Groups currentGroup = null;
-                var obj = this.CurrentObject.Data;
-                if (obj.ValidateTypeOrBaseType<TreeViewItemCustom>())
-                    currentGroup = ((TreeViewItemCustom)obj).Value as Groups;
-                if (obj.ValidateTypeOrBaseType<CustomEventArgs>())
-                    currentGroup = ((CustomEventArgs)obj).Data as Groups;
-                if (obj.ValidateTypeOrBaseType<Groups>())
-                    currentGroup = obj as Groups;
-                if (currentGroup != null)
+                if (this.CustomBase.Mode == EditModes.Update)
                 {
                     GroupsView groupView = this.DB.GroupsView.FirstOrDefault(x => x.ID_группы == currentGroup.id);
                     if (groupView == null)
@@ -61,16 +44,20 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     //throw new Exception("Проверить этот код с URL класса");
                     //this.txbUrlPicture.Text = classView.URL_изображения_класса;
                 }
+                if (this.CustomBase.Mode == EditModes.Create)
+                {
+                    if (currentGroup.Classes != null)
+                        this.cmbClass.Select(currentGroup.Classes.id);
+
+                }
             }
         }
 
         public override void UpdateForm(List<CustomEventArgs> args)
         {
             this.InitializeComponent();
-            this.btnOk.Text = this.CurrentObject != null ?
-          Common.Strings.Titles.Controls.Buttons.saveChanges :
-          Common.Strings.Titles.Controls.Buttons.createItem;
-            this.UpdateComboBox();
+            this.CustomBase.UpdateOkButton(this.btnOk);
+            this.CustomBase.UpdateComboBox(this.cmbClass, this.CustomBase.ToList(this.DB.Classes.ToList()));
         }
 
         public override object HandleOk(List<CustomEventArgs> args)

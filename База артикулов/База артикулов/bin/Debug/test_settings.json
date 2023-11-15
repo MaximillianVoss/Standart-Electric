@@ -1,5 +1,6 @@
 {
-  "CurrentConnectionString": "Test Connection String",
+  "CurrentConnectionStringName": "Test Connection String",
+  "CurrentConntectionString": null,
   "UserNameWDClient": "TestUser",
   "PasswordWDClient": "TestPassword",
   "ServerWDClient": "TestServer",

@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Linq;
 using Xunit;
 using База_артикулов.Классы;
+using База_артикулов.Классы.Дополнения;
 using База_артикулов.Модели;
 
 namespace База_артикулов.База_Данных.Тесты
@@ -10,15 +11,15 @@ namespace База_артикулов.База_Данных.Тесты
     public class TestsDBCustom
     {
         #region Поля
-        public SettingsNew settings;
+        public Settings settings;
         public CustomDB db;
         #endregion
 
         #region Настройки
-        public SettingsNew CreateSettingsWithConnectionString(string connectionStringName)
+        public Settings CreateSettingsWithConnectionString(string connectionStringName)
         {
             var connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
-            return new SettingsNew { CurrentConnectionString = connectionString };
+            return new Settings { CurrentConnectionStringName = connectionString };
         }
 
         #endregion
@@ -55,22 +56,27 @@ namespace База_артикулов.База_Данных.Тесты
         [Fact]
         public void InitDB_ShouldSwitchToNewConnectionString()
         {
-            var oldConnectionString = "old_connection_string";
-            var newConnectionString = "new_connection_string";
+            var oldConnectionStringName = "Подключение к LAPTOP-BBFM8MMD";
+            var newConnectionStringName = "Подключение к LAPTOP-BBFM8MMD-Test";
+            var oldExpectedConnectionString = "data source=LAPTOP-BBFM8MMD\\SQLEXPRESS;initial catalog=DBSE;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework"; // Замените на реальную старую строку подключения
+            var newExpectedConnectionString = "data source=LAPTOP-BBFM8MMD-TEST\\SQLEXPRESS;initial catalog=DBSE_Test;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework"; // Замените на реальную новую строку подключения
 
-            var oldSettings = new SettingsNew { CurrentConnectionString = oldConnectionString };
+            var oldSettings = new Settings { CurrentConnectionStringName = oldConnectionStringName };
             var customDb = new CustomDB(oldSettings);
 
             // Проверяем, что изначально используется старая строка подключения
-            Assert.Equal(oldConnectionString, customDb.CurrentConnectionString); // Предполагая, что у вас есть такое свойство.
+            Assert.Equal(oldConnectionStringName, customDb.CurrentConnectionStringName);
+            Assert.Equal(oldExpectedConnectionString, customDb.CurrentConnectionString); // Проверяем саму строку подключения
 
             // Меняем на новую строку подключения
-            oldSettings.CurrentConnectionString = newConnectionString;
+            oldSettings.CurrentConnectionStringName = newConnectionStringName;
             customDb.InitDB(true);
 
             // Проверяем, что теперь используется новая строка подключения
-            Assert.Equal(newConnectionString, customDb.CurrentConnectionString);
+            Assert.Equal(newConnectionStringName, customDb.CurrentConnectionStringName);
+            Assert.Equal(newExpectedConnectionString, customDb.CurrentConnectionString); // Проверяем саму строку подключения
         }
+
         #endregion
 
     }
@@ -177,6 +183,26 @@ namespace База_артикулов.База_Данных.Тесты
             this.context.SaveChanges();
         }
 
+        [Fact]
+        public void RetrieveProductsViewLiteWrappedCustom_ExecutesSuccessfully()
+        {
+            // Arrange
+            string sqlQuery = "SELECT * FROM ProductsViewLiteWrapped";
+
+            // Act
+            var products = this.service.ExecuteSqlQuery<ProductsViewLiteWrappedCustom>(sqlQuery);
+
+            // Assert
+            Assert.NotNull(products); // Убедитесь, что список не пустой
+            Assert.All(products, product =>
+            {
+                Assert.NotNull(product.Article); // Проверка, что поле Артикул не пустое
+                Assert.NotNull(product.ProductName); // Проверка, что поле Наименование продукта не пустое
+                // Добавьте дополнительные проверки для других полей при необходимости
+            });
+
+            // Дополнительные проверки можно добавить в зависимости от ваших требований
+        }
         #endregion
     }
     public class TestsDescriptors : TestsDBObjects

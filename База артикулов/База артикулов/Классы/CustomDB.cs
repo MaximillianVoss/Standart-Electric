@@ -28,14 +28,52 @@ namespace База_артикулов.Классы
         /// <summary>
         /// Настройки
         /// </summary>
-        private SettingsNew settings;
+        private Settings settings;
         #endregion
 
         #region Свойства
-
+        public Settings Settgins { get { return this.settings; } }
         public DBSEEntities DB { get => this.db; private set => this.db = value; }
+        /// <summary>
+        /// Имя строки подключения
+        /// </summary>
+        public string CurrentConnectionStringName
+        {
+            get => this.settings.CurrentConnectionStringName;
+            set
+            {
+                var connectionString = GetConnectionStringByName(value);
+                if (connectionString == null)
+                {
+                    throw new InvalidOperationException($"Строка подключения с именем '{value}' не найдена.");
+                }
 
-        public string CurrentConnectionString { set => this.settings.CurrentConnectionString = value; get => this.settings.CurrentConnectionString; }
+                this.settings.CurrentConnectionStringName = value;
+                this.settings.CurrentConntectionString = connectionString;
+            }
+        }
+        /// <summary>
+        /// Строка подключения
+        /// </summary>
+        public string CurrentConnectionString
+        {
+            get
+            {
+                return this.settings.CurrentConntectionString;
+            }
+            set
+            {
+                // Проверка на допустимость строки подключения
+                if (!IsValidConnectionString(value))
+                {
+                    throw new ArgumentException("Недопустимая строка подключения");
+                }
+
+                // При изменении строки подключения обновляем имя строки подключения
+                this.settings.CurrentConnectionStringName = this.GetConnectionStringName(value);
+                this.settings.CurrentConntectionString = value;
+            }
+        }
 
         public static CustomDB Instance
         {
@@ -48,25 +86,108 @@ namespace База_артикулов.Классы
                 return instance;
             }
         }
-
         #endregion
 
         #region Методы
 
+
+
+        #region SQL запросы
+        /// <summary>
+        /// Выполняет SQL запрос и возвращает результаты в виде списка объектов.
+        /// </summary>
+        /// <typeparam name="T">Тип объектов в списке.</typeparam>
+        /// <param name="sqlQuery">SQL запрос для выполнения.</param>
+        /// <returns>Список объектов типа T.</returns>
+        /// <remarks>
+        /// Этот метод открывает соединение с базой данных, используя текущую строку подключения,
+        /// выполняет предоставленный SQL запрос и отображает результаты в список объектов указанного типа.
+        /// Важно корректно обрабатывать входные данные для избежания SQL инъекций,
+        /// особенно если запросы строятся на основе внешних данных.
+        /// </remarks>
+        /// <example>
+        /// Пример использования:
+        /// <code>
+        /// var myData = customDbInstance.ExecuteSqlQuery<MyDataType>("SELECT * FROM MyTable");
+        /// </code>
+        /// </example>
+        public List<T> ExecuteSqlQuery<T>(string sqlQuery) where T : class, new()
+        {
+            using (var connection = new SqlConnection(this.CurrentConnectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(sqlQuery, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        var result = new List<T>();
+                        var properties = typeof(T).GetProperties();
+
+                        while (reader.Read())
+                        {
+                            var item = new T();
+                            foreach (var property in properties)
+                            {
+                                if (!reader.IsDBNull(reader.GetOrdinal(property.Name)))
+                                {
+                                    Type convertTo = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+                                    property.SetValue(item, Convert.ChangeType(reader[property.Name], convertTo), null);
+                                }
+                            }
+                            result.Add(item);
+                        }
+
+                        return result;
+                    }
+                }
+            }
+        }
+        #endregion
+
         #region Строка подключения
+        private bool IsValidConnectionString(string connectionString)
+        {
+            // Здесь может быть реализация проверки строки подключения
+            // Это пример и его следует адаптировать в соответствии с вашими требованиями
+            return connectionString.Contains("Server=") && connectionString.Contains("Database=");
+        }
         /// <summary>
         /// Обработчик события изменения строки подключения.
         /// Этот метод вызывается при обнаружении изменения строки подключения 
         /// в настройках. При этом происходит обновление контекста БД 
         /// с использованием новой строки подключения.
         /// </summary>
-        /// <param name="newConnectionString">Новая строка подключения к БД.</param>
-        private void HandleConnectionStringChange(string newConnectionString)
+        /// <param name="newConnectionStringName">Новая строка подключения к БД.</param>
+        private void HandleConnectionStringChange(string newConnectionStringName)
         {
             // Здесь ваш код обработки изменения строки подключения.
             // Например, вы можете вызвать InitDB или любой другой метод, 
             // который обновляет вашу базу данных с новой строкой подключения.
             this.InitDB(true);
+        }
+
+        private string GetConnectionStringByName(string name)
+        {
+            // Проверяем, существует ли строка подключения с таким именем
+            var settings = ConfigurationManager.ConnectionStrings[name];
+
+            if (settings != null)
+                return settings.ConnectionString;
+
+            return null; // или выбросить исключение, если предпочитаете
+        }
+        public string GetConnectionStringName(string connectionString)
+        {
+            // Перебираем все строки подключения в конфигурации
+            foreach (ConnectionStringSettings connectionStringSetting in ConfigurationManager.ConnectionStrings)
+            {
+                if (connectionStringSetting.ConnectionString == connectionString)
+                {
+                    return connectionStringSetting.Name; // Возвращаем имя, если нашли соответствующую строку
+                }
+            }
+
+            return null; // Возвращаем null, если соответствующая строка подключения не найдена
         }
         #endregion
 
@@ -90,9 +211,9 @@ namespace База_артикулов.Классы
         {
             if (!isForce)
             {
-                if (this.CurrentConnectionString != Settings.Connections.CurrentConnectionString)
+                if (this.CurrentConnectionString != this.CurrentConnectionString)
                 {
-                    this.CurrentConnectionString = Settings.Connections.CurrentConnectionString;
+                    this.CurrentConnectionString = this.CurrentConnectionString;
                 }
                 if (this.DB == null)
                 {
@@ -734,6 +855,8 @@ namespace База_артикулов.Классы
         #endregion
 
         #region Товары
+
+
         //TODO: добавить обновление и удаление товара
         public Products CreateEmptyProduct(string title = "Новый продукт", SubGroups subGroups = null)
         {
@@ -832,12 +955,12 @@ namespace База_артикулов.Классы
 
         #region Конструкторы/Деструкторы
 
-        public CustomDB() : this(new SettingsNew())
+        public CustomDB() : this(new Settings())
         {
 
         }
 
-        public CustomDB(SettingsNew settings)
+        public CustomDB(Settings settings)
         {
             if (settings == null)
             {

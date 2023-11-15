@@ -10,9 +10,8 @@
 namespace База_артикулов.Модели
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ProductsViewLite
+    public partial class GetFilteredProducts1_Result
     {
         public int ID_продукта { get; set; }
         public string Артикул { get; set; }

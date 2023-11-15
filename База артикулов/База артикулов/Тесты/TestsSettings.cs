@@ -14,7 +14,7 @@ namespace База_артикулов.Настройки.Тесты
         private const string TEST_SERVER = "TestServer";
         private const string TEST_BASE_PATH = "TestBasePath";
 
-        private void WriteSettingsToJsonFile(string filePath, SettingsNew settings)
+        private void WriteSettingsToJsonFile(string filePath, Settings settings)
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
             string jsonString = JsonSerializer.Serialize(settings, options);
@@ -31,22 +31,22 @@ namespace База_артикулов.Настройки.Тесты
             }
 
             // Действие
-            var settings = new SettingsNew(TEST_FILE_PATH);
+            var settings = new Settings(TEST_FILE_PATH);
 
             // Проверка
             Assert.True(File.Exists(TEST_FILE_PATH));
             string jsonString = File.ReadAllText(TEST_FILE_PATH);
-            var loadedSettings = JsonSerializer.Deserialize<SettingsNew>(jsonString);
-            Assert.Equal("Подключение к LAPTOP-BBFM8MMD", loadedSettings.CurrentConnectionString);
+            var loadedSettings = JsonSerializer.Deserialize<Settings>(jsonString);
+            Assert.Equal("Подключение к LAPTOP-BBFM8MMD", loadedSettings.CurrentConnectionStringName);
         }
 
         [Fact]
         public void Constructor_FileExists_SettingsLoadedFromFile()
         {
             // Подготовка
-            var initialSettings = new SettingsNew
+            var initialSettings = new Settings
             {
-                CurrentConnectionString = TEST_CONNECTION_STRING,
+                CurrentConnectionStringName = TEST_CONNECTION_STRING,
                 UserNameWDClient = TEST_USER_NAME,
                 PasswordWDClient = TEST_PASSWORD,
                 ServerWDClient = TEST_SERVER,
@@ -55,10 +55,10 @@ namespace База_артикулов.Настройки.Тесты
             this.WriteSettingsToJsonFile(TEST_FILE_PATH, initialSettings);
 
             // Действие
-            var settings = new SettingsNew(TEST_FILE_PATH);
+            var settings = new Settings(TEST_FILE_PATH);
 
             // Проверка
-            Assert.Equal(TEST_CONNECTION_STRING, settings.CurrentConnectionString);
+            Assert.Equal(TEST_CONNECTION_STRING, settings.CurrentConnectionStringName);
             Assert.Equal(TEST_USER_NAME, settings.UserNameWDClient);
             Assert.Equal(TEST_PASSWORD, settings.PasswordWDClient);
             Assert.Equal(TEST_SERVER, settings.ServerWDClient);
@@ -69,9 +69,9 @@ namespace База_артикулов.Настройки.Тесты
         public void SaveToFile_ValidPath_AllSettingsSavedToFile()
         {
             // Подготовка
-            var settings = new SettingsNew
+            var settings = new Settings
             {
-                CurrentConnectionString = TEST_CONNECTION_STRING,
+                CurrentConnectionStringName = TEST_CONNECTION_STRING,
                 UserNameWDClient = TEST_USER_NAME,
                 PasswordWDClient = TEST_PASSWORD,
                 ServerWDClient = TEST_SERVER,
@@ -83,8 +83,8 @@ namespace База_артикулов.Настройки.Тесты
 
             // Проверка
             string jsonString = File.ReadAllText(TEST_FILE_PATH);
-            var savedSettings = JsonSerializer.Deserialize<SettingsNew>(jsonString);
-            Assert.Equal(TEST_CONNECTION_STRING, savedSettings.CurrentConnectionString);
+            var savedSettings = JsonSerializer.Deserialize<Settings>(jsonString);
+            Assert.Equal(TEST_CONNECTION_STRING, savedSettings.CurrentConnectionStringName);
             Assert.Equal(TEST_USER_NAME, savedSettings.UserNameWDClient);
             Assert.Equal(TEST_PASSWORD, savedSettings.PasswordWDClient);
             Assert.Equal(TEST_SERVER, savedSettings.ServerWDClient);
@@ -95,22 +95,22 @@ namespace База_артикулов.Настройки.Тесты
         public void LoadFromFile_ValidPath_AllSettingsLoadedFromFile()
         {
             // Подготовка
-            var initialSettings = new SettingsNew
+            var initialSettings = new Settings
             {
-                CurrentConnectionString = TEST_CONNECTION_STRING,
+                CurrentConnectionStringName = TEST_CONNECTION_STRING,
                 UserNameWDClient = TEST_USER_NAME,
                 PasswordWDClient = TEST_PASSWORD,
                 ServerWDClient = TEST_SERVER,
                 BasePathWDClient = TEST_BASE_PATH
             };
             this.WriteSettingsToJsonFile(TEST_FILE_PATH, initialSettings);
-            var settings = new SettingsNew();
+            var settings = new Settings();
 
             // Действие
             settings.LoadFromFile(TEST_FILE_PATH);
 
             // Проверка
-            Assert.Equal(TEST_CONNECTION_STRING, settings.CurrentConnectionString);
+            Assert.Equal(TEST_CONNECTION_STRING, settings.CurrentConnectionStringName);
             Assert.Equal(TEST_USER_NAME, settings.UserNameWDClient);
             Assert.Equal(TEST_PASSWORD, settings.PasswordWDClient);
             Assert.Equal(TEST_SERVER, settings.ServerWDClient);
