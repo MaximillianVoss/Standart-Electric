@@ -70,9 +70,10 @@ namespace База_артикулов.Классы
             if (string.IsNullOrWhiteSpace(connectionString))
                 return false;
 
-            var regexPattern = @"^metadata=res:\/\/\*\/[a-zA-Z0-9_.]+\.csdl\|res:\/\/\*\/[a-zA-Z0-9_.]+\.ssdl\|res:\/\/\*\/[a-zA-Z0-9_.]+\.msl;provider=System\.Data\.SqlClient;provider connection string=""([^""]+)""";
+            var regexPattern = @"^metadata=res:\/\/\*\/.*\.csdl\|res:\/\/\*\/.*\.ssdl\|res:\/\/\*\/.*\.msl;provider=System\.Data\.SqlClient;provider connection string=""[^""]*""$";
             return Regex.IsMatch(connectionString, regexPattern);
         }
+
 
         #endregion
 

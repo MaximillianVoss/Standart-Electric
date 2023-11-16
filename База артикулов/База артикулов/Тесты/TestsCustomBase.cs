@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.Json;
 using Xunit;
+using База_артикулов.Классы;
 using База_артикулов.Формы;
 
 namespace База_артикулов.ГрафическийИнтерфейс.Тесты
@@ -17,15 +18,21 @@ namespace База_артикулов.ГрафическийИнтерфейс.�
 
         private static void CreateTestSettingsFile()
         {
+            var testConnectionStringInfo = new ConnectionStringInfo(
+                "TestConnectionName",
+                "metadata=res://*/Модели.ProductsModel.csdl|res://*/Модели.ProductsModel.ssdl|res://*/Модели.ProductsModel.msl;provider=System.Data.SqlClient;provider connection string=\"data source=TestServer;initial catalog=TestDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework\""
+            );
+
             var settings = new
             {
-                CurrentConnectionString = "Test Connection String",
+                CurrentConnectionString = testConnectionStringInfo,
                 UserNameWDClient = "TestUser",
                 PasswordWDClient = "TestPassword",
                 ServerWDClient = "TestServer",
                 BasePathWDClient = "TestBasePath"
             };
-            string jsonString = JsonSerializer.Serialize(settings);
+
+            string jsonString = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(TestSettingsFilePath, jsonString);
         }
 
@@ -38,10 +45,12 @@ namespace База_артикулов.ГрафическийИнтерфейс.�
             // Assert
             Assert.NotNull(customBase.CurrentObjects);
             Assert.NotNull(customBase.CustomDb); // Assuming CustomDb is initialized within CustomBase
-            // Assert.NotNull(customBase.WDClient); This needs to be checked where WDClient is actually a property
+                                                 // Assert.NotNull(customBase.WDClient); This needs to be checked where WDClient is actually a property
 
             // Assert the settings are loaded correctly
-            Assert.Equal("Test Connection String", customBase.CustomDb.CurrentConnectionString);
+            Assert.Equal("TestConnectionName", customBase.CustomDb.CurrentConnectionString.Name);
+            Assert.Equal("metadata=res://*/Модели.ProductsModel.csdl|res://*/Модели.ProductsModel.ssdl|res://*/Модели.ProductsModel.msl;provider=System.Data.SqlClient;provider connection string=\"data source=TestServer;initial catalog=TestDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework\"", customBase.CustomDb.CurrentConnectionString.Value);
+
             // WDClient properties should be checked within the WDClient object
             Assert.NotNull(customBase.WDClient.Client);
             Assert.NotNull(customBase.WDClient.UserName);
@@ -54,6 +63,7 @@ namespace База_артикулов.ГрафическийИнтерфейс.�
             Assert.Equal("TestServer", customBase.WDClient.Server);
             Assert.Equal("TestBasePath", customBase.WDClient.BasePath);
         }
+
 
         // ... Other test methods ...
 

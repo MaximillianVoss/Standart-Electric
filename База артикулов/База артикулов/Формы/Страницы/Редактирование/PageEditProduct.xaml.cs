@@ -287,7 +287,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                         this.CustomBase.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
                         #endregion
                         #region Таблица измерений
-                        var entityConnStr = this.CustomBase.CustomDb.Settgins.CurrentConntectionString;
+                        var entityConnStr = this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Value;
                         var entityBuilder = new EntityConnectionStringBuilder(entityConnStr);
                         string connectionString = entityBuilder.ProviderConnectionString;
                         string query = String.Format("SELECT * FROM ProductUnitsView where [ID товара] = {0}", this.CurrentProduct.ID_продукта);

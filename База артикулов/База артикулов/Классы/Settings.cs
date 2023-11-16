@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.Json;
+using База_артикулов.Классы;
 
 namespace База_артикулов.Классы
 {
@@ -9,8 +10,7 @@ namespace База_артикулов.Классы
         private const string DEFAULT_FILE_PATH = "settings.json";
 
         #region Поля
-        private string _currentConnectionStringName = "Подключение к LAPTOP-BBFM8MMD";
-        private string _currentConntectionString;
+        private ConnectionStringInfo _currentConnectionString;
         private string _userNameWDClient;
         private string _passwordWDClient;
         private string _serverWDClient;
@@ -18,35 +18,23 @@ namespace База_артикулов.Классы
         #endregion
 
         #region Свойства
-        public string CurrentConnectionStringName
+        public ConnectionStringInfo CurrentConnectionString
         {
-            get => this._currentConnectionStringName;
+            get => _currentConnectionString;
             set
             {
-                if (this._currentConnectionStringName != value)
+                if (_currentConnectionString != value)
                 {
-                    this._currentConnectionStringName = value;
-                    this.OnCurrentConnectionStringChanged(this._currentConnectionStringName);
+                    _currentConnectionString = value;
+                    OnCurrentConnectionStringChanged(value.Name);
                 }
             }
         }
 
-        public string CurrentConntectionString
-        {
-            get
-            {
-                return this._currentConntectionString;
-            }
-            set
-            {
-                this._currentConntectionString = value;
-            }
-        }
-
-        public string UserNameWDClient { get => this._userNameWDClient; set => this._userNameWDClient = value; }
-        public string PasswordWDClient { get => this._passwordWDClient; set => this._passwordWDClient = value; }
-        public string ServerWDClient { get => this._serverWDClient; set => this._serverWDClient = value; }
-        public string BasePathWDClient { get => this._basePathWDClient; set => this._basePathWDClient = value; }
+        public string UserNameWDClient { get => _userNameWDClient; set => _userNameWDClient = value; }
+        public string PasswordWDClient { get => _passwordWDClient; set => _passwordWDClient = value; }
+        public string ServerWDClient { get => _serverWDClient; set => _serverWDClient = value; }
+        public string BasePathWDClient { get => _basePathWDClient; set => _basePathWDClient = value; }
 
         public event Action<string> CurrentConnectionStringChanged;
         #endregion
@@ -77,13 +65,13 @@ namespace База_артикулов.Классы
                     var settings = JsonSerializer.Deserialize<Settings>(jsonString);
                     if (settings != null)
                     {
-                        this._currentConnectionStringName = settings.CurrentConnectionStringName;
-                        this._userNameWDClient = settings.UserNameWDClient;
-                        this._passwordWDClient = settings.PasswordWDClient;
-                        this._serverWDClient = settings.ServerWDClient;
-                        this._basePathWDClient = settings.BasePathWDClient;
+                        _currentConnectionString = settings.CurrentConnectionString;
+                        _userNameWDClient = settings.UserNameWDClient;
+                        _passwordWDClient = settings.PasswordWDClient;
+                        _serverWDClient = settings.ServerWDClient;
+                        _basePathWDClient = settings.BasePathWDClient;
 
-                        this.OnCurrentConnectionStringChanged(this._currentConnectionStringName);
+                        OnCurrentConnectionStringChanged(_currentConnectionString?.Name);
                     }
                 }
             }
@@ -96,32 +84,31 @@ namespace База_артикулов.Классы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public Settings() //: this(DEFAULT_FILE_PATH)
+        public Settings()
         {
-
+            // Загрузка настроек по умолчанию или какая-либо другая логика
         }
 
         public Settings(string filePath)
         {
             if (!File.Exists(filePath))
             {
-                this.SaveToFile(filePath);
+                SaveToFile(filePath);
             }
             else
             {
-                this.LoadFromFile(filePath);
+                LoadFromFile(filePath);
             }
         }
         #endregion
 
         #region Операторы
-
         #endregion
 
         #region Обработчики событий
-        private void OnCurrentConnectionStringChanged(string newConnectionString)
+        private void OnCurrentConnectionStringChanged(string newConnectionStringName)
         {
-            CurrentConnectionStringChanged?.Invoke(newConnectionString);
+            CurrentConnectionStringChanged?.Invoke(newConnectionStringName);
         }
         #endregion
     }

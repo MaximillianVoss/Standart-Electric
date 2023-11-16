@@ -156,7 +156,7 @@ namespace База_артикулов.Формы.Страницы
                         document.Remove(Common.Strings.Columns.idDescriptor);
                         #endregion
 
-                        var connectionString = this.CustomBase.CustomDb.Settgins.CurrentConntectionString;
+                        var connectionString = this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Value;
                         string providerConnectionString = new EntityConnectionStringBuilder(connectionString).ProviderConnectionString;
                         using (SqlConnection connection = new SqlConnection(providerConnectionString))
                         {

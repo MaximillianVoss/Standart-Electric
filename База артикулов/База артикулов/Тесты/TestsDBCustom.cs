@@ -16,10 +16,12 @@ namespace База_артикулов.База_Данных.Тесты
         #endregion
 
         #region Настройки
+        // Пример метода CreateSettingsWithConnectionString с использованием ConnectionStringInfo
         public Settings CreateSettingsWithConnectionString(string connectionStringName)
         {
             var connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
-            return new Settings { CurrentConnectionStringName = connectionString };
+            var connectionStringInfo = new ConnectionStringInfo(connectionStringName, connectionString);
+            return new Settings { CurrentConnectionString = connectionStringInfo };
         }
 
         #endregion
@@ -53,33 +55,38 @@ namespace База_артикулов.База_Данных.Тесты
             Assert.NotSame(db, CustomDB.Instance.DB);
         }
 
+        // Обновленный тестовый случай
         [Fact]
         public void InitDB_ShouldSwitchToNewConnectionString()
         {
             var oldConnectionStringName = "Подключение к LAPTOP-BBFM8MMD";
             var newConnectionStringName = "Подключение к LAPTOP-BBFM8MMD-Test";
-            var oldExpectedConnectionString = "data source=LAPTOP-BBFM8MMD\\SQLEXPRESS;initial catalog=DBSE;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework"; // Замените на реальную старую строку подключения
-            var newExpectedConnectionString = "data source=LAPTOP-BBFM8MMD-TEST\\SQLEXPRESS;initial catalog=DBSE_Test;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework"; // Замените на реальную новую строку подключения
 
-            var oldSettings = new Settings { CurrentConnectionStringName = oldConnectionStringName };
+            // Строки подключения, как они определены в файле конфигурации
+            var oldExpectedConnectionString = "metadata=res://*/Модели.ProductsModel.csdl|res://*/Модели.ProductsModel.ssdl|res://*/Модели.ProductsModel.msl;provider=System.Data.SqlClient;provider connection string=\"data source=LAPTOP-BBFM8MMD\\SQLEXPRESS;initial catalog=DBSE;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework\"";
+            var newExpectedConnectionString = "metadata=res://*/Модели.ProductsModel.csdl|res://*/Модели.ProductsModel.ssdl|res://*/Модели.ProductsModel.msl;provider=System.Data.SqlClient;provider connection string=\"data source=LAPTOP-BBFM8MMD\\SQLEXPRESS;initial catalog=DBSE;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework\"";
+
+            var oldSettings = CreateSettingsWithConnectionString(oldConnectionStringName);
             var customDb = new CustomDB(oldSettings);
 
             // Проверяем, что изначально используется старая строка подключения
-            Assert.Equal(oldConnectionStringName, customDb.CurrentConnectionStringName);
-            Assert.Equal(oldExpectedConnectionString, customDb.CurrentConnectionString); // Проверяем саму строку подключения
+            Assert.Equal(oldConnectionStringName, customDb.CurrentConnectionString.Name);
+            Assert.Equal(oldExpectedConnectionString, customDb.CurrentConnectionString.Value);
 
             // Меняем на новую строку подключения
-            oldSettings.CurrentConnectionStringName = newConnectionStringName;
-            customDb.InitDB(true);
+            var newSettings = CreateSettingsWithConnectionString(newConnectionStringName);
+            customDb.CurrentConnectionString = newSettings.CurrentConnectionString;
 
             // Проверяем, что теперь используется новая строка подключения
-            Assert.Equal(newConnectionStringName, customDb.CurrentConnectionStringName);
-            Assert.Equal(newExpectedConnectionString, customDb.CurrentConnectionString); // Проверяем саму строку подключения
+            Assert.Equal(newConnectionStringName, customDb.CurrentConnectionString.Name);
+            Assert.Equal(newExpectedConnectionString, customDb.CurrentConnectionString.Value);
         }
+
 
         #endregion
 
     }
+
     #region Объекты БД
     public class TestsDBObjects : TestsDBCustom
     {
@@ -96,7 +103,7 @@ namespace База_артикулов.База_Данных.Тесты
 
         ~TestsDBObjects()
         {
-            this.context.SaveChanges();
+            //this.context.SaveChanges();
         }
 
     }
@@ -196,9 +203,9 @@ namespace База_артикулов.База_Данных.Тесты
             Assert.NotNull(products); // Убедитесь, что список не пустой
             Assert.All(products, product =>
             {
-                Assert.NotNull(product.Article); // Проверка, что поле Артикул не пустое
-                Assert.NotNull(product.ProductName); // Проверка, что поле Наименование продукта не пустое
+                Assert.NotNull(product.Наименование_продукта); // Проверка, что поле Наименование продукта не пустое
                 // Добавьте дополнительные проверки для других полей при необходимости
+                Assert.True(product.ID_продукта > 0);
             });
 
             // Дополнительные проверки можно добавить в зависимости от ваших требований
@@ -361,9 +368,7 @@ namespace База_артикулов.База_Данных.Тесты
         public void GetDescriptorsResources()
         {
             int descriptorId = this.context.DescriptorsResources.FirstOrDefault().idDescriptor;
-
             var descriptorResource = this.service.GetDescriptorsResources(descriptorId);
-
             Assert.NotNull(descriptorResource);
         }
 

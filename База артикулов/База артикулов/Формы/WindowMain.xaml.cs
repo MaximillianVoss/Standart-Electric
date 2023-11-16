@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using System.Windows;
 using База_артикулов.Классы;
 //using База_артикулов.Properties;
@@ -11,7 +13,8 @@ namespace База_артикулов.Формы
     /// </summary>
     public partial class MainWindow : CustomWindow
     {
-        public MainWindow() : base("MainWindow", new Settings("settings.json"))
+        private const string DefaultSettingsFilePath = "settings.json";
+        public MainWindow() : base("MainWindow", new Settings(DefaultSettingsFilePath))
         {
             this.InitializeComponent();
             #region Set window size to 3/4 of the screen size
@@ -22,6 +25,8 @@ namespace База_артикулов.Формы
             this.fImport.Content = new PageImport();
             this.fSettings.Content = new PageSettings();
         }
+
+
 
         public override object HandleCancel()
         {

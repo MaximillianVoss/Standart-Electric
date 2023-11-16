@@ -29,9 +29,9 @@ namespace База_артикулов.Формы.Страницы
             {
                 this.cmbConnectionStrings.Add(connectionString.Name);
             }
-            if (this.CustomBase.CustomDb.Settgins.CurrentConnectionStringName != null)
+            if (this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Name != null)
             {
-                this.cmbConnectionStrings.Select(this.CustomBase.CustomDb.Settgins.CurrentConnectionStringName);
+                this.cmbConnectionStrings.Select(this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Name);
             }
             else
             {
@@ -72,7 +72,7 @@ namespace База_артикулов.Формы.Страницы
         {
             if (this.cmbConnectionStrings.SelectedItem != null)
             {
-                this.CustomBase.CustomDb.Settgins.CurrentConnectionStringName = this.cmbConnectionStrings.SelectedItem;
+                this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Name = this.cmbConnectionStrings.SelectedItem;
             }
         }
 

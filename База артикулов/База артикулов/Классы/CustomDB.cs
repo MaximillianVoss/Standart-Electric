@@ -35,43 +35,26 @@ namespace База_артикулов.Классы
         public Settings Settgins { get { return this.settings; } }
         public DBSEEntities DB { get => this.db; private set => this.db = value; }
         /// <summary>
-        /// Имя строки подключения
+        /// Текущая строка подключения к базе данных.
         /// </summary>
-        public string CurrentConnectionStringName
+        public ConnectionStringInfo CurrentConnectionString
         {
-            get => this.settings.CurrentConnectionStringName;
+            get => this.settings.CurrentConnectionString;
             set
             {
-                var connectionString = GetConnectionStringByName(value);
-                if (connectionString == null)
+                if (value == null)
                 {
-                    throw new InvalidOperationException($"Строка подключения с именем '{value}' не найдена.");
+                    throw new ArgumentNullException(nameof(value), "Строка подключения не может быть null.");
                 }
 
-                this.settings.CurrentConnectionStringName = value;
-                this.settings.CurrentConntectionString = connectionString;
-            }
-        }
-        /// <summary>
-        /// Строка подключения
-        /// </summary>
-        public string CurrentConnectionString
-        {
-            get
-            {
-                return this.settings.CurrentConntectionString;
-            }
-            set
-            {
-                // Проверка на допустимость строки подключения
-                if (!IsValidConnectionString(value))
+                var connectionStringName = this.GetConnectionStringName(value.Value);
+                if (connectionStringName == null)
                 {
-                    throw new ArgumentException("Недопустимая строка подключения");
+                    throw new InvalidOperationException($"Строка подключения с содержимым '{value.Value}' не найдена.");
                 }
 
-                // При изменении строки подключения обновляем имя строки подключения
-                this.settings.CurrentConnectionStringName = this.GetConnectionStringName(value);
-                this.settings.CurrentConntectionString = value;
+                this.settings.CurrentConnectionString = value;
+                this.InitDB(true); // Переинициализация БД с новой строкой подключения
             }
         }
 
@@ -113,13 +96,23 @@ namespace База_артикулов.Классы
         /// </example>
         public List<T> ExecuteSqlQuery<T>(string sqlQuery) where T : class, new()
         {
-            using (var connection = new SqlConnection(this.CurrentConnectionString))
+            // Извлечение строки подключения SQL Server из строки подключения EF
+            var entityBuilder = new EntityConnectionStringBuilder(this.CurrentConnectionString.Value);
+            var sqlConnectionString = entityBuilder.ProviderConnectionString;
+
+            using (var connection = new SqlConnection(sqlConnectionString))
             {
                 connection.Open();
                 using (var command = new SqlCommand(sqlQuery, connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
+                        // Вывод имен столбцов в ридере
+                        List<string> readerFields = new List<string>();
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            readerFields.Add(reader.GetName(i));
+                        }
                         var result = new List<T>();
                         var properties = typeof(T).GetProperties();
 
@@ -128,10 +121,11 @@ namespace База_артикулов.Классы
                             var item = new T();
                             foreach (var property in properties)
                             {
-                                if (!reader.IsDBNull(reader.GetOrdinal(property.Name)))
+                                var propreryName = property.Name.Replace('_', ' ');
+                                if (!reader.IsDBNull(reader.GetOrdinal(propreryName)))
                                 {
                                     Type convertTo = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
-                                    property.SetValue(item, Convert.ChangeType(reader[property.Name], convertTo), null);
+                                    property.SetValue(item, Convert.ChangeType(reader[propreryName], convertTo), null);
                                 }
                             }
                             result.Add(item);
@@ -222,7 +216,7 @@ namespace База_артикулов.Классы
                 else
                 {
                     var builder1 = new SqlConnectionStringBuilder(this.DB.Database.Connection.ConnectionString);
-                    EntityConnectionStringBuilder entityBuilder2 = new EntityConnectionStringBuilder(ConfigurationManager.ConnectionStrings[this.CurrentConnectionString].ConnectionString);
+                    EntityConnectionStringBuilder entityBuilder2 = new EntityConnectionStringBuilder(ConfigurationManager.ConnectionStrings[this.CurrentConnectionString.Name].ConnectionString);
                     string sqlConnectionString2 = entityBuilder2.ProviderConnectionString;
                     SqlConnectionStringBuilder builder2 = new SqlConnectionStringBuilder(sqlConnectionString2);
                     if (builder1.DataSource != builder2.DataSource || builder1.InitialCatalog != builder2.InitialCatalog)

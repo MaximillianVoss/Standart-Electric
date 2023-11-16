@@ -1,7 +1,10 @@
 {
-    "CurrentConnectionString": "Подключение к LAPTOP-BBFM8MMD",
-    "UserNameWDClient": "devstor",
-    "PasswordWDClient": "TE6db?lZE~8Ixc?KAtQW",
-    "ServerWDClient": "https://rcloud.rsk-gr.ru",
-    "BasePathWDClient": "/remote.php/dav/files/devstor"
+  "CurrentConnectionString": {
+    "Name": "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u043A LAPTOP-BBFM8MMD",
+    "Value": "metadata=res://*/\u041C\u043E\u0434\u0435\u043B\u0438.ProductsModel.csdl|res://*/\u041C\u043E\u0434\u0435\u043B\u0438.ProductsModel.ssdl|res://*/\u041C\u043E\u0434\u0435\u043B\u0438.ProductsModel.msl;provider=System.Data.SqlClient;provider connection string=\u0022data source=LAPTOP-BBFM8MMD\\SQLEXPRESS;initial catalog=DBSE;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework\u0022"
+  },
+  "UserNameWDClient": "devstor",
+  "PasswordWDClient": "TE6db?lZE~8Ixc?KAtQW",
+  "ServerWDClient": "https://rcloud.rsk-gr.ru",
+  "BasePathWDClient": "/remote.php/dav/files/devstor"
 }
