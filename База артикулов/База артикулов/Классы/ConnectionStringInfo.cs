@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Data.SqlClient;
+﻿using System;
 using System.Text.RegularExpressions;
 
 namespace База_артикулов.Классы
@@ -26,14 +24,14 @@ namespace База_артикулов.Классы
         /// </summary>
         public string Value
         {
-            get => _value;
+            get => this._value;
             set
             {
-                if (!IsValidConnectionString(value))
+                if (!this.IsValidConnectionString(value))
                 {
                     throw new ArgumentException("Недопустимая строка подключения Entity Framework");
                 }
-                _value = value;
+                this._value = value;
             }
         }
 
@@ -48,8 +46,8 @@ namespace База_артикулов.Классы
         /// <param name="value">Значение строки подключения.</param>
         public ConnectionStringInfo(string name, string value)
         {
-            Name = name;
-            Value = value;
+            this.Name = name;
+            this.Value = value;
         }
 
         #endregion

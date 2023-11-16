@@ -1,5 +1,4 @@
-﻿using BaseWindow_WPF.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows;
 using База_артикулов.Классы;
@@ -86,22 +85,24 @@ namespace База_артикулов.Формы
                         this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     if (argument.ValidateTypeOrBaseType<SubGroups>())
                         this.SetContent(title, new PageEditSubGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                    if (argument.ValidateTypeOrBaseType<Products>())
+                        this.SetContent(title, new PageEditProduct(this.CustomBase, this.ContentWidth, this.ContentHeight));
                 }
                 //if(this.CustomBase.UnpackCurrentObject<Classes>(this.CurrentObject)!=null)
 
                 //if (this.CurrentObject.DataType == typeof(TreeViewItemCustom))
                 //{
-                //    var treeViewSelectedObject = ((TreeViewItemCustom)this.CurrentObject.Data).Value;
+                //    var currentUnpackedObject = ((TreeViewItemCustom)this.CurrentObject.Data).Value;
                 //    title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CurrentObject);
-                //    if (treeViewSelectedObject.ValidateTypeOrBaseType<Classes>())
+                //    if (currentUnpackedObject.ValidateTypeOrBaseType<Classes>())
                 //    {
                 //        this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
                 //    }
-                //    if (treeViewSelectedObject.ValidateTypeOrBaseType<Groups>())
+                //    if (currentUnpackedObject.ValidateTypeOrBaseType<Groups>())
                 //    {
                 //        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
                 //    }
-                //    if (treeViewSelectedObject.ValidateTypeOrBaseType<SubGroups>())
+                //    if (currentUnpackedObject.ValidateTypeOrBaseType<SubGroups>())
                 //    {
                 //        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
                 //    }
@@ -146,23 +147,18 @@ namespace База_артикулов.Формы
                 throw new Exception("Не выбран элемент для редактирования!");
             if (this.CustomBase.CurrentObjects.Count == 1)
             {
-                if (this.CurrentObject.DataType == typeof(TreeViewItemCustom))
-                {
-                    var treeViewSelectedObject = ((TreeViewItemCustom)this.CurrentObject.Data).Value;
-                    title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CurrentObject);
-                    if (treeViewSelectedObject.ValidateTypeOrBaseType<Classes>())
-                    {
-                        this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, this.ContentHeight));
-                    }
-                    if (treeViewSelectedObject.ValidateTypeOrBaseType<Groups>())
-                    {
-                        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
-                    }
-                    if (treeViewSelectedObject.ValidateTypeOrBaseType<SubGroups>())
-                    {
-                        this.SetContent(title, new PageEditSubGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
-                    }
-                }
+                var currentUnpackedObject = this.CurrentObjectUnpacked;
+                title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CurrentObject);
+                if (currentUnpackedObject.ValidateTypeOrBaseType<Classes>())
+                    this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                if (currentUnpackedObject.ValidateTypeOrBaseType<Groups>())
+                    this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                if (currentUnpackedObject.ValidateTypeOrBaseType<SubGroups>())
+                    this.SetContent(title, new PageEditSubGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                if (currentUnpackedObject.ValidateTypeOrBaseType<Products>())
+                    this.SetContent(title, new PageEditProduct(this.CustomBase, this.ContentWidth, this.ContentHeight));
+
+
             }
             //if (this.ItemType == typeof(TreeViewItemCustom))
             //{
@@ -244,6 +240,17 @@ namespace База_артикулов.Формы
             this.SetContentSize(width, height);
             this.InitializeWindow(title);
         }
+
+        public WindowEdit(
+    CustomBase customBase,
+    int width = Common.WindowSizes.MediumH600W800.Width,
+    int height = Common.WindowSizes.MediumH600W800.Height
+    ) : base(title: string.Empty, customBase)
+        {
+            this.SetContentSize(width, height);
+            this.InitializeWindow(this.Title);
+        }
+
 
         /// <summary>
         /// Конструктор, принимающий путь к файлу настроек, создает экземпляр CustomBase из настроек.

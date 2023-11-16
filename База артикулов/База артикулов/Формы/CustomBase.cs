@@ -3,7 +3,6 @@ using CustomControlsWPF;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using База_артикулов.Классы;
@@ -79,6 +78,8 @@ namespace База_артикулов.Формы
         /// <param name="obj">Объект для проверки.</param>
         public static bool ValidateTypeOrBaseType<T>(this object obj)
         {
+            if (obj == null)
+                return false;
             Type expectedType = typeof(T);
             Type actualType = obj.GetType();
             return !(actualType != expectedType && actualType.BaseType != expectedType);

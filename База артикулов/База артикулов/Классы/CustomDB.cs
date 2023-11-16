@@ -32,7 +32,7 @@ namespace База_артикулов.Классы
         #endregion
 
         #region Свойства
-        public Settings Settgins { get { return this.settings; } }
+        public Settings Settgins => this.settings;
         public DBSEEntities DB { get => this.db; private set => this.db = value; }
         /// <summary>
         /// Текущая строка подключения к базе данных.
@@ -129,7 +129,7 @@ namespace База_артикулов.Классы
                 connection.Open();
                 using (var command = new SqlCommand(sqlQuery, connection))
                 {
-                    return ReadData<T>(command);
+                    return this.ReadData<T>(command);
                 }
             }
         }
@@ -153,7 +153,7 @@ namespace База_артикулов.Классы
                         }
                     }
 
-                    return ReadData<T>(command);
+                    return this.ReadData<T>(command);
                 }
             }
         }

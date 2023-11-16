@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Windows;
 using База_артикулов.Классы;
 //using База_артикулов.Properties;

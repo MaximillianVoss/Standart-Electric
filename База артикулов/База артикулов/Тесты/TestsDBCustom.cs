@@ -66,7 +66,7 @@ namespace База_артикулов.База_Данных.Тесты
             var oldExpectedConnectionString = "metadata=res://*/Модели.ProductsModel.csdl|res://*/Модели.ProductsModel.ssdl|res://*/Модели.ProductsModel.msl;provider=System.Data.SqlClient;provider connection string=\"data source=LAPTOP-BBFM8MMD\\SQLEXPRESS;initial catalog=DBSE;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework\"";
             var newExpectedConnectionString = "metadata=res://*/Модели.ProductsModel.csdl|res://*/Модели.ProductsModel.ssdl|res://*/Модели.ProductsModel.msl;provider=System.Data.SqlClient;provider connection string=\"data source=LAPTOP-BBFM8MMD\\SQLEXPRESS;initial catalog=DBSE;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework\"";
 
-            var oldSettings = CreateSettingsWithConnectionString(oldConnectionStringName);
+            var oldSettings = this.CreateSettingsWithConnectionString(oldConnectionStringName);
             var customDb = new CustomDB(oldSettings);
 
             // Проверяем, что изначально используется старая строка подключения
@@ -74,7 +74,7 @@ namespace База_артикулов.База_Данных.Тесты
             Assert.Equal(oldExpectedConnectionString, customDb.CurrentConnectionString.Value);
 
             // Меняем на новую строку подключения
-            var newSettings = CreateSettingsWithConnectionString(newConnectionStringName);
+            var newSettings = this.CreateSettingsWithConnectionString(newConnectionStringName);
             customDb.CurrentConnectionString = newSettings.CurrentConnectionString;
 
             // Проверяем, что теперь используется новая строка подключения

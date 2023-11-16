@@ -1,7 +1,7 @@
-﻿using База_артикулов.Классы;
-using System.Data.Entity.Core.EntityClient;
+﻿using System;
 using System.Data.Entity;
-using System;
+using System.Data.Entity.Core.EntityClient;
+using База_артикулов.Классы;
 
 namespace База_артикулов.Модели
 {

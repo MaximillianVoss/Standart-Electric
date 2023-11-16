@@ -41,7 +41,7 @@ namespace База_артикулов.Настройки.Тесты
             string jsonString = File.ReadAllText(TEST_FILE_PATH);
             var loadedSettings = JsonSerializer.Deserialize<Settings>(jsonString);
 
-            Assert.Null(loadedSettings.CurrentConnectionString);           
+            Assert.Null(loadedSettings.CurrentConnectionString);
         }
 
         [Fact]
@@ -50,20 +50,20 @@ namespace База_артикулов.Настройки.Тесты
             // Создание начальных настроек и запись в файл
             var initialSettings = new Settings
             {
-                CurrentConnectionString = TEST_CONNECTION_STRING,
+                CurrentConnectionString = this.TEST_CONNECTION_STRING,
                 UserNameWDClient = TEST_USER_NAME,
                 PasswordWDClient = TEST_PASSWORD,
                 ServerWDClient = TEST_SERVER,
                 BasePathWDClient = TEST_BASE_PATH
             };
-            WriteSettingsToJsonFile(TEST_FILE_PATH, initialSettings);
+            this.WriteSettingsToJsonFile(TEST_FILE_PATH, initialSettings);
 
             // Создание нового объекта настроек и загрузка из файла
             var settings = new Settings(TEST_FILE_PATH);
 
             // Проверка загруженных значений
-            Assert.Equal(TEST_CONNECTION_STRING.Name, settings.CurrentConnectionString.Name);
-            Assert.Equal(TEST_CONNECTION_STRING.Value, settings.CurrentConnectionString.Value);
+            Assert.Equal(this.TEST_CONNECTION_STRING.Name, settings.CurrentConnectionString.Name);
+            Assert.Equal(this.TEST_CONNECTION_STRING.Value, settings.CurrentConnectionString.Value);
             Assert.Equal(TEST_USER_NAME, settings.UserNameWDClient);
             Assert.Equal(TEST_PASSWORD, settings.PasswordWDClient);
             Assert.Equal(TEST_SERVER, settings.ServerWDClient);
@@ -76,7 +76,7 @@ namespace База_артикулов.Настройки.Тесты
             // Создание настроек
             var settings = new Settings
             {
-                CurrentConnectionString = TEST_CONNECTION_STRING,
+                CurrentConnectionString = this.TEST_CONNECTION_STRING,
                 UserNameWDClient = TEST_USER_NAME,
                 PasswordWDClient = TEST_PASSWORD,
                 ServerWDClient = TEST_SERVER,
@@ -90,8 +90,8 @@ namespace База_артикулов.Настройки.Тесты
             string jsonString = File.ReadAllText(TEST_FILE_PATH);
             var savedSettings = JsonSerializer.Deserialize<Settings>(jsonString);
 
-            Assert.Equal(TEST_CONNECTION_STRING.Name, savedSettings.CurrentConnectionString.Name);
-            Assert.Equal(TEST_CONNECTION_STRING.Value, savedSettings.CurrentConnectionString.Value);
+            Assert.Equal(this.TEST_CONNECTION_STRING.Name, savedSettings.CurrentConnectionString.Name);
+            Assert.Equal(this.TEST_CONNECTION_STRING.Value, savedSettings.CurrentConnectionString.Value);
             Assert.Equal(TEST_USER_NAME, savedSettings.UserNameWDClient);
             Assert.Equal(TEST_PASSWORD, savedSettings.PasswordWDClient);
             Assert.Equal(TEST_SERVER, savedSettings.ServerWDClient);
@@ -104,21 +104,21 @@ namespace База_артикулов.Настройки.Тесты
             // Создание и запись начальных настроек
             var initialSettings = new Settings
             {
-                CurrentConnectionString = TEST_CONNECTION_STRING,
+                CurrentConnectionString = this.TEST_CONNECTION_STRING,
                 UserNameWDClient = TEST_USER_NAME,
                 PasswordWDClient = TEST_PASSWORD,
                 ServerWDClient = TEST_SERVER,
                 BasePathWDClient = TEST_BASE_PATH
             };
-            WriteSettingsToJsonFile(TEST_FILE_PATH, initialSettings);
+            this.WriteSettingsToJsonFile(TEST_FILE_PATH, initialSettings);
 
             // Создание нового объекта настроек и загрузка из файла
             var settings = new Settings();
             settings.LoadFromFile(TEST_FILE_PATH);
 
             // Проверка загруженных значений
-            Assert.Equal(TEST_CONNECTION_STRING.Name, settings.CurrentConnectionString.Name);
-            Assert.Equal(TEST_CONNECTION_STRING.Value, settings.CurrentConnectionString.Value);
+            Assert.Equal(this.TEST_CONNECTION_STRING.Name, settings.CurrentConnectionString.Name);
+            Assert.Equal(this.TEST_CONNECTION_STRING.Value, settings.CurrentConnectionString.Value);
             Assert.Equal(TEST_USER_NAME, settings.UserNameWDClient);
             Assert.Equal(TEST_PASSWORD, settings.PasswordWDClient);
             Assert.Equal(TEST_SERVER, settings.ServerWDClient);

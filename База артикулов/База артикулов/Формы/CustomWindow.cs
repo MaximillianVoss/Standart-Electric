@@ -42,7 +42,17 @@ namespace База_артикулов.Формы
         /// Первый переданный объект в списке аргументов (если они не <see langword="null"/>)
         /// </summary>
         public CustomEventArgs CurrentObject { get => this.CustomBase.CurrentObject; set => this.CustomBase.CurrentObject = value; }
-
+        /// <summary>
+        /// Получает переданный объект в распакованном виде, извлеченном из CustomEventArgs
+        /// </summary>
+        public Object CurrentObjectUnpacked
+        {
+            get
+            {
+                if (this.CurrentObject == null) return null;
+                return this.CustomBase.UnpackCurrentObject<Object>(this.CurrentObject.Data);
+            }
+        }
         #endregion
 
         #region Методы

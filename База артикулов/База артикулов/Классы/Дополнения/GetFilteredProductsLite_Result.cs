@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace База_артикулов.Модели
+﻿namespace База_артикулов.Модели
 {
     public partial class GetFilteredProductsLite_Result
     {

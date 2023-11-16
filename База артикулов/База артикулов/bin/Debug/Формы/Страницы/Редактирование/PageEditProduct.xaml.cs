@@ -2,7 +2,6 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
@@ -229,105 +228,6 @@ namespace База_артикулов.Формы.Страницы.Редакти
         }
 
         /// <summary>
-        /// Заполняет форму свойствами указанного продукта.
-        /// </summary>
-        /// <param name="productView">Представление продукта</param>
-        /// <exception cref="Exception">Выбрасывает исключение, если продукт равен null или не удалось найти продукт.</exception>
-        private void UpdateForm(ProductsView productView)
-        {
-            try
-            {
-                if (productView != null)
-                {
-                    var product = this.DB.Products.FirstOrDefault(x => x.id == productView.ID_продукта);
-                    if (product != null)
-                    {
-                        #region Изображение
-                        _ = this.UpdateImageAsync(productView);
-                        #endregion
-                        #region Каталог
-                        this.txbPath.Text = this.GetPath(productView);
-                        #endregion
-                        #region Название
-                        this.txbTitle.Text = productView.Наименование_продукта;
-                        #endregion
-                        #region Описание
-                        this.txbDescription.Text = productView.Описание_продукта;
-                        #endregion
-                        #region Артикул
-                        //this.txbVendorCode.IsEnabled = false;
-                        this.txbVendorCode.Text = productView.Артикул;
-                        #endregion
-                        #region Бухгалтерский код
-                        this.txbCodeAccountant.IsEnabled = false;
-                        this.txbCodeAccountant.Text = productView.Бухгалтерский_код;
-                        #endregion
-                        #region Короткое название
-                        this.txbTitleShort.Text = productView.Сокращенное_наименование_продукта;
-                        #endregion
-                        #region Нормы
-                        this.cmbNorm.Update(this.CustomBase.ToList<Norms>(this.DB.Norms), product.idNorm);
-                        #endregion
-                        #region Подгруппа
-                        this.cmbSubGroup.Update(this.CustomBase.ToList<SubGroups>(this.DB.SubGroups), product.idSubGroup);
-                        #endregion
-                        #region Покрытия
-                        this.cmbCover.Update(this.CustomBase.ToList<Covers>(this.DB.Covers), product.idCover);
-                        #endregion
-                        #region Материалы
-                        this.cmbMaterial.Update(this.CustomBase.ToList<Materials>(this.DB.Materials), product.idMaterial);
-                        #endregion
-                        #region Упаковки
-                        this.cmbPackage.Update(this.CustomBase.ToList<Packages>(this.DB.Packages), product.idPackage);
-                        #endregion
-                        #region Перфорации
-                        this.cmbPerforation.Update(this.CustomBase.ToList<Perforations>(this.DB.Perforations), product.idPerforation);
-                        #endregion
-                        #region Отметка "На складе"
-                        this.CustomBase.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
-                        #endregion
-                        #region Таблица измерений
-                        var entityConnStr = this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Value;
-                        var entityBuilder = new EntityConnectionStringBuilder(entityConnStr);
-                        string connectionString = entityBuilder.ProviderConnectionString;
-                        string query = String.Format("SELECT * FROM ProductUnitsView where [ID товара] = {0}", this.CurrentProduct.ID_продукта);
-
-                        using (SqlConnection connection = new SqlConnection(connectionString))
-                        {
-                            connection.Open();
-
-                            using (SqlCommand command = new SqlCommand(query, connection))
-                            {
-                                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                                DataTable dataTable = new DataTable();
-                                adapter.Fill(dataTable);
-
-                                this.dgDimensions.ItemsSource = dataTable.DefaultView;
-                            }
-                        }
-                        #endregion
-                        #region Таблица файлов
-                        this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.Where(x => x.ID_продукта == this.CurrentProduct.ID_продукта).ToList();
-                        #endregion
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Заполняет форму свойствами указанного продукта.
-        /// </summary>
-        /// <param name="idProduct">ID продукта</param>
-        private void UpdateForm(int? idProduct)
-        {
-            this.UpdateForm(this.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == this.IdProduct));
-        }
-
-        /// <summary>
         /// Обновляет выбор единицы продукции.
         /// </summary>
         private void UpdateUnitSelection()
@@ -487,6 +387,119 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 this.DB.SaveChanges();
             }
         }
+
+
+        public override void UpdateFields(List<CustomEventArgs> args)
+        {
+            try
+            {
+                var product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
+                if (product != null)
+                {
+                    var productView = this.CustomBase.CustomDb.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == product.id);
+                    if (productView != null)
+                    {
+                        #region Изображение
+                        _ = this.UpdateImageAsync(productView);
+                        #endregion
+                        #region Каталог
+                        this.txbPath.Text = this.GetPath(productView);
+                        #endregion
+                        #region Название
+                        this.txbTitle.Text = productView.Наименование_продукта;
+                        #endregion
+                        #region Описание
+                        this.txbDescription.Text = productView.Описание_продукта;
+                        #endregion
+                        #region Артикул
+                        this.txbVendorCode.IsEnabled = this.CustomBase.Mode == EditModes.Create;
+                        this.txbVendorCode.Text = productView.Артикул;
+                        #endregion
+                        #region Бухгалтерский код
+                        this.txbCodeAccountant.IsEnabled = this.CustomBase.Mode == EditModes.Create;
+                        this.txbCodeAccountant.Text = productView.Бухгалтерский_код;
+                        #endregion
+                        #region Короткое название
+                        this.txbTitleShort.Text = productView.Сокращенное_наименование_продукта;
+                        #endregion
+                        #region Нормы
+                        this.cmbNorm.Update(this.CustomBase.ToList<Norms>(this.DB.Norms), product.idNorm);
+                        #endregion
+                        #region Подгруппа
+                        this.cmbSubGroup.Update(this.CustomBase.ToList<SubGroups>(this.DB.SubGroups), product.idSubGroup);
+                        #endregion
+                        #region Покрытия
+                        this.cmbCover.Update(this.CustomBase.ToList<Covers>(this.DB.Covers), product.idCover);
+                        #endregion
+                        #region Материалы
+                        this.cmbMaterial.Update(this.CustomBase.ToList<Materials>(this.DB.Materials), product.idMaterial);
+                        #endregion
+                        #region Упаковки
+                        this.cmbPackage.Update(this.CustomBase.ToList<Packages>(this.DB.Packages), product.idPackage);
+                        #endregion
+                        #region Перфорации
+                        this.cmbPerforation.Update(this.CustomBase.ToList<Perforations>(this.DB.Perforations), product.idPerforation);
+                        #endregion
+                        #region Отметка "На складе"
+                        this.CustomBase.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
+                        #endregion
+                        #region Таблица измерений
+                        var entityConnStr = this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Value;
+                        var entityBuilder = new EntityConnectionStringBuilder(entityConnStr);
+                        string connectionString = entityBuilder.ProviderConnectionString;
+                        string query = String.Format("SELECT * FROM ProductUnitsView where [ID товара] = {0}", productView.ID_продукта);
+
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+
+                            using (SqlCommand command = new SqlCommand(query, connection))
+                            {
+                                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                                DataTable dataTable = new DataTable();
+                                adapter.Fill(dataTable);
+
+                                this.dgDimensions.ItemsSource = dataTable.DefaultView;
+                            }
+                        }
+                        #endregion
+                        #region Таблица файлов
+                        this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.Where(x => x.ID_продукта == this.CurrentProduct.ID_продукта).ToList();
+                        #endregion
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex.Message);
+            }
+        }
+
+        public override void UpdateForm(List<CustomEventArgs> args)
+        {
+            this.InitializeComponent();
+            this.CustomBase.UpdateOkButton(this.btnOk);
+
+        }
+
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            if (this.CustomBase.Mode == EditModes.Create)
+            {
+                throw new NotImplementedException();
+            }
+            if (this.CustomBase.Mode == EditModes.Update)
+            {
+                throw new NotImplementedException();
+            }
+            this.CustomBase.Result.Data = true;
+            return true;
+        }
+
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            return false;
+        }
         #endregion
 
         #region Конструкторы/Деструкторы
@@ -496,28 +509,10 @@ namespace База_артикулов.Формы.Страницы.Редакти
         /// <param name="product">
         /// Здесь ожидается либо ProductsView - представление товара
         /// </param>
-        public PageEditProduct(object product)
+        public PageEditProduct(CustomBase customBase, int width = 600, int height = 800) : base(customBase)
         {
             this.InitializeComponent();
-            try
-            {
-                if (product.GetType() != typeof(ProductsView))
-                    throw new Exception("Ожидался объект типа ProductsView");
-                if (product != null)
-                {
-                    this.CurrentProduct = (ProductsView)product;
-                    this.IdProduct = this.CurrentProduct.ID_продукта;
-                    this.UpdateFieldsTitles();
-                    if (this.IdProduct != null)
-                        this.UpdateForm(this.IdProduct);
-                    else
-                        this.UpdateForm(this.CurrentProduct);
-                }
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex);
-            }
+            this.SetSize(width, height);
         }
         #endregion
 
@@ -526,10 +521,13 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Обработчики событий
-
         private void CustomPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
 
+        }
+        private void imgPreview_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            _ = this.UpdateImageAsync(this.CurrentProduct);
         }
         private void txbFieldName_TextChanged(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -563,33 +561,46 @@ namespace База_артикулов.Формы.Страницы.Редакти
             //    }
             //}
         }
-        private void btnOk_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnAddDimension_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ProductUnitsWindow productUnitsWindow = new ProductUnitsWindow((int)this.IdProduct);
+            productUnitsWindow.ShowDialog();
+            this.UpdateForm(this.CustomBase.CurrentObjects);
+        }
+        private void btnAddVendorCode_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                this.Save(this.IdProduct);
-                this.CloseWindow(true);
+                //var vendorCode = new VendorCodes();
+                //WindowEdit windowEdit = new WindowEdit("Создание артикула", vendorCode, EditModes.Create);
+                //windowEdit.ShowDialog();
+
+
+                //if (windowEdit.DialogResult != false)
+                //{
+
+                //if (windowEdit.CurrentObject != null && this.CustomBase.IsTypeEqual(typeof(VendorCodes), windowEdit.CurrentObject))
+                //{
+                //    this.txbVendorCode.Text = ((VendorCodes)windowEdit.CurrentObject).Descriptors.title;
+                //    this.txbCodeAccountant.Text = ((VendorCodes)windowEdit.CurrentObject).codeAccountant;
+                //    this.CurrentVendorCode = (VendorCodes)windowEdit.CurrentObject;
+                //}
+
+                //}
             }
             catch (Exception ex)
             {
                 this.ShowError(ex);
             }
         }
+        private void btnOk_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.ProcessOk();
+        }
         private void btnCancel_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            this.CloseWindow(false);
+            this.ProcessCancel();
         }
-        private void btnAddDimension_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            ProductUnitsWindow productUnitsWindow = new ProductUnitsWindow((int)this.IdProduct);
-            productUnitsWindow.ShowDialog();
-            this.UpdateForm(this.idProduct);
-        }
-        private void imgPreview_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            _ = this.UpdateImageAsync(this.CurrentProduct);
-        }
-
 
         #region Контекстное меню таблиц
 
@@ -650,7 +661,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     this.DB.UnitsProducts.Remove(
                         this.DB.UnitsProducts.FirstOrDefault(x => x.id == this.currentUnit.id));
                     this.DB.SaveChanges();
-                    this.UpdateForm(this.currentProduct);
+                    this.UpdateForm(this.CustomBase.CurrentObjects);
                 }
             }
             catch (Exception ex)
@@ -702,7 +713,6 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 this.ShowError(ex);
             }
         }
-
         private void btnFilesAdd_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             try
@@ -777,7 +787,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     // Сохраните изменения
                     this.DB.SaveChanges();
                     //this.InitDB();
-                    this.UpdateForm(this.currentProduct);
+                    this.UpdateForm(this.CustomBase.CurrentObjects);
                 }
             }
             catch (Exception ex)
@@ -790,7 +800,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             try
             {
                 //this.InitDB(true);
-                this.UpdateForm(this.currentProduct);
+                this.UpdateForm(this.CustomBase.CurrentObjects);
             }
             catch (Exception ex)
             {
@@ -803,51 +813,5 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         #endregion
 
-        private void btnAddVendorCode_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //var vendorCode = new VendorCodes();
-                //WindowEdit windowEdit = new WindowEdit("Создание артикула", vendorCode, EditModes.Create);
-                //windowEdit.ShowDialog();
-
-
-                //if (windowEdit.DialogResult != false)
-                //{
-
-                //if (windowEdit.CurrentObject != null && this.CustomBase.IsTypeEqual(typeof(VendorCodes), windowEdit.CurrentObject))
-                //{
-                //    this.txbVendorCode.Text = ((VendorCodes)windowEdit.CurrentObject).Descriptors.title;
-                //    this.txbCodeAccountant.Text = ((VendorCodes)windowEdit.CurrentObject).codeAccountant;
-                //    this.CurrentVendorCode = (VendorCodes)windowEdit.CurrentObject;
-                //}
-
-                //}
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex);
-            }
-        }
-
-        public override void UpdateFields(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void UpdateForm(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override object HandleOk(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override object HandleCancel(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

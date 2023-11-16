@@ -54,6 +54,8 @@ namespace База_артикулов.Классы
                 public static readonly string isNotContainsHeaders = "Таблица не содержит заголовки";
                 public static readonly string isContainsDescription = "Таблица содержит описание для заголовков (2 строка)";
                 public static readonly string isNotContainsDescription = "Таблица не содержит описание для заголовков (2 строка)";
+                //public static readonly string isAvaliable = "";
+                //public static readonly string isNotAvaliable = "";
             }
             public static class Extensions
             {

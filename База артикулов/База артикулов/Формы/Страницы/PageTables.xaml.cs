@@ -105,7 +105,15 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var windowEdit = new WindowEdit("Редактировать продукт", this.SelectedItemTable, EditModes.Update, 600, 800);
+                var selectedProductViewCustom = this.SelectedItemTable as ProductsViewLiteWrappedCustom;
+                var product = this.CustomBase.CustomDb.DB.Products.FirstOrDefault(x => x.id == selectedProductViewCustom.ID_продукта);
+                this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(product));
+                this.CustomBase.Mode = EditModes.Update;
+                var windowEdit = new WindowEdit(
+                    this.CustomBase,
+                    Common.WindowSizes.SmallH320W400.Width,
+                    Common.WindowSizes.SmallH320W400.Height
+                    );
                 windowEdit.ShowDialog();
                 if ((bool)windowEdit.DialogResult)
                 {
@@ -323,6 +331,7 @@ namespace База_артикулов.Формы.Страницы
             this.CurrentTableData.ItemsAll = new ObservableCollection<object>(filteredProducts);
             return Task.CompletedTask;
         }
+
 
 
         /// <summary>
@@ -624,7 +633,7 @@ namespace База_артикулов.Формы.Страницы
                 if ((bool)windowEdit.DialogResult)
                     _ = this.UpdateTreeView();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -634,7 +643,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView));
+                this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView.Value));
                 this.CustomBase.Mode = EditModes.Update;
                 var windowEdit = new WindowEdit(
                     Common.Strings.Titles.Windows.edit,
