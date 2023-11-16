@@ -28,7 +28,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             this.InitializeComponent();
             if (this.CustomBase.Mode == EditModes.Update)
             {
-                var currentClass = this.CustomBase.UnpackCurrentObject<Classes>(this.CurrentObject);
+                Classes currentClass = this.CustomBase.UnpackCurrentObject<Classes>(this.CurrentObject);
                 if (currentClass != null)
                 {
                     ClassesView classView = this.DB.ClassesView.FirstOrDefault(x => x.ID_класса == currentClass.id);
@@ -62,7 +62,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
             if (this.CustomBase.Mode == EditModes.Update)
             {
-                var currentClass = this.CustomBase.UnpackCurrentObject<Classes>(this.CurrentObject);
+                Classes currentClass = this.CustomBase.UnpackCurrentObject<Classes>(this.CurrentObject);
                 if (currentClass == null)
                 {
                     throw new Exception(Common.Strings.Errors.failedToGetParam);

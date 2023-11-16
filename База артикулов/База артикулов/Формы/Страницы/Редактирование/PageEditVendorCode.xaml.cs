@@ -50,7 +50,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 }
                 else
                 {
-                    Descriptors descriptors = new Descriptors();
+                    var descriptors = new Descriptors();
                     descriptors.title = this.txbCode.Text;
                     descriptors = this.DB.Descriptors.Add(descriptors);
                     this.currentItem.Descriptors = descriptors;

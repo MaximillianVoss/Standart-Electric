@@ -53,7 +53,7 @@ namespace База_артикулов.Формы
             // Открытие диалогового окна и отправка файла на сервер
             if (openFileDialog.ShowDialog() == true)
             {
-                var fileName = openFileDialog.FileName;
+                string fileName = openFileDialog.FileName;
                 _ = this.WDClient.UploadFile(fileName, folderPath);
             }
         }

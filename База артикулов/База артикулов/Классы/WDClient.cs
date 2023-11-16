@@ -33,7 +33,7 @@ namespace База_артикулов.Классы
             }
             treeView.Items.Clear();
             // Получение списка файлов и папок
-            var items = await this.GetFilesList();
+            IEnumerable<Item> items = await this.GetFilesList();
             // Создание корневого узла
             var rootNode = new TreeViewItem { Header = System.IO.Path.GetFileName(this.BasePath.TrimEnd('/')) };
             treeView.Items.Add(rootNode);
@@ -43,7 +43,7 @@ namespace База_артикулов.Классы
         }
         private async void ShowDirectoryInTreeView(Client client, IEnumerable<Item> items, TreeViewItem parentItem)
         {
-            foreach (var item in items)
+            foreach (Item item in items)
             {
                 // Создание узла для элемента
                 var itemNode = new TreeViewItem { Header = item.DisplayName };
@@ -51,7 +51,7 @@ namespace База_артикулов.Классы
                 // Если элемент является папкой, рекурсивно получаем ее содержимое и добавляем его к узлу
                 if (item.IsCollection)
                 {
-                    var folderFiles = await client.List(item.Href);
+                    IEnumerable<Item> folderFiles = await client.List(item.Href);
                     this.ShowDirectoryInTreeView(client, folderFiles, itemNode);
                 }
             }
@@ -62,11 +62,11 @@ namespace База_артикулов.Классы
         }
         public async Task<bool> IsFileExists(string cloudFilePath)
         {
-            var folderPath = Path.GetDirectoryName(cloudFilePath);
-            var fileName = Path.GetFileName(cloudFilePath);
-            var items = await this.Client.List(folderPath);
+            string folderPath = Path.GetDirectoryName(cloudFilePath);
+            string fileName = Path.GetFileName(cloudFilePath);
+            IEnumerable<Item> items = await this.Client.List(folderPath);
 
-            foreach (var item in items)
+            foreach (Item item in items)
             {
                 if (item.DisplayName == fileName)
                 {
@@ -89,7 +89,7 @@ namespace База_артикулов.Классы
             }
 
             using (var tempFile = new FileStream(saveFilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
-            using (var stream = await this.Client.Download(file.Href).ConfigureAwait(false))
+            using (Stream stream = await this.Client.Download(file.Href).ConfigureAwait(false))
             {
                 await stream.CopyToAsync(tempFile).ConfigureAwait(false);
             }
@@ -115,7 +115,7 @@ namespace База_артикулов.Классы
         }
         public async void DeleteFile(string filePath)
         {
-            var file = await this.Client.GetFile(filePath);
+            Item file = await this.Client.GetFile(filePath);
             await this.DeleteFile(file);
         }
         public async Task DeleteFile(Item file)
@@ -134,7 +134,7 @@ namespace База_артикулов.Классы
             try
             {
                 // Пытаемся получить папку
-                var folder = await this.Client.GetFolder(fullPath);
+                Item folder = await this.Client.GetFolder(fullPath);
             }
             catch
             {

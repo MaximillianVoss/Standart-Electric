@@ -47,7 +47,7 @@ namespace База_артикулов.Классы
                     throw new ArgumentNullException(nameof(value), "Строка подключения не может быть null.");
                 }
 
-                var connectionStringName = this.GetConnectionStringName(value.Value);
+                string connectionStringName = this.GetConnectionStringName(value.Value);
                 if (connectionStringName == null)
                 {
                     throw new InvalidOperationException($"Строка подключения с содержимым '{value.Value}' не найдена.");
@@ -78,17 +78,17 @@ namespace База_артикулов.Классы
         #region SQL запросы
         private List<T> ReadData<T>(SqlCommand command) where T : class, new()
         {
-            using (var reader = command.ExecuteReader())
+            using (SqlDataReader reader = command.ExecuteReader())
             {
                 var result = new List<T>();
-                var properties = typeof(T).GetProperties();
+                System.Reflection.PropertyInfo[] properties = typeof(T).GetProperties();
 
                 while (reader.Read())
                 {
                     var item = new T();
-                    foreach (var property in properties)
+                    foreach (System.Reflection.PropertyInfo property in properties)
                     {
-                        var columnName = property.Name.Replace('_', ' ');
+                        string columnName = property.Name.Replace('_', ' ');
                         if (reader.GetOrdinal(columnName) >= 0 && !reader.IsDBNull(reader.GetOrdinal(columnName)))
                         {
                             Type convertTo = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
@@ -122,7 +122,7 @@ namespace База_артикулов.Классы
         public List<T> ExecuteSqlQuery<T>(string sqlQuery) where T : class, new()
         {
             var entityBuilder = new EntityConnectionStringBuilder(this.CurrentConnectionString.Value);
-            var sqlConnectionString = entityBuilder.ProviderConnectionString;
+            string sqlConnectionString = entityBuilder.ProviderConnectionString;
 
             using (var connection = new SqlConnection(sqlConnectionString))
             {
@@ -137,7 +137,7 @@ namespace База_артикулов.Классы
         public List<T> ExecuteSqlQuery<T>(string sqlQuery, IEnumerable<SqlParameter> parameters) where T : class, new()
         {
             var entityBuilder = new EntityConnectionStringBuilder(this.CurrentConnectionString.Value);
-            var sqlConnectionString = entityBuilder.ProviderConnectionString;
+            string sqlConnectionString = entityBuilder.ProviderConnectionString;
 
             using (var connection = new SqlConnection(sqlConnectionString))
             {
@@ -147,7 +147,7 @@ namespace База_артикулов.Классы
                     // Добавление параметров к команде
                     if (parameters != null)
                     {
-                        foreach (var param in parameters)
+                        foreach (SqlParameter param in parameters)
                         {
                             command.Parameters.Add(param);
                         }
@@ -177,7 +177,7 @@ namespace База_артикулов.Классы
         private string GetConnectionStringByName(string name)
         {
             // Проверяем, существует ли строка подключения с таким именем
-            var settings = ConfigurationManager.ConnectionStrings[name];
+            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings[name];
 
             if (settings != null)
                 return settings.ConnectionString;
@@ -230,9 +230,9 @@ namespace База_артикулов.Классы
                 else
                 {
                     var builder1 = new SqlConnectionStringBuilder(this.DB.Database.Connection.ConnectionString);
-                    EntityConnectionStringBuilder entityBuilder2 = new EntityConnectionStringBuilder(ConfigurationManager.ConnectionStrings[this.CurrentConnectionString.Name].ConnectionString);
+                    var entityBuilder2 = new EntityConnectionStringBuilder(ConfigurationManager.ConnectionStrings[this.CurrentConnectionString.Name].ConnectionString);
                     string sqlConnectionString2 = entityBuilder2.ProviderConnectionString;
-                    SqlConnectionStringBuilder builder2 = new SqlConnectionStringBuilder(sqlConnectionString2);
+                    var builder2 = new SqlConnectionStringBuilder(sqlConnectionString2);
                     if (builder1.DataSource != builder2.DataSource || builder1.InitialCatalog != builder2.InitialCatalog)
                     {
                         // строки подключения отличаются
@@ -290,7 +290,7 @@ namespace База_артикулов.Классы
         /// <returns>Возвращает обновленный объект дескриптора или null, если дескриптор с указанным ID не найден.</returns>
         public Descriptors UpdateDescriptor(int id, string code = null, string title = null, string titleShort = null, string titleDisplay = null, string description = null)
         {
-            var descriptor = this.DB.Descriptors.Find(id);
+            Descriptors descriptor = this.DB.Descriptors.Find(id);
 
             if (descriptor == null)
             {
@@ -314,7 +314,7 @@ namespace База_артикулов.Классы
         /// <returns>Возвращает обновленный объект дескриптора или null, если дескриптор с указанным ID не найден.</returns>
         public Descriptors UpdateDescriptor(Descriptors descriptorToUpdate)
         {
-            var descriptor = this.DB.Descriptors.Find(descriptorToUpdate.id);
+            Descriptors descriptor = this.DB.Descriptors.Find(descriptorToUpdate.id);
 
             if (descriptor == null)
             {
@@ -339,14 +339,14 @@ namespace База_артикулов.Классы
         /// <exception cref="Exception">Вызывается, если дескриптор с указанным идентификатором не найден.</exception>
         public bool DeleteDescriptor(int id)
         {
-            var descriptor = this.DB.Descriptors.Find(id); // Предположим, что у вашего контекста CustomDb есть свойство Descriptors, представляющее таблицу дескрипторов.
+            Descriptors descriptor = this.DB.Descriptors.Find(id); // Предположим, что у вашего контекста CustomDb есть свойство Descriptors, представляющее таблицу дескрипторов.
 
             if (descriptor == null)
             {
                 throw new Exception($"Дескриптор с id:{id} не найден!");
             }
 
-            var resourcesToRemove = this.DB.DescriptorsResources.Where(x => x.idDescriptor == descriptor.id);
+            IQueryable<DescriptorsResources> resourcesToRemove = this.DB.DescriptorsResources.Where(x => x.idDescriptor == descriptor.id);
             this.DB.Descriptors.Remove(descriptor);
             this.DB.DescriptorsResources.RemoveRange(resourcesToRemove);
             this.DB.SaveChanges();
@@ -371,7 +371,7 @@ namespace База_артикулов.Классы
         /// <returns></returns>
         public Descriptors GetDescriptorProduct(int idProduct)
         {
-            var product = this.GetProduct(idProduct);
+            Products product = this.GetProduct(idProduct);
             if (product == null)
                 return null;
             else
@@ -426,7 +426,7 @@ namespace База_артикулов.Классы
             Descriptors descriptor = this.CreateDescriptor(code, title, titleShort, description);
 
             // Создаем новый объект SubGroups и добавляем его в базу данных
-            var subGroup = this.DB.SubGroups.Add(new SubGroups(
+            SubGroups subGroup = this.DB.SubGroups.Add(new SubGroups(
                 descriptor,
                 this.DB.Groups.FirstOrDefault(x => x.id == groupId),
                 this.DB.LoadDiagrams.FirstOrDefault(x => x.id == loadDiagramId)
@@ -472,7 +472,7 @@ namespace База_артикулов.Классы
             currentSubGroup.Groups = this.DB.Groups.FirstOrDefault(x => x.id == groupId);
             currentSubGroup.LoadDiagrams = this.DB.LoadDiagrams.FirstOrDefault(x => x.id == loadDiagramId);
 
-            var subGroupApplication = this.DB.GroupsApplications.FirstOrDefault(x => x.idSubGroup == currentSubGroup.id);
+            GroupsApplications subGroupApplication = this.DB.GroupsApplications.FirstOrDefault(x => x.idSubGroup == currentSubGroup.id);
             if (subGroupApplication != null)
             {
                 subGroupApplication.Applications = this.DB.Applications.FirstOrDefault(x => x.id == applicationId);
@@ -501,7 +501,7 @@ namespace База_артикулов.Классы
 
             // Сохраняем ID дескриптора, связанного с этой подгруппой, для дальнейшего удаления
             int descriptorId = subGroupToDelete.idDescriptor;
-            var subGroupsApplicationsToDelete = this.DB.GroupsApplications.Where(x => x.idSubGroup == subGroupToDelete.id);
+            IQueryable<GroupsApplications> subGroupsApplicationsToDelete = this.DB.GroupsApplications.Where(x => x.idSubGroup == subGroupToDelete.id);
             this.DB.GroupsApplications.RemoveRange(subGroupsApplicationsToDelete);
             // Удаляем подгруппу
             this.DB.SubGroups.Remove(subGroupToDelete);
@@ -537,10 +537,10 @@ namespace База_артикулов.Классы
             string description,
             int classId)
         {
-            Descriptors descriptor = new Descriptors(code, title, titleShort, description);
+            var descriptor = new Descriptors(code, title, titleShort, description);
             this.DB.Descriptors.Add(descriptor);
 
-            Groups newGroup = new Groups(descriptor, this.DB.Classes.FirstOrDefault(x => x.id == classId));
+            var newGroup = new Groups(descriptor, this.DB.Classes.FirstOrDefault(x => x.id == classId));
             this.DB.Groups.Add(newGroup);
 
             this.DB.SaveChanges();
@@ -623,7 +623,7 @@ namespace База_артикулов.Классы
             this.DB.SaveChanges();
 
             // Создаем новый объект Classes с ссылкой на созданный Descriptors
-            Classes newClass = new Classes(descriptor);
+            var newClass = new Classes(descriptor);
 
             // Добавляем Classes в базу данных
             this.DB.Classes.Add(newClass);
@@ -726,7 +726,7 @@ namespace База_артикулов.Классы
         /// <param name="value">Новое значение измерения.</param>
         public void UpdateUnitProduct(int unitProductId, int idUnit, int idType, double value)
         {
-            var unitProduct = this.DB.UnitsProducts.FirstOrDefault(x => x.id == unitProductId);
+            UnitsProducts unitProduct = this.DB.UnitsProducts.FirstOrDefault(x => x.id == unitProductId);
 
             if (unitProduct == null)
                 throw new Exception($"Измерение с ID '{unitProductId}' не найдено.");
@@ -743,7 +743,7 @@ namespace База_артикулов.Классы
         /// <param name="unitProductId">ID объекта UnitsProducts для удаления.</param>
         public void DeleteUnitProduct(int unitProductId)
         {
-            var unitProduct = this.DB.UnitsProducts.FirstOrDefault(x => x.id == unitProductId);
+            UnitsProducts unitProduct = this.DB.UnitsProducts.FirstOrDefault(x => x.id == unitProductId);
 
             if (unitProduct == null)
                 throw new Exception($"Измерение с ID '{unitProductId}' не найдено.");
@@ -757,7 +757,7 @@ namespace База_артикулов.Классы
         #region Артикул
         public void CreateVendorCode(string code, string accountantCode, int manufacturerId, bool isActual, bool isPublic, bool isSale)
         {
-            VendorCodes item = new VendorCodes(code, accountantCode, manufacturerId, isActual, isPublic, isSale);
+            var item = new VendorCodes(code, accountantCode, manufacturerId, isActual, isPublic, isSale);
             this.DB.VendorCodes.Add(item);
             this.DB.SaveChanges();
         }
@@ -803,18 +803,18 @@ namespace База_артикулов.Классы
 
             if (this.IsDescriptorProductExists(productId))
             {
-                var extension = System.IO.Path.GetExtension(filePath);
-                var typeView = this.DB.ResourceTypesView.FirstOrDefault(x => x.Расширение_ресурса == extension);
+                string extension = System.IO.Path.GetExtension(filePath);
+                ResourceTypesView typeView = this.DB.ResourceTypesView.FirstOrDefault(x => x.Расширение_ресурса == extension);
 
                 if (typeView == null)
                 {
-                    ResourceTypes resourceTypes = new ResourceTypes();
+                    var resourceTypes = new ResourceTypes();
                     resourceTypes.title = $"Файл с расширением {extension}";
                     resourceTypes.extension_ = extension;
                     this.DB.ResourceTypes.Add(resourceTypes);
                 }
 
-                var productDescriptor = this.GetDescriptorProduct(productId);
+                Descriptors productDescriptor = this.GetDescriptorProduct(productId);
                 var productDescriptorResource = new DescriptorsResources
                 {
                     idDescriptor = productDescriptor.id,
@@ -834,8 +834,8 @@ namespace База_артикулов.Классы
         {
             if (this.IsDescriptorProductExists(productId))
             {
-                var productDescriptor = this.GetDescriptorProduct(productId);
-                var productDescriptorResource = this.GetDescriptorsResources(productDescriptor.id);
+                Descriptors productDescriptor = this.GetDescriptorProduct(productId);
+                DescriptorsResources productDescriptorResource = this.GetDescriptorsResources(productDescriptor.id);
 
                 if (productDescriptorResource != null)
                 {
@@ -849,8 +849,8 @@ namespace База_артикулов.Классы
         {
             if (this.IsDescriptorProductExists(productId))
             {
-                var productDescriptor = this.GetDescriptorProduct(productId);
-                var productDescriptorResource = this.GetDescriptorsResources(productDescriptor.id);
+                Descriptors productDescriptor = this.GetDescriptorProduct(productId);
+                DescriptorsResources productDescriptorResource = this.GetDescriptorsResources(productDescriptor.id);
 
                 if (productDescriptorResource != null)
                 {
@@ -913,7 +913,7 @@ namespace База_артикулов.Классы
         }
         public List<ProductsViewLite> GetFilteredProducts(string group = null, string classValue = null, string subGroup = null)
         {
-            var products = this.db.ProductsViewLite.AsQueryable(); // предположим, что у вас есть DbSet ProductsViewLite
+            IQueryable<ProductsViewLite> products = this.db.ProductsViewLite.AsQueryable(); // предположим, что у вас есть DbSet ProductsViewLite
             if (!string.IsNullOrEmpty(group))
             {
                 products = products.Where(p => p.Наименование_группы == group);
@@ -946,7 +946,7 @@ namespace База_артикулов.Классы
             int idPackage, bool isInStock
             )
         {
-            var descriptor = this.CreateDescriptor(vendorCode, title, titleShort, title, description);
+            Descriptors descriptor = this.CreateDescriptor(vendorCode, title, titleShort, title, description);
             if (descriptor != null)
             {
                 var product = new Products(descriptor.id, idNorm, idSubGroup, idCover, idMaterial, idPerforation, idPackage, isInStock);

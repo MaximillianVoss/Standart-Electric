@@ -92,12 +92,12 @@ namespace База_артикулов.Формы.Страницы.Редакти
         /// </summary>
         private void UpdateFieldsTitles()
         {
-            foreach (var childControl in this.gridFields.Children)
+            foreach (object childControl in this.gridFields.Children)
             {
                 if (childControl.GetType() == typeof(LabeledTextBox))
                 {
                     var control = childControl as LabeledTextBox;
-                    var field = this.DB.Fields.FirstOrDefault(x => x.Descriptors.title.ToLower() == control.Name.Replace("txb", "").ToLower());
+                    Fields field = this.DB.Fields.FirstOrDefault(x => x.Descriptors.title.ToLower() == control.Name.Replace("txb", "").ToLower());
                     if (field != null)
                     {
                         control.Title = field.titleRus;
@@ -106,7 +106,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 if (childControl.GetType() == typeof(LabeledComboBox))
                 {
                     var control = childControl as LabeledComboBox;
-                    var field = this.DB.Fields.FirstOrDefault(x => x.Descriptors.title.ToLower() == control.Name.Replace("cmb", "").ToLower());
+                    Fields field = this.DB.Fields.FirstOrDefault(x => x.Descriptors.title.ToLower() == control.Name.Replace("cmb", "").ToLower());
                     if (field != null)
                     {
                         control.Title = field.titleRus;
@@ -115,7 +115,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 if (childControl.GetType() == typeof(LabeledCheckBox))
                 {
                     var control = childControl as LabeledCheckBox;
-                    var field = this.DB.Fields.FirstOrDefault(x => x.Descriptors.title.ToLower() == control.Name.Replace("chb", "").ToLower());
+                    Fields field = this.DB.Fields.FirstOrDefault(x => x.Descriptors.title.ToLower() == control.Name.Replace("chb", "").ToLower());
                     if (field != null)
                     {
                         control.Title = field.titleRus;
@@ -190,7 +190,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 if (productsView == null)
                     return;
 
-                List<String> cloudPaths = new List<string>()
+                var cloudPaths = new List<string>()
     {
         productsView.Артикул,
         productsView.Код_подгруппы,
@@ -232,12 +232,12 @@ namespace База_артикулов.Формы.Страницы.Редакти
         /// </summary>
         private void UpdateUnitSelection()
         {
-            DataRowView rowView = this.dgDimensions.SelectedItem as DataRowView;
+            var rowView = this.dgDimensions.SelectedItem as DataRowView;
             if (rowView != null)
             {
                 // Для получения значения определенного столбца используйте:
-                var idProduct = Convert.ToInt32(rowView["ID товара"]);
-                var idUnitProduct = Convert.ToInt32(rowView["ID связи продукт-измерение"]);
+                int idProduct = Convert.ToInt32(rowView["ID товара"]);
+                int idUnitProduct = Convert.ToInt32(rowView["ID связи продукт-измерение"]);
                 this.currentUnit = this.DB.UnitsProducts.FirstOrDefault(x => x.idProduct == idProduct && x.id == idUnitProduct);
                 this.DB.Entry(this.currentUnit).Reload();
             }
@@ -262,7 +262,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 #region Показать элементы, если поле не пустое
                 if (String.IsNullOrEmpty(fieldName))
                 {
-                    foreach (var childControl in this.gridFields.Children)
+                    foreach (object childControl in this.gridFields.Children)
                     {
                         var control = childControl as UserControl;
                         control.Visibility = System.Windows.Visibility.Visible;
@@ -272,7 +272,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 #region Скрыть элементы, если поле пустое
                 else
                 {
-                    foreach (var childControl in this.gridFields.Children)
+                    foreach (object childControl in this.gridFields.Children)
                     {
                         if (childControl.GetType() == typeof(LabeledTextBox))
                         {
@@ -335,10 +335,10 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 product.Descriptors.code = this.txbVendorCode.Text;
                 #endregion
                 #region Артикул
-                var productVendorCode = this.DB.ProductsVendorCodes.FirstOrDefault(x => x.idProduct == product.id);
+                ProductsVendorCodes productVendorCode = this.DB.ProductsVendorCodes.FirstOrDefault(x => x.idProduct == product.id);
                 if (productVendorCode != null)
                 {
-                    var vendorCode = this.DB.VendorCodes.FirstOrDefault(x => x.id == productVendorCode.idCode);
+                    VendorCodes vendorCode = this.DB.VendorCodes.FirstOrDefault(x => x.id == productVendorCode.idCode);
                     if (vendorCode != null)
                     {
                         vendorCode.Descriptors.title = this.txbVendorCode.Text;
@@ -393,10 +393,10 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             try
             {
-                var product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
+                Products product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
                 if (product != null)
                 {
-                    var productView = this.CustomBase.CustomDb.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == product.id);
+                    ProductsView productView = this.CustomBase.CustomDb.DB.ProductsView.FirstOrDefault(x => x.ID_продукта == product.id);
                     if (productView != null)
                     {
                         #region Изображение
@@ -444,19 +444,19 @@ namespace База_артикулов.Формы.Страницы.Редакти
                         this.CustomBase.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
                         #endregion
                         #region Таблица измерений
-                        var entityConnStr = this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Value;
+                        string entityConnStr = this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Value;
                         var entityBuilder = new EntityConnectionStringBuilder(entityConnStr);
                         string connectionString = entityBuilder.ProviderConnectionString;
                         string query = String.Format("SELECT * FROM ProductUnitsView where [ID товара] = {0}", productView.ID_продукта);
 
-                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        using (var connection = new SqlConnection(connectionString))
                         {
                             connection.Open();
 
-                            using (SqlCommand command = new SqlCommand(query, connection))
+                            using (var command = new SqlCommand(query, connection))
                             {
-                                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                                DataTable dataTable = new DataTable();
+                                var adapter = new SqlDataAdapter(command);
+                                var dataTable = new DataTable();
                                 adapter.Fill(dataTable);
 
                                 this.dgDimensions.ItemsSource = dataTable.DefaultView;
@@ -563,7 +563,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         }
         private void btnAddDimension_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            ProductUnitsWindow productUnitsWindow = new ProductUnitsWindow((int)this.IdProduct);
+            var productUnitsWindow = new ProductUnitsWindow((int)this.IdProduct);
             productUnitsWindow.ShowDialog();
             this.UpdateForm(this.CustomBase.CurrentObjects);
         }
@@ -686,11 +686,11 @@ namespace База_артикулов.Формы.Страницы.Редакти
             {
                 if (this.currentResource != null)
                 {
-                    var resource = this.DB.Resources.FirstOrDefault(x => x.id == this.currentResource.ID_ресурса);
+                    Resources resource = this.DB.Resources.FirstOrDefault(x => x.id == this.currentResource.ID_ресурса);
                     if (resource != null)
                     {
-                        var fileName = Path.GetFileName(resource.URL);
-                        var fileExtension = Path.GetExtension(resource.URL);
+                        string fileName = Path.GetFileName(resource.URL);
+                        string fileExtension = Path.GetExtension(resource.URL);
                         var saveFileDialog = new SaveFileDialog
                         {
                             FileName = fileName,
@@ -777,7 +777,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                                                 .ToList();
 
                     // Удалите эти записи
-                    foreach (var item in itemsToDelete)
+                    foreach (DescriptorsResources item in itemsToDelete)
                     {
                         this.WDClient.DeleteFile(item.Resources.URL);
                         this.DB.DescriptorsResources.Remove(item);

@@ -38,7 +38,7 @@ namespace База_артикулов.Формы
 
         private void UpdateUnits(int? idProduct = null, int? idUnitType = null)
         {
-            var productUnits = this.DB.UnitsProducts.FirstOrDefault(x => x.idProduct == idProduct && x.idType == idUnitType);
+            UnitsProducts productUnits = this.DB.UnitsProducts.FirstOrDefault(x => x.idProduct == idProduct && x.idType == idUnitType);
             this.btnDelete.IsEnabled = productUnits != null;
             #region Если в продукт уже добавлено это измерение
             if (productUnits != null)
@@ -62,7 +62,7 @@ namespace База_артикулов.Формы
             {
                 throw new Exception(Common.Strings.Errors.emptyObject);
             }
-            var productUnits = this.DB.UnitsProducts.FirstOrDefault(x => x.idProduct == idProduct && x.idType == idUnitType);
+            UnitsProducts productUnits = this.DB.UnitsProducts.FirstOrDefault(x => x.idProduct == idProduct && x.idType == idUnitType);
             #region Если в продукт уже добавлено это измерение
             if (productUnits != null)
             {
@@ -128,7 +128,7 @@ namespace База_артикулов.Формы
         {
             try
             {
-                var unitProduct = this.DB.UnitsProducts.FirstOrDefault(x => x.idProduct == this.IdProduct && x.idType == this.cmbUnitType.SelectedId);
+                UnitsProducts unitProduct = this.DB.UnitsProducts.FirstOrDefault(x => x.idProduct == this.IdProduct && x.idType == this.cmbUnitType.SelectedId);
                 if (unitProduct != null)
                 {
                     this.DB.UnitsProducts.Remove(unitProduct);

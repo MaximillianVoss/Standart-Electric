@@ -23,7 +23,7 @@ namespace База_артикулов.Строка_Подключения.Тес
         [Fact]
         public void Constructor_InvalidConnectionString_ThrowsArgumentException()
         {
-            var exception = Assert.Throws<ArgumentException>(() => new ConnectionStringInfo(ConnectionName, InvalidConnectionString));
+            ArgumentException exception = Assert.Throws<ArgumentException>(() => new ConnectionStringInfo(ConnectionName, InvalidConnectionString));
             Assert.Equal("Недопустимая строка подключения Entity Framework", exception.Message);
         }
 
@@ -31,7 +31,7 @@ namespace База_артикулов.Строка_Подключения.Тес
         public void IsValidConnectionString_ValidConnectionString_ReturnsTrue()
         {
             var connectionStringInfo = new ConnectionStringInfo(ConnectionName, ValidConnectionString);
-            var result = connectionStringInfo.IsValidConnectionString(ValidConnectionString);
+            bool result = connectionStringInfo.IsValidConnectionString(ValidConnectionString);
 
             Assert.True(result);
         }
@@ -40,7 +40,7 @@ namespace База_артикулов.Строка_Подключения.Тес
         public void IsValidConnectionString_InvalidConnectionString_ReturnsFalse()
         {
             var connectionStringInfo = new ConnectionStringInfo(ConnectionName, ValidConnectionString);
-            var result = connectionStringInfo.IsValidConnectionString(InvalidConnectionString);
+            bool result = connectionStringInfo.IsValidConnectionString(InvalidConnectionString);
 
             Assert.False(result);
         }
@@ -59,7 +59,7 @@ namespace База_артикулов.Строка_Подключения.Тес
         {
             var connectionStringInfo = new ConnectionStringInfo(ConnectionName, ValidConnectionString);
 
-            var exception = Assert.Throws<ArgumentException>(() => connectionStringInfo.Value = InvalidConnectionString);
+            ArgumentException exception = Assert.Throws<ArgumentException>(() => connectionStringInfo.Value = InvalidConnectionString);
             Assert.Equal("Недопустимая строка подключения Entity Framework", exception.Message);
         }
 

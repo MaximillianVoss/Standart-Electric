@@ -20,8 +20,14 @@ namespace База_артикулов.Формы
         #endregion
 
         #region Свойства
-        public int ContentWidth { set; get; }
-        public int ContentHeight { set; get; }
+        public int ContentWidth
+        {
+            set; get;
+        }
+        public int ContentHeight
+        {
+            set; get;
+        }
         #endregion
 
         #region Методы
@@ -35,27 +41,40 @@ namespace База_артикулов.Формы
         }
         private void SetContent(string title, object content)
         {
+            this.Title = title;
+            this.SetContent(content);
+        }
+        private void SetContent(object content)
+        {
             if (this.fMain != null)
             {
-                this.Title = title;
                 this.fMain.Content = content;
             }
         }
-
         public override void UpdateFields(List<CustomEventArgs> args = null)
         {
             this.InitializeComponent();
         }
         public override void UpdateForm(List<CustomEventArgs> args = null)
         {
-            switch (this.CustomBase.Mode)
+            try
             {
-                case EditModes.Create:
-                    this.HandleCreateMode(args);
-                    break;
-                case EditModes.Update:
-                    this.HandleEditMode(args);
-                    break;
+                //this.InitializeComponent();
+                //this.SetCenter();
+                this.Title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CustomBase.UnpackCurrentObject(this.CurrentObject));
+                switch (this.CustomBase.Mode)
+                {
+                    case EditModes.Create:
+                        this.HandleCreateMode(args);
+                        break;
+                    case EditModes.Update:
+                        this.HandleEditMode(args);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
             }
         }
         public override object HandleOk()
@@ -66,151 +85,44 @@ namespace База_артикулов.Формы
         {
             throw new NotImplementedException();
         }
-        private void HandleCreateMode(List<CustomEventArgs> args)
+        private void HandleContent(List<CustomEventArgs> args)
         {
-            string title = String.Empty;
             if (this.CustomBase == null || this.CustomBase.CurrentObjects == null)
-            {
-                throw new Exception("Не указан тип создаваемого объекта! В форму надо передать объект с конструктором по умолчанию!");
-            }
+                throw new Exception(Common.Strings.Errors.incorrectUpdateElement);
             if (this.CustomBase.CurrentObjects.Count == 1)
             {
-                var argument = this.CustomBase.UnpackCurrentObject(this.CurrentObject);
-                title = this.CustomBase.GetTitle(this.CustomBase.Mode, argument);
+                object argument = this.CustomBase.UnpackCurrentObject(this.CurrentObject);
                 if (argument != null)
                 {
                     if (argument.ValidateTypeOrBaseType<Classes>())
-                        this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                        this.SetContent(new PageEditClass(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     if (argument.ValidateTypeOrBaseType<Groups>())
-                        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                        this.SetContent(new PageEditGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     if (argument.ValidateTypeOrBaseType<SubGroups>())
-                        this.SetContent(title, new PageEditSubGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                        this.SetContent(new PageEditSubGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     if (argument.ValidateTypeOrBaseType<Products>())
-                        this.SetContent(title, new PageEditProduct(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                        this.SetContent(new PageEditProduct(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                    //TODO: Проверить
+                    //if (argument.ValidateTypeOrBaseType<UnitsProducts>())
+                    //    this.SetContent(new PageEditUnit(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                    //if (argument.ValidateTypeOrBaseType<ResourcesViewProducts>())
+                    //    this.SetContent(new PageEditResource(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                    //if (argument.ValidateTypeOrBaseType<VendorCodes>())
+                    //    this.SetContent(new PageEditVendorCode(this.CustomBase, this.ContentWidth, this.ContentHeight));
+
                 }
-                //if(this.CustomBase.UnpackCurrentObject<Classes>(this.CurrentObject)!=null)
-
-                //if (this.CurrentObject.DataType == typeof(TreeViewItemCustom))
-                //{
-                //    var currentUnpackedObject = ((TreeViewItemCustom)this.CurrentObject.Data).Value;
-                //    title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CurrentObject);
-                //    if (currentUnpackedObject.ValidateTypeOrBaseType<Classes>())
-                //    {
-                //        this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, ContentHeight));
-                //    }
-                //    if (currentUnpackedObject.ValidateTypeOrBaseType<Groups>())
-                //    {
-                //        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
-                //    }
-                //    if (currentUnpackedObject.ValidateTypeOrBaseType<SubGroups>())
-                //    {
-                //        this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, ContentHeight));
-                //    }
-
-                //}
-
-
-                //if (this.CurrentObject.IsTypeOrBaseEqual(typeof(SubGroups)))
-                //{
-                //    this.SetContent("Создание подгруппы", new PageEditSubGroup(this.CustomBase, 1));
-                //}
-
-                //else if (currentItem.IsTypeOrBaseEqual(typeof(UnitsProducts)))
-                //{
-                //    this.SetContent("Создание единицы продукции", new PageEditUnit(this.CustomBase.CurrentObjects, this.CustomBase.Mode));
-                //}
-                //else if (currentItem.IsTypeOrBaseEqual(typeof(ResourcesViewProducts)))
-                //{
-                //    this.SetContent("Создание ресурса продукции", new PageEditResource(this.CustomBase.CurrentObjects, this.CustomBase.Mode));
-                //}
-                //else if (currentItem.IsTypeOrBaseEqual(typeof(ProductsView)))
-                //{
-                //    this.SetContent("Создание продукта", new PageEditProduct(this.CustomBase.CurrentObjects, this.CustomBase.Mode));
-                //}
-                //else if (currentItem.IsTypeOrBaseEqual(typeof(VendorCodes)))
-                //{
-                //    throw new Exception("Перепроверить этот код!");
-                //    VendorCodes newVendorCode = new VendorCodes();
-                //    newVendorCode.Manufacturers = this.DB.Manufacturers.FirstOrDefault(x => x.id > 0);
-                //    var page = new PageEditVendorCode(newVendorCode);
-                //    page.DataChanged += PageDataChanged;
-                //    this.SetContent("Создание кода поставщика", page);
-                //}
-
             }
 
+
+
+        }
+        private void HandleCreateMode(List<CustomEventArgs> args)
+        {
+            this.HandleContent(args);
         }
         private void HandleEditMode(List<CustomEventArgs> args)
         {
-            string title = String.Empty;
-            if (this.CustomBase.CurrentObject == null)
-                throw new Exception("Не выбран элемент для редактирования!");
-            if (this.CustomBase.CurrentObjects.Count == 1)
-            {
-                var currentUnpackedObject = this.CurrentObjectUnpacked;
-                title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CurrentObject);
-                if (currentUnpackedObject.ValidateTypeOrBaseType<Classes>())
-                    this.SetContent(title, new PageEditClass(this.CustomBase, this.ContentWidth, this.ContentHeight));
-                if (currentUnpackedObject.ValidateTypeOrBaseType<Groups>())
-                    this.SetContent(title, new PageEditGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
-                if (currentUnpackedObject.ValidateTypeOrBaseType<SubGroups>())
-                    this.SetContent(title, new PageEditSubGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
-                if (currentUnpackedObject.ValidateTypeOrBaseType<Products>())
-                    this.SetContent(title, new PageEditProduct(this.CustomBase, this.ContentWidth, this.ContentHeight));
-
-
-            }
-            //if (this.ItemType == typeof(TreeViewItemCustom))
-            //{
-            //    object objValue = ((TreeViewItemCustom)this.CurrentObject).Value;
-            //    if (objValue != null)
-            //    {
-            //        Type objBaseType = objValue.GetType().BaseType;
-            //        if (objBaseType == typeof(Classes))
-            //        {
-            //            this.Title = "Редактирование класса";
-            //            this.fMain.Content = new PageEditClass(objValue);
-            //        }
-            //        if (objBaseType == typeof(Groups))
-            //        {
-            //            this.Title = "Редактирование группы";
-            //            this.fMain.Content = new PageEditGroup(objValue);
-            //        }
-            //        if (objBaseType == typeof(SubGroups))
-            //        {
-            //            this.Title = "Редактирование подгруппы";
-            //            this.fMain.Content = new PageEditSubGroup(objValue);
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    object objValue = this.CurrentObject;
-            //    Type objBaseType = objValue.GetType().BaseType;
-            //    if (objBaseType.BaseType == typeof(ProductsView) || objValue.GetType() == typeof(ProductsView))
-            //    {
-            //        this.Title = "Редактирование продукта";
-            //        this.fMain.Content = new PageEditProduct(objValue);
-            //    }
-            //    if (objBaseType == typeof(UnitsProducts))
-            //    {
-            //        this.Title = "Редактирование единицы продукции";
-            //        this.fMain.Content = new PageEditUnit(objValue);
-            //    }
-            //    if (this.CustomBase.IsTypeEqual(typeof(ResourcesViewProducts), this.CurrentObject))
-            //    {
-            //        this.Title = "Редактирование ресурса продукции";
-            //        this.fMain.Content = new PageEditResource(objValue, this.Mode);
-            //    }
-            //    else if (this.CustomBase.IsTypeEqual(typeof(VendorCodes), this.CurrentObject))
-            //    {
-            //        this.Title = "Редактирование кода поставщика";
-            //        var page = new PageEditVendorCode(this.CurrentObject);
-            //        page.DataChanged += PageDataChanged;
-            //        this.fMain.Content = page;
-            //    }
-            //}
-
+            this.HandleContent(args);
         }
         #endregion
 
@@ -222,7 +134,7 @@ namespace База_артикулов.Формы
         /// <param name="title">Заголовок окна. По умолчанию "WindowEdit".</param>
         public WindowEdit(string title = "WindowEdit") : base(title: title)
         {
-            this.InitializeWindow(title);
+
         }
 
         /// <summary>
@@ -238,7 +150,6 @@ namespace База_артикулов.Формы
             ) : base(title: title, customBase)
         {
             this.SetContentSize(width, height);
-            this.InitializeWindow(title);
         }
 
         public WindowEdit(
@@ -248,7 +159,6 @@ namespace База_артикулов.Формы
     ) : base(title: string.Empty, customBase)
         {
             this.SetContentSize(width, height);
-            this.InitializeWindow(this.Title);
         }
 
 
@@ -264,17 +174,6 @@ namespace База_артикулов.Формы
 
         }
 
-        /// <summary>
-        /// Вспомогательный метод для инициализации окна WindowEdit, включая заголовок.
-        /// </summary>
-        /// <param name="title">Заголовок окна, который будет установлен.</param>
-        private void InitializeWindow(string title)
-        {
-            this.InitializeComponent();
-            //this.SetCenter(); // Предполагается, что SetCenter - это метод, который центрирует окно.
-            this.Title = title; // Устанавливаем заголовок окна.
-                                // Здесь может быть выполнена остальная инициализация, например, установка размеров и т.д.
-        }
 
         #endregion
 

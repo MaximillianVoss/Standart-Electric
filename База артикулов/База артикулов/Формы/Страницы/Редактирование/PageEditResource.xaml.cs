@@ -33,7 +33,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 throw new ArgumentNullException(nameof(filePath));
 
             // Получаем расширение файла без точки (например, "jpg" вместо ".jpg")
-            var extension = System.IO.Path.GetExtension(filePath)?.TrimStart('.');
+            string extension = System.IO.Path.GetExtension(filePath)?.TrimStart('.');
 
             if (string.IsNullOrEmpty(extension))
                 throw new InvalidOperationException("File does not have an extension.");
@@ -42,7 +42,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             await this.WDClient.CreateDirectoryIfNotExistsAsync("/Resources", extension);
 
             // Загружаем файл в созданную папку
-            var cloudFolderPath = $"{this.WDClient.BasePath}/Resources/{extension}";
+            string cloudFolderPath = $"{this.WDClient.BasePath}/Resources/{extension}";
             var cloudFolder = new Item { Href = cloudFolderPath, IsCollection = true };  // Предположим, что у вас есть подходящий конструктор или метод для создания объекта папки
             //this.ShowMessage("Загрузка по пути " + cloudFolderPath);
             await this.WDClient.UploadFile(filePath, cloudFolder);
@@ -57,19 +57,19 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 #region Загрузка файла
                 if (String.IsNullOrEmpty(this.lbltxbFilePath.Text))
                     throw new Exception("Не указан путь до загружаемого файла!");
-                var url = await this.UploadFile(this.lbltxbFilePath.Text);
+                string url = await this.UploadFile(this.lbltxbFilePath.Text);
                 #endregion
                 //this.ShowMessage("Загрузка выполнена! ID_продукта:" + this.currentItem.ID_продукта.ToString());
                 #region Создание/обновление данных
                 if (this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentItem.ID_продукта))
                 {
                     //this.ShowMessage("Дескриптор продукта обнаружен!");
-                    var extension = System.IO.Path.GetExtension(this.lbltxbFilePath.Text);
-                    var typeView = this.DB.ResourceTypesView.FirstOrDefault(x => x.Расширение_ресурса == extension);
+                    string extension = System.IO.Path.GetExtension(this.lbltxbFilePath.Text);
+                    ResourceTypesView typeView = this.DB.ResourceTypesView.FirstOrDefault(x => x.Расширение_ресурса == extension);
                     #region Если типа файла нет, добавляем
                     if (typeView == null)
                     {
-                        ResourceTypes resourceTypes = new ResourceTypes();
+                        var resourceTypes = new ResourceTypes();
                         resourceTypes.title = $"Файл с расширением {extension}";
                         this.lbltxbResourceTitle.Text = resourceTypes.title;
                         resourceTypes.extension_ = extension;
@@ -84,7 +84,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
                     if (!this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentItem.ID_продукта))
                         throw new Exception("Не удалось найти дескриптор продукта!");
-                    var productDescriptor = this.CustomBase.CustomDb.GetDescriptorProduct(this.currentItem.ID_продукта);
+                    Descriptors productDescriptor = this.CustomBase.CustomDb.GetDescriptorProduct(this.currentItem.ID_продукта);
                     //this.ShowMessage(productDescriptor.id.ToString());
 
                     var productDescriptorResource = new DescriptorsResources();
@@ -92,7 +92,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     var desriptorResource = new DescriptorsResources();
                     desriptorResource.idDescriptor = productDescriptor.id;
                     productDescriptorResource = this.DB.DescriptorsResources.Add(desriptorResource);
-                    Resources resource = new Resources();
+                    var resource = new Resources();
                     resource.URL = url;
                     resource = this.DB.Resources.Add(resource);
                     productDescriptorResource.title = this.lbltxbResourceTitle.Text;
@@ -115,9 +115,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 {
                     if (!this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentItem.ID_продукта))
                         throw new Exception("Не удалось найти дескриптор продукта!");
-                    var productDescriptor = this.CustomBase.CustomDb.GetDescriptorProduct(this.currentItem.ID_продукта);
+                    Descriptors productDescriptor = this.CustomBase.CustomDb.GetDescriptorProduct(this.currentItem.ID_продукта);
 
-                    var productDescriptorResource = this.CustomBase.CustomDb.GetDescriptorsResources(productDescriptor.id);
+                    DescriptorsResources productDescriptorResource = this.CustomBase.CustomDb.GetDescriptorsResources(productDescriptor.id);
                     if (productDescriptorResource != null)
                     {
                         productDescriptorResource.title = this.lbltxbResourceTitle.Text;
@@ -135,10 +135,10 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         void Update(ResourcesViewProducts item)
         {
-            var productDescriptor = this.CustomBase.CustomDb.GetDescriptorProduct(item.ID_продукта);
+            Descriptors productDescriptor = this.CustomBase.CustomDb.GetDescriptorProduct(item.ID_продукта);
             if (this.CustomBase.CustomDb.IsDescriptorResourcesExists(productDescriptor.id))
             {
-                var productDescriptorResource = this.CustomBase.CustomDb.GetDescriptorsResources(productDescriptor.id);
+                DescriptorsResources productDescriptorResource = this.CustomBase.CustomDb.GetDescriptorsResources(productDescriptor.id);
                 this.lbltxbResourceTitle.Text = productDescriptorResource.title;
             }
             else
@@ -197,19 +197,19 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             try
             {
-                List<string> fileNames = this.GetLoadFilePath("Все файлы|*.*").ToList();
+                var fileNames = this.GetLoadFilePath("Все файлы|*.*").ToList();
                 if (fileNames.Count > 0)
                 {
                     this.lbltxbFilePath.Text = fileNames[0];
-                    var extension = System.IO.Path.GetExtension(this.lbltxbFilePath.Text);
-                    var typeView = this.DB.ResourceTypesView.FirstOrDefault(x => x.Расширение_ресурса == extension);
+                    string extension = System.IO.Path.GetExtension(this.lbltxbFilePath.Text);
+                    ResourceTypesView typeView = this.DB.ResourceTypesView.FirstOrDefault(x => x.Расширение_ресурса == extension);
                     if (typeView != null)
                     {
                         this.lbltxbResourceTitle.Text = typeView.Наименование_типа_ресурса.ToString();
                     }
                     else
                     {
-                        var fileName = System.IO.Path.GetFileName(this.lbltxbFilePath.Text);
+                        string fileName = System.IO.Path.GetFileName(this.lbltxbFilePath.Text);
                         this.lbltxbResourceTitle.Text = fileName;
                     }
                 }

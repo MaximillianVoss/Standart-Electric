@@ -61,7 +61,7 @@ namespace База_артикулов.Классы
                 if (File.Exists(filePath))
                 {
                     string jsonString = File.ReadAllText(filePath);
-                    var settings = JsonSerializer.Deserialize<Settings>(jsonString);
+                    Settings settings = JsonSerializer.Deserialize<Settings>(jsonString);
                     if (settings != null)
                     {
                         this._currentConnectionString = settings.CurrentConnectionString;

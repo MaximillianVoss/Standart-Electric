@@ -39,7 +39,7 @@ namespace База_артикулов.Настройки.Тесты
 
             // Загрузка и проверка созданных настроек
             string jsonString = File.ReadAllText(TEST_FILE_PATH);
-            var loadedSettings = JsonSerializer.Deserialize<Settings>(jsonString);
+            Settings loadedSettings = JsonSerializer.Deserialize<Settings>(jsonString);
 
             Assert.Null(loadedSettings.CurrentConnectionString);
         }
@@ -88,7 +88,7 @@ namespace База_артикулов.Настройки.Тесты
 
             // Загрузка и проверка сохраненных настроек
             string jsonString = File.ReadAllText(TEST_FILE_PATH);
-            var savedSettings = JsonSerializer.Deserialize<Settings>(jsonString);
+            Settings savedSettings = JsonSerializer.Deserialize<Settings>(jsonString);
 
             Assert.Equal(this.TEST_CONNECTION_STRING.Name, savedSettings.CurrentConnectionString.Name);
             Assert.Equal(this.TEST_CONNECTION_STRING.Value, savedSettings.CurrentConnectionString.Value);

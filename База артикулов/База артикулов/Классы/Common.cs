@@ -179,7 +179,7 @@ namespace База_артикулов.Классы
                 { typeof(ResourceTypes), "Типа ресурса" },
                 { typeof(SubGroups), "Подгруппы" },
                 { typeof(Tables), "Таблицы" },
-                { typeof(Units), "Единицы" },
+                { typeof(Units), "Единицы измерения" },
                 { typeof(UnitsPackages), "Упаковки единиц" },
                 { typeof(UnitsPerforations), "Перфорации единиц" },
                 { typeof(UnitsProducts), "Продукты единиц" },

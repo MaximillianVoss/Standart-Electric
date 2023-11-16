@@ -45,7 +45,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             if (this.currentUnit != null)
             {
-                var unitProductDb = this.DB.UnitsProducts.FirstOrDefault(x => x.id == this.currentUnit.id);
+                UnitsProducts unitProductDb = this.DB.UnitsProducts.FirstOrDefault(x => x.id == this.currentUnit.id);
                 if (unitProductDb != null)
                 {
                     unitProductDb.idUnit = this.txbCmbCurrentUnit.SelectedId;

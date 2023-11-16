@@ -41,7 +41,7 @@ namespace База_артикулов.Формы
                 throw new Exception("Не передано имя поля!");
             }
 
-            var field = obj.GetType().GetProperty(fieldName);
+            System.Reflection.PropertyInfo field = obj.GetType().GetProperty(fieldName);
             return field == null
                 ? throw new Exception(База_артикулов.Классы.Common.Strings.Errors.fieldIsNotFoundInObject)
                 : field.GetValue(obj, null);
@@ -384,7 +384,7 @@ namespace База_артикулов.Формы
         /// <returns></returns>
         public object ToList(IEnumerable items, Type type)
         {
-            var collectionWithType = typeof(List<>).MakeGenericType(type);
+            Type collectionWithType = typeof(List<>).MakeGenericType(type);
             return Activator.CreateInstance(collectionWithType, items);
         }
         /// <summary>
@@ -396,11 +396,11 @@ namespace База_артикулов.Формы
         /// <returns></returns>
         public List<object> ToList<T>(DbSet items)
         {
-            List<object> list = new List<object>();
-            foreach (var item in items)
+            var list = new List<object>();
+            foreach (object item in items)
             {
-                var type = item.GetType();
-                var methodInfo = type.GetMethod("ToObject");
+                Type type = item.GetType();
+                System.Reflection.MethodInfo methodInfo = type.GetMethod("ToObject");
                 list.Add(methodInfo.Invoke(item, null));
             }
             return list;
@@ -414,11 +414,11 @@ namespace База_артикулов.Формы
         /// <returns></returns>
         public List<object> ToList<T>(List<T> items)
         {
-            List<object> list = new List<object>();
+            var list = new List<object>();
             foreach (T item in items)
             {
-                var type = item.GetType();
-                var methodInfo = type.GetMethod("ToObject");
+                Type type = item.GetType();
+                System.Reflection.MethodInfo methodInfo = type.GetMethod("ToObject");
                 list.Add(methodInfo.Invoke(item, null));
             }
             return list;

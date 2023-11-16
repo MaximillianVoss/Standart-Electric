@@ -68,7 +68,7 @@ namespace База_артикулов.Классы
             if (string.IsNullOrWhiteSpace(connectionString))
                 return false;
 
-            var regexPattern = @"^metadata=res:\/\/\*\/.*\.csdl\|res:\/\/\*\/.*\.ssdl\|res:\/\/\*\/.*\.msl;provider=System\.Data\.SqlClient;provider connection string=""[^""]*""$";
+            string regexPattern = @"^metadata=res:\/\/\*\/.*\.csdl\|res:\/\/\*\/.*\.ssdl\|res:\/\/\*\/.*\.msl;provider=System\.Data\.SqlClient;provider connection string=""[^""]*""$";
             return Regex.IsMatch(connectionString, regexPattern);
         }
 

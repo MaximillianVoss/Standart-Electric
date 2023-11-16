@@ -140,7 +140,7 @@ namespace База_артикулов.Формы.Страницы
         private async Task<List<string>> Import(string path, bool isContainsHeaders, bool isContainsDescription)
         {
 
-            List<string> queries = new List<string>();
+            var queries = new List<string>();
             await Task.Run(() =>
             {
                 ExcelDocument document = this.ExcelParser.Parse(path, isHasHeaders: isContainsHeaders, isHasFieldsDescription: isContainsDescription);
@@ -155,11 +155,11 @@ namespace База_артикулов.Формы.Страницы
                         document.Remove(Common.Strings.Columns.idDescriptor);
                         #endregion
 
-                        var connectionString = this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Value;
+                        string connectionString = this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Value;
                         string providerConnectionString = new EntityConnectionStringBuilder(connectionString).ProviderConnectionString;
-                        using (SqlConnection connection = new SqlConnection(providerConnectionString))
+                        using (var connection = new SqlConnection(providerConnectionString))
                         {
-                            List<string> descriptorsIds = new List<string>();
+                            var descriptorsIds = new List<string>();
                             #region Получение списка Id дескрипторов
                             connection.Open();
                             List<string> dbDescriptorsColumns = this.GetDBTableColumns("Descriptors");
@@ -167,9 +167,9 @@ namespace База_артикулов.Формы.Страницы
                             ExcelDocument descriptorsDocument = this.ExcelParser.Parse(path,
                                 isHasHeaders: isContainsHeaders, isHasFieldsDescription: isContainsDescription);
                             List<string> descriptorsQueries = descriptorsDocument.ToSQLScript(dbDescriptorsColumns, "Descriptors");
-                            foreach (var query in descriptorsQueries)
+                            foreach (string query in descriptorsQueries)
                             {
-                                SqlCommand command = new SqlCommand(query, connection);
+                                var command = new SqlCommand(query, connection);
                                 SqlDataReader reader = command.ExecuteReader();
                                 while (reader.Read())
                                 {
@@ -180,7 +180,7 @@ namespace База_артикулов.Формы.Страницы
                             connection.Close();
                             #endregion
                             #region Заполнение сущностей в таблицу с привязкой к дескрипторам
-                            ExcelField idDescriptorField = new ExcelField(title: Common.Strings.Columns.idDescriptor, description: "ID дескриптора");
+                            var idDescriptorField = new ExcelField(title: Common.Strings.Columns.idDescriptor, description: "ID дескриптора");
                             document.Add(idDescriptorField);
                             if (descriptorsIds.Count != document.RowsCount)
                             {
@@ -249,8 +249,8 @@ namespace База_артикулов.Формы.Страницы
             {
                 throw new ArgumentNullException(Common.Strings.Errors.incorrectList);
             }
-            List<string> queries = new List<string>();
-            foreach (var fileName in filesNames)
+            var queries = new List<string>();
+            foreach (string fileName in filesNames)
             {
                 queries.AddRange((IEnumerable<string>)this.Import(String.Format("{0}\\{1}", folderPath, fileName), isContainsHeaders, isContainsDescription));
             }
@@ -284,7 +284,7 @@ namespace База_артикулов.Формы.Страницы
             {
                 this.Log.Add("Обработка файла {0}", Path.GetFileName(path));
 
-                var tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(p => p.PropertyType.Name.StartsWith("DbSet") && p.Name == Path.GetFileNameWithoutExtension(path));
+                System.Reflection.PropertyInfo tableProperty = this.DB.GetType().GetProperties().FirstOrDefault(p => p.PropertyType.Name.StartsWith("DbSet") && p.Name == Path.GetFileNameWithoutExtension(path));
                 #region Если таблицы нет в БД
                 if (tableProperty == null)
                 {
@@ -297,7 +297,7 @@ namespace База_артикулов.Формы.Страницы
                     List<string> queries = await this.Import(path, this.IsContainsHeaders, this.IsContainsDescription);
                     if (queries != null)
                     {
-                        foreach (var query in queries)
+                        foreach (string query in queries)
                         {
                             await Task.Run(() =>
                             {
@@ -388,7 +388,7 @@ namespace База_артикулов.Формы.Страницы
                     this.Dispatcher.Invoke(() =>
                     {
                         this.lvSelectedItems.Items.Clear();
-                        foreach (var item in fileNames)
+                        foreach (string item in fileNames)
                         {
                             this.lvSelectedItems.Items.Add(item);
                         }
@@ -468,10 +468,10 @@ namespace База_артикулов.Формы.Страницы
         /// <returns></returns>
         private List<string> GetDBTableColumns(string tableName)
         {
-            var tableProperty = this.DB.GetType()
+            System.Reflection.PropertyInfo tableProperty = this.DB.GetType()
                                        .GetProperties()
                                        .FirstOrDefault(p => p.PropertyType.Name.StartsWith("DbSet") && p.Name == tableName);
-            var dbSet = tableProperty?.GetValue(this.DB, null);
+            object dbSet = tableProperty?.GetValue(this.DB, null);
             if (dbSet == null)
                 return new List<string>();
             Type dbSetType = dbSet.GetType().GetGenericArguments().First();
@@ -498,7 +498,7 @@ namespace База_артикулов.Формы.Страницы
 
 
             #region Подсчет прогресса выполнения
-            System.Timers.Timer timer = new System.Timers.Timer(100);
+            var timer = new System.Timers.Timer(100);
             timer.Elapsed += async (sender, e) => await this.UpdateProgress();
             //timer.Elapsed += async (sender, e) => await UpdateLog();
             timer.Start();
@@ -529,7 +529,7 @@ namespace База_артикулов.Формы.Страницы
             try
             {
                 #region Получение списка файлов от пользователя
-                List<string> fileNames = this.GetLoadFilePath("Файлы Excel(*.xlsx,*.csv)|*.xlsx;*.csv|Книга Excel|*.xlsx|CSV UTF-8|*.csv", true, 1).ToList();
+                var fileNames = this.GetLoadFilePath("Файлы Excel(*.xlsx,*.csv)|*.xlsx;*.csv|Книга Excel|*.xlsx|CSV UTF-8|*.csv", true, 1).ToList();
                 #endregion
 
                 #region Получение списка файлов из тестовых массивов
@@ -602,7 +602,7 @@ namespace База_артикулов.Формы.Страницы
             try
             {
                 #region Получение списка файлов от пользователя
-                List<string> fileNames = this.GetLoadFilePath("Файлы Excel(*.xlsx,*.csv)|*.xlsx;*.csv|Книга Excel|*.xlsx|CSV UTF-8|*.csv", true, 1).ToList();
+                var fileNames = this.GetLoadFilePath("Файлы Excel(*.xlsx,*.csv)|*.xlsx;*.csv|Книга Excel|*.xlsx|CSV UTF-8|*.csv", true, 1).ToList();
                 #endregion
 
                 _ = this.UpdateSelectedItems(fileNames);

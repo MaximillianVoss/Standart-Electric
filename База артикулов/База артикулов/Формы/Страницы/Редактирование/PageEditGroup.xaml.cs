@@ -73,7 +73,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
             if (this.CustomBase.Mode == EditModes.Update)
             {
-                var group = this.CustomBase.UnpackCurrentObject<Groups>(this.CurrentObject);
+                Groups group = this.CustomBase.UnpackCurrentObject<Groups>(this.CurrentObject);
                 if (group == null)
                 {
                     throw new Exception(Common.Strings.Errors.failedToGetParam);

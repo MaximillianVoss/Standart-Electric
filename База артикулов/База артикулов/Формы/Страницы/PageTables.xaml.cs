@@ -106,7 +106,7 @@ namespace База_артикулов.Формы.Страницы
             try
             {
                 var selectedProductViewCustom = this.SelectedItemTable as ProductsViewLiteWrappedCustom;
-                var product = this.CustomBase.CustomDb.DB.Products.FirstOrDefault(x => x.id == selectedProductViewCustom.ID_продукта);
+                Products product = this.CustomBase.CustomDb.DB.Products.FirstOrDefault(x => x.id == selectedProductViewCustom.ID_продукта);
                 this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(product));
                 this.CustomBase.Mode = EditModes.Update;
                 var windowEdit = new WindowEdit(
@@ -150,18 +150,18 @@ namespace База_артикулов.Формы.Страницы
         private TableData GetTable(string tableName)
         {
             // Предполагаем, что ViewsTablesView имеет индекс по Отображаемое_название_таблицы для ускорения поиска
-            var view = this.DB.ViewsTablesView.FirstOrDefault(x => x.Отображаемое_название_таблицы == tableName) ?? throw new Exception($"Не найдена таблица с именем {tableName}");
+            ViewsTablesView view = this.DB.ViewsTablesView.FirstOrDefault(x => x.Отображаемое_название_таблицы == tableName) ?? throw new Exception($"Не найдена таблица с именем {tableName}");
 
             // Кэшируем свойства
             var dbProperties = this.DB.GetType().GetProperties().Where(p => p.PropertyType.Name.StartsWith("DbSet")).ToDictionary(p => p.Name, p => p);
 
-            if (!dbProperties.TryGetValue(view.Наименование_представления, out var tableProperty))
+            if (!dbProperties.TryGetValue(view.Наименование_представления, out System.Reflection.PropertyInfo tableProperty))
                 throw new Exception($"Не найдено свойство DbSet для таблицы {tableName}");
 
-            var dbSet = tableProperty.GetValue(this.DB) as IEnumerable ?? throw new Exception($"Не удалось получить значение DbSet для таблицы {tableName}");
+            IEnumerable dbSet = tableProperty.GetValue(this.DB) as IEnumerable ?? throw new Exception($"Не удалось получить значение DbSet для таблицы {tableName}");
 
             // Допускаем только один вызов GetGenericArguments
-            var genericArguments = dbSet.GetType().GetGenericArguments();
+            Type[] genericArguments = dbSet.GetType().GetGenericArguments();
 
             if (!genericArguments.Any())
                 throw new Exception("Не удалось получить тип данных для этой таблицы!");
@@ -169,7 +169,7 @@ namespace База_артикулов.Формы.Страницы
             Type dbSetType = genericArguments.First();
             var columnNames = dbSetType.GetProperties().Select(p => p.Name).ToList();
 
-            TableData tableData = new TableData(
+            var tableData = new TableData(
                 view.Наименование_представления,
                 view.Отображаемое_название_таблицы,
                 dbSetType,
@@ -193,8 +193,8 @@ namespace База_артикулов.Формы.Страницы
         {
             if (this.cmbTables.SelectedIndex != -1)
             {
-                var selectedTableName = this.cmbTables.SelectedItem.ToString();
-                var table = this.GetTable(selectedTableName);
+                string selectedTableName = this.cmbTables.SelectedItem.ToString();
+                TableData table = this.GetTable(selectedTableName);
 
                 if (table != null && table.ItemsType != null)
                 {
@@ -203,22 +203,22 @@ namespace База_артикулов.Формы.Страницы
                         var entities = table.ItemsAll.OfType<object>().ToList();
                         if (entities.Any())
                         {
-                            var propertyNames = table.ItemsType.GetProperties().Select(p => isDeleteUnderline ? p.Name.Replace("_", " ") : p.Name);
+                            IEnumerable<string> propertyNames = table.ItemsType.GetProperties().Select(p => isDeleteUnderline ? p.Name.Replace("_", " ") : p.Name);
 
                             string separator = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
 
-                            var header = string.Join(separator, propertyNames);
+                            string header = string.Join(separator, propertyNames);
                             writer.WriteLine(header);
 
-                            foreach (var entity in entities)
+                            foreach (object entity in entities)
                             {
-                                var values = propertyNames.Select(p =>
+                                IEnumerable<string> values = propertyNames.Select(p =>
                                 {
-                                    var value = entity.GetType().GetProperty(isDeleteUnderline ? p.Replace(" ", "_") : p)?.GetValue(entity)?.ToString();
+                                    string value = entity.GetType().GetProperty(isDeleteUnderline ? p.Replace(" ", "_") : p)?.GetValue(entity)?.ToString();
                                     return string.IsNullOrEmpty(value) ? value : $"\"{value.Replace("\"", "\"\"")}\"";
                                 });
 
-                                var line = string.Join(separator, values);
+                                string line = string.Join(separator, values);
                                 writer.WriteLine(line);
                             }
                         }
@@ -256,7 +256,7 @@ namespace База_артикулов.Формы.Страницы
         private void UpdateTablesComboBox()
         {
             var tables = this.DB.ViewsTablesView.OrderBy(x => x.Отображаемое_название_таблицы).Where(x => x.Тип.ToLower() == "Пользовательский".ToLower()).ToList();
-            foreach (var table in tables)
+            foreach (ViewsTablesView table in tables)
                 this.cmbTables.Add(table.Отображаемое_название_таблицы);
             this.cmbTables.Select("Продукты");
         }
@@ -325,7 +325,7 @@ namespace База_артикулов.Формы.Страницы
             }
 
             // Выполнение SQL запроса с параметрами
-            var filteredProducts = this.CustomBase.CustomDb.ExecuteSqlQuery<ProductsViewLiteWrappedCustom>(sqlQuery, parameters);
+            List<ProductsViewLiteWrappedCustom> filteredProducts = this.CustomBase.CustomDb.ExecuteSqlQuery<ProductsViewLiteWrappedCustom>(sqlQuery, parameters);
 
             // Обновление ItemsAll с отфильтрованными продуктами
             this.CurrentTableData.ItemsAll = new ObservableCollection<object>(filteredProducts);
@@ -343,20 +343,20 @@ namespace База_артикулов.Формы.Страницы
         private TreeViewItemCustom AddToTreeView(Classes @class)
         {
             // Создание нового элемента для класса
-            TreeViewItemCustom classItem = new TreeViewItemCustom(@class.id, @class.Descriptors.title, @class);
+            var classItem = new TreeViewItemCustom(@class.id, @class.Descriptors.title, @class);
 
             // Проверка, что свойство Groups класса не равно null и содержит элементы
             if (@class.Groups != null)
             {
-                foreach (var group in @class.Groups)
+                foreach (Groups group in @class.Groups)
                 {
                     // Создание нового элемента для группы
-                    TreeViewItemCustom groupItem = new TreeViewItemCustom(group.id, group.Descriptors.title, group);
+                    var groupItem = new TreeViewItemCustom(group.id, group.Descriptors.title, group);
 
                     // Проверка, что свойство SubGroups группы не равно null и содержит элементы
                     if (group.SubGroups != null)
                     {
-                        foreach (var subGroup in group.SubGroups)
+                        foreach (SubGroups subGroup in group.SubGroups)
                         {
                             // Создание и добавление нового элемента для подгруппы
                             groupItem.Add(new TreeViewItemCustom(subGroup.id, subGroup.Descriptors.title, subGroup));
@@ -397,7 +397,7 @@ namespace База_артикулов.Формы.Страницы
         /// <param name="items"></param>
         private void SaveTreeState(ItemCollection items)
         {
-            foreach (var obj in items)
+            foreach (object obj in items)
             {
                 var item = obj as TreeViewItemCustom;
                 if (item == null)
@@ -433,9 +433,9 @@ namespace База_артикулов.Формы.Страницы
                 // Если доступ к базе данных является блокирующей операцией, используйте асинхронные методы.
                 var classes = await Task.Run(() => this.DB.Classes.ToList());
 
-                foreach (var @class in classes)
+                foreach (Classes @class in classes)
                 {
-                    var classItem = this.AddToTreeView(@class);
+                    TreeViewItemCustom classItem = this.AddToTreeView(@class);
                     // Восстанавливаем состояние для каждого элемента
                     if (this.treeState.TryGetValue(@class.id, out bool isExpanded))
                     {
@@ -446,7 +446,7 @@ namespace База_артикулов.Формы.Страницы
                 //Выбор первого элемента, если есть
                 if (this.tvGroups.Items.Count > 0)
                 {
-                    TreeViewItem firstItem = (TreeViewItem)this.tvGroups.ItemContainerGenerator.ContainerFromIndex(0);
+                    var firstItem = (TreeViewItem)this.tvGroups.ItemContainerGenerator.ContainerFromIndex(0);
                     if (firstItem != null)
                     {
                         firstItem.IsSelected = true;
@@ -465,7 +465,7 @@ namespace База_артикулов.Формы.Страницы
         /// </summary>
         private void UpdateContextMenu()
         {
-            var selectedItemTreeViewObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
+            object selectedItemTreeViewObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
             bool isEnabled = this.SelectedItemTreeView != null;
             this.miTreeAddPrimary.IsEnabled = isEnabled;
             this.miTreeEdit.IsEnabled = isEnabled;
@@ -578,7 +578,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                var selectedItemTreeViewObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
+                object selectedItemTreeViewObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
                 if (selectedItemTreeViewObject != null)
                 {
                     if (selectedItemTreeViewObject.ValidateTypeOrBaseType<Classes>())
@@ -667,11 +667,11 @@ namespace База_артикулов.Формы.Страницы
                 if (this.SelectedItemTreeView == null || this.SelectedItemTreeView.Value == null)
                     throw new Exception("Не выбран элемент для удаления!");
 
-                var result = System.Windows.MessageBox.Show("Вы уверены, что хотите удалить этот элемент?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                MessageBoxResult result = System.Windows.MessageBox.Show("Вы уверены, что хотите удалить этот элемент?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    var obj = this.SelectedItemTreeView.Value;
+                    object obj = this.SelectedItemTreeView.Value;
                     if (obj.ValidateTypeOrBaseType<Classes>())
                     {
                         this.CustomBase.CustomDb.DeleteClass(((Classes)obj).id);
@@ -759,7 +759,7 @@ namespace База_артикулов.Формы.Страницы
                     dialog.FilterIndex = 1;
                     dialog.RestoreDirectory = true;
 
-                    var selectedTableName = "";
+                    string selectedTableName = "";
                     if (this.cmbTables.SelectedIndex != -1)
                     {
                         selectedTableName = this.cmbTables.SelectedItem.ToString();
@@ -772,7 +772,7 @@ namespace База_артикулов.Формы.Страницы
 
                     if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        var outputFilePath = dialog.FileName;
+                        string outputFilePath = dialog.FileName;
                         this.Export(outputFilePath);
                         this.ShowMessage($"Экспорт таблицы {selectedTableName} завершен!");
                     }
