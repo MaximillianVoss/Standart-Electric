@@ -105,14 +105,14 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                //var windowEdit = new WindowEdit("Редактировать продукт", this.SelectedItemTable, EditModes.Update, 600, 800);
-                //windowEdit.ShowDialog();
-                //if ((bool)windowEdit.DialogResult)
-                //{
-                //    this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
-                //    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
-                //    this.UpdateDataGrid(this.CurrentTableData);
-                //}
+                var windowEdit = new WindowEdit("Редактировать продукт", this.SelectedItemTable, EditModes.Update, 600, 800);
+                windowEdit.ShowDialog();
+                if ((bool)windowEdit.DialogResult)
+                {
+                    this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
+                    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
+                    this.UpdateDataGrid(this.CurrentTableData);
+                }
             }
             catch (Exception ex)
             {
@@ -225,17 +225,17 @@ namespace База_артикулов.Формы.Страницы
         private Task UpdateDataGrid(TableData tableData)
         {
             this.dgTable.TableData = tableData;
-            if (this.CurrentTableData.ItemsType == typeof(ProductsViewLite))
+            if (this.CurrentTableData.ItemsType == typeof(ProductsViewLiteWrapped))
             {
                 // Создание списка с одним элементом
-                var displayColumns = new List<string> {
-                    "Артикул",
-                    "Наименование_продукта",
-                    "Вес",
-                    "Количество_в_упаковке",
-                    "Вес_упаковки_с_товаром"
-                };
-                this.dgTable.TableData.SetDisplayColumns(displayColumns);
+                //var displayColumns = new List<string> {
+                //    "Артикул",
+                //    "Наименование_продукта",
+                //    "Вес",
+                //    "Количество_в_упаковке",
+                //    "Вес_упаковки_с_товаром"
+                //};
+                //this.dgTable.TableData.SetDisplayColumns(displayColumns);
             }
             return Task.CompletedTask;
         }
@@ -264,7 +264,7 @@ namespace База_артикулов.Формы.Страницы
         {
             if (this.cmbTables.SelectedIndex == -1)
                 return Task.CompletedTask;
-            if (this.CurrentTableData.ItemsType != typeof(ProductsViewLite))
+            if (this.CurrentTableData.ItemsType != typeof(ProductsViewLiteWrapped))
                 return Task.CompletedTask;
 
             string className = null;
@@ -285,37 +285,45 @@ namespace База_артикулов.Формы.Страницы
                     break;
             }
 
-            #region Фильтрация через EF
-            //List<GetFilteredProductsLite_Result> results = this.CustomBase.CustomDb.DB.GetFilteredProductsLite(
-            //    groupName,
-            //    className,
-            //    subGroupName
-            //).ToList();
-            //List<ProductsViewLiteWrapped> filteredProducts = results.Select(result => new ProductsViewLiteWrapped(result)).ToList();
-            #endregion
+            // Строим SQL запрос на основе фильтров
+            var sqlQueryBuilder = new StringBuilder("SELECT * FROM ProductsViewLiteWrapped WHERE 1=1");
 
-            #region Получение элементов напрямую через SQL с использованием Entity Framework
-                // Подготовка параметров
-                //var groupNameParam = new SqlParameter("@GroupName", groupName ?? (object)DBNull.Value);
-                //var classNameParam = new SqlParameter("@ClassName", className ?? (object)DBNull.Value);
-                //var subGroupNameParam = new SqlParameter("@SubGroupName", subGroupName ?? (object)DBNull.Value);
+            if (!string.IsNullOrEmpty(className))
+            {
+                sqlQueryBuilder.Append(" AND [Наименование класса] = @className");
+            }
+            if (!string.IsNullOrEmpty(groupName))
+            {
+                sqlQueryBuilder.Append(" AND [Наименование группы] = @groupName");
+            }
+            if (!string.IsNullOrEmpty(subGroupName))
+            {
+                sqlQueryBuilder.Append(" AND [Наименование подгруппы] = @subGroupName");
+            }
 
-                //// Вызов хранимой процедуры
-                //var result = this.DB.Database.SqlQuery<ProductsViewLiteWrappedCustom>("GetFilteredProductsLite @GroupName, @ClassName, @SubGroupName", groupNameParam, classNameParam, subGroupNameParam);
+            string sqlQuery = sqlQueryBuilder.ToString();
+            var parameters = new List<SqlParameter>();
+            if (!string.IsNullOrEmpty(className))
+            {
+                parameters.Add(new SqlParameter("@className", className));
+            }
+            if (!string.IsNullOrEmpty(groupName))
+            {
+                parameters.Add(new SqlParameter("@groupName", groupName));
+            }
+            if (!string.IsNullOrEmpty(subGroupName))
+            {
+                parameters.Add(new SqlParameter("@subGroupName", subGroupName));
+            }
 
-                //// Обработка результатов
-                //foreach (var item in result)
-                //{
-                //    // Обработка каждого элемента
-                //}          
-            #endregion
+            // Выполнение SQL запроса с параметрами
+            var filteredProducts = this.CustomBase.CustomDb.ExecuteSqlQuery<ProductsViewLiteWrappedCustom>(sqlQuery, parameters);
 
-
-
-            var filteredProducts = this.DB.GetFilteredProducts(groupName, className, subGroupName);
+            // Обновление ItemsAll с отфильтрованными продуктами
             this.CurrentTableData.ItemsAll = new ObservableCollection<object>(filteredProducts);
             return Task.CompletedTask;
         }
+
 
         /// <summary>
         /// Добавляет класс и связанные с ним группы и подгруппы в дерево представления.
@@ -403,7 +411,7 @@ namespace База_артикулов.Формы.Страницы
         private async Task UpdateTreeView()
         {
             if (this.CurrentTableData.ItemsType == typeof(Products) ||
-                this.CurrentTableData.ItemsType == typeof(ProductsViewLite))
+                this.CurrentTableData.ItemsType == typeof(ProductsViewLiteWrapped))
             {
                 // Сохраняем текущее состояние дерева перед его очисткой
                 this.treeState = new Dictionary<int, bool>();
@@ -681,19 +689,6 @@ namespace База_артикулов.Формы.Страницы
         #endregion
 
         #region Кнопки контекстного меню таблицы
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void dgTable_RightClickSelectedCellChanged(object sender, EventArgs e)
         {
 
@@ -720,22 +715,22 @@ namespace База_артикулов.Формы.Страницы
                 this.ShowError(ex);
             }
         }
-        private void dgTable_DeleteMenuItemClicked(object sender, EventArgs e)
+        private void dgTable_EditMenuItemClicked(object sender, EventArgs e)
         {
             try
             {
-                this.Delete();
+                this.Update();
             }
             catch (Exception ex)
             {
                 this.ShowError(ex);
             }
         }
-        private void dgTable_EditMenuItemClicked(object sender, EventArgs e)
+        private void dgTable_DeleteMenuItemClicked(object sender, EventArgs e)
         {
             try
             {
-                this.Update();
+                this.Delete();
             }
             catch (Exception ex)
             {
@@ -787,7 +782,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                if (this.CurrentTableData.ItemsType != typeof(ProductsViewLite))
+                if (this.CurrentTableData.ItemsType != typeof(ProductsViewLiteWrapped))
                     throw new Exception("Редактирование других таблиц недоступно");
 
             }

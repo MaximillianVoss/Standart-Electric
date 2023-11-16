@@ -485,7 +485,7 @@ namespace База_артикулов.Формы.Страницы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageImport()
+        public PageImport(CustomBase customBase) : base(customBase)
         {
             this.InitializeComponent();
             this.UpdateChbHeaders();

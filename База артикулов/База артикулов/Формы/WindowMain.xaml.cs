@@ -22,8 +22,8 @@ namespace База_артикулов.Формы
             this.Height = SystemParameters.PrimaryScreenHeight * 0.75;
             #endregion
             this.fTables.Content = new PageTables(this.CustomBase);
-            this.fImport.Content = new PageImport();
-            this.fSettings.Content = new PageSettings();
+            this.fImport.Content = new PageImport(this.CustomBase);
+            this.fSettings.Content = new PageSettings(this.CustomBase);
         }
 
 

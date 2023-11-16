@@ -76,6 +76,31 @@ namespace База_артикулов.Классы
 
 
         #region SQL запросы
+        private List<T> ReadData<T>(SqlCommand command) where T : class, new()
+        {
+            using (var reader = command.ExecuteReader())
+            {
+                var result = new List<T>();
+                var properties = typeof(T).GetProperties();
+
+                while (reader.Read())
+                {
+                    var item = new T();
+                    foreach (var property in properties)
+                    {
+                        var columnName = property.Name.Replace('_', ' ');
+                        if (reader.GetOrdinal(columnName) >= 0 && !reader.IsDBNull(reader.GetOrdinal(columnName)))
+                        {
+                            Type convertTo = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+                            property.SetValue(item, Convert.ChangeType(reader[columnName], convertTo), null);
+                        }
+                    }
+                    result.Add(item);
+                }
+
+                return result;
+            }
+        }
         /// <summary>
         /// Выполняет SQL запрос и возвращает результаты в виде списка объектов.
         /// </summary>
@@ -96,7 +121,6 @@ namespace База_артикулов.Классы
         /// </example>
         public List<T> ExecuteSqlQuery<T>(string sqlQuery) where T : class, new()
         {
-            // Извлечение строки подключения SQL Server из строки подключения EF
             var entityBuilder = new EntityConnectionStringBuilder(this.CurrentConnectionString.Value);
             var sqlConnectionString = entityBuilder.ProviderConnectionString;
 
@@ -105,46 +129,37 @@ namespace База_артикулов.Классы
                 connection.Open();
                 using (var command = new SqlCommand(sqlQuery, connection))
                 {
-                    using (var reader = command.ExecuteReader())
+                    return ReadData<T>(command);
+                }
+            }
+        }
+
+        public List<T> ExecuteSqlQuery<T>(string sqlQuery, IEnumerable<SqlParameter> parameters) where T : class, new()
+        {
+            var entityBuilder = new EntityConnectionStringBuilder(this.CurrentConnectionString.Value);
+            var sqlConnectionString = entityBuilder.ProviderConnectionString;
+
+            using (var connection = new SqlConnection(sqlConnectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(sqlQuery, connection))
+                {
+                    // Добавление параметров к команде
+                    if (parameters != null)
                     {
-                        // Вывод имен столбцов в ридере
-                        List<string> readerFields = new List<string>();
-                        for (int i = 0; i < reader.FieldCount; i++)
+                        foreach (var param in parameters)
                         {
-                            readerFields.Add(reader.GetName(i));
+                            command.Parameters.Add(param);
                         }
-                        var result = new List<T>();
-                        var properties = typeof(T).GetProperties();
-
-                        while (reader.Read())
-                        {
-                            var item = new T();
-                            foreach (var property in properties)
-                            {
-                                var propreryName = property.Name.Replace('_', ' ');
-                                if (!reader.IsDBNull(reader.GetOrdinal(propreryName)))
-                                {
-                                    Type convertTo = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
-                                    property.SetValue(item, Convert.ChangeType(reader[propreryName], convertTo), null);
-                                }
-                            }
-                            result.Add(item);
-                        }
-
-                        return result;
                     }
+
+                    return ReadData<T>(command);
                 }
             }
         }
         #endregion
 
         #region Строка подключения
-        private bool IsValidConnectionString(string connectionString)
-        {
-            // Здесь может быть реализация проверки строки подключения
-            // Это пример и его следует адаптировать в соответствии с вашими требованиями
-            return connectionString.Contains("Server=") && connectionString.Contains("Database=");
-        }
         /// <summary>
         /// Обработчик события изменения строки подключения.
         /// Этот метод вызывается при обнаружении изменения строки подключения 
@@ -159,7 +174,6 @@ namespace База_артикулов.Классы
             // который обновляет вашу базу данных с новой строкой подключения.
             this.InitDB(true);
         }
-
         private string GetConnectionStringByName(string name)
         {
             // Проверяем, существует ли строка подключения с таким именем

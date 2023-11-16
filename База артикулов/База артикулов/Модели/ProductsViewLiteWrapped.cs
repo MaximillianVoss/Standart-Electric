@@ -23,8 +23,8 @@ namespace База_артикулов.Модели
         public string Наименование_группы { get; set; }
         public Nullable<int> ID_класса { get; set; }
         public string Наименование_класса { get; set; }
-        public Nullable<double> Вес__кг_ { get; set; }
+        public Nullable<double> Вес { get; set; }
         public string Наименование_упаковки { get; set; }
-        public Nullable<double> Вес_упаковки_с_товаром__кг_ { get; set; }
+        public Nullable<double> Вес_упаковки_с_товаром { get; set; }
     }
 }

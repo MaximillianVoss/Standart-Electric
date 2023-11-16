@@ -3,6 +3,44 @@
   <EntityContainerMapping StorageEntityContainer="Хранилище DBSEModelContainer" CdmEntityContainer="DBSEEntities">
     <FunctionImportMapping FunctionImportName="AddProductImagePaths" FunctionName="Хранилище DBSEModel.AddProductImagePaths" />
     <FunctionImportMapping FunctionImportName="AddSubGroupImagePaths" FunctionName="Хранилище DBSEModel.AddSubGroupImagePaths" />
+    <FunctionImportMapping FunctionImportName="GetFilteredProducts1" FunctionName="Хранилище DBSEModel.GetFilteredProducts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBSEModel.GetFilteredProducts1_Result">
+          <ScalarProperty Name="ID_продукта" ColumnName="ID продукта" />
+          <ScalarProperty Name="Артикул" ColumnName="Артикул" />
+          <ScalarProperty Name="Наименование_продукта" ColumnName="Наименование продукта" />
+          <ScalarProperty Name="Сокращенное_наименование_продукта" ColumnName="Сокращенное наименование продукта" />
+          <ScalarProperty Name="ID_подгруппы" ColumnName="ID подгруппы" />
+          <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
+          <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
+          <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
+          <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
+          <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
+          <ScalarProperty Name="Наименование_упаковки" ColumnName="Наименование упаковки" />
+          <ScalarProperty Name="Вес" ColumnName="Вес" />
+          <ScalarProperty Name="Количество_в_упаковке" ColumnName="Количество в упаковке" />
+          <ScalarProperty Name="Вес_упаковки_с_товаром" ColumnName="Вес упаковки с товаром" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetFilteredProductsLite1" FunctionName="Хранилище DBSEModel.GetFilteredProductsLite">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBSEModel.GetFilteredProductsLite1_Result">
+          <ScalarProperty Name="ID_продукта" ColumnName="ID продукта" />
+          <ScalarProperty Name="Артикул" ColumnName="Артикул" />
+          <ScalarProperty Name="Наименование_продукта" ColumnName="Наименование продукта" />
+          <ScalarProperty Name="ID_подгруппы" ColumnName="ID подгруппы" />
+          <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
+          <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
+          <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
+          <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
+          <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
+          <ScalarProperty Name="Вес__кг_" ColumnName="Вес (кг)" />
+          <ScalarProperty Name="Наименование_упаковки" ColumnName="Наименование упаковки" />
+          <ScalarProperty Name="Вес_упаковки_с_товаром__кг_" ColumnName="Вес упаковки с товаром (кг)" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <EntitySetMapping Name="Applications">
       <EntityTypeMapping TypeName="DBSEModel.Applications">
         <MappingFragment StoreEntitySet="Applications">
@@ -623,9 +661,9 @@
     <EntitySetMapping Name="ProductsViewLiteWrapped">
       <EntityTypeMapping TypeName="DBSEModel.ProductsViewLiteWrapped">
         <MappingFragment StoreEntitySet="ProductsViewLiteWrapped">
-          <ScalarProperty Name="Вес_упаковки_с_товаром__кг_" ColumnName="Вес упаковки с товаром (кг)" />
+          <ScalarProperty Name="Вес_упаковки_с_товаром" ColumnName="Вес упаковки с товаром" />
           <ScalarProperty Name="Наименование_упаковки" ColumnName="Наименование упаковки" />
-          <ScalarProperty Name="Вес__кг_" ColumnName="Вес (кг)" />
+          <ScalarProperty Name="Вес" ColumnName="Вес" />
           <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
           <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
           <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
@@ -805,43 +843,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="GetFilteredProducts1" FunctionName="Хранилище DBSEModel.GetFilteredProducts">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DBSEModel.GetFilteredProducts1_Result">
-          <ScalarProperty Name="ID_продукта" ColumnName="ID продукта" />
-          <ScalarProperty Name="Артикул" ColumnName="Артикул" />
-          <ScalarProperty Name="Наименование_продукта" ColumnName="Наименование продукта" />
-          <ScalarProperty Name="Сокращенное_наименование_продукта" ColumnName="Сокращенное наименование продукта" />
-          <ScalarProperty Name="ID_подгруппы" ColumnName="ID подгруппы" />
-          <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
-          <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
-          <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
-          <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
-          <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
-          <ScalarProperty Name="Наименование_упаковки" ColumnName="Наименование упаковки" />
-          <ScalarProperty Name="Вес" ColumnName="Вес" />
-          <ScalarProperty Name="Количество_в_упаковке" ColumnName="Количество в упаковке" />
-          <ScalarProperty Name="Вес_упаковки_с_товаром" ColumnName="Вес упаковки с товаром" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="GetFilteredProductsLite1" FunctionName="Хранилище DBSEModel.GetFilteredProductsLite">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DBSEModel.GetFilteredProductsLite1_Result">
-          <ScalarProperty Name="ID_продукта" ColumnName="ID продукта" />
-          <ScalarProperty Name="Артикул" ColumnName="Артикул" />
-          <ScalarProperty Name="Наименование_продукта" ColumnName="Наименование продукта" />
-          <ScalarProperty Name="ID_подгруппы" ColumnName="ID подгруппы" />
-          <ScalarProperty Name="Наименование_подгруппы" ColumnName="Наименование подгруппы" />
-          <ScalarProperty Name="ID_группы" ColumnName="ID группы" />
-          <ScalarProperty Name="Наименование_группы" ColumnName="Наименование группы" />
-          <ScalarProperty Name="ID_класса" ColumnName="ID класса" />
-          <ScalarProperty Name="Наименование_класса" ColumnName="Наименование класса" />
-          <ScalarProperty Name="Вес__кг_" ColumnName="Вес (кг)" />
-          <ScalarProperty Name="Наименование_упаковки" ColumnName="Наименование упаковки" />
-          <ScalarProperty Name="Вес_упаковки_с_товаром__кг_" ColumnName="Вес упаковки с товаром (кг)" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -36,11 +36,11 @@
             <MenuItem Header="Файл">
                 <MenuItem x:Name="btnExport"  Header="Экспорт текущей таблицы в файл" Click="miExport_Click" />
             </MenuItem>
-            <MenuItem Header="Правка">
+            <!--<MenuItem Header="Правка">
                 <MenuItem x:Name="btnAdd" Header="Добавить" Click="btnAdd_Click" />
                 <MenuItem x:Name="btnEdit" Header="Редактировать" Click="btnEdit_Click" />
                 <MenuItem x:Name="btnDelete" Header="Удалить" Click="btnDelete_Click" IsEnabled="False" />
-            </MenuItem>
+            </MenuItem>-->
         </Menu>
         <CustomControlsWPF:PagedDataGrid x:Name="dgTable" Grid.Row="2" Grid.Column="1" 
                                          RightClickSelectedCellChanged="dgTable_RightClickSelectedCellChanged" 

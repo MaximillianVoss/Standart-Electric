@@ -208,14 +208,18 @@ namespace CustomControlsWPF
                     var firstItem = tableData.ItemsAll.FirstOrDefault();
                     if (firstItem != null)
                     {
+                        var properties = firstItem.GetType().GetProperties().ToDictionary(p => p.Name.Replace('_', ' ').ToLower(), p => p);
+
                         foreach (var columnName in tableData.DisplayColumnNames)
                         {
-                            if (firstItem.GetType().GetProperty(columnName) != null)
+                            var normalizedColumnName = columnName.Replace('_', ' ').ToLower();
+
+                            if (properties.TryGetValue(normalizedColumnName, out var property))
                             {
                                 var column = new DataGridTextColumn
                                 {
                                     Header = columnName.Replace('_', ' '),
-                                    Binding = new System.Windows.Data.Binding(columnName)
+                                    Binding = new System.Windows.Data.Binding(property.Name)
                                 };
                                 this.dgData.Columns.Add(column);
                             }

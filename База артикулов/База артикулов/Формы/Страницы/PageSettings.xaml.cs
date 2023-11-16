@@ -44,7 +44,7 @@ namespace База_артикулов.Формы.Страницы
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageSettings()
+        public PageSettings(CustomBase customBase) : base(customBase)
         {
             this.InitializeComponent();
         }
