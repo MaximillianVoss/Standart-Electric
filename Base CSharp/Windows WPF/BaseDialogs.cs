@@ -123,10 +123,10 @@ namespace BaseWindow_WPF
         public void ShowError(Exception ex, bool isShowInner = true)
         {
             var message = isShowInner && ex.InnerException != null
-                ? ex.Message + "\n\n" + ex.InnerException.Message
+                ? ex.Message + "\n\n" + ex.InnerException.Message + "\n" + ex.StackTrace
                 : ex.Message;
-
             System.Windows.MessageBox.Show(message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
         public void ShowMessage(string message, string title = "Уведомление")
         {

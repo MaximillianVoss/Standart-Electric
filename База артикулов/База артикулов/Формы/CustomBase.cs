@@ -265,13 +265,13 @@ namespace База_артикулов.Формы
         public string GetTitle(EditModes mode, Type type)
         {
             string typeStr = "Объекта";
-            if (Common.EntityRussianNames.Names.ContainsKey(type))
-                typeStr = Common.EntityRussianNames.Names[type];
+            if (Common.EntityRussianNames.NamesNominative.ContainsKey(type))
+                typeStr = Common.EntityRussianNames.NameGenitiveSingular[type];
             return String.Format("{0} {1}", Common.EditModesDescriptions.Descriptions[mode], typeStr.ToLower());
         }
         public string GetTitle(EditModes mode, object obj)
         {
-            if (Common.EntityRussianNames.Names.ContainsKey(obj.GetType()))
+            if (Common.EntityRussianNames.NamesGenitive.ContainsKey(obj.GetType()))
                 return this.GetTitle(mode, obj.GetType());
             return this.GetTitle(mode, obj.GetType().BaseType);
         }

@@ -1241,7 +1241,10 @@
         <member name="M:Guard.ArgumentNotNullOrEmpty(System.String,System.Collections.IEnumerable)">
             <summary/>
         </member>
-        <member name="M:Guard.ArgumentValid(System.String,System.String,System.Boolean)">
+        <member name="M:Guard.ArgumentValid(System.String,System.Boolean,System.String)">
+            <summary/>
+        </member>
+        <member name="M:Guard.ArgumentValid(System.String,System.Boolean,System.String,System.Object[])">
             <summary/>
         </member>
     </members>

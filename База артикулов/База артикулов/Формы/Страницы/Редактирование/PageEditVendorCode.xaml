@@ -7,12 +7,12 @@
       xmlns:local="clr-namespace:База_артикулов.Формы.Страницы.Редактирование"
       xmlns:CustomControlsWPF="clr-namespace:CustomControlsWPF;assembly=CustomControlsWPF" x:Class="База_артикулов.Формы.Страницы.Редактирование.PageEditVendorCode"
       mc:Ignorable="d"
-      Title="PageEditVendorCode" Height="588" Width="459">
+      Title="PageEditVendorCode" Height="524" Width="500">
 
     <Grid Background="White">
 
-        <CustomControlsWPF:ButtonPrimary x:Name="btnOk" Margin="10,0,10,55" Text="Сохранить" Click="btnOk_Click" Height="40" VerticalAlignment="Bottom"/>
-        <CustomControlsWPF:ButtonPrimary x:Name="btnCancel" Margin="10,0,10,10" Text="Отмена" Color="danger" Click="btnCancel_Click" Height="40" VerticalAlignment="Bottom"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnOk" Margin="10,0,10,45" Text="ТЕКСТ_ДЕЙСТВИЯ" Click="btnOk_Click" Height="30" VerticalAlignment="Bottom"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnCancel" Margin="10,0,10,10" Text="Отмена" Color="danger" Click="btnCancel_Click" Height="30" VerticalAlignment="Bottom"/>
         <CustomControlsWPF:LabeledTextBox x:Name="txbCode" Margin="10,10,10,0" VerticalAlignment="Top" Text="" Title="Код"/>
         <CustomControlsWPF:LabeledTextBox x:Name="txbAccountantCode" Margin="10,90,10,0" VerticalAlignment="Top" Text="" Title="Бухгалтерский код"/>
         <CustomControlsWPF:LabeledComboBox x:Name="cmbManufacturer" Margin="10,165,10,0" VerticalAlignment="Top" Title="Производитель"/>

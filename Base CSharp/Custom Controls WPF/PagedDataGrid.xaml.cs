@@ -84,6 +84,10 @@ namespace CustomControlsWPF
                     this.lblTitle.Content = value;
                 }
             }
+            get
+            {
+                return this.lblTitle.Content.ToString();
+            }
         }
         public int CurrentPage
         {

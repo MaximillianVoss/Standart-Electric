@@ -22,33 +22,44 @@ using База_артикулов.Модели;
 
 namespace База_артикулов.Формы.Страницы
 {
-
-
     /// <summary>
     /// Логика взаимодействия для PageTables.xaml
     /// </summary>
     public partial class PageTables : CustomPage
     {
         #region Поля
-        private Dictionary<int, bool> treeState;
         #endregion
 
         #region Свойства
         /// <summary>
         /// Текущий объект, выбранный в таблице
         /// </summary>
-        private object SelectedItemTable { set; get; }
+        private object SelectedItemTable
+        {
+            set; get;
+        }
         /// <summary>
         /// Текущий объект, выбранный в иерархическом списке,
         /// само значение лежит в  поле Value
         /// </summary>
-        private TreeViewItemCustom SelectedItemTreeView { set; get; }
+        private TreeViewItemCustom SelectedItemTreeView
+        {
+            set; get;
+        }
         /// <summary>
         /// Данные из текущей выбранной таблицы
         /// </summary>
-        private TableData CurrentTableData { set; get; }
-
-
+        private TableData CurrentTableData
+        {
+            set; get;
+        }
+        /// <summary>
+        /// Хранит текущее состояние элементов иерархического списка
+        /// </summary>
+        private Dictionary<int, bool> TreeState
+        {
+            set; get;
+        }
         #endregion
 
         #region Методы
@@ -114,12 +125,12 @@ namespace База_артикулов.Формы.Страницы
                     Common.WindowSizes.SmallH320W400.Width,
                     Common.WindowSizes.SmallH320W400.Height
                     );
-                windowEdit.ShowDialog();
+                _ = windowEdit.ShowDialog();
                 if ((bool)windowEdit.DialogResult)
                 {
                     this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
-                    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
-                    this.UpdateDataGrid(this.CurrentTableData);
+                    _ = this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
+                    _ = this.UpdateDataGrid(this.CurrentTableData);
                 }
             }
             catch (Exception ex)
@@ -298,15 +309,15 @@ namespace База_артикулов.Формы.Страницы
 
             if (!string.IsNullOrEmpty(className))
             {
-                sqlQueryBuilder.Append(" AND [Наименование класса] = @className");
+                _ = sqlQueryBuilder.Append(" AND [Наименование класса] = @className");
             }
             if (!string.IsNullOrEmpty(groupName))
             {
-                sqlQueryBuilder.Append(" AND [Наименование группы] = @groupName");
+                _ = sqlQueryBuilder.Append(" AND [Наименование группы] = @groupName");
             }
             if (!string.IsNullOrEmpty(subGroupName))
             {
-                sqlQueryBuilder.Append(" AND [Наименование подгруппы] = @subGroupName");
+                _ = sqlQueryBuilder.Append(" AND [Наименование подгруппы] = @subGroupName");
             }
 
             string sqlQuery = sqlQueryBuilder.ToString();
@@ -325,7 +336,8 @@ namespace База_артикулов.Формы.Страницы
             }
 
             // Выполнение SQL запроса с параметрами
-            List<ProductsViewLiteWrappedCustom> filteredProducts = this.CustomBase.CustomDb.ExecuteSqlQuery<ProductsViewLiteWrappedCustom>(sqlQuery, parameters);
+            List<ProductsViewLiteWrappedCustom> filteredProducts =
+                this.CustomBase.CustomDb.ExecuteSqlQuery<ProductsViewLiteWrappedCustom>(sqlQuery, parameters);
 
             // Обновление ItemsAll с отфильтрованными продуктами
             this.CurrentTableData.ItemsAll = new ObservableCollection<object>(filteredProducts);
@@ -369,7 +381,7 @@ namespace База_артикулов.Формы.Страницы
             }
 
             // Добавление класса к дереву представления
-            this.tvGroups.Items.Add(classItem);
+            _ = this.tvGroups.Items.Add(classItem);
 
             // Возвращение созданного элемента TreeViewItemCustom
             return classItem;
@@ -405,7 +417,7 @@ namespace База_артикулов.Формы.Страницы
 
                 if (item.Value is Classes @class)
                 {
-                    this.treeState[@class.id] = item.IsExpanded;
+                    this.TreeState[@class.id] = item.IsExpanded;
                 }
                 // Сохраняем состояние каждого дочернего элемента
                 if (item.Items.Count > 0)
@@ -423,7 +435,7 @@ namespace База_артикулов.Формы.Страницы
                 this.CurrentTableData.ItemsType == typeof(ProductsViewLiteWrapped))
             {
                 // Сохраняем текущее состояние дерева перед его очисткой
-                this.treeState = new Dictionary<int, bool>();
+                this.TreeState = new Dictionary<int, bool>();
                 this.SaveTreeState(this.tvGroups.Items);
 
                 this.tvGroups.Items.Clear();
@@ -437,7 +449,7 @@ namespace База_артикулов.Формы.Страницы
                 {
                     TreeViewItemCustom classItem = this.AddToTreeView(@class);
                     // Восстанавливаем состояние для каждого элемента
-                    if (this.treeState.TryGetValue(@class.id, out bool isExpanded))
+                    if (this.TreeState.TryGetValue(@class.id, out bool isExpanded))
                     {
                         classItem.IsExpanded = isExpanded;
                     }
@@ -465,17 +477,81 @@ namespace База_артикулов.Формы.Страницы
         /// </summary>
         private void UpdateContextMenu()
         {
+            Dictionary<System.Windows.Controls.MenuItem, ControlState> controlStates =
+                new Dictionary<System.Windows.Controls.MenuItem, ControlState>()
+                {
+                    { this.miTreeAddPrimary, new ControlState() },
+                    { this.miTreeAddSecondary, new ControlState() },
+                    { this.miTreeUpdate, new ControlState() },
+                    { this.miTreeDelete, new ControlState() }
+                };
             object selectedItemTreeViewObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
-            bool isEnabled = this.SelectedItemTreeView != null;
-            this.miTreeAddPrimary.IsEnabled = isEnabled;
-            this.miTreeEdit.IsEnabled = isEnabled;
-            this.miTreeDelete.IsEnabled = isEnabled;
-            #region Дополнительный пункт меню для класса
-            //если выбран класс, показывать дополнительный пункт "Создать класс"
-            this.miTreeAddSecondary.Header = this.CustomBase.GetTitle(EditModes.Create, new Classes());
-            this.miTreeAddSecondary.IsEnabled = isEnabled && selectedItemTreeViewObject.ValidateTypeOrBaseType<Classes>();
-            this.miTreeAddSecondary.Visibility = this.miTreeAddSecondary.IsEnabled ? Visibility.Visible : Visibility.Collapsed;
+            if (selectedItemTreeViewObject.ValidateTypeOrBaseType<Classes>())
+            {
+                controlStates[this.miTreeAddPrimary] = new ControlState(this.CustomBase.GetTitle(EditModes.Create, new Classes()), true, true);
+                controlStates[this.miTreeAddSecondary] = new ControlState(this.CustomBase.GetTitle(EditModes.Create, new Groups()), true, true);
+                controlStates[this.miTreeUpdate] = new ControlState(this.CustomBase.GetTitle(EditModes.Update, new Classes()), true, true);
+                controlStates[this.miTreeDelete] = new ControlState(this.CustomBase.GetTitle(EditModes.Delete, new Classes()), true, true);
+            }
+            if (selectedItemTreeViewObject.ValidateTypeOrBaseType<Groups>())
+            {
+                controlStates[this.miTreeAddPrimary] = new ControlState(this.CustomBase.GetTitle(EditModes.Create, new SubGroups()), true, true);
+                controlStates[this.miTreeAddSecondary] = new ControlState(this.CustomBase.GetTitle(EditModes.Create, new Groups()), false, false);
+                controlStates[this.miTreeUpdate] = new ControlState(this.CustomBase.GetTitle(EditModes.Update, new Groups()), true, true);
+                controlStates[this.miTreeDelete] = new ControlState(this.CustomBase.GetTitle(EditModes.Delete, new Groups()), true, true);
+            }
+            if (selectedItemTreeViewObject.ValidateTypeOrBaseType<SubGroups>())
+            {
+                controlStates[this.miTreeAddPrimary] = new ControlState(this.CustomBase.GetTitle(EditModes.Create, new SubGroups()), true, true);
+                controlStates[this.miTreeAddSecondary] = new ControlState(this.CustomBase.GetTitle(EditModes.Create, new SubGroups()), false, false);
+                controlStates[this.miTreeUpdate] = new ControlState(this.CustomBase.GetTitle(EditModes.Update, new SubGroups()), true, true);
+                controlStates[this.miTreeDelete] = new ControlState(this.CustomBase.GetTitle(EditModes.Delete, new SubGroups()), true, true);
+            }
+            #region Актвация кнопок
+            foreach (var item in controlStates)
+            {
+                item.Value.UpdateControl(item.Key);
+            }
             #endregion
+        }
+        /// <summary>
+        /// Обрабатывает нажатие кнопки "Добавить" в контекстном меню иерархического списка
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddEventHandler(object sender, RoutedEventArgs e)
+        {
+            object selectedItemTreeViewObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
+            if (selectedItemTreeViewObject != null)
+            {
+                if (selectedItemTreeViewObject.ValidateTypeOrBaseType<Classes>())
+                {
+                    var group = new Groups();
+                    group.Classes = selectedItemTreeViewObject as Classes;
+                    this.CustomBase.AddWithClearCurrentObjects(group);
+                }
+                if (selectedItemTreeViewObject.ValidateTypeOrBaseType<Groups>() || selectedItemTreeViewObject.ValidateTypeOrBaseType<SubGroups>())
+                {
+                    var subGroup = new SubGroups();
+                    subGroup.Groups = selectedItemTreeViewObject as Groups;
+                    this.CustomBase.AddWithClearCurrentObjects(subGroup);
+                }
+            }
+            else
+            {
+                this.CustomBase.AddWithClearCurrentObjects(new Classes());
+            }
+            //this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView));
+            this.CustomBase.Mode = EditModes.Create;
+            var windowEdit = new WindowEdit(
+                Common.Strings.Titles.Windows.add,
+                this.CustomBase,
+                Common.WindowSizes.SmallH320W400.Width,
+                Common.WindowSizes.SmallH320W400.Height
+                );
+            _ = windowEdit.ShowDialog();
+            if ((bool)windowEdit.DialogResult)
+                _ = this.UpdateTreeView();
         }
 
         #endregion
@@ -543,15 +619,16 @@ namespace База_артикулов.Формы.Страницы
                     this.SelectedItemTreeView = (TreeViewItemCustom)e.NewValue;
 
                     string header = this.CustomBase.GetTitle(EditModes.Create, new Classes());
-                    if (this.SelectedItemTreeView != null && this.SelectedItemTreeView.Value != null)
+                    var selectedObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
+                    if (selectedObject != null)
                     {
-                        if (this.SelectedItemTreeView.Value.ValidateTypeOrBaseType<Classes>())
+                        if (selectedObject.ValidateTypeOrBaseType<Classes>())
                             header = this.CustomBase.GetTitle(EditModes.Create, new Groups());
-                        if (this.SelectedItemTreeView.Value.ValidateTypeOrBaseType<Groups>())
+                        if (selectedObject.ValidateTypeOrBaseType<Groups>() || selectedObject.ValidateTypeOrBaseType<SubGroups>())
                             header = this.CustomBase.GetTitle(EditModes.Create, new SubGroups());
                     }
                     this.miTreeAddPrimary.Header = header;
-                    await this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
+                    await this.FilterTableByTreeView(this.CurrentTableData.ItemsType, selectedObject);
                     await this.UpdateDataGrid(this.CurrentTableData);
                 }
                 this.UpdateContextMenu();
@@ -574,71 +651,29 @@ namespace База_артикулов.Формы.Страницы
         #endregion
 
         #region Кнопки контекстного меню иерархического списка
+
         private void miTreeAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                object selectedItemTreeViewObject = this.CustomBase.UnpackCurrentObject(this.SelectedItemTreeView);
-                if (selectedItemTreeViewObject != null)
-                {
-                    if (selectedItemTreeViewObject.ValidateTypeOrBaseType<Classes>())
-                    {
-                        var group = new Groups();
-                        group.Classes = selectedItemTreeViewObject as Classes;
-                        this.CustomBase.AddWithClearCurrentObjects(group);
-                    }
-                    if (selectedItemTreeViewObject.ValidateTypeOrBaseType<Groups>())
-                    {
-                        var subGroup = new SubGroups();
-                        subGroup.Groups = selectedItemTreeViewObject as Groups;
-                        this.CustomBase.AddWithClearCurrentObjects(subGroup);
-                    }
-                }
-                else
-                {
-                    this.CustomBase.AddWithClearCurrentObjects(new Classes());
-                }
-                //this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView));
-                this.CustomBase.Mode = EditModes.Create;
-                var windowEdit = new WindowEdit(
-                    Common.Strings.Titles.Windows.add,
-                    this.CustomBase,
-                    Common.WindowSizes.SmallH320W400.Width,
-                    Common.WindowSizes.SmallH320W400.Height
-                    );
-                windowEdit.ShowDialog();
-                if ((bool)windowEdit.DialogResult)
-                    _ = this.UpdateTreeView();
+                AddEventHandler(sender, e);
             }
             catch (Exception ex)
             {
                 this.ShowError(ex);
             }
         }
-
         private void miTreeAddSecondary_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //Если выбран класс и выбрано втроое действие "Ссоздать класс"
-                this.CustomBase.AddWithClearCurrentObjects(new Classes());
-                this.CustomBase.Mode = EditModes.Create;
-                var windowEdit = new WindowEdit(
-                    Common.Strings.Titles.Windows.add,
-                    this.CustomBase,
-                    Common.WindowSizes.SmallH320W400.Width,
-                    Common.WindowSizes.SmallH320W400.Height
-                    );
-                windowEdit.ShowDialog();
-                if ((bool)windowEdit.DialogResult)
-                    _ = this.UpdateTreeView();
+                AddEventHandler(sender, e);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                this.ShowError(ex);
             }
         }
-
         private void miTreeEdit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -651,7 +686,7 @@ namespace База_артикулов.Формы.Страницы
                     Common.WindowSizes.SmallH320W400.Width,
                     Common.WindowSizes.SmallH320W400.Height
                     );
-                windowEdit.ShowDialog();
+                _ = windowEdit.ShowDialog();
                 if ((bool)windowEdit.DialogResult)
                     _ = this.UpdateTreeView();
             }
@@ -674,7 +709,7 @@ namespace База_артикулов.Формы.Страницы
                     object obj = this.SelectedItemTreeView.Value;
                     if (obj.ValidateTypeOrBaseType<Classes>())
                     {
-                        this.CustomBase.CustomDb.DeleteClass(((Classes)obj).id);
+                        _ = this.CustomBase.CustomDb.DeleteClass(((Classes)obj).id);
                     }
                     if (obj.ValidateTypeOrBaseType<Groups>())
                     {

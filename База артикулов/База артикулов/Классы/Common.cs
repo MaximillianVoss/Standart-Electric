@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Packaging;
+using System.Security.AccessControl;
+using System.Windows.Documents;
+using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 using База_артикулов.Модели;
 using База_артикулов.Формы;
 
@@ -155,9 +160,120 @@ namespace База_артикулов.Классы
 
         public static class EntityRussianNames
         {
-            public static readonly Dictionary<Type, string> Names = new Dictionary<Type, string>
+            /// <summary>
+            /// Наименования сущностей именительном падеже
+            /// </summary>
+            public static readonly Dictionary<Type, string> NamesNominative = new Dictionary<Type, string>
             {
-                { typeof(Applications), "Приложения" },
+               { typeof(Applications), "Приложения" },
+                { typeof(BuisnessUnits), "Бизнес-юниты" },
+                { typeof(Classes), "Классы" },
+                { typeof(Covers), "Крышки" },
+                { typeof(Descriptors), "Дескрипторы" },
+                { typeof(DescriptorsResources), "Ресурсы дескрипторов" },
+                { typeof(Fields), "Поля" },
+                { typeof(Groups), "Группы" },
+                { typeof(GroupsApplications), "Приложения групп" },
+                { typeof(LoadDiagrams), "Схемы загрузки" },
+                { typeof(Manufacturers), "Производители" },
+                { typeof(Materials), "Материалы" },
+                { typeof(Norms), "Нормы" },
+                { typeof(Packages), "Упаковки" },
+                { typeof(Perforations), "Перфорации" },
+                { typeof(Products), "Продукты" },
+                { typeof(ProductsAnalogs), "Аналоги продуктов" },
+                { typeof(ProductsVendorCodes), "Коды продавцов продуктов" },
+                { typeof(Resources), "Ресурсы" },
+                { typeof(ResourceTypes), "Типы ресурсов" },
+                { typeof(SubGroups), "Подгруппы" },
+                { typeof(Tables), "Таблицы" },
+                { typeof(Units), "Единицы измерения" },
+                { typeof(UnitsPackages), "Упаковки единиц" },
+                { typeof(UnitsPerforations), "Перфорации единиц" },
+                { typeof(UnitsProducts), "Продукты единиц" },
+                { typeof(UnitsTypes), "Типы единиц" },
+                { typeof(VendorCodes), "Коды продавцов" },
+                { typeof(Views), "Виды" },
+                // ... и так далее для всех DbSet объявленных в контексте.
+            };
+            /// <summary>
+            /// Наименования сущностей родительском падеже
+            /// </summary>
+            public static readonly Dictionary<Type, string> NamesGenitive = new Dictionary<Type, string>
+            {
+                { typeof(Applications), "Приложений" },
+                { typeof(BuisnessUnits), "Бизнес-юнитов" },
+                { typeof(Classes), "Классов" },
+                { typeof(Covers), "Крышек" },
+                { typeof(Descriptors), "Дескрипторов" },
+                { typeof(DescriptorsResources), "Ресурсов дескрипторов" },
+                { typeof(Fields), "Полей" },
+                { typeof(Groups), "Групп" },
+                { typeof(GroupsApplications), "Приложений групп" },
+                { typeof(LoadDiagrams), "Схем загрузки" },
+                { typeof(Manufacturers), "Производителей" },
+                { typeof(Materials), "Материалов" },
+                { typeof(Norms), "Норм" },
+                { typeof(Packages), "Упаковок" },
+                { typeof(Perforations), "Перфораций" },
+                { typeof(Products), "Продуктов" },
+                { typeof(ProductsAnalogs), "Аналогов продуктов" },
+                { typeof(ProductsVendorCodes), "Кодов продавцов продуктов" },
+                { typeof(Resources), "Ресурсов" },
+                { typeof(ResourceTypes), "Типов ресурсов" },
+                { typeof(SubGroups), "Подгрупп" },
+                { typeof(Tables), "Таблиц" },
+                { typeof(Units), "Единиц измерения" },
+                { typeof(UnitsPackages), "Упаковок единиц" },
+                { typeof(UnitsPerforations), "Перфораций единиц" },
+                { typeof(UnitsProducts), "Продуктов единиц" },
+                { typeof(UnitsTypes), "Типов единиц" },
+                { typeof(VendorCodes), "Кодов продавцов" },
+                { typeof(Views), "Видов" },
+                // ... и так далее для всех DbSet объявленных в контексте.
+            };
+            /// <summary>
+            /// Наименования сущностей в именительном падеже единственного числа
+            /// </summary>
+            public static readonly Dictionary<Type, string> NameNominativeSingular = new Dictionary<Type, string>
+            {
+                { typeof(Application), "Приложение" },
+                { typeof(BuisnessUnits), "Бизнес-юнит" },
+                { typeof(Classes), "Класс" },
+                { typeof(Covers), "Крышка" },
+                { typeof(Descriptors), "Дескриптор" },
+                { typeof(DescriptorsResources), "Ресурс дескриптора" },
+                { typeof(Fields), "Поле" },
+                { typeof(Groups), "Группа" },
+                { typeof(GroupsApplications), "Приложение группы" },
+                { typeof(LoadDiagrams), "Схема загрузки" },
+                { typeof(Manufacturers), "Производитель" },
+                { typeof(Material), "Материал" },
+                { typeof(Norms), "Норма" },
+                { typeof(Package), "Упаковка" },
+                { typeof(Perforations), "Перфорация" },
+                { typeof(Products), "Продукт" },
+                { typeof(ProductsAnalogs), "Аналог продукта" },
+                { typeof(ProductsVendorCodes), "Код продавца продукта" },
+                { typeof(Resources), "Ресурс" },
+                { typeof(ResourceTypes), "Тип ресурса" },
+                { typeof(SubGroups), "Подгруппа" },
+                { typeof(Table), "Таблица" },
+                { typeof(Units), "Единица измерения" },
+                { typeof(UnitsPackages), "Упаковка единицы" },
+                { typeof(UnitsPerforations), "Перфорация единицы" },
+                { typeof(UnitsProducts), "Продукт единицы" },
+                { typeof(UnitsTypes), "Тип единицы" },
+                { typeof(VendorCodes), "Код продавца" },
+                { typeof(Views), "Вид" },
+                // ... и так далее для всех DbSet объявленных в контексте.
+            };
+            /// <summary>
+            /// Наименования сущностей в родительном падеже единственного числа
+            /// </summary>
+            public static readonly Dictionary<Type, string> NameGenitiveSingular = new Dictionary<Type, string>
+            {
+                { typeof(Application), "Приложения" },
                 { typeof(BuisnessUnits), "Бизнес-юнита" },
                 { typeof(Classes), "Класса" },
                 { typeof(Covers), "Крышки" },
@@ -168,9 +284,9 @@ namespace База_артикулов.Классы
                 { typeof(GroupsApplications), "Приложения группы" },
                 { typeof(LoadDiagrams), "Схемы загрузки" },
                 { typeof(Manufacturers), "Производителя" },
-                { typeof(Materials), "Материала" },
+                { typeof(Material), "Материала" },
                 { typeof(Norms), "Нормы" },
-                { typeof(Packages), "Упаковки" },
+                { typeof(Package), "Упаковки" },
                 { typeof(Perforations), "Перфорации" },
                 { typeof(Products), "Продукта" },
                 { typeof(ProductsAnalogs), "Аналога продукта" },
@@ -178,12 +294,12 @@ namespace База_артикулов.Классы
                 { typeof(Resources), "Ресурса" },
                 { typeof(ResourceTypes), "Типа ресурса" },
                 { typeof(SubGroups), "Подгруппы" },
-                { typeof(Tables), "Таблицы" },
+                { typeof(Table), "Таблицы" },
                 { typeof(Units), "Единицы измерения" },
-                { typeof(UnitsPackages), "Упаковки единиц" },
-                { typeof(UnitsPerforations), "Перфорации единиц" },
-                { typeof(UnitsProducts), "Продукты единиц" },
-                { typeof(UnitsTypes), "Типы единиц" },
+                { typeof(UnitsPackages), "Упаковки единицы" },
+                { typeof(UnitsPerforations), "Перфорации единицы" },
+                { typeof(UnitsProducts), "Продукта единицы" },
+                { typeof(UnitsTypes), "Типа единицы" },
                 { typeof(VendorCodes), "Кода продавца" },
                 { typeof(Views), "Вида" },
                 // ... и так далее для всех DbSet объявленных в контексте.
@@ -199,9 +315,15 @@ namespace База_артикулов.Классы
                 { EditModes.Delete, "Удаление" },
                 { EditModes.None, "Нет действия" }
             };
+
+            public static readonly Dictionary<EditModes, string> ActionDescriptions = new Dictionary<EditModes, string>
+            {
+                { EditModes.Create, "Создать" },
+                { EditModes.Update, "Обновить" },
+                { EditModes.Delete, "Удалить" },
+                { EditModes.None, "Нет действия" }
+            };
+
         }
-
-
-
     }
 }

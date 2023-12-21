@@ -1,7 +1,9 @@
 ﻿using CustomControlsWPF;
+using Microsoft.Office.Interop.Excel;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
@@ -48,21 +50,33 @@ namespace База_артикулов.Формы.Страницы.Редакти
         /// <summary>
         /// Получает или устанавливает идентификатор продукта.
         /// </summary>
-        public int? IdProduct { get => this.idProduct; set => this.idProduct = (int)value; }
+        public int? IdProduct
+        {
+            get => this.idProduct; set => this.idProduct = (int)value;
+        }
 
         /// <summary>
         /// Получает или устанавливает тип DbSet.
         /// </summary>
-        public Type DbSetType { get => this.dbSetType; set => this.dbSetType = value; }
+        public Type DbSetType
+        {
+            get => this.dbSetType; set => this.dbSetType = value;
+        }
 
         /// <summary>
         /// Получает или устанавливает текущий продукт.
         /// </summary>
-        public ProductsView CurrentProduct { get => this.currentProduct; set => this.currentProduct = value; }
+        public ProductsView CurrentProduct
+        {
+            get => this.currentProduct; set => this.currentProduct = value;
+        }
         /// <summary>
         /// Используется при создании объекта
         /// </summary>
-        public VendorCodes CurrentVendorCode { set; get; }
+        public VendorCodes CurrentVendorCode
+        {
+            set; get;
+        }
         #endregion
 
         #region Методы
@@ -257,61 +271,47 @@ namespace База_артикулов.Формы.Страницы.Редакти
         /// <param name="fieldName">Имя поля</param>
         private void FilterFields(string fieldName)
         {
-            if (this.gridFields != null)
-            {
-                #region Показать элементы, если поле не пустое
-                if (String.IsNullOrEmpty(fieldName))
-                {
-                    foreach (object childControl in this.gridFields.Children)
-                    {
-                        var control = childControl as UserControl;
-                        control.Visibility = System.Windows.Visibility.Visible;
-                    }
-                }
-                #endregion
-                #region Скрыть элементы, если поле пустое
-                else
-                {
-                    foreach (object childControl in this.gridFields.Children)
-                    {
-                        if (childControl.GetType() == typeof(LabeledTextBox))
-                        {
-                            var control = childControl as LabeledTextBox;
-                            if (!control.Title.ToLower().Contains(fieldName.ToLower()))
-                            {
-                                control.Visibility = System.Windows.Visibility.Collapsed;
-                            }
-                        }
-                        if (childControl.GetType() == typeof(LabeledComboBox))
-                        {
-                            var control = childControl as LabeledComboBox;
-                            if (!control.Title.ToLower().Contains(fieldName.ToLower()))
-                            {
-                                control.Visibility = System.Windows.Visibility.Collapsed;
-                            }
-                        }
-                        if (childControl.GetType() == typeof(LabeledTextBoxAndComboBox))
-                        {
-                            var control = childControl as LabeledTextBoxAndComboBox;
-                            if (!control.Title.ToLower().Contains(fieldName.ToLower()))
-                            {
-                                control.Visibility = System.Windows.Visibility.Collapsed;
-                            }
-                        }
-                        if (childControl.GetType() == typeof(LabeledCheckBox))
-                        {
-                            var control = childControl as LabeledCheckBox;
-                            if (!control.Title.ToLower().Contains(fieldName.ToLower()))
-                            {
-                                control.Visibility = System.Windows.Visibility.Collapsed;
-                            }
-                        }
+            if (this.gridFields == null)
+                return;
 
+            #region Показать элементы, если поле пустое
+            if (string.IsNullOrEmpty(fieldName))
+            {
+                foreach (var control in this.gridFields.Children.OfType<UserControl>())
+                {
+                    control.Visibility = Visibility.Visible;
+                }
+            }
+            #endregion
+
+            #region Скрыть элементы, если поле не пустое
+            else
+            {
+                var typesToCheck = new Type[]
+                {
+            typeof(LabeledTextBox),
+            typeof(LabeledComboBox),
+            typeof(LabeledTextBoxAndComboBox),
+            typeof(LabeledCheckBox),
+            typeof(PagedDataGrid),
+            typeof(LabeledTextBoxAndButton)
+                };
+
+                foreach (var childControl in this.gridFields.Children)
+                {
+                    if (typesToCheck.Contains(childControl.GetType()))
+                    {
+                        var control = childControl as dynamic;
+                        if (control != null && !control.Title.ToLower().Contains(fieldName.ToLower()))
+                        {
+                            control.Visibility = Visibility.Collapsed;
+                        }
                     }
                 }
-                #endregion
             }
+            #endregion
         }
+
 
         /// <summary>
         /// Сохраняет изменения, внесенные в продукт.
@@ -388,11 +388,11 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
         }
 
-
         public override void UpdateFields(List<CustomEventArgs> args)
         {
             try
             {
+                this.UpdateFieldsTitles();
                 Products product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
                 if (product != null)
                 {
@@ -412,7 +412,11 @@ namespace База_артикулов.Формы.Страницы.Редакти
                         this.txbDescription.Text = productView.Описание_продукта;
                         #endregion
                         #region Артикул
-                        this.txbVendorCode.IsEnabled = this.CustomBase.Mode == EditModes.Create;
+                        this.txbVendorCode.IsEnabled = true;
+                        this.txbVendorCode.IsEnableTextBox = this.CustomBase.Mode == EditModes.Create;
+                        //this.txbVendorCode.IsEnableTextBox = true;
+                        //this.txbVendorCode.IsEnableButton = true;
+                        this.txbVendorCode.TitleButton = Common.EditModesDescriptions.ActionDescriptions[this.CustomBase.Mode];
                         this.txbVendorCode.Text = productView.Артикул;
                         #endregion
                         #region Бухгалтерский код
@@ -444,27 +448,23 @@ namespace База_артикулов.Формы.Страницы.Редакти
                         this.CustomBase.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
                         #endregion
                         #region Таблица измерений
-                        string entityConnStr = this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Value;
-                        var entityBuilder = new EntityConnectionStringBuilder(entityConnStr);
-                        string connectionString = entityBuilder.ProviderConnectionString;
-                        string query = String.Format("SELECT * FROM ProductUnitsView where [ID товара] = {0}", productView.ID_продукта);
+                        this.dgDimensions.Title = Common.EntityRussianNames.NamesNominative[typeof(Units)];
+                        //var queryResult = this.CustomBase.CustomDb.ExecuteSqlQuery<ProductUnitsView>($"SELECT * FROM ProductUnitsView where [ID товара] = {product.id}");
+                        //int g = 0;
+                        //ObservableCollection<Object> observableCollection = new ObservableCollection<Object>(queryResult);
 
-                        using (var connection = new SqlConnection(connectionString))
-                        {
-                            connection.Open();
-
-                            using (var command = new SqlCommand(query, connection))
-                            {
-                                var adapter = new SqlDataAdapter(command);
-                                var dataTable = new DataTable();
-                                adapter.Fill(dataTable);
-
-                                this.dgDimensions.ItemsSource = dataTable.DefaultView;
-                            }
-                        }
+                        //this.dgDimensions.TableData =
+                        //    new TableData(
+                        //        typeof(ProductUnitsView).GetType().Name,
+                        //        typeof(ProductUnitsView).GetType().Name,
+                        //        typeof(ProductUnitsView),
+                        //        typeof(ProductUnitsView).GetProperties().Select(p => p.Name).ToList(),
+                        //         observableCollection
+                        //        );
                         #endregion
                         #region Таблица файлов
-                        this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.Where(x => x.ID_продукта == this.CurrentProduct.ID_продукта).ToList();
+                        this.dgFiles.Title = Common.EntityRussianNames.NamesNominative[typeof(Resources)];
+                        //this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.Where(x => x.ID_продукта == product.id).ToList();
                         #endregion
                     }
                 }
@@ -813,5 +813,59 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         #endregion
 
+        private void dgDimensions_RightClickSelectedCellChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgDimensions_LeftClickSelectedCellChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgDimensions_AddMenuItemClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgDimensions_DeleteMenuItemClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgDimensions_EditMenuItemClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgFiles_RightClickSelectedCellChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgFiles_LeftClickSelectedCellChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgFiles_AddMenuItemClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgFiles_DeleteMenuItemClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgFiles_EditMenuItemClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbVendorCode_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
