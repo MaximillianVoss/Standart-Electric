@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <CustomControlsWPF:LabeledComboBox x:Name="cmbConnectionStrings" Margin="10,10,10,0" Height="75" VerticalAlignment="Top" Title="Доступные подключения к БД" SelectionChanged="cmbConnectionStrings_SelectionChanged"/>
-        <CustomControlsWPF:ButtonPrimary x:Name="btnSave" Grid.Row="1" Margin="10,10,10,10" Height="40" Text="Сохранить настройки"/>
+        <CustomControlsWPF:ButtonPrimary x:Name="btnSave" Grid.Row="1" Margin="10,10,10,10" Height="40" Text="Сохранить настройки" Click="btnSave_Click"/>
 
     </Grid>
 </local1:CustomPage>

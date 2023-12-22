@@ -283,6 +283,8 @@ namespace База_артикулов.Формы
         }
         public string GetTitle(EditModes mode, object obj)
         {
+            if (obj == null)
+                return null;
             if (Common.EntityRussianNames.NamesGenitive.ContainsKey(obj.GetType()))
                 return this.GetTitle(mode, obj.GetType());
             return this.GetTitle(mode, obj.GetType().BaseType);

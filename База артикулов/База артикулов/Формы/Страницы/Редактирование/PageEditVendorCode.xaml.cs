@@ -69,7 +69,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             if (this.CustomBase.Mode == EditModes.Create)
             {
-                this.CustomBase.Result.Data = this.CustomBase.CustomDb.CreateVendorCode(
+                var vendoreCode = this.CustomBase.CustomDb.CreateVendorCode(
                     this.txbCode.Text,
                     this.txbAccountantCode.Text,
                     (int)this.cmbManufacturer.SelectedId,
@@ -77,6 +77,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     (bool)this.chbIsPublic.IsChecked,
                     (bool)this.chbIsSale.IsChecked
                     );
+                return vendoreCode;
             }
             if (this.CustomBase.Mode == EditModes.Update)
             {
@@ -94,11 +95,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
                     this.chbIsPublic.IsChecked ?? false,  // Если IsChecked == null, используйте 'false'
                     this.chbIsSale.IsChecked ?? false     // Если IsChecked == null, используйте 'false'
                 );
-
-                this.CustomBase.Result.Data = true;
-
+                return true;
             }
-            return true;
+            return false;
         }
         public override object HandleCancel(List<CustomEventArgs> args)
         {

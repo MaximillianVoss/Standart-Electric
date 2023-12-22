@@ -76,8 +76,6 @@ namespace База_артикулов.Классы
 
         #region Методы
 
-
-
         #region SQL запросы
         private List<T> ReadData<T>(SqlCommand command) where T : class, new()
         {
@@ -913,33 +911,7 @@ namespace База_артикулов.Классы
 
 
         //TODO: добавить обновление и удаление товара
-        public Products CreateEmptyProduct(string title = "Новый продукт", SubGroups subGroups = null)
-        {
-            throw new Exception("Проверить метод! нужен ли он вообще!");
-            // Создание нового дескриптора
-            var descriptor = new Descriptors
-            {
-                title = title
-            };
 
-            // Сохранение дескриптора в БД
-            this.DB.Descriptors.Add(descriptor);
-            this.DB.SaveChanges();
-
-            // Создание нового продукта со значениями по умолчанию
-            var product = new Products
-            {
-                Descriptors = descriptor,
-                Covers = this.DB.Covers.FirstOrDefault(x => x.id > 0),
-                SubGroups = subGroups
-                // Добавьте здесь другие значения по умолчанию, если они есть
-            };
-
-            // Сохранение продукта в БД
-            product = this.DB.Products.Add(product);
-            this.DB.SaveChanges();
-            return product;
-        }
         /// <summary>
         /// Поверяет наличие товара в базе
         /// </summary>
@@ -985,23 +957,143 @@ namespace База_артикулов.Классы
         }
 
         public Products CreateProduct(
-            string title, string titleShort,
-            string description, string vendorCode,
-            int idNorm, int idSubGroup,
-            int idCover, int idMaterial,
+            string title,
+            string titleShort,
+            string description,
+            string vendorCode,
+            int idNorm,
+            int idSubGroup,
+            int idCover,
+            int idMaterial,
             int idPerforation,
-            int idPackage, bool isInStock
+            int idPackage,
+            bool isInStock
             )
         {
             Descriptors descriptor = this.CreateDescriptor(vendorCode, title, titleShort, title, description);
             if (descriptor != null)
             {
                 var product = new Products(descriptor.id, idNorm, idSubGroup, idCover, idMaterial, idPerforation, idPackage, isInStock);
-                return this.DB.Products.Add(product);
+                product = this.DB.Products.Add(product);
+                this.DB.SaveChanges();
+                return product;
             }
             return null;
         }
 
+        public bool UpdateProduct(
+            int productId,
+            string title,
+            string titleShort,
+            string description,
+            string vendorCode,
+            int idNorm,
+            int idSubGroup,
+            int idCover,
+            int idMaterial,
+            int idPerforation,
+            int idPackage,
+            bool isInStock
+        )
+        {
+            var descriptors = this.GetDescriptorProduct(productId);
+            // Находим продукт по ID
+            var product = this.DB.Products.FirstOrDefault(p => p.id == productId);
+            if (descriptors != null && product != null)
+            {
+                descriptors.title = title;
+                descriptors.titleShort = titleShort;
+                descriptors.description = description;
+
+                product.idNorm = idNorm;
+                product.idSubGroup = idSubGroup;
+                product.idCover = idCover;
+                product.idMaterial = idMaterial;
+                product.idPerforation = idPerforation;
+                product.idPackage = idPackage;
+                product.isInStock = isInStock;
+
+                var productVendorCode = this.DB.ProductsVendorCodes.FirstOrDefault(p => p.idProduct == product.id);
+                if (productVendorCode != null)
+                {
+                    var vendorCodeDB = this.DB.VendorCodes.FirstOrDefault(p => p.id == productVendorCode.idCode);
+                    vendorCodeDB.Descriptors.title = vendorCode;
+                }
+                else
+                {
+                    return false;
+                }
+
+                // Сохраняем изменения в базе данных
+                this.DB.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteProduct(int productId)
+        {
+            // Находим продукт по ID
+            var product = this.DB.Products.FirstOrDefault(p => p.id == productId);
+            var descriptors = this.GetDescriptorProduct(productId);
+            if (product != null)
+            {
+                // Удаляем продукт из базы данных
+                this.DB.Products.Remove(product);
+                this.DeleteDescriptor(descriptors.id);
+                var productVendorCode = this.DB.ProductsVendorCodes.FirstOrDefault(p => p.idProduct == product.id);
+                if (productVendorCode != null)
+                {
+                    this.DB.ProductsVendorCodes.Remove(productVendorCode);
+                    var vendorCode = this.DB.VendorCodes.FirstOrDefault(x => x.id == productVendorCode.idCode);
+                }
+                this.DB.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public Products CreateEmptyProduct(string title = "Новый продукт")
+        {
+            var norm = this.DB.Norms.FirstOrDefault();
+            var subGroup = this.DB.SubGroups.FirstOrDefault();
+            var cover = this.DB.Covers.FirstOrDefault();
+            var material = this.DB.Materials.FirstOrDefault();
+            var perforation = this.DB.Perforations.FirstOrDefault();
+            var package = this.DB.Packages.FirstOrDefault();
+
+            // Проверяем каждое значение на null перед использованием.
+            // Если значение равно null, можно использовать значение по умолчанию или обработать ошибку.
+            var product = this.CreateProduct(
+                title,
+                String.Empty,
+                String.Empty,
+                String.Empty,
+                norm?.id ?? default(int), // Используйте 'default(int)' или определите подходящее значение.
+                subGroup?.id ?? default(int),
+                cover?.id ?? default(int),
+                material?.id ?? default(int),
+                perforation?.id ?? default(int),
+                package?.id ?? default(int),
+                false
+            );
+            var manufacturer = this.DB.Manufacturers.FirstOrDefault();
+            var vendorCode = this.CreateVendorCode(
+                String.Empty,
+                String.Empty,
+                manufacturer?.id ?? default(int),
+                false,
+                false,
+                false
+                );
+            this.DB.VendorCodes.Add(vendorCode);
+            var productsVendorCodes = new ProductsVendorCodes();
+            productsVendorCodes.idProduct = product?.id ?? default(int);
+            productsVendorCodes.idCode = vendorCode?.id ?? default(int);
+            this.DB.ProductsVendorCodes.Add(productsVendorCodes);
+            this.DB.SaveChanges();
+            return product;
+        }
         #endregion
 
         #endregion

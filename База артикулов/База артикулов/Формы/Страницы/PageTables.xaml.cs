@@ -105,6 +105,21 @@ namespace База_артикулов.Формы.Страницы
                 //    this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
                 //    this.UpdateDataGrid(this.CurrentTableData);
                 //}
+                Products product = this.CustomBase.CustomDb.CreateEmptyProduct();
+                this.CustomBase.AddCurrentObject(new CustomEventArgs(product));
+                this.CustomBase.Mode = EditModes.Create;
+                var windowEdit = new WindowEdit(
+                    this.CustomBase,
+                    Common.WindowSizes.MediumH600W800.Width,
+                    Common.WindowSizes.MediumH600W800.Height
+                    );
+                _ = windowEdit.ShowDialog();
+                if ((bool)windowEdit.DialogResult)
+                {
+                    this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
+                    _ = this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
+                    _ = this.UpdateDataGrid(this.CurrentTableData);
+                }
             }
             catch (Exception ex)
             {
@@ -257,6 +272,15 @@ namespace База_артикулов.Формы.Страницы
                 //this.dgTable.TableData.SetDisplayColumns(displayColumns);
             }
             return Task.CompletedTask;
+        }
+        /// <summary>
+        /// Обновлет Grid с записями
+        /// </summary>
+        private void UpdateDateGrid()
+        {
+            this.CurrentTableData = this.GetTable(this.cmbTables.SelectedItem);
+            _ = this.FilterTableByTreeView(this.CurrentTableData.ItemsType, this.SelectedItemTreeView.Value);
+            _ = this.UpdateDataGrid(this.CurrentTableData);
         }
         #endregion
 
@@ -728,6 +752,7 @@ namespace База_артикулов.Формы.Страницы
             }
         }
 
+
         #endregion
 
         #endregion
@@ -775,6 +800,17 @@ namespace База_артикулов.Формы.Страницы
             try
             {
                 this.Delete();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
+        private void dgTable_RefreshMenuItemClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateDateGrid();
             }
             catch (Exception ex)
             {
@@ -873,6 +909,7 @@ namespace База_артикулов.Формы.Страницы
                 this.ShowError(ex);
             }
         }
+
 
 
 

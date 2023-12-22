@@ -6,7 +6,7 @@ namespace База_артикулов.Классы
 {
     public class Settings
     {
-        private const string DEFAULT_FILE_PATH = "settings.json";
+        public const string DEFAULT_FILE_PATH = "settings.json";
 
         #region Поля
         private ConnectionStringInfo _currentConnectionString;

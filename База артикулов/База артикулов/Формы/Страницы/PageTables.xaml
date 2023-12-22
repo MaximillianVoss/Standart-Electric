@@ -47,7 +47,7 @@
                                          LeftClickSelectedCellChanged="dgTable_LeftClickSelectedCellChanged" 
                                          AddMenuItemClicked="dgTable_AddMenuItemClicked" 
                                          DeleteMenuItemClicked="dgTable_DeleteMenuItemClicked" 
-                                         EditMenuItemClicked="dgTable_EditMenuItemClicked"/>
+                                         EditMenuItemClicked="dgTable_EditMenuItemClicked" RefreshMenuItemClicked="dgTable_RefreshMenuItemClicked"/>
 
     </Grid>
 </local1:CustomPage>

@@ -21,6 +21,16 @@ namespace База_артикулов.Формы.Страницы
         #endregion
 
         #region Методы
+        private void Save()
+        {
+            if (this.cmbConnectionStrings.SelectedItem != null)
+            {
+                this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Name = this.cmbConnectionStrings.SelectedItem;
+                this.CustomBase.CustomDb.Settgins.SaveToFile(Settings.DEFAULT_FILE_PATH);
+                this.CustomBase.CustomDb = new CustomDB(new Settings(Settings.DEFAULT_FILE_PATH));
+                //this.CustomBase.CustomDb.InitDB(true);
+            }
+        }
         private void UpdateConnectionsComboBox()
         {
             ConnectionStringSettingsCollection connectionStrings = ConfigurationManager.ConnectionStrings;
@@ -40,6 +50,23 @@ namespace База_артикулов.Формы.Страницы
                     this.cmbConnectionStrings.Select(connectionStrings[0].Name);
                 }
             }
+        }
+        public override void UpdateFields(List<CustomEventArgs> args)
+        {
+            //throw new NotImplementedException();
+        }
+        public override void UpdateForm(List<CustomEventArgs> args)
+        {
+            this.InitializeComponent();
+            this.UpdateConnectionsComboBox();
+        }
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
+        }
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -61,7 +88,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                this.UpdateConnectionsComboBox();
+
             }
             catch (Exception ex)
             {
@@ -70,32 +97,15 @@ namespace База_артикулов.Формы.Страницы
         }
         private void cmbConnectionStrings_SelectionChanged(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (this.cmbConnectionStrings.SelectedItem != null)
-            {
-                this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Name = this.cmbConnectionStrings.SelectedItem;
-            }
+            Save();
+        }
+        private void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Save();
         }
 
-        public override void UpdateFields(List<CustomEventArgs> args)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public override void UpdateForm(List<CustomEventArgs> args)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public override object HandleOk(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override object HandleCancel(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
+
 
     }
 }
