@@ -686,8 +686,8 @@
           <ScalarProperty Name="Наименование_единицы_измерения" ColumnName="Наименование единицы измерения" />
           <ScalarProperty Name="ID_единицы_измерения" ColumnName="ID единицы измерения" />
           <ScalarProperty Name="ID_дескриптора_товара" ColumnName="ID дескриптора товара" />
-          <ScalarProperty Name="ID_товара" ColumnName="ID товара" />
-          <ScalarProperty Name="ID_связи_продукт_измерение" ColumnName="ID связи продукт-измерение" />
+          <ScalarProperty Name="ID_продукта" ColumnName="ID продукта" />
+          <ScalarProperty Name="ID_связи_продуктИзмерение" ColumnName="ID связи продуктИзмерение" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

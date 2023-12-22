@@ -118,7 +118,10 @@ namespace База_артикулов.Формы
         /// <summary>
         /// Текущий режим: создание/редактирование/удаление
         /// </summary>
-        public EditModes Mode { set; get; }
+        public EditModes Mode
+        {
+            set; get;
+        }
         /// <summary>
         /// Объекты с которыми в данный момент взаимодействует окно/страница, обычно передаются ему в качестве параметров
         /// </summary>
@@ -137,15 +140,24 @@ namespace База_артикулов.Формы
         /// Объект возвращаемый окном/страницей после закрытия,
         /// NULL - если ничего не требуется возвращать
         /// </summary>
-        public CustomEventArgs Result { set; get; }
+        public CustomEventArgs Result
+        {
+            set; get;
+        }
         /// <summary>
         /// webDAV-клиент
         /// </summary>
-        public WDClient WDClient { set; get; }
+        public WDClient WDClient
+        {
+            set; get;
+        }
         /// <summary>
         /// База данных
         /// </summary>
-        public CustomDB CustomDb { set; get; }
+        public CustomDB CustomDb
+        {
+            set; get;
+        }
         /// <summary>
         /// Текущий объект, выбранный в списке параметров
         /// </summary>
@@ -155,7 +167,7 @@ namespace База_артикулов.Формы
             get
             {
                 if (this.CurrentObjects != null && this.CurrentObjects.Count > 0)
-                    this.currentObject = this.CurrentObjects[0];
+                    this.currentObject = this.CurrentObjects[this.CurrentObjects.Count - 1];
                 return this.currentObject;
             }
         }
@@ -291,6 +303,22 @@ namespace База_артикулов.Формы
             {
                 this.CurrentObjects.Add(item);
             }
+        }
+        /// <summary>
+        /// Добавляет элемент в список текущих объектов.
+        /// </summary>
+        /// <param name="object">Элемент для добавления.</param>
+        public void AddCurrentObject(object @object)
+        {
+            this.AddCurrentObject(new CustomEventArgs(@object));
+        }
+        /// <summary>
+        /// Удаляет последний добавленный элемент
+        /// </summary>
+        public void RemoveLastCurrentObject()
+        {
+            if (this.CurrentObjects != null && this.CurrentObjects.Count > 0)
+                this.CurrentObjects.RemoveAt(this.CurrentObjects.Count - 1);
         }
 
         /// <summary>

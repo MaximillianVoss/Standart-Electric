@@ -98,69 +98,6 @@ namespace База_артикулов.Формы.Страницы.Редакти
                 this.CustomBase.Result.Data = true;
             }
             return true;
-            //// Объявляем объект descriptor здесь, так как он будет использоваться в обоих случаях
-            //Descriptors descriptor;
-
-            //// Проверяем, задан ли CurrentObject
-            //if (this.CurrentObject != null)
-            //{
-            //    // Проверяем, является ли CurrentObject объектом Groups
-            //    if (!(this.CurrentObject is SubGroups currentSubGroup))
-            //        throw new Exception("Редактируемый элемент не является классом");
-
-            //    // Извлекаем соответствующую группу из базы данных
-            //    currentSubGroup = this.DB.SubGroups.FirstOrDefault(x => x.id == currentSubGroup.id);
-
-            //    сохраняем descriptor
-            //    descriptor = this.save(
-            //        currentsubgroup.iddescriptor,
-            //        this.txbcode.text,
-            //        this.txbtitle.text,
-            //        this.txbtitleshort.text,
-            //        "",
-            //        this.txbdescription.text
-            //        );
-
-            //    // Обновляем текущую группу
-            //    currentSubGroup.Descriptors = descriptor;
-            //    currentSubGroup.Groups = this.DB.Groups.FirstOrDefault(x => x.id == this.cmbGroup.SelectedId);
-            //    currentSubGroup.LoadDiagrams = this.DB.LoadDiagrams.FirstOrDefault(x => x.id == this.cmbLoadDiagram.SelectedId);
-            //    var subGroupApplication = this.DB.GroupsApplications.FirstOrDefault(x => x.idSubGroup == currentSubGroup.id);
-            //    if (subGroupApplication != null)
-            //    {
-            //        subGroupApplication.Applications = this.DB.Applications.FirstOrDefault(x => x.id == this.cmbApplication.SelectedId);
-            //    }
-            //    else
-            //    {
-            //        this.DB.GroupsApplications.Add(new GroupsApplications(
-            //            currentSubGroup,
-            //            this.DB.Applications.FirstOrDefault(x => x.id == this.cmbApplication.SelectedId)
-            //            ));
-            //    }
-            //}
-            //else
-            //{
-            //    // Создаем новый объект Descriptors и добавляем его в базу данных
-            //    descriptor = new Descriptors(
-            //        this.txbCode.Text,
-            //        this.txbTitle.Text,
-            //        this.txbTitleShort.Text,
-            //        this.txbDescription.Text
-            //        );
-
-            //    descriptor = this.DB.Descriptors.Add(descriptor);
-
-            //    // Создаем новый объект Groups и добавляем его в базу данных
-            //    this.DB.SubGroups.Add(new SubGroups(
-            //        descriptor,
-            //        this.DB.Groups.FirstOrDefault(x => x.id == this.cmbGroup.SelectedId),
-            //        this.DB.LoadDiagrams.FirstOrDefault(x => x.id == this.cmbLoadDiagram.SelectedId)
-            //        ));
-
-            //}
-
-            //// Сохраняем изменения в базе данных
-            //this.DB.SaveChanges();
         }
 
         public override object HandleCancel(List<CustomEventArgs> args)

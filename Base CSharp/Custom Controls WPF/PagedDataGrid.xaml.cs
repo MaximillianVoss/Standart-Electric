@@ -147,6 +147,7 @@ namespace CustomControlsWPF
 
         public void SetDisplayColumns(List<string> columnNames)
         {
+            this.tableData.DisplayColumnNames.Clear();
             foreach (var item in columnNames)
                 this.AddDisplayColumn(item);
         }

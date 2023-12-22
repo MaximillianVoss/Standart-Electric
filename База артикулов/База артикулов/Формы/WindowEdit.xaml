@@ -7,7 +7,7 @@
                     mc:Ignorable="d"
                     d:DesignWidth="400"
                     d:DesignHeight="400"
-        Title="WindowEdit" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" ContentRendered="CustomWindow_ContentRendered" SizeChanged="CustomWindow_SizeChanged">
+        Title="WindowEdit" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" ContentRendered="CustomWindow_ContentRendered" SizeChanged="CustomWindow_SizeChanged" Closing="CustomWindow_Closing">
     <Grid>
         <Frame x:Name="fMain" Content="Frame" 
                NavigationUIVisibility="Hidden" 

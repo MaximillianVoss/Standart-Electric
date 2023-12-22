@@ -89,7 +89,7 @@ namespace База_артикулов.Формы
         {
             if (this.CustomBase == null || this.CustomBase.CurrentObjects == null)
                 throw new Exception(Common.Strings.Errors.incorrectUpdateElement);
-            if (this.CustomBase.CurrentObjects.Count == 1)
+            if (this.CustomBase.CurrentObjects.Count >= 1)
             {
                 object argument = this.CustomBase.UnpackCurrentObject(this.CurrentObject);
                 if (argument != null)
@@ -102,19 +102,16 @@ namespace База_артикулов.Формы
                         this.SetContent(new PageEditSubGroup(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     if (argument.ValidateTypeOrBaseType<Products>())
                         this.SetContent(new PageEditProduct(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                    if (argument.ValidateTypeOrBaseType<ProductsVendorCodes>())
+                        this.SetContent(new PageEditVendorCode(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     //TODO: Проверить
                     //if (argument.ValidateTypeOrBaseType<UnitsProducts>())
                     //    this.SetContent(new PageEditUnit(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     //if (argument.ValidateTypeOrBaseType<ResourcesViewProducts>())
                     //    this.SetContent(new PageEditResource(this.CustomBase, this.ContentWidth, this.ContentHeight));
-                    //if (argument.ValidateTypeOrBaseType<VendorCodes>())
-                    //    this.SetContent(new PageEditVendorCode(this.CustomBase, this.ContentWidth, this.ContentHeight));
 
                 }
             }
-
-
-
         }
         private void HandleCreateMode(List<CustomEventArgs> args)
         {
@@ -205,7 +202,13 @@ namespace База_артикулов.Формы
         {
 
         }
+        private void CustomWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //Действуем по принципу стека - в конце списка последний обрабатываемый элемент
+            this.CustomBase.RemoveLastCurrentObject();
+        }
         #endregion
+
 
     }
 }

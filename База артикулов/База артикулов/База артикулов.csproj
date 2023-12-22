@@ -201,6 +201,8 @@
     <Compile Include="Классы\Дополнения\ProductsView.cs" />
     <Compile Include="Классы\Дополнения\ProductsViewLite.cs" />
     <Compile Include="Классы\Дополнения\ProductsViewLiteWrappedCustom.cs" />
+    <Compile Include="Классы\Дополнения\ProductUnitsViewCustom.cs" />
+    <Compile Include="Классы\Дополнения\ResourcesViewProductsCustom.cs" />
     <Compile Include="Классы\Дополнения\SubGroups.cs" />
     <Compile Include="Классы\Дополнения\Units.cs" />
     <Compile Include="Классы\Дополнения\UnitsProducts.cs" />

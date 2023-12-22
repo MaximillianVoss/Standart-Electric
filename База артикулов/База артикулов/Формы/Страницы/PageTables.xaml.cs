@@ -118,7 +118,7 @@ namespace База_артикулов.Формы.Страницы
             {
                 var selectedProductViewCustom = this.SelectedItemTable as ProductsViewLiteWrappedCustom;
                 Products product = this.CustomBase.CustomDb.DB.Products.FirstOrDefault(x => x.id == selectedProductViewCustom.ID_продукта);
-                this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(product));
+                this.CustomBase.AddCurrentObject(new CustomEventArgs(product));
                 this.CustomBase.Mode = EditModes.Update;
                 var windowEdit = new WindowEdit(
                     this.CustomBase,
@@ -528,18 +528,18 @@ namespace База_артикулов.Формы.Страницы
                 {
                     var group = new Groups();
                     group.Classes = selectedItemTreeViewObject as Classes;
-                    this.CustomBase.AddWithClearCurrentObjects(group);
+                    this.CustomBase.AddCurrentObject(group);
                 }
                 if (selectedItemTreeViewObject.ValidateTypeOrBaseType<Groups>() || selectedItemTreeViewObject.ValidateTypeOrBaseType<SubGroups>())
                 {
                     var subGroup = new SubGroups();
                     subGroup.Groups = selectedItemTreeViewObject as Groups;
-                    this.CustomBase.AddWithClearCurrentObjects(subGroup);
+                    this.CustomBase.AddCurrentObject(subGroup);
                 }
             }
             else
             {
-                this.CustomBase.AddWithClearCurrentObjects(new Classes());
+                this.CustomBase.AddCurrentObject(new Classes());
             }
             //this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView));
             this.CustomBase.Mode = EditModes.Create;
@@ -678,7 +678,7 @@ namespace База_артикулов.Формы.Страницы
         {
             try
             {
-                this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(this.SelectedItemTreeView.Value));
+                this.CustomBase.AddCurrentObject(new CustomEventArgs(this.SelectedItemTreeView.Value));
                 this.CustomBase.Mode = EditModes.Update;
                 var windowEdit = new WindowEdit(
                     Common.Strings.Titles.Windows.edit,

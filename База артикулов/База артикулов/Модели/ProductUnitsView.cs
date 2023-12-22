@@ -14,8 +14,8 @@ namespace База_артикулов.Модели
     
     public partial class ProductUnitsView
     {
-        public Nullable<int> ID_связи_продукт_измерение { get; set; }
-        public int ID_товара { get; set; }
+        public Nullable<int> ID_связи_продуктИзмерение { get; set; }
+        public int ID_продукта { get; set; }
         public int ID_дескриптора_товара { get; set; }
         public Nullable<int> ID_единицы_измерения { get; set; }
         public string Наименование_единицы_измерения { get; set; }

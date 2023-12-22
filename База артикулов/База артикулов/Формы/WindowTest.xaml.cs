@@ -68,7 +68,7 @@ namespace База_артикулов.Формы
         private void TestCreateGroup()
         {
             this.CustomBase = new CustomBase(new Settings("settings.json"));
-            this.CustomBase.AddWithClearCurrentObjects(new CustomEventArgs(new TreeViewItemCustom(1, "Test", new Groups())));
+            this.CustomBase.AddCurrentObject(new CustomEventArgs(new TreeViewItemCustom(1, "Test", new Groups())));
             this.CustomBase.Mode = EditModes.Create;
             var windowEdit = new WindowEdit(
                 Common.Strings.Titles.Windows.add,
@@ -81,7 +81,7 @@ namespace База_артикулов.Формы
         private void TestUpdateProduct()
         {
             this.CustomBase = new CustomBase(new Settings("settings.json"));
-            this.CustomBase.AddWithClearCurrentObjects(this.DB.Products.FirstOrDefault());
+            this.CustomBase.AddCurrentObject(this.DB.Products.FirstOrDefault());
             this.CustomBase.Mode = EditModes.Update;
             var windowEdit = new WindowEdit(
                 Common.Strings.Titles.Windows.add,

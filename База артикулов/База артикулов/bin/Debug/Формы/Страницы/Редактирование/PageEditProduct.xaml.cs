@@ -14,6 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using База_артикулов.Классы;
+using База_артикулов.Классы.Дополнения;
 using База_артикулов.Модели;
 
 namespace База_артикулов.Формы.Страницы.Редактирование
@@ -449,22 +450,45 @@ namespace База_артикулов.Формы.Страницы.Редакти
                         #endregion
                         #region Таблица измерений
                         this.dgDimensions.Title = Common.EntityRussianNames.NamesNominative[typeof(Units)];
-                        //var queryResult = this.CustomBase.CustomDb.ExecuteSqlQuery<ProductUnitsView>($"SELECT * FROM ProductUnitsView where [ID товара] = {product.id}");
-                        //int g = 0;
-                        //ObservableCollection<Object> observableCollection = new ObservableCollection<Object>(queryResult);
+                        var productUnitsViewCustoms = this.CustomBase.CustomDb.ExecuteSqlQuery<ProductUnitsViewCustom>(
+                            $"SELECT * FROM ProductUnitsView where [ID продукта] = {product.id}");
+                        ObservableCollection<Object> ocProductUnitsViewCustoms = new ObservableCollection<Object>(productUnitsViewCustoms);
 
-                        //this.dgDimensions.TableData =
-                        //    new TableData(
-                        //        typeof(ProductUnitsView).GetType().Name,
-                        //        typeof(ProductUnitsView).GetType().Name,
-                        //        typeof(ProductUnitsView),
-                        //        typeof(ProductUnitsView).GetProperties().Select(p => p.Name).ToList(),
-                        //         observableCollection
-                        //        );
+                        this.dgDimensions.TableData =
+                            new TableData(
+                                typeof(ProductUnitsView).GetType().Name,
+                                typeof(ProductUnitsView).GetType().Name,
+                                typeof(ProductUnitsView),
+                                typeof(ProductUnitsView).GetProperties().Select(p => p.Name).ToList(),
+                                 ocProductUnitsViewCustoms
+                                );
+                        this.dgDimensions.TableData.DisplayColumnNames = new List<string>()
+                        {
+                            "Наименование типа единицы измерения",
+                            "Значение",
+                            "Сокращенное наименование единицы измерения"
+                        };
+                        this.dgDimensions.Update();
                         #endregion
                         #region Таблица файлов
                         this.dgFiles.Title = Common.EntityRussianNames.NamesNominative[typeof(Resources)];
-                        //this.dgFiles.ItemsSource = this.DB.ResourcesViewProducts.Where(x => x.ID_продукта == product.id).ToList();
+                        var resourcesViewProducts = this.CustomBase.CustomDb.ExecuteSqlQuery<ResourcesViewProductsCustom>(
+                            $"SELECT * FROM ResourcesViewProducts where [ID продукта] = {product.id}");
+                        ObservableCollection<Object> ocResourcesViewProducts = new ObservableCollection<Object>(resourcesViewProducts);
+                        this.dgFiles.TableData =
+                           new TableData(
+                               typeof(ProductUnitsView).GetType().Name,
+                               typeof(ProductUnitsView).GetType().Name,
+                               typeof(ProductUnitsView),
+                               typeof(ProductUnitsView).GetProperties().Select(p => p.Name).ToList(),
+                                ocResourcesViewProducts
+                               );
+                        //TODO:Добавить отображаемые столбцы
+                        //this.dgFiles.TableData.DisplayColumnNames = new List<string>()
+                        //{
+
+                        //};
+                        this.dgFiles.Update();
                         #endregion
                     }
                 }
@@ -499,6 +523,37 @@ namespace База_артикулов.Формы.Страницы.Редакти
         public override object HandleCancel(List<CustomEventArgs> args)
         {
             return false;
+        }
+
+        public void HandleUpdateVendorCode()
+        {
+            if (this.CustomBase.Mode == EditModes.Create)
+            {
+                this.CustomBase.AddCurrentObject(new CustomEventArgs(new ProductsVendorCodes()));
+                var windowEdit = new WindowEdit(
+               Common.Strings.Titles.Windows.add,
+               this.CustomBase,
+               Common.WindowSizes.SmallH320W400.Width,
+               Common.WindowSizes.SmallH320W400.Height
+               );
+                windowEdit.ShowDialog();
+            }
+            if (this.CustomBase.Mode == EditModes.Update)
+            {
+                Products product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
+                if (product != null)
+                {
+                    ProductsVendorCodes productVendorCode = this.DB.ProductsVendorCodes.FirstOrDefault(x => x.idProduct == product.id);
+                    this.CustomBase.AddCurrentObject(new CustomEventArgs(productVendorCode));
+                    var windowEdit = new WindowEdit(
+                   Common.Strings.Titles.Windows.add,
+                   this.CustomBase,
+                   Common.WindowSizes.SmallH320W400.Width,
+                   Common.WindowSizes.SmallH320W400.Height
+                   );
+                    windowEdit.ShowDialog();
+                }
+            }
         }
         #endregion
 
@@ -717,7 +772,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             try
             {
-                //ResourcesViewProducts resourcesViewProducts = new ResourcesViewProducts();
+                //resourcesViewProducts resourcesViewProducts = new resourcesViewProducts();
                 //resourcesViewProducts.ID_продукта = this.currentProduct.ID_продукта;
                 //if (this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentProduct.ID_продукта))
                 //{
@@ -745,7 +800,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
         {
             try
             {
-                //ResourcesViewProducts resourcesViewProducts = new ResourcesViewProducts();
+                //resourcesViewProducts resourcesViewProducts = new resourcesViewProducts();
                 //resourcesViewProducts.ID_продукта = this.currentProduct.ID_продукта;
                 //if (this.CustomBase.CustomDb.IsDescriptorProductExists(this.currentProduct.ID_продукта))
                 //{
@@ -811,8 +866,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         #endregion
 
-        #endregion
+        //Новые события
 
+        #region Измерения
         private void dgDimensions_RightClickSelectedCellChanged(object sender, EventArgs e)
         {
 
@@ -838,6 +894,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         }
 
+        #endregion
+
+        #region Файлы
         private void dgFiles_RightClickSelectedCellChanged(object sender, EventArgs e)
         {
 
@@ -863,9 +922,22 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         }
 
+        #endregion
+
+
         private void txbVendorCode_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                this.HandleUpdateVendorCode();
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
+
+        #endregion
+
     }
 }

@@ -33,7 +33,10 @@ namespace База_артикулов.Классы
 
         #region Свойства
         public Settings Settgins => this.settings;
-        public DBSEEntities DB { get => this.db; private set => this.db = value; }
+        public DBSEEntities DB
+        {
+            get => this.db; private set => this.db = value;
+        }
         /// <summary>
         /// Текущая строка подключения к базе данных.
         /// </summary>
@@ -133,6 +136,40 @@ namespace База_артикулов.Классы
                 }
             }
         }
+
+        public List<object> ExecuteSqlQuery(string sqlQuery, Type entityType)
+        {
+            var entityBuilder = new EntityConnectionStringBuilder(this.CurrentConnectionString.Value);
+            string sqlConnectionString = entityBuilder.ProviderConnectionString;
+            var resultList = new List<object>();
+
+            using (var connection = new SqlConnection(sqlConnectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(sqlQuery, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        var props = entityType.GetProperties().Where(property => property.CanWrite).ToList();
+                        while (reader.Read())
+                        {
+                            var item = Activator.CreateInstance(entityType);
+                            foreach (var property in props)
+                            {
+                                var val = reader[property.Name];
+                                if (val != DBNull.Value)
+                                {
+                                    property.SetValue(item, val);
+                                }
+                            }
+                            resultList.Add(item);
+                        }
+                    }
+                }
+            }
+            return resultList;
+        }
+
 
         public List<T> ExecuteSqlQuery<T>(string sqlQuery, IEnumerable<SqlParameter> parameters) where T : class, new()
         {
@@ -297,11 +334,16 @@ namespace База_артикулов.Классы
                 throw new Exception($"Дескриптор с id:{id} не найден!");
             }
 
-            if (code != null) descriptor.code = code;
-            if (title != null) descriptor.title = title;
-            if (titleShort != null) descriptor.titleShort = titleShort;
-            if (titleDisplay != null) descriptor.titleDisplay = titleDisplay;
-            if (description != null) descriptor.description = description;
+            if (code != null)
+                descriptor.code = code;
+            if (title != null)
+                descriptor.title = title;
+            if (titleShort != null)
+                descriptor.titleShort = titleShort;
+            if (titleDisplay != null)
+                descriptor.titleDisplay = titleDisplay;
+            if (description != null)
+                descriptor.description = description;
 
             this.DB.SaveChanges();
             return descriptor;
@@ -755,11 +797,12 @@ namespace База_артикулов.Классы
         #endregion
 
         #region Артикул
-        public void CreateVendorCode(string code, string accountantCode, int manufacturerId, bool isActual, bool isPublic, bool isSale)
+        public VendorCodes CreateVendorCode(string code, string accountantCode, int manufacturerId, bool isActual, bool isPublic, bool isSale)
         {
             var item = new VendorCodes(code, accountantCode, manufacturerId, isActual, isPublic, isSale);
             this.DB.VendorCodes.Add(item);
             this.DB.SaveChanges();
+            return item;
         }
 
         public void UpdateVendorCode(int itemId, string code, string accountantCode, int manufacturerId, bool isActual, bool isPublic, bool isSale)
