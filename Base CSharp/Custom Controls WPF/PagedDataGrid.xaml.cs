@@ -115,6 +115,7 @@ namespace CustomControlsWPF
         public event EventHandler AddMenuItemClicked;
         public event EventHandler EditMenuItemClicked;
         public event EventHandler DeleteMenuItemClicked;
+        public event EventHandler RefreshMenuItemClicked;
 
         #endregion
 
@@ -333,6 +334,11 @@ namespace CustomControlsWPF
         {
             DeleteMenuItemClicked?.Invoke(this, EventArgs.Empty);
         }
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshMenuItemClicked?.Invoke(this, EventArgs.Empty);
+        }
         #endregion
+
     }
 }

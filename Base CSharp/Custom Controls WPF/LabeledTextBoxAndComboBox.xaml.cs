@@ -73,7 +73,11 @@ namespace CustomControlsWPF
         /// </summary>
         public string Text
         {
-            set { this.txbValue.Text = value; this.isValidCheck(); }
+            set
+            {
+                this.txbValue.Text = value;
+                this.isValidCheck();
+            }
             get => this.txbValue.Text;
         }
         /// <summary>
@@ -339,6 +343,16 @@ namespace CustomControlsWPF
         public void Select(string value)
         {
             this.SelectedIndex = this.items.FindIndex(x => this.GetObjectFieldValue(x, "title").ToString() == value || x.ToString() == value);
+        }
+        /// <summary>
+        /// Выбирает первый элемент в выпадающем списке
+        /// </summary>
+        public void SelectFirst()
+        {
+            if (this.items != null && this.items.Count > 0)
+            {
+                this.SelectedIndex = 0;
+            }
         }
         /// <summary>
         /// Обновляет элемент управления в соответствии с указанными данными

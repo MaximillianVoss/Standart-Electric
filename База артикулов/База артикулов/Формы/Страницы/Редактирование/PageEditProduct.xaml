@@ -68,21 +68,7 @@
                         LeftClickSelectedCellChanged="dgDimensions_LeftClickSelectedCellChanged" 
                         AddMenuItemClicked="dgDimensions_AddMenuItemClicked" 
                         DeleteMenuItemClicked="dgDimensions_DeleteMenuItemClicked" 
-                        EditMenuItemClicked="dgDimensions_EditMenuItemClicked"/>
-
-                    <!--<DataGrid x:Name="dgDimensions" Margin="10" Height="200" Grid.Row="13" 
-                              AutoGenerateColumns="True" IsReadOnly="True" 
-                              SelectionChanged="dgDimensions_SelectionChanged" 
-                              SelectedCellsChanged="dgDimensions_SelectedCellsChanged" 
-                              CanUserAddRows="False" CanUserDeleteRows="False">
-                        <DataGrid.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem x:Name="btnDimensionsAdd" Header="Добавить" Click="btnDimensionsAdd_Click"/>
-                                <MenuItem x:Name="btnDimensionsEdit" Header="Редактировать" Click="btnDimensionsEdit_Click"/>
-                                <MenuItem x:Name="btnDimensionsDelete" Header="Удалить" Click="btnDimensionsDelete_Click"/>
-                            </ContextMenu>
-                        </DataGrid.ContextMenu>
-                    </DataGrid>-->
+                        EditMenuItemClicked="dgDimensions_EditMenuItemClicked" RefreshMenuItemClicked="dgDimensions_RefreshMenuItemClicked"/>
 
                     <CustomControlsWPF:PagedDataGrid x:Name="dgFiles"  Grid.Row="14" 
                        MinHeight="150"
@@ -90,25 +76,10 @@
                        LeftClickSelectedCellChanged="dgFiles_LeftClickSelectedCellChanged" 
                        AddMenuItemClicked="dgFiles_AddMenuItemClicked" 
                        DeleteMenuItemClicked="dgFiles_DeleteMenuItemClicked" 
-                       EditMenuItemClicked="dgFiles_EditMenuItemClicked"/>
-
-                    <!--<DataGrid x:Name="dgFiles" Margin="10" Height="200" Grid.Row="14" 
-                              AutoGenerateColumns="False" IsReadOnly="False" 
-                              SelectionChanged="dgFiles_SelectionChanged" SelectedCellsChanged="dgFiles_SelectedCellsChanged">
-                        <DataGrid.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem x:Name="btnRefreshFilesTable" Header="Обновить таблицу" Click="btnRefreshFilesTable_Click"/>
-                                <MenuItem x:Name="btnFilesDownload" Header="Скачать на компьютер" Click="btnFilesDownload_Click"/>
-                                <MenuItem x:Name="btnFilesAdd" Header="Загрузить на сервер" Click="btnFilesAdd_Click"/>
-                                <MenuItem x:Name="btnFilesEdit" Header="Редактировать" Click="btnFilesEdit_Click"/>
-                                <MenuItem x:Name="btnFilesDelete" Header="Удалить" Click="btnFilesDelete_Click"/>
-                            </ContextMenu>
-                        </DataGrid.ContextMenu>
-                    </DataGrid>-->
+                       EditMenuItemClicked="dgFiles_EditMenuItemClicked" RefreshMenuItemClicked="dgFiles_RefreshMenuItemClicked"/>
 
                     <Image x:Name="imgPreview" Margin="10,5,0,5" Height="100" HorizontalAlignment="Left" Width="100" Source="/Изображения/Document.Refresh.png" MouseLeftButtonDown="imgPreview_MouseLeftButtonDown">
                     </Image>
-                    <!--<CustomControlsWPF:ButtonPrimary x:Name="btnAddVendorCode" Margin="572,23,0,23" Grid.Row="4" Text="Добавить" Click="btnAddVendorCode_Click" HorizontalAlignment="Left" Width="203"/>-->
                 </Grid>
             </ScrollViewer>
         </Grid>

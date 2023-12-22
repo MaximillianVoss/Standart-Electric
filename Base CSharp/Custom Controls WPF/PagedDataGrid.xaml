@@ -15,6 +15,7 @@
         <DataGrid x:Name="dgData" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="DgData_SelectionChanged" Grid.Row="1">
             <DataGrid.ContextMenu>
                 <ContextMenu>
+                    <MenuItem x:Name="btnRefresh" Header="Обновить таблицу" Click="btnRefresh_Click"/>
                     <MenuItem x:Name="btnAdd" Header="Добавить" Click="btnAdd_Click"/>
                     <MenuItem x:Name="btnEdit" Header="Редактировать" Click="btnEdit_Click"/>
                     <MenuItem x:Name="btnDelete" Header="Удалить" Click="btnDelete_Click"/>

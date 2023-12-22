@@ -1,6 +1,7 @@
 ﻿using CustomControlsWPF;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Win32;
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,7 @@ using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -389,6 +391,61 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
         }
 
+        public void UpdateDimensionsGrid(Products product)
+        {
+            if (product != null)
+            {
+                this.dgDimensions.Title = Common.EntityRussianNames.NamesNominative[typeof(Units)];
+                var productUnitsViewCustoms = this.CustomBase.CustomDb.ExecuteSqlQuery<ProductUnitsViewCustom>(
+                    $"SELECT * FROM ProductUnitsView where [ID продукта] = {product.id}");
+                ObservableCollection<Object> ocProductUnitsViewCustoms = new ObservableCollection<Object>(productUnitsViewCustoms);
+
+                this.dgDimensions.TableData =
+                    new TableData(
+                        typeof(ProductUnitsView).GetType().Name,
+                        typeof(ProductUnitsView).GetType().Name,
+                        typeof(ProductUnitsView),
+                        typeof(ProductUnitsView).GetProperties().Select(p => p.Name).ToList(),
+                         ocProductUnitsViewCustoms
+                        );
+                this.dgDimensions.TableData.DisplayColumnNames = new List<string>()
+                        {
+                            "Наименование типа единицы измерения",
+                            "Значение",
+                            "Сокращенное наименование единицы измерения"
+                        };
+                this.dgDimensions.Update();
+            }
+        }
+
+        public void UpdateFilesGrid(Products product)
+        {
+            if (product != null)
+            {
+                this.dgFiles.Title = Common.EntityRussianNames.NamesNominative[typeof(Resources)];
+                var resourcesViewProducts = this.CustomBase.CustomDb.ExecuteSqlQuery<ResourcesViewProductsCustom>(
+                    $"SELECT * FROM ResourcesViewProducts where [ID продукта] = {product.id}");
+                ObservableCollection<Object> ocResourcesViewProducts = new ObservableCollection<Object>(resourcesViewProducts);
+                this.dgFiles.TableData =
+                   new TableData(
+                       typeof(ResourcesViewProductsCustom).GetType().Name,
+                       typeof(ResourcesViewProductsCustom).GetType().Name,
+                       typeof(ResourcesViewProductsCustom),
+                       typeof(ResourcesViewProductsCustom).GetProperties().Select(p => p.Name).ToList(),
+                        ocResourcesViewProducts
+                       );
+
+                this.dgFiles.TableData.DisplayColumnNames = new List<string>()
+                {
+                    "URL ресурса",
+                    "Наименование ресурса",
+                    "Наименование типа ресурса",
+                    "Расширение ресурса"
+                };
+                this.dgFiles.Update();
+            }
+        }
+
         public override void UpdateFields(List<CustomEventArgs> args)
         {
             try
@@ -449,46 +506,10 @@ namespace База_артикулов.Формы.Страницы.Редакти
                         this.CustomBase.UpdateCheckBox(this.chbInStock, "На складе", "Под заказ", product.isInStock);
                         #endregion
                         #region Таблица измерений
-                        this.dgDimensions.Title = Common.EntityRussianNames.NamesNominative[typeof(Units)];
-                        var productUnitsViewCustoms = this.CustomBase.CustomDb.ExecuteSqlQuery<ProductUnitsViewCustom>(
-                            $"SELECT * FROM ProductUnitsView where [ID продукта] = {product.id}");
-                        ObservableCollection<Object> ocProductUnitsViewCustoms = new ObservableCollection<Object>(productUnitsViewCustoms);
-
-                        this.dgDimensions.TableData =
-                            new TableData(
-                                typeof(ProductUnitsView).GetType().Name,
-                                typeof(ProductUnitsView).GetType().Name,
-                                typeof(ProductUnitsView),
-                                typeof(ProductUnitsView).GetProperties().Select(p => p.Name).ToList(),
-                                 ocProductUnitsViewCustoms
-                                );
-                        this.dgDimensions.TableData.DisplayColumnNames = new List<string>()
-                        {
-                            "Наименование типа единицы измерения",
-                            "Значение",
-                            "Сокращенное наименование единицы измерения"
-                        };
-                        this.dgDimensions.Update();
+                        this.UpdateDimensionsGrid(product);
                         #endregion
                         #region Таблица файлов
-                        this.dgFiles.Title = Common.EntityRussianNames.NamesNominative[typeof(Resources)];
-                        var resourcesViewProducts = this.CustomBase.CustomDb.ExecuteSqlQuery<ResourcesViewProductsCustom>(
-                            $"SELECT * FROM ResourcesViewProducts where [ID продукта] = {product.id}");
-                        ObservableCollection<Object> ocResourcesViewProducts = new ObservableCollection<Object>(resourcesViewProducts);
-                        this.dgFiles.TableData =
-                           new TableData(
-                               typeof(ProductUnitsView).GetType().Name,
-                               typeof(ProductUnitsView).GetType().Name,
-                               typeof(ProductUnitsView),
-                               typeof(ProductUnitsView).GetProperties().Select(p => p.Name).ToList(),
-                                ocResourcesViewProducts
-                               );
-                        //TODO:Добавить отображаемые столбцы
-                        //this.dgFiles.TableData.DisplayColumnNames = new List<string>()
-                        //{
-
-                        //};
-                        this.dgFiles.Update();
+                        this.UpdateFilesGrid(product);
                         #endregion
                     }
                 }
@@ -515,6 +536,7 @@ namespace База_артикулов.Формы.Страницы.Редакти
             if (this.CustomBase.Mode == EditModes.Update)
             {
                 throw new NotImplementedException();
+                //this.CustomBase.CustomDb.UpdateP
             }
             this.CustomBase.Result.Data = true;
             return true;
@@ -881,20 +903,106 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         private void dgDimensions_AddMenuItemClicked(object sender, EventArgs e)
         {
+            try
+            {
+                Products product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
+                if (product != null)
+                {
+                    UnitsProducts unitsProducts = new UnitsProducts();
+                    unitsProducts.idProduct = product.id;
+                    unitsProducts.value = 0;
 
+                    this.CustomBase.AddCurrentObject(new CustomEventArgs(unitsProducts));
+                    this.CustomBase.Mode = EditModes.Create;
+                    var windowEdit = new WindowEdit(
+                       Common.Strings.Titles.Windows.add,
+                       this.CustomBase,
+                       Common.WindowSizes.SmallH320W400.Width,
+                       Common.WindowSizes.SmallH320W400.Height
+                    );
+                    _ = windowEdit.ShowDialog();
+                    if ((bool)windowEdit.DialogResult)
+                    {
+                        this.UpdateDimensionsGrid(product);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
 
         private void dgDimensions_EditMenuItemClicked(object sender, EventArgs e)
         {
+            try
+            {
+                Products product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
+                if (product != null)
+                {
+                    var selectedUnit = this.dgDimensions.SelectedItem as ProductUnitsViewCustom;
+                    UnitsProducts unitsProducts = new UnitsProducts();
+                    unitsProducts.id = selectedUnit.ID_связи_продуктИзмерение;
+                    unitsProducts.idProduct = selectedUnit.ID_продукта;
+                    unitsProducts.idType = selectedUnit.ID_типа_измерения;
+                    unitsProducts.idUnit = selectedUnit.ID_единицы_измерения;
+                    unitsProducts.value = selectedUnit.Значение;
 
+                    this.CustomBase.AddCurrentObject(new CustomEventArgs(unitsProducts));
+                    this.CustomBase.Mode = EditModes.Update;
+                    var windowEdit = new WindowEdit(
+                       Common.Strings.Titles.Windows.add,
+                       this.CustomBase,
+                       Common.WindowSizes.SmallH320W400.Width,
+                       Common.WindowSizes.SmallH320W400.Height
+                    );
+                    _ = windowEdit.ShowDialog();
+                    if ((bool)windowEdit.DialogResult)
+                    {
+                        this.UpdateDimensionsGrid(product);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
 
         private void dgDimensions_DeleteMenuItemClicked(object sender, EventArgs e)
         {
+            try
+            {
+                Products product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
+                if (product != null)
+                {
+                    var selectedUnit = this.dgDimensions.SelectedItem as ProductUnitsViewCustom;
+                    this.CustomBase.CustomDb.DeleteUnitProduct(selectedUnit.ID_связи_продуктИзмерение);
+                    this.UpdateDimensionsGrid(product);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
 
         }
 
-
+        private void dgDimensions_RefreshMenuItemClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Products product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
+                if (product != null)
+                {
+                    this.UpdateDimensionsGrid(product);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
         #endregion
 
         #region Файлы
@@ -910,19 +1018,101 @@ namespace База_артикулов.Формы.Страницы.Редакти
 
         private void dgFiles_AddMenuItemClicked(object sender, EventArgs e)
         {
-
+            try
+            {
+                Products product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
+                if (product != null)
+                {
+                    ResourcesViewProducts resourcesViewProducts = new ResourcesViewProducts();
+                    resourcesViewProducts.ID_продукта = product.id;
+                    this.CustomBase.AddCurrentObject(new CustomEventArgs(resourcesViewProducts));
+                    this.CustomBase.Mode = EditModes.Create;
+                    var windowEdit = new WindowEdit(
+                       Common.Strings.Titles.Windows.add,
+                       this.CustomBase,
+                       Common.WindowSizes.SmallH320W400.Width,
+                       Common.WindowSizes.SmallH320W400.Height
+                    );
+                    _ = windowEdit.ShowDialog();
+                    if ((bool)windowEdit.DialogResult)
+                    {
+                        this.UpdateFilesGrid(product);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
 
         private void dgFiles_EditMenuItemClicked(object sender, EventArgs e)
         {
-
+            try
+            {
+                Products product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
+                var selectedItem = this.dgFiles.SelectedItem;
+                if (selectedItem != null)
+                {
+                    ResourcesViewProductsCustom selectedItemCustom = selectedItem as ResourcesViewProductsCustom;
+                    ResourcesViewProducts resourcesViewProducts = this.CustomBase.CustomDb.DB.ResourcesViewProducts.FirstOrDefault(
+                        x => x.ID_ресурса == selectedItemCustom.ID_ресурса);
+                    this.CustomBase.AddCurrentObject(new CustomEventArgs(resourcesViewProducts));
+                    this.CustomBase.Mode = EditModes.Update;
+                    var windowEdit = new WindowEdit(
+                       Common.Strings.Titles.Windows.add,
+                       this.CustomBase,
+                       Common.WindowSizes.SmallH320W400.Width,
+                       Common.WindowSizes.SmallH320W400.Height
+                    );
+                    _ = windowEdit.ShowDialog();
+                    if ((bool)windowEdit.DialogResult)
+                    {
+                        this.UpdateFilesGrid(product);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
 
         private void dgFiles_DeleteMenuItemClicked(object sender, EventArgs e)
         {
-
+            try
+            {
+                Products product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
+                var selectedItem = this.dgFiles.SelectedItem;
+                if (product != null && selectedItem != null)
+                {
+                    ResourcesViewProductsCustom selectedItemCustom = selectedItem as ResourcesViewProductsCustom;
+                    this.CustomBase.WDClient.DeleteFile(selectedItemCustom.URL_ресурса);
+                    this.CustomBase.CustomDb.DeleteResource(product.id);
+                    this.UpdateFilesGrid(product);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
         }
 
+        private void dgFiles_RefreshMenuItemClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Products product = this.CustomBase.UnpackCurrentObject<Products>(this.CurrentObject);
+                if (product != null)
+                {
+                    this.UpdateFilesGrid(product);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowError(ex);
+            }
+        }
 
         #endregion
 
@@ -939,7 +1129,9 @@ namespace База_артикулов.Формы.Страницы.Редакти
             }
         }
 
+
         #endregion
+
 
     }
 }

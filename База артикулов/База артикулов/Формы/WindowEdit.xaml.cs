@@ -59,8 +59,6 @@ namespace База_артикулов.Формы
         {
             try
             {
-                //this.InitializeComponent();
-                //this.SetCenter();
                 this.Title = this.CustomBase.GetTitle(this.CustomBase.Mode, this.CustomBase.UnpackCurrentObject(this.CurrentObject));
                 switch (this.CustomBase.Mode)
                 {
@@ -104,11 +102,10 @@ namespace База_артикулов.Формы
                         this.SetContent(new PageEditProduct(this.CustomBase, this.ContentWidth, this.ContentHeight));
                     if (argument.ValidateTypeOrBaseType<ProductsVendorCodes>())
                         this.SetContent(new PageEditVendorCode(this.CustomBase, this.ContentWidth, this.ContentHeight));
-                    //TODO: Проверить
-                    //if (argument.ValidateTypeOrBaseType<UnitsProducts>())
-                    //    this.SetContent(new PageEditUnit(this.CustomBase, this.ContentWidth, this.ContentHeight));
-                    //if (argument.ValidateTypeOrBaseType<ResourcesViewProducts>())
-                    //    this.SetContent(new PageEditResource(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                    if (argument.ValidateTypeOrBaseType<UnitsProducts>())
+                        this.SetContent(new PageEditUnit(this.CustomBase, this.ContentWidth, this.ContentHeight));
+                    if (argument.ValidateTypeOrBaseType<ResourcesViewProducts>())
+                        this.SetContent(new PageEditResource(this.CustomBase, this.ContentWidth, this.ContentHeight));
 
                 }
             }
@@ -150,10 +147,10 @@ namespace База_артикулов.Формы
         }
 
         public WindowEdit(
-    CustomBase customBase,
-    int width = Common.WindowSizes.MediumH600W800.Width,
-    int height = Common.WindowSizes.MediumH600W800.Height
-    ) : base(title: string.Empty, customBase)
+            CustomBase customBase,
+            int width = Common.WindowSizes.MediumH600W800.Width,
+            int height = Common.WindowSizes.MediumH600W800.Height
+            ) : base(title: string.Empty, customBase)
         {
             this.SetContentSize(width, height);
         }

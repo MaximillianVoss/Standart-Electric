@@ -10,7 +10,7 @@
       mc:Ignorable="d"
       Title="PageEditUnit" Height="235" Width="432">
 
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />

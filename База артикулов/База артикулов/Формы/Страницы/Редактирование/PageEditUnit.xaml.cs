@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using База_артикулов.Классы;
 using База_артикулов.Модели;
@@ -19,65 +21,90 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #endregion
 
         #region Свойства
-        UnitsProducts currentUnit { set; get; }
+
         #endregion
 
         #region Методы
 
-        void Update(UnitsProducts unit)
+        public override void UpdateFields(List<CustomEventArgs> args)
         {
-            if (unit != null)
+            UnitsProducts unitsProducts = this.CustomBase.UnpackCurrentObject<UnitsProducts>(this.CurrentObject);
+            if (unitsProducts != null)
             {
-                this.cmbUnitType.Update(this.CustomBase.ToList<UnitsTypes>(this.DB.UnitsTypes), unit.idType);
-                this.txbCmbCurrentUnit.Update(this.CustomBase.ToList<Units>(this.DB.Units),
-                    text: unit.value.ToString(),
-                    currentItemId: this.currentUnit.idUnit);
+                if (this.CustomBase.Mode == EditModes.Update)
+                {
+                    this.txbCmbCurrentUnit.Text = unitsProducts.value.ToString();
+                    this.txbCmbCurrentUnit.SelectedId = unitsProducts.idUnit;
+                    this.cmbUnitType.SelectedId = unitsProducts.idType;
+                }
+                if (this.CustomBase.Mode == EditModes.Create)
+                {
+                    this.txbCmbCurrentUnit.Text = "0";
+                    this.cmbUnitType.SelectFirst();
+                    this.txbCmbCurrentUnit.SelectFirst();
+                }
             }
-            else
-            {
-                this.cmbUnitType.Update(this.CustomBase.ToList<UnitsTypes>(this.DB.UnitsTypes));
-                this.txbCmbCurrentUnit.Update(this.CustomBase.ToList<Units>(this.DB.Units), "Новое измерение");
-            }
-            this.DB.SaveChanges();
         }
 
-        void Save()
+        public override void UpdateForm(List<CustomEventArgs> args)
         {
-            if (this.currentUnit != null)
+            this.InitializeComponent();
+            this.CustomBase.UpdateOkButton(this.btnOk);
+            this.CustomBase.UpdateComboBox(this.cmbUnitType, this.CustomBase.ToList(this.DB.UnitsTypes.ToList()));
+            this.CustomBase.UpdateComboBox(this.txbCmbCurrentUnit, this.CustomBase.ToList(this.DB.Units.ToList()));
+            // Получение символа десятичного разделителя из текущей культуры
+            string decimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+            // Создание регулярного выражения с учётом локального десятичного разделителя
+            string regexPattern = @"^-?\d+(" + Regex.Escape(decimalSeparator) + @"\d+)?$";
+            // Установка текста валидации и регулярного выражения для контрола
+            this.txbCmbCurrentUnit.ValidationText = "Пожалуйста, введите действительное число.";
+            this.txbCmbCurrentUnit.RegEx = regexPattern;
+        }
+
+        public override object HandleOk(List<CustomEventArgs> args)
+        {
+            UnitsProducts unitsProducts = this.CustomBase.UnpackCurrentObject<UnitsProducts>(this.CurrentObject);
+            if (unitsProducts == null)
             {
-                UnitsProducts unitProductDb = this.DB.UnitsProducts.FirstOrDefault(x => x.id == this.currentUnit.id);
-                if (unitProductDb != null)
-                {
-                    unitProductDb.idUnit = this.txbCmbCurrentUnit.SelectedId;
-                    unitProductDb.idType = this.cmbUnitType.SelectedId;
-                    unitProductDb.value = Convert.ToDouble(this.txbCmbCurrentUnit.Text);
-                }
-                else
-                {
-                    this.currentUnit.idUnit = this.txbCmbCurrentUnit.SelectedId;
-                    this.currentUnit.idType = this.cmbUnitType.SelectedId;
-                    this.currentUnit.value = Convert.ToDouble(this.txbCmbCurrentUnit.Text);
-                    this.DB.UnitsProducts.Add(this.currentUnit);
-                }
+                throw new Exception("Объект типа UnitsProducts должен быть передан в форму, как при создании, так и при редактированни!");
             }
-            else
+            if (!this.txbCmbCurrentUnit.IsValid)
             {
-                throw new Exception("Предполагается, что мы передаем измерение как при создании, так и при редактированни!");
+                throw new Exception("Исправьте ошибки в полях перед сохранением!");
             }
-            this.DB.SaveChanges();
+            if (this.CustomBase.Mode == EditModes.Create)
+            {
+                this.CustomBase.Result.Data = this.CustomBase.CustomDb.CreateUnitProduct(
+                    unitsProducts.idProduct,
+                    (int)this.txbCmbCurrentUnit.SelectedId,
+                    (int)this.cmbUnitType.SelectedId,
+                    Double.Parse(this.txbCmbCurrentUnit.Text)
+                    );
+            }
+            if (this.CustomBase.Mode == EditModes.Update)
+            {
+                this.CustomBase.CustomDb.UpdateUnitProduct(
+                    unitsProducts.id,
+                     (int)this.txbCmbCurrentUnit.SelectedId,
+                    (int)this.cmbUnitType.SelectedId,
+                    Double.Parse(this.txbCmbCurrentUnit.Text)
+                    );
+                this.CustomBase.Result.Data = true;
+            }
+            return true;
+        }
+
+        public override object HandleCancel(List<CustomEventArgs> args)
+        {
+            return false;
         }
         #endregion
 
         #region Конструкторы/Деструкторы
-        public PageEditUnit(object unit = null)
+        public PageEditUnit(CustomBase customBase, int width = 600, int height = 800) : base(customBase)
         {
+            this.SetSize(width, height);
             this.InitializeComponent();
-            this.currentUnit = (UnitsProducts)unit;
-            this.btnOk.Text =
-                this.currentUnit != null || this.DB.UnitsProducts.FirstOrDefault(x => x.id == this.currentUnit.id) == null ?
-            Common.Strings.Titles.Controls.Buttons.saveChanges :
-            Common.Strings.Titles.Controls.Buttons.createItem;
-            this.Update(this.currentUnit);
         }
 
         #endregion
@@ -89,40 +116,13 @@ namespace База_артикулов.Формы.Страницы.Редакти
         #region Обработчики событий
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                this.Save();
-                this.CloseWindow(true);
-            }
-            catch (Exception ex)
-            {
-                this.ShowError(ex);
-            }
+            this.ProcessOk();
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.CloseWindow();
+            this.ProcessCancel();
         }
 
-        public override void UpdateFields(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void UpdateForm(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override object HandleOk(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override object HandleCancel(List<CustomEventArgs> args)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
 
 

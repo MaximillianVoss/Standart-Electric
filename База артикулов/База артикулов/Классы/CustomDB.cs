@@ -858,19 +858,23 @@ namespace База_артикулов.Классы
                 }
 
                 Descriptors productDescriptor = this.GetDescriptorProduct(productId);
+                Resources resource = new Resources();
+                resource.URL = url;
+                resource = this.DB.Resources.Add(resource);
                 var productDescriptorResource = new DescriptorsResources
                 {
                     idDescriptor = productDescriptor.id,
                     title = resourceTitle,
+                    idResource = resource.id,
+                    idResourceType = typeView.ID_типа_ресурса,
                     ResourceTypes = this.DB.ResourceTypes.FirstOrDefault(x => x.extension_ == typeView.Расширение_ресурса),
                     Resources = new Resources { URL = url }
                 };
 
-                this.DB.DescriptorsResources.Add(productDescriptorResource);
+                productDescriptorResource = this.DB.DescriptorsResources.Add(productDescriptorResource);
+                this.DB.SaveChanges();
                 return productDescriptorResource;
             }
-
-            this.DB.SaveChanges();
             return null;
         }
         public void UpdateResource(int productId, string resourceTitle)

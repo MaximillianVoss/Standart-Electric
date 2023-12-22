@@ -265,6 +265,16 @@ namespace CustomControlsWPF
 
         }
         /// <summary>
+        /// Выбирает первый элемент в выпадающем списке
+        /// </summary>
+        public void SelectFirst()
+        {
+            if (this.items != null && this.items.Count > 0)
+            {
+                this.SelectedIndex = 0;
+            }
+        }
+        /// <summary>
         /// Обновляет элемент управления в соответствии с указанными данными
         /// </summary>
         /// <param name="items"></param>
