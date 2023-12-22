@@ -26,6 +26,7 @@ namespace База_артикулов.Формы.Страницы
             if (this.cmbConnectionStrings.SelectedItem != null)
             {
                 this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Name = this.cmbConnectionStrings.SelectedItem;
+                this.CustomBase.CustomDb.Settgins.CurrentConnectionString.Value = ConfigurationManager.ConnectionStrings[this.cmbConnectionStrings.SelectedItem].ConnectionString;
                 this.CustomBase.CustomDb.Settgins.SaveToFile(Settings.DEFAULT_FILE_PATH);
                 this.CustomBase.CustomDb = new CustomDB(new Settings(Settings.DEFAULT_FILE_PATH));
                 //this.CustomBase.CustomDb.InitDB(true);
